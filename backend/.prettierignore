@@ -1,0 +1,8 @@
+dist
+node_modules
+logs
+src/assets
+docs
+
+# Migrations
+prisma/migrations/*
