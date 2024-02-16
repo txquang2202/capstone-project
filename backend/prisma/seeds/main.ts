@@ -1,5 +1,8 @@
+// import { PrismaClient } from "@prisma/client";
+import user from "./user.json";
+
 import { PrismaClient } from "@prisma/client";
-// import user from "./user.json";
+
 const prisma = new PrismaClient();
 
 async function main() {

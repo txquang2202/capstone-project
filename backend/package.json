@@ -27,7 +27,8 @@
     "test-e2e": "jest --silent --config jest-integ.config.js",
     "migrate:init": "npx prisma migrate dev --name init",
     "migrate:db": "npx prisma db push",
-    "migrate:dev": "npx prisma migrate dev"
+    "migrate:dev": "npx prisma migrate dev",
+    "migrate:pull": "npx prisma db pull"
   },
   "dependencies": {
     "@graphql-tools/schema": "^7.1.5",
