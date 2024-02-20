@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "name": "Nguyễn Văn A",
+    "email": "nguyenvana@gmail.com",
+    "phone": "0902321222",
+    "gender": 0,
+    "dob": "15-05-2001",
+    "current_address": "135 Nguyễn Cư Trinh, P.3, Q.1, Tp.HCM",
+    "about_me": "As a software engineer, I thrive on turning ideas into reality through code. Constantly seeking elegant solutions to complex problems, I'm passionate about crafting efficient and innovative software that makes a meaningful impact.",
+    "role": 0,
+    "img_url": "https://picsum.photos/200/300",
+    "personal_link": "https://www.linkedin.com/feed/"
+  },
+  {
+    "id": 2,
+    "name": "Trần Thị B",
+    "email": "tranthib@gmail.com",
+    "phone": "0918765432",
+    "gender": 1,
+    "dob": "20-08-1995",
+    "current_address": "28 Lê Lợi, P.5, Q.3, Tp.HCM",
+    "about_me": "Passionate about user experience, I'm a UX designer dedicated to creating intuitive and visually appealing interfaces. Transforming complex concepts into user-friendly designs is my forte.",
+    "role": 1,
+    "img_url": "https://picsum.photos/200/300",
+    "personal_link": "https://www.behance.net/tranthib"
+  },
+  {
+    "id": 3,
+    "name": "Phạm Văn C",
+    "email": "phamvanc@gmail.com",
+    "phone": "0976543210",
+    "gender": 0,
+    "dob": "12-11-1988",
+    "current_address": "42 Bùi Thị Xuân, P.1, Q.Tân Bình, Tp.HCM",
+    "about_me": "A seasoned project manager with a knack for leading cross-functional teams. I excel in optimizing workflows and ensuring timely delivery of high-quality projects. Let's build something great together!",
+    "role": 0,
+    "img_url": "https://picsum.photos/200/300",
+    "personal_link": "https://www.linkedin.com/in/phamvanc"
+  },
+  {
+    "id": 4,
+    "name": "Hoàng Thị D",
+    "email": "hoangthid@gmail.com",
+    "phone": "0931122334",
+    "gender": 1,
+    "dob": "05-04-1990",
+    "current_address": "72 Đinh Công Tráng, P.Tân Định, Q.1, Tp.HCM",
+    "about_me": "With a background in data science, I specialize in deriving actionable insights from complex datasets. Transforming raw data into meaningful narratives is what I do best.",
+    "role": 0,
+    "img_url": "https://picsum.photos/200/300",
+    "personal_link": "https://www.twitter.com/hoangthid"
+  },
+  {
+    "id": 5,
+    "name": "Lê Văn E",
+    "email": "levane@gmail.com",
+    "phone": "0945678901",
+    "gender": 0,
+    "dob": "18-09-1993",
+    "current_address": "15 Trần Quang Khải, P.Tân Định, Q.1, Tp.HCM",
+    "about_me": "Front-end developer with a passion for creating seamless user experiences. I enjoy bringing designs to life through clean and efficient code.",
+    "role": 1,
+    "img_url": "https://picsum.photos/200/300",
+    "personal_link": "https://www.github.com/levane"
+  },
+  {
+    "id": 6,
+    "name": "Nguyễn Thị F",
+    "email": "nguyenthif@gmail.com",
+    "phone": "0923456789",
+    "gender": 1,
+    "dob": "25-07-1985",
+    "current_address": "89 Lý Chính Thắng, P.7, Q.3, Tp.HCM",
+    "about_me": "As a cybersecurity enthusiast, I'm dedicated to safeguarding digital landscapes. Implementing robust security measures is my commitment to a safer online world.",
+    "role": 1,
+    "img_url": "https://picsum.photos/200/300",
+    "personal_link": "https://www.linkedin.com/in/nguyenthif"
+  }
+]

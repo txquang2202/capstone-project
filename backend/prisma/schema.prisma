@@ -18,13 +18,14 @@ model blog {
 }
 
 model company {
-  id               Int                @id(map: "company_pk") @default(autoincrement())
-  name             String             @db.VarChar
-  type             String?            @db.VarChar
-  size             Int?
-  country          String?            @db.VarChar
-  working_day      Int?               @db.SmallInt
-  ot_policy        String?            @db.VarChar
+  id               Int                       @id(map: "company_pk") @default(autoincrement())
+  name             String                    @db.VarChar
+  type             String?                   @db.VarChar
+  country          String?                   @db.VarChar
+  working_day      String?                   @db.VarChar
+  ot_policy        String?                   @db.VarChar
+  size             Unsupported("int4range")?
+  overview         String?                   @db.VarChar
   company_location company_location[]
   follow           follow[]
   job              job[]
@@ -48,9 +49,8 @@ model cover_letter {
 }
 
 model cv {
-  user_id Int
+  user_id Int    @id(map: "cv_pk")
   url     String @db.VarChar
-  id      Int    @id(map: "cv_pk") @default(autoincrement())
   user    user   @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cv_fk")
 }
 
@@ -154,9 +154,10 @@ model user {
   personal_link                                String?               @db.VarChar
   role                                         Int
   password                                     Bytes?
+  img_url                                      String?               @db.VarChar
   blog                                         blog[]
   cover_letter_cover_letter_user_idTouser      cover_letter[]        @relation("cover_letter_user_idTouser")
-  cv                                           cv[]
+  cv                                           cv?
   follow                                       follow[]
   job_apply                                    job_apply[]
   job_preferences                              job_preferences?
@@ -218,6 +219,7 @@ model work_experience {
   from_date           DateTime? @db.Date
   to_date             DateTime? @db.Date
   description         String?   @db.VarChar
+  company             String?   @db.VarChar
   user                user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "work_experience_fk")
 
   @@id([id, user_id], map: "work_experience_pk")

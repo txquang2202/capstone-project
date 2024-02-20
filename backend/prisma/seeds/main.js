@@ -24,7 +24,7 @@ async function main() {
   };
 
   for (const [key, value] of Object.entries(database)) {
-    await (prisma as any)[key].createMany({
+    await prisma[key].createMany({
       data: value,
       skipDuplicates: true,
     });
