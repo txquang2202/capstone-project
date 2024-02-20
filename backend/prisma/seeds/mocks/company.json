@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "FPT Software",
+    "type": "IT Product",
+    "size": "[1000,)",
+    "country": "Vietnam",
+    "working_day": "Monday - Friday",
+    "ot_policy": "No OT"
+  },
+  {
+    "id": 2,
+    "name": "KMS Technology",
+    "type": "IT Outsourcing",
+    "size": "[1000,)",
+    "country": "United States",
+    "working_day": "Monday - Friday",
+    "ot_policy": "No OT"
+  },
+  {
+    "id": 3,
+    "name": "NFQ Asia",
+    "type": "IT Outsourcing",
+    "size": "[301,500]",
+    "country": "Germany",
+    "working_day": "Monday - Friday",
+    "ot_policy": "No OT"
+  },
+  {
+    "id": 4,
+    "name": "Employment Hero",
+    "type": "IT Product",
+    "size": "[501,1000]",
+    "country": "Australia",
+    "working_day": "Monday - Friday",
+    "ot_policy": "No OT"
+  }
+]

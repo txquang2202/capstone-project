@@ -1,5 +1,8 @@
+// import { PrismaClient } from "@prisma/client";
+import user from "./user.json";
+
 import { PrismaClient } from "@prisma/client";
-// import user from "./user.json";
+
 const prisma = new PrismaClient();
 
 async function main() {
@@ -21,7 +24,7 @@ async function main() {
   };
 
   for (const [key, value] of Object.entries(database)) {
-    await (prisma as any)[key].createMany({
+    await prisma[key].createMany({
       data: value,
       skipDuplicates: true,
     });
