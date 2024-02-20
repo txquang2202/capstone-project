@@ -18,6 +18,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
+    "@nextui-org/tooltip": "^2.0.29",
+    "clipboard": "^2.0.11",
     "clsx": "^2.0.0",
     "lucide-react": "^0.297.0",
     "next": "^14.0.4",
@@ -38,6 +42,7 @@
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.16",
+    "daisyui": "^4.6.2",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",
     "eslint-config-prettier": "^8.10.0",
@@ -48,6 +53,7 @@
     "lint-staged": "^12.5.0",
     "next-router-mock": "^0.7.5",
     "next-sitemap": "^2.5.28",
+    "nodemon": "^3.0.3",
     "postcss": "^8.4.32",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.1.13",

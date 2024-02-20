@@ -41,8 +41,17 @@ export default function HomePage() {
             </ArrowLink>
           </p>
 
-          <ButtonLink className='mt-6' href='/components' variant='light'>
-            See all components
+          <ButtonLink className='mt-6' href='/profile-cv' variant='light'>
+            Profile
+          </ButtonLink>
+          <ButtonLink className='mt-6' href='/settings' variant='light'>
+            Settings
+          </ButtonLink>
+          <ButtonLink className='mt-6' href='/blog' variant='light'>
+            Blog
+          </ButtonLink>
+          <ButtonLink className='mt-6' href='/my-jobs' variant='light'>
+            My Jobs
           </ButtonLink>
 
           <UnstyledLink
