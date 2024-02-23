@@ -1,0 +1,71 @@
+.text-it-red {
+  color: #ed1b2f !important;
+}
+
+.text-it-black {
+  color: #121212 !important;
+}
+
+.text-it-white {
+  color: #fff !important;
+}
+
+.text-white-red {
+  color: #fff5f5 !important;
+}
+
+.text-light-red {
+  color: #ffdfdf !important;
+}
+
+.text-dark-red {
+  color: #c82222 !important;
+}
+
+.text-rich-grey {
+  color: #414042 !important;
+}
+
+.text-dark-grey {
+  color: #a6a6a6 !important;
+}
+
+.text-silver-grey {
+  color: #dedede !important;
+}
+
+.text-light-grey {
+  color: #f7f7f7 !important;
+}
+
+.text-success-color {
+  color: #0ab305 !important;
+}
+
+.text-info-color {
+  color: #085bdd !important;
+}
+
+.text-error-color {
+  color: #f60d00 !important;
+}
+
+.text-warning-color {
+  color: #ff9119 !important;
+}
+
+.text-light-success-color {
+  color: #eaf9e9 !important;
+}
+
+.text-light-info-color {
+  color: #eaf0fa !important;
+}
+
+.text-light-error-color {
+  color: #feeeed !important;
+}
+
+.text-light-warning-color {
+  color: #fff4e9 !important;
+}

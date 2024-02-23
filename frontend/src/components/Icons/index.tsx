@@ -21,4 +21,8 @@ export {
   Youtube as IconYoutube,
   Info as IconInfo,
   PlusCircle as IconPlusCircle,
+  ChevronsRight as IconChevronsRight,
+  PhoneCall as IconPhoneCall,
+  Mail as IconMail,
+  Send as IconSend,
 } from 'react-feather';
