@@ -105,6 +105,12 @@ export const routes = {
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
   }),
+  employer: route({
+    path: '/employer',
+    requiredAuth: false,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+  }),
 };
 
 export const getRouteByPath = (path = '') => {
