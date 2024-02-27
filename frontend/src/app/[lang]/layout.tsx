@@ -1,54 +1,61 @@
 import { MantineProvider } from '@mantine/core';
 import { Metadata } from 'next';
 import { Lexend } from 'next/font/google';
+import { headers } from 'next/headers';
 import { type ReactNode } from 'react';
 
-import { siteConfig } from '@/constant/config';
+import { getRouteByPath } from '@/configs/router';
+import { DEFAULT_LOCALE, siteConfig } from '@/constant/config';
 
 import '@mantine/core/styles.css';
 import '@/styles/globals.css';
 
-// !STARTERCONF Change these default meta
-// !STARTERCONF Look at @/constant/config to change them
-export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default: siteConfig.title,
-    template: `%s | ${siteConfig.title}`,
-  },
-  description: siteConfig.description,
-  robots: { index: true, follow: true },
-  // !STARTERCONF this is the default favicon, you can generate your own from https://realfavicongenerator.net/
-  // ! copy to /favicon folder
-  icons: {
-    icon: '/favicon/favicon.ico',
-    shortcut: '/favicon/favicon-16x16.png',
-    apple: '/favicon/apple-touch-icon.png',
-  },
-  manifest: `/favicon/site.webmanifest`,
-  openGraph: {
-    url: siteConfig.url,
-    title: siteConfig.title,
-    description: siteConfig.description,
-    siteName: siteConfig.title,
-    images: [`${siteConfig.url}/images/og.jpg`],
-    type: 'website',
-    locale: 'en_US',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: siteConfig.title,
-    description: siteConfig.description,
-    images: [`${siteConfig.url}/images/og.jpg`],
-    // creator: '@th_clarence',
-  },
-  // authors: [
-  //   {
-  //     name: 'Theodorus Clarence',
-  //     url: 'https://theodorusclarence.com',
-  //   },
-  // ],
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: string };
+}): Promise<Metadata> {
+  const headersList = headers();
+  const pathname = headersList.get('x-pathname') || '';
+  const route = getRouteByPath(pathname);
+  const lang = route?.locales.find((locale) => locale === params.lang)
+    ? params.lang
+    : route?.defaultLocale || DEFAULT_LOCALE;
+
+  const title = route?.metadata?.[lang].title || siteConfig.title;
+  const description = route?.metadata?.[lang].title || siteConfig.description;
+
+  return {
+    metadataBase: new URL(siteConfig.url),
+    title: {
+      default: title,
+      template: `%s | ${title}`,
+    },
+    description: description,
+    robots: { index: true, follow: true },
+    icons: {
+      icon: '/favicon/favicon.ico',
+      shortcut: '/favicon/favicon-16x16.png',
+      apple: '/favicon/apple-touch-icon.png',
+    },
+    manifest: `/favicon/site.webmanifest`,
+    openGraph: {
+      url: siteConfig.url,
+      title,
+      description,
+      siteName: siteConfig.title,
+      images: [`${siteConfig.url}/images/og.jpg`],
+      type: 'website',
+      locale: 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${siteConfig.url}/images/og.jpg`],
+    },
+  };
+}
 
 export const font = Lexend({
   weight: ['400', '500', '600', '700'],

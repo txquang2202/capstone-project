@@ -1,15 +1,15 @@
-import { Roboto } from 'next/font/google';
+import { Lexend } from 'next/font/google';
 import css from 'styled-jsx/css';
 
-export const font = Roboto({
-  weight: ['400', '500', '700'],
+export const font = Lexend({
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
-  variable: '--font-roboto',
+  variable: '--font-lexend',
 });
 
 export const variable = css.global`
   :root {
-    --font-roboto: ${font.style.fontFamily};
+    --font-lexend: ${font.style.fontFamily};
   }
 `;
 

@@ -187,3 +187,9 @@
     background-size: 0 2px, 100% 2px;
   }
 }
+
+.position-sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}

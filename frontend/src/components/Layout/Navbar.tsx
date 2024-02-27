@@ -9,9 +9,12 @@ import {
 } from 'next/navigation';
 
 import { IconChevronDown } from '@/components/Icons';
+import { routes } from '@/configs/router';
 import useLocaleConfig from '@/hooks/useLocaleConfig';
 import { cn } from '@/lib/classNames';
 import { useLocale } from '@/locale';
+
+import { AppLink } from '../AppLink';
 
 const Header = () => {
   const router = useRouter();
@@ -34,15 +37,17 @@ const Header = () => {
 
   return (
     <header className='header'>
-      <nav className='navbar fixed-top navbar-expand-lg'>
+      <nav className='navbar navbar-expand-lg fixed left-0 right-0 z-10'>
         <div className='bg-header-gradient icontainer-header flex w-full items-center'>
-          <Image
-            alt='logo'
-            src='/images/logo.png'
-            className='me-8'
-            width={108}
-            height={40}
-          />
+          <AppLink href={routes.home.path}>
+            <Image
+              alt='logo'
+              src='/images/logo.png'
+              className='me-8'
+              width={108}
+              height={40}
+            />
+          </AppLink>
           <div className='navbar-collapse'>
             <ul className='navbar-nav me-auto items-center gap-2'>
               <li className='nav-item main-menu relative'>
@@ -97,14 +102,14 @@ const Header = () => {
                 </a>
               </li>
               <li className='nav-item'>
-                <a
+                <AppLink
                   hrefLang='vi-VN'
                   rel='nofollow'
                   className='text-it-white'
-                  href='/dang-nhap-tai-khoan'
+                  href={routes.signin.path}
                 >
                   Đăng Nhập/Đăng Ký
-                </a>
+                </AppLink>
               </li>
               <li className='nav-item'>
                 <div className='switch-language flex'>

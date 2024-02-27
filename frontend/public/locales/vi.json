@@ -11,13 +11,21 @@
     "Quản lý hồ sơ và quyền riêng tư của bạn"
   ],
   "welcomeToText": "Chào mừng bạn đến với",
-  "termsOfServiceAndPrivacyPolicyText": "<div>Bằng việc đăng nhập, bạn đồng ý với các <a href=''>Điều khoản dịch vụ</a> và <a href=''>Chính sách quyền riêng tư</a> của ITviec liên quan đến thông tin riêng tư của bạn.",
+  "termsOfServiceAndPrivacyPolicyText": "Bằng việc đăng nhập, bạn đồng ý với các <a href=''>Điều khoản dịch vụ</a> và <a href=''>Chính sách quyền riêng tư</a> của ITviec liên quan đến thông tin riêng tư của bạn.",
   "signinWithText": "Đăng nhập bằng {0}",
+  "signupWithText": "Đăng ký bằng {0}",
   "orText": "Hoặc",
   "emailAddressText": "Địa chỉ Email",
   "passwordText": "Mật khẩu",
   "forgotPasswordText": "Quên mật khẩu",
   "requiredText": "Thông tin bắt buộc",
   "doNotHaveAnAccountText": "Bạn chưa có tài khoản?",
-  "signupNowText": "Đăng ký ngay"
+  "youHaveAnAccountText": "Bạn đã có tài khoản",
+  "signupNowText": "Đăng ký ngay",
+  "signinNowText": "Đăng nhập ngay",
+  "userNameText": "Tên đăng nhập",
+  "registerAccountText": "Đăng ký tài khoản",
+  "agreeTermsOfServiceAndPrivacyPolicyText": "Tôi đã đọc và đồng ý với các <a href=''>Điều khoản dịch vụ</a> và <a href=''>Chính sách quyền riêng tư</a> của ITviec liên quan đến thông tin riêng tư của tôi.",
+  "yourEmailText": "Email của bạn",
+  "resetPasswordText": "Đặt lại mật khẩu"
 }
