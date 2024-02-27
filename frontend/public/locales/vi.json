@@ -20,12 +20,5 @@
   "forgotPasswordText": "Quên mật khẩu",
   "requiredText": "Thông tin bắt buộc",
   "doNotHaveAnAccountText": "Bạn chưa có tài khoản?",
-  "youHaveAnAccountText": "Bạn đã có tài khoản",
-  "signupNowText": "Đăng ký ngay",
-  "signinNowText": "Đăng nhập ngay",
-  "userNameText": "Tên đăng nhập",
-  "registerAccountText": "Đăng ký tài khoản",
-  "agreeTermsOfServiceAndPrivacyPolicyText": "Tôi đã đọc và đồng ý với các <a href=''>Điều khoản dịch vụ</a> và <a href=''>Chính sách quyền riêng tư</a> của ITviec liên quan đến thông tin riêng tư của tôi.",
-  "yourEmailText": "Email của bạn",
-  "resetPasswordText": "Đặt lại mật khẩu"
+  "signupNowText": "Đăng ký ngay"
 }
