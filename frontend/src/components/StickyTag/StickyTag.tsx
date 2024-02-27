@@ -27,6 +27,7 @@ const StickyTag = ({
         className={cn('absolute z-[2] pt-2', {
           'right-0': position === 'right',
           'left-0': position === 'left',
+          tagClass,
         })}
       >
         <div

@@ -89,8 +89,10 @@ const JobItem = ({
           {locations.join('-')}
         </div>
         <div className='mb-2 mt-3 flex items-center gap-2'>
-          {tags.map((tag) => (
-            <div className='itag itag-light itag-sm'>{tag}</div>
+          {tags.map((tag, index) => (
+            <div key={index} className='itag itag-light itag-sm'>
+              {tag}
+            </div>
           ))}
         </div>
       </div>

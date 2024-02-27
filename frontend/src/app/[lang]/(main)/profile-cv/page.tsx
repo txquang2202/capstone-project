@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-
 import Card from '@/components/ProfilePage/Card';
 import Navigation from '@/components/ProfilePage/Navigation';
 import ProfileCard from '@/components/ProfilePage/ProfileCard';

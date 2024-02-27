@@ -27,7 +27,7 @@ export default function Information() {
     setIsEditing(true);
   };
 
-  const handleCancel = () => {
+  const _handleCancel = () => {
     setIsEditing(false);
     setEditedName(infor.name);
     setErrorMessage('');

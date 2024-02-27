@@ -11,7 +11,6 @@ import {
 
 import { IconChevronDown } from '@/components/Icons';
 import { routes } from '@/configs/router';
-import useLocaleConfig from '@/hooks/useLocaleConfig';
 import { cn } from '@/lib/classNames';
 import { useLocale } from '@/locale';
 
@@ -23,8 +22,7 @@ const Header = () => {
   const params = useParams();
   const searchParams = useSearchParams();
 
-  const { locale } = useLocaleConfig(params?.lang as string);
-  const { t, locale: _locale } = useLocale();
+  const { locale: _locale } = useLocale();
 
   const onChangeLang = (lang: string) => {
     if (!pathname) return;

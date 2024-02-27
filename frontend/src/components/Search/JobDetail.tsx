@@ -31,7 +31,6 @@ const JobDetail = ({
   title,
   image,
   type,
-  locations,
   salaryFrom,
   salaryTo,
   hideSalary,
@@ -84,8 +83,10 @@ const JobDetail = ({
           </div>
           <div className='flex items-center gap-1'>
             <span className='mr-3'>Skills:</span>
-            {tags.map((tag) => (
-              <div className='itag itag-light itag-sm'>{tag}</div>
+            {tags.map((tag, index) => (
+              <div key={index} className='itag itag-light itag-sm'>
+                {tag}
+              </div>
             ))}
           </div>
         </div>

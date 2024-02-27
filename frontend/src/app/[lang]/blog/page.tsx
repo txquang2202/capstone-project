@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-
 import ListCard from '@/components/BlogPage/ListCard';
 import ListLatest from '@/components/BlogPage/ListLatest';
 import ListMost from '@/components/BlogPage/ListMost';

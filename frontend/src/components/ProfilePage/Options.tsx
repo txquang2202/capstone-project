@@ -1,6 +1,6 @@
 'use client';
 
-import { Combobox, InputBase, Tooltip, useCombobox } from '@mantine/core';
+import { Combobox, InputBase, useCombobox } from '@mantine/core';
 import { useState } from 'react';
 
 import { IconChevronDown, IconSearch } from '@/components/Icons';
@@ -31,7 +31,7 @@ export default function Options() {
   const [skillList, setskillList] = useState<skill[]>([]);
   const isSearchDisabled = skillList.length >= 5;
 
-  let countSkill: number = skillList.length;
+  const countSkill: number = skillList.length;
   // filter skill
   const filteredCompanies =
     query === ''

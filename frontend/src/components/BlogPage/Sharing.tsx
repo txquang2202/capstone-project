@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-
 import { Button } from '@/components/Button';
 
 export default function Sharing() {
@@ -13,7 +11,7 @@ export default function Sharing() {
             Câu chuyện sự nghiệp của bạn sẽ truyền cảm hứng đến rất nhiều người.
           </h3>
           <Button
-            href={'#!'}
+            href='#!'
             intent='primary'
             size='large'
             className='h-[56px] w-[200px] text-[22px] font-[600] hover:bg-red-700'
