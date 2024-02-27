@@ -549,3 +549,361 @@
   font-size: 14px;
   font-weight: 400;
 }
+
+/* Employer page */
+@media (min-width: 992px) {
+  .employer-landing-container .contact-now-btn {
+    width: initial !important;
+  }
+}
+
+.employer-landing-container .itviec-different-container {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 223, 223, 0) 29.86%,
+    #fff6f6 100%
+  );
+}
+
+.employer-landing-container .itviec-different-container .content-box {
+  height: 180px;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .itviec-different-container .content-box {
+    flex: 1;
+    max-width: 428px;
+  }
+}
+
+.employer-landing-container .itviec-different-container .content-box img {
+  top: -40px;
+}
+
+.employer-landing-container .itviec-different-container .large-number {
+  font-size: 40px;
+  text-shadow: 4px 4px 0px #ffdfdf;
+}
+
+.employer-landing-container .itviec-different-container .content-wrapper {
+  background-image: url(https://itviec.com/assets/employer_landing/round-7b576a08f59ea555667c691a6bb1de728b3bd9d8c2f9b137a24976fbc3825aa9.svg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .itviec-different-container .content-wrapper {
+    background-position: center center;
+  }
+}
+
+.employer-landing-container .hight-value-services-container {
+  background: linear-gradient(180deg, #680000 25.23%, #121212 100%);
+}
+
+.employer-landing-container
+  .hight-value-services-container
+  .job-posting-content-box {
+  border-radius: 8px 8px 0px 0px;
+  background: linear-gradient(180deg, #fff6f6 0%, rgba(255, 223, 223, 0) 100%);
+}
+
+.employer-landing-container .hight-value-services-container .aim-content-box {
+  border-radius: 8px 0px 0px 8px;
+  background: linear-gradient(90deg, #fff6f6 0%, rgba(255, 223, 223, 0) 100%);
+}
+
+.employer-landing-container .hight-value-services-container .flex-box-wrapper {
+  border-radius: 16px;
+}
+
+.employer-landing-container
+  .hight-value-services-container
+  .left-content
+  > div {
+  max-width: 584px;
+}
+
+.employer-landing-container .hight-value-services-container .large-pic {
+  max-height: 450px;
+  max-width: 480px;
+}
+
+.employer-landing-container .top-employers-container {
+  background-image: url(https://itviec.com/assets/employer_landing/top-employer-bg-164b5f70bc68259732cfb92075898a08aee0c77e38f24cb689d68fb33b3c80f6.svg);
+  background-repeat: no-repeat;
+  background-color: #f7f7f7;
+  background-size: 100%;
+}
+
+.employer-landing-container .top-employers-container .feedback-container {
+  height: 700px;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .top-employers-container .feedback-container {
+    height: initial;
+  }
+}
+
+.employer-landing-container .top-employers-container .feedback-content {
+  height: 116px;
+}
+
+.employer-landing-container .top-employers-container .item {
+  min-height: 565px;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .top-employers-container .item {
+    width: 656px;
+    min-height: initial;
+  }
+}
+
+.employer-landing-container .top-employers-container .employer-logo {
+  object-fit: contain;
+}
+
+.employer-landing-container .top-employers-container .top-employers-wrapper {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 12px;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .top-employers-container .top-employers-wrapper {
+    grid-template-rows: repeat(2, 143px);
+    grid-template-columns: repeat(8, 1fr);
+    justify-content: space-between;
+    grid-gap: 28px;
+  }
+}
+
+.employer-landing-container
+  .top-employers-container
+  .top-employers-wrapper
+  img {
+  max-width: 75px;
+  max-height: 75px;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container
+    .top-employers-container
+    .carousel-item
+    > .carousel-item-wrapper {
+    height: 276px;
+  }
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container
+    .top-employers-container
+    .feedback-author-wrapper {
+    max-width: 352px;
+  }
+}
+
+.employer-landing-container
+  .top-employers-container
+  button.carousel-control-prev,
+.employer-landing-container
+  .top-employers-container
+  button.carousel-control-next {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #dedede;
+  border-radius: 50%;
+  position: initial !important;
+  opacity: 1 !important;
+}
+
+.employer-landing-container
+  .top-employers-container
+  button.carousel-control-prev:hover,
+.employer-landing-container
+  .top-employers-container
+  button.carousel-control-next:hover {
+  border: 1px solid #414042;
+}
+
+.employer-landing-container .employer-contact-container {
+  background: linear-gradient(323deg, #690710 5.42%, #000 83.8%);
+}
+
+.employer-landing-container .employer-contact-container .contact-box {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .employer-contact-container .contact-form {
+    flex: 2;
+  }
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .employer-contact-container .contact-info {
+    flex: 1;
+  }
+}
+
+.employer-landing-container
+  .employer-contact-container
+  .ts-wrapper
+  .ts-control
+  input::placeholder {
+  color: #a6a6a6;
+  font-size: 16px;
+}
+
+.employer-landing-container .employer-contact-container .ts-control {
+  height: 56px;
+}
+
+.employer-landing-container .employer-contact-container .item {
+  font-size: 16px;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container
+    .blog-posts-container
+    .blog-item-card:nth-child(2) {
+    margin: 0 28px;
+  }
+}
+
+.employer-landing-container .blog-posts-container .blog-item-card {
+  position: relative;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  max-width: 428px;
+  border-bottom: 1px solid #dedede;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .blog-posts-container .blog-item-card {
+    border-radius: 8px;
+    box-shadow: 0px 6px 32px 0px rgba(0, 0, 0, 0.08);
+    border-bottom: none;
+  }
+}
+
+.employer-landing-container
+  .blog-posts-container
+  .blog-item-card
+  .text-clamp-4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+.employer-landing-container .blog-posts-container .blog-item:nth-child(2) {
+  margin: 20px 0;
+  border-top: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .blog-posts-container .blog-item:nth-child(2) {
+    margin: 0 20px;
+    border-top: none;
+    border-bottom: none;
+  }
+}
+
+.employer-landing-container .blog-posts-container .blog-card-image {
+  border: 1px solid #dedede;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .blog-posts-container .blog-card-image {
+    height: 226px;
+    border: none;
+    border-radius: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+}
+
+.employer-landing-container .blog-posts-container .blog-salary-wrapper {
+  box-shadow: 0px 6px 32px 0px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .blog-posts-container .blog-salary-wrapper {
+    height: 218px;
+  }
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container
+    .blog-posts-container
+    .salary-report-image-wrapper {
+    width: 220px;
+    height: 282px;
+  }
+}
+
+.employer-landing-container
+  .blog-posts-container
+  .salary-report-image-wrapper
+  img {
+  height: 282px;
+}
+
+.employer-landing-container .blog-posts-container .card-title {
+  min-height: 48px;
+}
+
+.employer-landing-container .excite-it-container {
+  background-image: url(https://itviec.com/assets/employer_landing/excite-it-mobile-6b4b865d74e6be8b519b9d496410dd9cccf5a17e6f773953504c02379e33fe74.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .excite-it-container {
+    min-height: 738px;
+  }
+}
+
+.employer-landing-container .excite-it-container .excite-it-bg-image {
+  width: auto;
+  min-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .excite-it-container {
+    background: linear-gradient(90deg, #121212 57%, #50141b 100%);
+  }
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .excite-it-container .excite-content {
+    flex: 1;
+  }
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .excite-it-container .excite-video {
+    flex: 2;
+    height: 498px;
+    width: 884px;
+  }
+}
+
+@media (min-width: 992px) {
+  .employer-landing-container .excite-it-container .excite-it-content-wrapper {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+}

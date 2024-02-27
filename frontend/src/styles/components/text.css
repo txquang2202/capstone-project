@@ -69,3 +69,12 @@
 .text-light-warning-color {
   color: #fff4e9 !important;
 }
+
+.text-decoration-underline {
+  text-decoration: underline !important;
+}
+
+.normal-text {
+  font-size: 16px;
+  font-weight: 400;
+}
