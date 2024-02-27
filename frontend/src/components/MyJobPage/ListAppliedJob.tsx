@@ -58,6 +58,7 @@ export default function ListAppliedJob() {
 
 const optionsEn = ['Lastest application date', 'Furthest application date'];
 const optionsVi = ['Ngày ứng tuyển gần nhất', 'Ngày ứng tuyển xa nhất'];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const jobs: any[] = [
   // {
   //   postedAgo: 34,

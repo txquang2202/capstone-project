@@ -7,10 +7,27 @@ import { AppLink } from '@/components/AppLink';
 import { Button } from '@/components/Button';
 import { IconCheck } from '@/components/Icons';
 import { routes } from '@/configs/router';
+import { useForm } from '@/hooks/useForm';
 import { useLocale } from '@/locale';
+
+type LoginForm = {
+  username: string;
+  password: string;
+};
 
 export default function Page() {
   const { t } = useLocale();
+  const { fields, error, handleSubmit, onChangeField } = useForm<LoginForm>({
+    defaultState: { username: '', password: '' },
+    config: {
+      username: { required: true },
+      password: { required: true },
+    },
+  });
+
+  const onSubmit = () => {
+    console.log(fields);
+  };
 
   return (
     <div className='mx-[30px]'>
@@ -59,6 +76,9 @@ export default function Page() {
                 label={t('emailAddressText')}
                 placeholder={t('emailAddressText')}
                 classNames={{ label: 'mb-1' }}
+                value={fields.username}
+                error={t(error.username)}
+                onChange={(e) => onChangeField('username', e.target.value)}
               />
               <div className='relative'>
                 <AppLink
@@ -73,9 +93,14 @@ export default function Page() {
                   label={t('passwordText')}
                   placeholder={t('passwordText')}
                   classNames={{ label: 'mb-1' }}
+                  value={fields.password}
+                  error={t(error.password)}
+                  onChange={(e) => onChangeField('password', e.target.value)}
                 />
               </div>
-              <Button>{t('signinWithText', ['Email'])}</Button>
+              <Button onClick={() => handleSubmit(onSubmit)}>
+                {t('signinWithText', ['Email'])}
+              </Button>
               <div className='text-center'>
                 {`${t('doNotHaveAnAccountText')} `}
                 <AppLink

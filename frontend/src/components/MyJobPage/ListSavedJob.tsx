@@ -58,6 +58,7 @@ export default function ListSavedJob() {
 
 const optionsEn = ['Nearest expiration time', 'Newest job'];
 const optionsVi = ['Ngày hết hạn gần nhất', 'Việc làm mới nhất'];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const jobs: any[] = [
   {
     postedAgo: 4,
