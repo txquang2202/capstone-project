@@ -39,9 +39,15 @@ export function middleware(request: NextRequest) {
       let pathWithoutLocale = pathname.slice(`/${pathLocale}`.length) || '/';
       if (request.nextUrl.search) pathWithoutLocale += request.nextUrl.search;
 
-      response = NextResponse.redirect(new URL(pathWithoutLocale, request.url));
+      response = NextResponse.redirect(
+        new URL(pathWithoutLocale, request.url),
+        { headers: { 'x-pathname': pathWithoutLocale } }
+      );
     }
 
+    response = NextResponse.next({
+      headers: { 'x-pathname': pathname.slice(`/${pathLocale}`.length) },
+    });
     nextLocale = pathLocale;
   } else {
     const isFirstVisit = !request.cookies.has('NEXT_LOCALE');
@@ -53,12 +59,17 @@ export function middleware(request: NextRequest) {
 
     response =
       locale === defaultLocale
-        ? NextResponse.rewrite(new URL(newPath, request.url))
-        : NextResponse.redirect(new URL(newPath, request.url));
+        ? NextResponse.rewrite(new URL(newPath, request.url), {
+            headers: { 'x-pathname': pathname },
+          })
+        : NextResponse.redirect(new URL(newPath, request.url), {
+            headers: { 'x-pathname': pathname },
+          });
     nextLocale = locale;
   }
 
-  if (!response) response = NextResponse.next();
+  if (!response)
+    response = NextResponse.next({ headers: { 'x-pathname': pathname } });
 
   if (nextLocale) response.cookies.set('NEXT_LOCALE', nextLocale);
 
@@ -66,5 +77,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/((?!api|_next/static|_next/image|images/|favicon/|favicon.ico).*)',
+  matcher: '/((?!api|_next/static|_next/image|images/|favicon/).*)',
 };

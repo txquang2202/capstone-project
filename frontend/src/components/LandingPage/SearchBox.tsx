@@ -1,7 +1,9 @@
 'use client';
 
-import { Button } from '@/components/Button';
 import { IconSearch } from '@/components/Icons';
+import { routes } from '@/configs/router';
+
+import { AppLink } from '../AppLink';
 
 const SearchBox = () => {
   return (
@@ -50,15 +52,16 @@ const SearchBox = () => {
             type='text'
             placeholder='Nhập từ khoá theo kỹ năng, chức vụ, công ty...'
           />
-          <Button
+          <AppLink
+            nextLink={false}
+            href={routes.search.path}
             intent='primary'
-            size='large'
-            className='h-[56px] w-[240px] text-[18px] font-[600] hover:bg-red-700'
+            size='xl'
+            className='w-[240px]'
+            icon={<IconSearch className='mr-1 h-5 w-5' />}
           >
-            {/* feather icon sprite */}
-            <IconSearch className='mr-1 h-5 w-5' />
             Tìm kiếm
-          </Button>
+          </AppLink>
         </div>
       </div>
       <div className='mt-[28px] flex w-full flex-row items-center'>

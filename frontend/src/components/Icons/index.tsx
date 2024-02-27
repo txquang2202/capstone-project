@@ -9,6 +9,7 @@ export {
   Camera as IconCamera,
   Check as IconCheck,
   ChevronDown as IconChevronDown,
+  ChevronLeft as IconChevronLeft,
   ChevronRight as IconChevronRight,
   Clock as IconClock,
   ExternalLink as IconExternalLink,
