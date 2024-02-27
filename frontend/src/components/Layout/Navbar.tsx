@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   useParams,
   usePathname,
@@ -93,13 +94,9 @@ const Header = () => {
       </div> */}
             <ul className='navbar-nav ms-auto items-center gap-6'>
               <li className='nav-item main-menu'>
-                <a
-                  className='text-it-white'
-                  rel='canonical'
-                  href='/danh-cho-nha-tuyen-dung'
-                >
+                <Link href={routes.employer.path} className='text-it-white'>
                   Nhà Tuyển Dụng
-                </a>
+                </Link>
               </li>
               <li className='nav-item'>
                 <AppLink
