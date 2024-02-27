@@ -64,7 +64,7 @@ const Header = () => {
                 </a>
               </li>
               <li className='nav-item main-menu relative'>
-                <a href='/#' className='flex items-center px-2'>
+                <a href='/blog' className='flex items-center px-2'>
                   Blog
                   <IconChevronDown />
                 </a>

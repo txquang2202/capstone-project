@@ -4,6 +4,7 @@ export { default as IconSalary } from './Salary';
 export { default as IconFacebookFill } from './FacebookFill';
 export { default as IconYoutubeFill } from './YoutubeFill';
 export { default as IconLinkedinFill } from './LinkedinFill';
+export { default as IconCrossCircle } from './CrossCircle';
 export {
   ArrowRightCircle as IconArrowRightCircle,
   Camera as IconCamera,
@@ -26,4 +27,12 @@ export {
   PhoneCall as IconPhoneCall,
   Mail as IconMail,
   Send as IconSend,
+  XCircle as IconXCircle,
+  Plus as IconPlus,
+  ChevronUp as IconChevronUp,
+  Globe as IconGlobe,
+  Phone as IconPhone,
+  Gift as IconGift,
+  User as IconUser,
+  Edit as IconEdit,
 } from 'react-feather';
