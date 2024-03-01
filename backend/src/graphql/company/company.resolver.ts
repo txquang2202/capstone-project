@@ -1,10 +1,9 @@
 import { company } from "@prisma/client";
 import { ContextInterface } from "../context";
-import { CompanyInput } from "./company.types";
 
 const Query = {
   //Show list of companies
-  company: async (
+  companies: async (
     _: any,
     _args: any,
     { prisma }: ContextInterface,
@@ -19,7 +18,7 @@ const Mutation = {
   //Trường size hiện tại đang bị xung đột kiểu dữ liệu nên tạm thời không thêm trường size nhé <3
   createCompany: async (
     _: any,
-    { input }: { input: CompanyInput },
+    { input }: { input: company },
     { prisma }: ContextInterface,
   ): Promise<company> => {
     const newCompany = await prisma.company.create({
@@ -31,7 +30,7 @@ const Mutation = {
   // Update an existing company by ID
   updateCompany: async (
     _: any,
-    { id, input }: { id: string; input: CompanyInput },
+    { id, input }: { id: string; input: company },
     { prisma }: ContextInterface,
   ): Promise<company | null> => {
     const companyId = parseInt(id);

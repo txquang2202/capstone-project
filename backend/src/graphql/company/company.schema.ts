@@ -31,8 +31,8 @@ const CompanySchema = gql`
   # Queries
   # ---------------------------------------------------------
   extend type Query {
-    company: [CompanyPayload!]
-    companies(id: ID!): CompanyPayload
+    companies: [CompanyPayload!]
+    company(id: ID!): CompanyPayload
     companyReviews: [CompanyReview!]
     companyReview(id: ID!): CompanyReview
   }

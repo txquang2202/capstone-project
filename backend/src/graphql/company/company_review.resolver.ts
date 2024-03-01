@@ -1,18 +1,18 @@
-import { review, PrismaClient } from "@prisma/client";
-import {
-  CompanyReviewInput,
-  UpdateCompanyReviewInput,
-} from "./company_review.types";
-
-const prisma = new PrismaClient();
+import { review } from "@prisma/client";
+import { ContextInterface } from "../context";
 
 const Query = {
-  companyReviews: async (): Promise<review[]> => {
+  companyReviews: async (
+    _: any,
+    _args: any,
+    { prisma }: ContextInterface,
+  ): Promise<review[]> => {
     return await prisma.review.findMany();
   },
 
   companyReview: async (
     _: any,
+    { prisma }: ContextInterface,
     { id }: { id: number },
   ): Promise<review | null> => {
     return await prisma.review.findUnique({
@@ -26,7 +26,8 @@ const Query = {
 const Mutation = {
   createCompanyReview: async (
     _: any,
-    { input }: { input: CompanyReviewInput },
+    { input }: { input: review },
+    { prisma }: ContextInterface,
   ): Promise<review> => {
     const existingUser = await prisma.user.findUnique({
       where: { id: input.user_id },
@@ -63,7 +64,8 @@ const Mutation = {
 
   updateCompanyReview: async (
     _: any,
-    { id, input }: { id: string; input: UpdateCompanyReviewInput },
+    { id, input }: { id: string; input: review },
+    { prisma }: ContextInterface,
   ): Promise<review | null> => {
     const companyReviewId = parseInt(id);
     const existingReview = await prisma.review.findUnique({
@@ -83,6 +85,7 @@ const Mutation = {
   deleteCompanyReview: async (
     _: any,
     { id }: { id: string },
+    { prisma }: ContextInterface,
   ): Promise<review | null> => {
     const companyReviewId = parseInt(id);
     const existingReview = await prisma.review.findUnique({

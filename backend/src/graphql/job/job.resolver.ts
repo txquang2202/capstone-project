@@ -1,5 +1,4 @@
 import { job_apply } from "@prisma/client";
-import { ApplyJobInput } from "./job.types";
 import { ContextInterface } from "../context";
 
 const Query = {
@@ -18,7 +17,7 @@ const Mutation = {
   //Add to application list
   applyJob: async (
     _: any,
-    { input }: { input: ApplyJobInput },
+    { input }: { input: job_apply },
     { prisma }: ContextInterface,
   ): Promise<job_apply> => {
     const userExists = await prisma.user.findUnique({
