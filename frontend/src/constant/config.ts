@@ -12,3 +12,5 @@ export const LANGUAGES_CODE = {
 };
 
 export const DEFAULT_LOCALE = LANGUAGES_CODE.vi;
+
+export const STICKY_NAV_OFFSET = 90;

@@ -8,6 +8,14 @@ const BestFeatures = () => {
       <div className='text-center'>
         <h1>Công cụ tốt nhất cho hành trang ứng tuyển của bạn</h1>
       </div>
+      {/* <div className='flex max-w-28'>
+        <div className='flex-1 items-center justify-center'>
+          <div className='bg-gray w-50 h-50 rounded-full'>asdas</div>
+          <span>123</span>
+        </div>
+        <div className='flex-1'>asdas</div>
+        <div className='flex-1'>asdas</div>
+      </div> */}
       <div className='mt-[48px] grid grid-cols-3 gap-[40px]'>
         <div className='relative flex flex-row'>
           <div className=''>

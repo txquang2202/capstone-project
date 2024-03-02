@@ -9,7 +9,7 @@ const EmployerTopEmployers = () => {
             đầu, và các công ty khởi nghiệp sáng tạo
           </p>
           <div className='top-employers-wrapper'>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -22,7 +22,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -35,7 +35,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -48,7 +48,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -61,7 +61,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -74,7 +74,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -87,7 +87,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -100,7 +100,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -113,7 +113,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -126,7 +126,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -139,7 +139,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -152,7 +152,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -165,7 +165,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -178,7 +178,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -191,7 +191,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
@@ -204,7 +204,7 @@ const EmployerTopEmployers = () => {
                 />
               </a>
             </div>
-            <div className='border-radius-large flex items-center justify-center bg-white'>
+            <div className='flex items-center justify-center rounded-lg bg-white'>
               <a
                 target='_blank'
                 data-controller='utm-tracking'
