@@ -1,0 +1,4 @@
+- pipeline.id: jdbc
+  path.config: "/usr/share/logstash/pipeline/jdbc.conf"
+- pipeline.id: kafka
+  path.config: "/usr/share/logstash/pipeline/kafka.conf"
