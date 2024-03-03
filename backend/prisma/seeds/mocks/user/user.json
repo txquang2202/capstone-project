@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "phone": "+1234567890",
+    "gender": 1,
+    "current_address": "123 Main Street, Cityville, Country",
+    "about_me": "Experienced software engineer with a passion for creating efficient and scalable solutions.",
+    "cover_letter": "I am excited to apply my skills in software engineering to contribute to innovative projects...",
+    "personal_link": "https://www.linkedin.com/in/johndoe/",
+    "role": 0,
+    "img_url": "https://picsum.photos/200/300"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "phone": "+9876543210",
+    "gender": 0,
+    "current_address": "456 Oak Avenue, Townsville, Country",
+    "about_me": "Passionate software engineer with a focus on user-centric design and problem-solving.",
+    "cover_letter": "I am eager to apply my technical expertise to contribute to cutting-edge projects...",
+    "personal_link": "https://www.linkedin.com/in/janesmith/",
+    "role": 0,
+    "img_url": "https://picsum.photos/200/300"
+  },
+  {
+    "id": 3,
+    "name": "Alex Johnson",
+    "email": "alex.johnson@example.com",
+    "phone": "+1122334455",
+    "gender": 1,
+    "current_address": "789 Pine Street, Villagetown, Country",
+    "about_me": "Results-driven software engineer with a strong background in full-stack development.",
+    "cover_letter": "I am committed to delivering high-quality software solutions and leveraging the latest technologies...",
+    "personal_link": "https://www.linkedin.com/in/alexjohnson/",
+    "role": 1,
+    "img_url": "https://picsum.photos/200/300"
+  },
+  {
+    "id": 4,
+    "name": "Ryan Turner",
+    "email": "ryan.turner@example.com",
+    "phone": "+5566778899",
+    "gender": 0,
+    "current_address": "567 Birch Street, Lakeside, Country",
+    "about_me": "Innovative software engineer with expertise in machine learning and artificial intelligence.",
+    "cover_letter": "I am passionate about pushing the boundaries of technology and leveraging AI to solve complex problems...",
+    "personal_link": "https://www.linkedin.com/in/ryanturner/",
+    "role": 1,
+    "img_url": "https://picsum.photos/200/300"
+  }
+]

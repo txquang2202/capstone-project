@@ -1,35 +1,26 @@
 [
   {
     "user_id": 1,
-    "skills": "[Java, ReactJS, NodeJS]",
-    "job_level": "fresher",
+    "skills": "[\"Java\", \"Python\", \"JavaScript\", \"SQL\", \"React\"]",
+    "job_level": "[\"junior\", \"senior\"]",
+    "current_salary": 12000000,
+    "expected_salary_from": 15000000,
+    "expected_salary_to": 18000000,
+    "working_type": "[\"Remote\", \"Hybrid\"]",
+    "company_type": "[\"IT Product\", \"IT Service and IT Consulting\"]",
+    "company_size": "[\"51-150\", \"151-300\", \"301-500\"]",
+    "location": "Ho Chi Minh"
+  },
+  {
+    "user_id": 2,
+    "skills": "[\"C++\", \"JavaScript\", \"MongoDB\", \"Node.js\"]",
+    "job_level": "[\"senior\", \"manager\"]",
     "current_salary": 15000000,
-    "expected_salary": 20000000,
-    "working_type": "[remote, hybrid]",
-    "company_type": "product",
-    "company_size": 1500,
-    "location": "Thành phố Hồ Chí Minh"
-  },
-  {
-    "user_id": 3,
-    "skills": "[Java]",
-    "job_level": "middle",
-    "current_salary": 45000000,
-    "expected_salary": 60000000,
-    "working_type": "[onsite]",
-    "company_type": "outsource",
-    "company_size": 10000,
-    "location": "Hà Nội"
-  },
-  {
-    "user_id": 4,
-    "skills": "[ReactJS, Ruby]",
-    "job_level": "middle",
-    "current_salary": 50000000,
-    "expected_salary": 60000000,
-    "working_type": "[onsite, hybrid]",
-    "company_type": "any",
-    "company_size": 10000,
-    "location": "Đà Nẵng"
+    "expected_salary_from": 18000000,
+    "expected_salary_to": 22000000,
+    "working_type": "[\"At office\", \"Hybrid\"]",
+    "company_type": "[\"IT Oursourcing\", \"IT Service and IT Consulting\"]",
+    "company_size": "[\"151-300\", \"301-500\", \"501-1000\", \"1000+\"]",
+    "location": "Others"
   }
 ]

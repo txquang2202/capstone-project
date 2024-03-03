@@ -1,0 +1,56 @@
+[
+  {
+    "user_id": 1,
+    "project_name": "Smart Home Automation System",
+    "start_date": "01/05/2019",
+    "end_date": "30/11/2019",
+    "currently_working_here": false,
+    "description": "<p>Developed a smart home automation system that allows users to control devices remotely. Integrated with voice recognition for seamless user interaction.</p><ul><li>Implemented remote control functionality for various home devices</li><li>Integrated voice recognition using natural language processing</li><li>Ensured security measures for user data and device control</li></ul>",
+    "project_url": "https://github.com/user1/smart-home-automation"
+  },
+  {
+    "user_id": 1,
+    "project_name": "E-commerce Platform Enhancement",
+    "start_date": "01/03/2020",
+    "end_date": "30/06/2020",
+    "currently_working_here": false,
+    "description": "<p>Enhanced an existing e-commerce platform with new features, improved user interfaces, and optimized performance for better customer experience.</p><ul><li>Implemented new features based on user feedback and market trends</li><li>Optimized front-end performance for faster loading times</li><li>Collaborated with cross-functional teams for successful project delivery</li></ul>",
+    "project_url": "https://github.com/user1/ecommerce-enhancement"
+  },
+  {
+    "user_id": 1,
+    "project_name": "Data Analytics Dashboard",
+    "start_date": "01/02/2021",
+    "end_date": null,
+    "currently_working_here": true,
+    "description": "<p>Developed a data analytics dashboard for visualizing and analyzing large datasets. Implemented various charts and graphs for data representation.</p><ul><li>Designed and implemented interactive charts for data visualization</li><li>Integrated data processing algorithms for accurate analysis</li><li>Collaborated with data scientists to ensure dashboard effectiveness</li></ul>",
+    "project_url": "https://github.com/user1/data-analytics-dashboard"
+  },
+  {
+    "user_id": 2,
+    "project_name": "Social Media Analytics Tool",
+    "start_date": "01/08/2017",
+    "end_date": "30/12/2017",
+    "currently_working_here": false,
+    "description": "<p>Created a tool for analyzing social media trends and user engagement. Utilized machine learning algorithms to predict popular topics.</p><ul><li>Implemented sentiment analysis for user-generated content</li><li>Developed algorithms to predict trending topics based on historical data</li><li>Collaborated with data scientists to refine machine learning models</li></ul>",
+    "project_url": "https://github.com/user2/social-media-analytics"
+  },
+  {
+    "user_id": 2,
+    "project_name": "Portfolio Website",
+    "start_date": "01/04/2018",
+    "end_date": "30/06/2018",
+    "currently_working_here": false,
+    "description": "<p>Designed and developed a personal portfolio website to showcase skills, projects, and experience. Implemented responsive design for optimal viewing on various devices.</p><ul><li>Created a visually appealing and user-friendly design</li><li>Implemented responsive web design for optimal user experience</li><li>Integrated project showcase and resume download functionality</li></ul>",
+    "project_url": "https://github.com/user2/portfolio-website"
+  },
+  {
+    "user_id": 2,
+    "project_name": "Online Task Management System",
+    "start_date": "01/01/2019",
+    "end_date": null,
+    "currently_working_here": true,
+    "description": "<p>Developed an online task management system for efficient project collaboration. Integrated features for task assignment, progress tracking, and file sharing.</p><ul><li>Designed and implemented task assignment and tracking features</li><li>Integrated file sharing functionality for seamless collaboration</li><li>Continuously enhancing system features based on user feedback</li></ul>",
+    "project_url": "https://github.com/user2/task-management-system"
+  }
+]
