@@ -57,6 +57,7 @@
     "express": "^4.16.4",
     "faker": "^5.5.3",
     "graphql": "^15.0.0",
+    "graphql-constraint-directive": "v2",
     "graphql-depth-limit": "^1.1.0",
     "graphql-jit": "^0.5.2",
     "graphql-middleware": "^6.0.10",
