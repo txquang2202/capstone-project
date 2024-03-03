@@ -1,4 +1,8 @@
 import { ApolloServerPluginInlineTraceDisabled } from "apollo-server-core";
+import {
+  constraintDirective,
+  constraintDirectiveTypeDefs,
+} from "graphql-constraint-directive";
 import { ApolloServer } from "apollo-server-express";
 import depthLimit from "graphql-depth-limit";
 import { applyMiddleware } from "graphql-middleware";
@@ -31,10 +35,15 @@ export const createApolloServer = (
 ): any => {
   schema = rateLimitDirectiveTransformer(
     makeExecutableSchema({
-      typeDefs: [rateLimitDirectiveTypeDefs, schema],
+      typeDefs: [
+        rateLimitDirectiveTypeDefs,
+        constraintDirectiveTypeDefs,
+        schema,
+      ],
       resolvers,
     }),
   );
+  schema = constraintDirective()(schema);
   schema = applyMiddleware(schema, permissions);
   const introspection = process.env.APOLLO_INTROSPECTION === "true";
   const debug = process.env.APOLLO_DEBUG === "true";

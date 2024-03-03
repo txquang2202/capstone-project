@@ -24,7 +24,7 @@ const ShopSchema = gql`
   # Input Objects
   # ---------------------------------------------------------
   input UserInput {
-    name: String!
+    name: String! @constraint(minLength: 5)
     email: String!
     bod: Date
     password: String!
