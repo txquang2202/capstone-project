@@ -18,6 +18,15 @@ model blog {
   blog_tag   blog_tag[]
 }
 
+model blog_tag {
+  blog_id Int
+  tag_id  Int
+  blog    blog @relation(fields: [blog_id], references: [id], onDelete: Cascade, map: "blog_tag_fk")
+  tag     tag  @relation(fields: [tag_id], references: [id], onDelete: Cascade, map: "blog_tag_fk_1")
+
+  @@id([blog_id, tag_id], map: "blog_tag_pk")
+}
+
 model company {
   id                Int                @id(map: "company_pk") @default(autoincrement())
   company_name      String             @db.VarChar
@@ -35,6 +44,21 @@ model company {
   follow            follow[]
   job               job[]
   review            review[]
+}
+
+model company_benefit {
+  company_id         Int     @unique(map: "company_benefit_unique")
+  key_benefit        String? @db.VarChar
+  detail_description String? @db.VarChar
+  company_images     String? @db.VarChar
+  company            company @relation(fields: [company_id], references: [id], onDelete: Cascade, map: "company_benefit_company_fk")
+}
+
+model company_key_skill {
+  company_id  Int     @unique(map: "company_key_skill_unique")
+  key_skills  String? @db.VarChar
+  description String? @db.VarChar
+  company     company @relation(fields: [company_id], references: [id], onDelete: Cascade, map: "company_key_skill_company_fk")
 }
 
 model company_location {
@@ -142,6 +166,12 @@ model review {
   user                         user     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_fk_1")
 }
 
+model tag {
+  id       Int        @id(map: "tag_pk") @default(autoincrement())
+  tag_name String     @db.VarChar
+  blog_tag blog_tag[]
+}
+
 model user {
   id                                           Int                   @id(map: "user_pk") @default(autoincrement())
   name                                         String?               @db.VarChar
@@ -175,13 +205,32 @@ model user {
 }
 
 model user_award {
-  id           Int     @id(map: "user_award_pk") @default(autoincrement())
-  user_id      Int
-  name         String? @db.VarChar
-  organization String? @db.VarChar
-  issue_date   String? @db.VarChar
-  description  String? @db.VarChar
-  user         user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_award_fk")
+  id          Int     @id(map: "user_award_pk") @default(autoincrement())
+  user_id     Int
+  award_name  String? @db.VarChar
+  org_name    String? @db.VarChar
+  issue_date  String? @db.VarChar
+  description String? @db.VarChar
+  user        user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_award_fk")
+}
+
+model user_certificate {
+  id          Int     @id(map: "certificate_pk") @default(autoincrement())
+  user_id     Int
+  cert_name   String? @db.VarChar
+  org_name    String? @db.VarChar
+  cert_url    String? @db.VarChar
+  description String? @db.VarChar
+  issue_date  String? @db.VarChar
+  user        user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "certificate_fk")
+}
+
+model user_cv {
+  id            Int       @id(map: "user_cv_pk") @default(autoincrement())
+  user_id       Int
+  date_uploaded DateTime? @db.Date
+  url           String?   @db.VarChar
+  user          user      @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "user_cv_fk")
 }
 
 model user_education {
@@ -229,56 +278,4 @@ model work_experience {
   user                   user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "work_experience_fk")
 
   @@id([id, user_id], map: "work_experience_pk")
-}
-
-model blog_tag {
-  blog_id Int
-  tag_id  Int
-  blog    blog @relation(fields: [blog_id], references: [id], onDelete: Cascade, map: "blog_tag_fk")
-  tag     tag  @relation(fields: [tag_id], references: [id], onDelete: Cascade, map: "blog_tag_fk_1")
-
-  @@id([blog_id, tag_id], map: "blog_tag_pk")
-}
-
-model tag {
-  id       Int        @id(map: "tag_pk") @default(autoincrement())
-  tag_name String     @db.VarChar
-  blog_tag blog_tag[]
-}
-
-model user_certificate {
-  id          Int     @id(map: "certificate_pk") @default(autoincrement())
-  user_id     Int
-  cert_name   String? @db.VarChar
-  org_name    String? @db.VarChar
-  cert_url    String? @db.VarChar
-  description String? @db.VarChar
-  issue_date  String? @db.VarChar
-  user        user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "certificate_fk")
-}
-
-model user_cv {
-  id            Int       @id(map: "user_cv_pk") @default(autoincrement())
-  user_id       Int
-  date_uploaded DateTime? @db.Date
-  url           String?   @db.VarChar
-  user          user      @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "user_cv_fk")
-}
-
-model company_benefit {
-  company_id         Int     @unique(map: "company_benefit_unique")
-  key_benefit        String? @db.VarChar
-  detail_description String? @db.VarChar
-  company_images     String? @db.VarChar
-  company            company @relation(fields: [company_id], references: [id], onDelete: Cascade, map: "company_benefit_company_fk")
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model company_key_skill {
-  company_id  Int     @unique(map: "company_key_skill_unique")
-  key_skills  String? @db.VarChar
-  description String? @db.VarChar
-  company     company @relation(fields: [company_id], references: [id], onDelete: Cascade, map: "company_key_skill_company_fk")
-
-  @@ignore
 }
