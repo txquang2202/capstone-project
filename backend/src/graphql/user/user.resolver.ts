@@ -1,6 +1,9 @@
 // import { User } from "@prisma/client";
 // import { ContextInterface } from "../context";
 
+import { user } from "@prisma/client";
+import { ContextInterface } from "../context";
+
 const Query = {
   // user: async (
   //   _: any,
@@ -36,16 +39,19 @@ const Query = {
 };
 
 const Mutation = {
-  // createUser: async (
-  //   _: any,
-  //   { input }: { input: User },
-  //   { prisma }: ContextInterface,
-  // ): Promise<User> => {
-  //   const user = await prisma.user.create({
-  //     data: input,
-  //   });
-  //   return user;
-  // },
+  createUser: async (
+    _: any,
+    { input }: { input: user },
+    { prisma }: ContextInterface,
+  ): Promise<user> => {
+    // return await prisma.user.create({
+    //   data: input,
+    // });
+    return {
+      id: 1,
+      name: "test",
+    };
+  },
   // updateUser: async (
   //   _: any,
   //   { id, input }: { id: string; input: User },

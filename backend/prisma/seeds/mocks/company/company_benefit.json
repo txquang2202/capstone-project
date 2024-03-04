@@ -1,0 +1,32 @@
+[
+  {
+    "company_id": 1,
+    "key_benefit": "<ul><li>Competitive Salary Packages</li><li>Flexible Work Hours</li></ul>",
+    "detail_description": "<p>At TechSolutions, we believe in rewarding our employees with competitive salary packages and providing flexibility in work hours to maintain a healthy work-life balance.</p>",
+    "company_images": "[\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\"]"
+  },
+  {
+    "company_id": 2,
+    "key_benefit": "<ul><li>Career Development Programs</li><li>Health and Wellness Initiatives</li></ul>",
+    "detail_description": "<p>InnovateTech is committed to the professional growth of its employees through career development programs. We also prioritize the well-being of our team members with health and wellness initiatives.</p>",
+    "company_images": "[\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\"]"
+  },
+  {
+    "company_id": 3,
+    "key_benefit": "<ul><li>Opportunities for Advancement</li><li>Employee Recognition Programs</li></ul>",
+    "detail_description": "<p>TalentSearch fosters an environment that encourages career advancement. Our employee recognition programs ensure that hard work and dedication are acknowledged and celebrated.</p>",
+    "company_images": "[\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\"]"
+  },
+  {
+    "company_id": 4,
+    "key_benefit": "<ul><li>Mentorship Programs</li><li>Team Building Activities</li></ul>",
+    "detail_description": "<p>ConsultTech is dedicated to fostering a collaborative environment. Our mentorship programs and team-building activities strengthen the bonds within our talented team.</p>",
+    "company_images": "[\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\"]"
+  },
+  {
+    "company_id": 5,
+    "key_benefit": "<ul><li>Work-Life Balance Initiatives</li><li>Community Engagement Opportunities</li></ul>",
+    "detail_description": "<p>GreenInnovations values the well-being of its employees and promotes work-life balance initiatives. We also encourage community engagement, providing opportunities to make a positive impact beyond the workplace.</p>",
+    "company_images": "[\"https://picsum.photos/200/300\",\"https://picsum.photos/200/300\"]"
+  }
+]
