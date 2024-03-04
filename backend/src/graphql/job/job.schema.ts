@@ -10,6 +10,21 @@ const JobApplicationSchema = gql`
     cv: Int!
     cover_letter: String
   }
+  type Job {
+    job_id: Int
+    company_id: Int
+    working_location: Int
+    name: String
+    salary: Int
+    country: String
+    skills: String
+    working_type: String
+    overview: String
+    top_3_reason: String
+    job_description: String
+    skill_demand: String
+    why_you_love_working_here: String
+  }
 
   # ---------------------------------------------------------
   # Queries
@@ -17,6 +32,7 @@ const JobApplicationSchema = gql`
   extend type Query {
     jobApplicaitons: [JobApplication!]
     jobApplication(id: ID!): JobApplication
+    search(query: String!): [Job]
   }
   # ---------------------------------------------------------
   # Input Objects

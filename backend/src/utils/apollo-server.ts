@@ -9,6 +9,7 @@ import { applyMiddleware } from "graphql-middleware";
 import { rateLimitDirective } from "graphql-rate-limit-directive";
 import jwt from "jsonwebtoken";
 import prisma from "./prisma";
+import elastic from "./elasticsearch";
 import { executor } from "./executor";
 import Logger from "./logger";
 require("dotenv").config();
@@ -71,7 +72,7 @@ export const createApolloServer = (
           authUser.role = "admin";
         }
       }
-      return Object.assign({ isRoot, authUser, prisma });
+      return Object.assign({ isRoot, authUser, prisma, elastic });
     },
     validationRules: [depthLimit(20)],
     formatError: (error) => {
