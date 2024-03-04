@@ -1,0 +1,26 @@
+[
+  {
+    "company_id": 1,
+    "key_skills": "[\"C++\",\"JavaScript\",\"ReactJS\",\"NodeJS\",\"TypeScript\"]'",
+    "description": "<ul><li>Embedded Software for Automotive Applications</li><li>Enterprise Software development using Java &amp; .Net</li><li>SAP Consulting</li></ul>"
+  },
+  {
+    "company_id": 2,
+    "key_skills": "[\"ReactJS\",\"Ruby\",\"AWS\",\"React Native\", \".NET\"]'"
+  },
+  {
+    "company_id": 3,
+    "key_skills": "[\".NET\",\"QA and QC\",\"PHP\",\"Business Analyst\",\"TypeScript\"]'",
+    "description": "<ul><li>Python</li><li>Manual / Automation Test</li><li>Frontend (Angular/ReactJS/VueJS)</li><li>Mobile (Native App and Cross platform)</li><li>Microservice</li><li>Cloud computing</li></ul>"
+  },
+  {
+    "company_id": 4,
+    "key_skills": "[\"C++\",\"JavaScript\",\"ReactJS\",\"NodeJS\",\"TypeScript\"]'",
+    "description": "<ul><li>Embedded Software for Automotive Applications</li><li>Enterprise Software development using Java &amp; .Net</li><li>SAP Consulting</li></ul>"
+  },
+  {
+    "company_id": 5,
+    "key_skills": "[\"C++\",\"JavaScript\",\"ReactJS\",\"NodeJS\",\"TypeScript\"]'",
+    "description": "<ul><li>Python</li><li>Manual / Automation Test</li><li>Frontend (Angular/ReactJS/VueJS)</li><li>Mobile (Native App and Cross platform)</li><li>Microservice</li><li>Cloud computing</li></ul>"
+  }
+]

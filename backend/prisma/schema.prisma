@@ -13,38 +13,63 @@ model blog {
   created_at DateTime?  @default(dbgenerated("CURRENT_DATE")) @db.Date
   content    String?    @db.VarChar
   time_read  Int?
+  title      String?    @db.VarChar
   user       user       @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "blog_fk")
   blog_tag   blog_tag[]
 }
 
+model blog_tag {
+  blog_id Int
+  tag_id  Int
+  blog    blog @relation(fields: [blog_id], references: [id], onDelete: Cascade, map: "blog_tag_fk")
+  tag     tag  @relation(fields: [tag_id], references: [id], onDelete: Cascade, map: "blog_tag_fk_1")
+
+  @@id([blog_id, tag_id], map: "blog_tag_pk")
+}
+
 model company {
-  id               Int                @id(map: "company_pk") @default(autoincrement())
-  name             String             @db.VarChar
-  type             String?            @db.VarChar
-  country          String?            @db.VarChar
-  working_day      String?            @db.VarChar
-  ot_policy        String?            @db.VarChar
-  size             String?            @db.VarChar
-  overview         String?            @db.VarChar
-  company_location company_location[]
-  follow           follow[]
-  job              job[]
-  review           review[]
+  id                Int                @id(map: "company_pk") @default(autoincrement())
+  company_name      String             @db.VarChar
+  company_type      String?            @db.VarChar
+  country           String?            @db.VarChar
+  working_day       String?            @db.VarChar
+  ot_policy         String?            @db.VarChar
+  company_size      String?            @db.VarChar
+  overview          String?            @db.VarChar
+  company_website   String?            @db.VarChar
+  company_facebook  String?            @db.VarChar
+  brief_overview    String?            @db.VarChar
+  company_benefit   company_benefit?
+  company_key_skill company_key_skill?
+  company_location  company_location[]
+  follow            follow[]
+  job               job[]
+  review            review[]
+}
+
+model company_benefit {
+  company_id         Int     @unique(map: "company_benefit_unique")
+  key_benefit        String? @db.VarChar
+  detail_description String? @db.VarChar
+  company_images     String? @db.VarChar
+  company            company @relation(fields: [company_id], references: [id], onDelete: Cascade, map: "company_benefit_company_fk")
+}
+
+model company_key_skill {
+  company_id  Int     @unique(map: "company_key_skill_unique")
+  key_skills  String? @db.VarChar
+  description String? @db.VarChar
+  company     company @relation(fields: [company_id], references: [id], onDelete: Cascade, map: "company_key_skill_company_fk")
 }
 
 model company_location {
-  id         Int     @id(map: "company_location_pk") @default(autoincrement())
-  company_id Int
-  address    String  @db.VarChar
-  company    company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "company_location_fk")
-  job        job[]
-}
-
-model cover_letter {
-  content                              String @db.VarChar
-  user_id                              Int    @id(map: "cover_letter_pk")
-  user_cover_letter_user_idTouser      user   @relation("cover_letter_user_idTouser", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cover_letter_fk")
-  user_user_cover_letterTocover_letter user[] @relation("user_cover_letterTocover_letter")
+  id                   Int                    @id(map: "company_location_pk") @default(autoincrement())
+  company_id           Int
+  address              String                 @db.VarChar
+  long                 Decimal?               @db.Decimal
+  lat                  Decimal?               @db.Decimal
+  company              company                @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "company_location_fk")
+  job_working_location job_working_location[]
 }
 
 model follow {
@@ -57,57 +82,46 @@ model follow {
 }
 
 model job {
-  id                        Int                   @id(map: "job_pk") @default(autoincrement())
+  id                        Int                    @id(map: "job_pk") @default(autoincrement())
   company_id                Int
-  working_location          Int?
-  name                      String?               @db.VarChar
+  name                      String?                @db.VarChar
   salary                    Int?
-  country                   String?               @db.VarChar
-  skills                    String?               @db.VarChar
-  working_type              String?               @db.VarChar
-  overview                  String?               @db.VarChar
-  top_3_reason              String?               @db.VarChar
-  job_description           String?               @db.VarChar
-  skill_demand              String?               @db.VarChar
-  why_you_love_working_here String?               @db.VarChar
-  company                   company               @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_fk")
-  company_location          company_location?     @relation(fields: [working_location], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_fk_1")
+  country                   String?                @db.VarChar
+  skills                    String?                @db.VarChar
+  working_type              String?                @db.VarChar
+  top_3_reason              String?                @db.VarChar
+  job_description           String?                @db.VarChar
+  skill_demand              String?                @db.VarChar
+  why_you_love_working_here String?                @db.VarChar
+  date_posted               DateTime?              @db.Date
+  company                   company                @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_fk")
   job_apply                 job_apply[]
-  job_recently_viewed       job_recently_viewed[]
   job_saved                 job_saved[]
+  job_working_location      job_working_location[]
 }
 
 model job_apply {
   user_id      Int
-  cv           Int?
-  cover_letter Int?
+  cv           String? @db.VarChar
+  cover_letter String? @db.VarChar
   job_id       Int
-  job          job  @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "apply_fk")
-  user         user @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "apply_fk_1")
-
-  @@id([user_id, job_id], map: "job_apply_pk")
+  id           Int     @id(map: "job_apply_pk") @default(autoincrement())
+  job          job     @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "apply_fk")
+  user         user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "apply_fk_1")
 }
 
 model job_preferences {
-  user_id         Int     @id(map: "job_preferences_pk")
-  skills          String? @db.VarChar
-  job_level       String? @db.VarChar
-  current_salary  Int?
-  expected_salary Int?
-  working_type    String? @db.VarChar
-  company_type    String? @db.VarChar
-  company_size    String? @db.VarChar
-  location        String? @db.VarChar
-  user            user    @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "job_preferences_fk")
-}
-
-model job_recently_viewed {
-  job_id  Int
-  user_id Int
-  user    user @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_recently_viewed_fk")
-  job     job  @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_recently_viewed_fk_1")
-
-  @@id([job_id, user_id], map: "job_recently_viewed_pk")
+  user_id              Int     @id(map: "job_preferences_pk")
+  skills               String? @db.VarChar
+  job_level            String? @db.VarChar
+  current_salary       Int?
+  expected_salary_from Int?
+  working_type         String? @db.VarChar
+  company_type         String? @db.VarChar
+  company_size         String? @db.VarChar
+  location             String? @db.VarChar
+  expected_salary_to   Int?
+  user                 user    @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "job_preferences_fk")
 }
 
 model job_saved {
@@ -119,61 +133,103 @@ model job_saved {
   @@id([user_id, job_id], map: "job_saved_pk")
 }
 
+model job_working_location {
+  job_id           Int
+  working_location Int
+  job              job              @relation(fields: [job_id], references: [id], onDelete: Cascade, map: "job_working_location_fk")
+  company_location company_location @relation(fields: [working_location], references: [id], onDelete: Cascade, map: "job_working_location_fk_1")
+
+  @@id([job_id, working_location], map: "job_working_location_pk")
+}
+
 model review {
-  id                           Int      @id(map: "review_pk") @default(autoincrement())
+  id                           Int            @id(map: "review_pk") @default(autoincrement())
   company_id                   Int
   user_id                      Int
-  over_rating                  Decimal  @db.Decimal
-  summary                      Decimal  @db.Decimal
-  ot_satisfy                   Decimal  @db.Decimal
-  ot_satisfy_reason            String?  @db.VarChar
-  input_experience             String?  @db.VarChar
-  input_improvement_suggestion String?  @db.VarChar
-  is_recommned                 Boolean?
-  company                      company  @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_fk")
-  user                         user     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_fk_1")
+  summary                      String         @db.VarChar
+  ot_satisfy_reason            String?        @db.VarChar
+  input_experience             String?        @db.VarChar
+  input_improvement_suggestion String?        @db.VarChar
+  is_recommended               Boolean?
+  ot_satisfy                   Boolean?
+  company                      company        @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_fk")
+  user                         user           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_fk_1")
+  review_rating                review_rating?
+}
+
+model review_rating {
+  review_id         Int    @id(map: "review_rating_pk")
+  overall_rating    Int?
+  salary_benefits   Int?
+  training_learning Int?
+  management_cares  Int?
+  culture_fun       Int?
+  office_workspace  Int?
+  review            review @relation(fields: [review_id], references: [id], onDelete: Cascade, map: "review_rating_fk")
+}
+
+model tag {
+  id       Int        @id(map: "tag_pk") @default(autoincrement())
+  tag_name String     @db.VarChar
+  blog_tag blog_tag[]
 }
 
 model user {
-  id                                           Int                   @id(map: "user_pk") @default(autoincrement())
-  name                                         String?               @db.VarChar
-  email                                        String?               @db.VarChar
-  phone                                        String?               @db.VarChar
-  gender                                       String?               @db.Bit(1)
-  dob                                          DateTime?             @db.Date
-  current_address                              String?               @db.VarChar
-  about_me                                     String?               @db.VarChar
-  cover_letter                                 Int?
-  personal_link                                String?               @db.VarChar
-  role                                         Int
-  password                                     Bytes?
-  img_url                                      String?               @db.VarChar
-  blog                                         blog[]
-  cover_letter_cover_letter_user_idTouser      cover_letter?         @relation("cover_letter_user_idTouser")
-  follow                                       follow[]
-  job_apply                                    job_apply[]
-  job_preferences                              job_preferences?
-  job_recently_viewed                          job_recently_viewed[]
-  job_saved                                    job_saved[]
-  review                                       review[]
-  cover_letter_user_cover_letterTocover_letter cover_letter?         @relation("user_cover_letterTocover_letter", fields: [cover_letter], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "user_fk")
-  user_award                                   user_award[]
-  user_certificate                             user_certificate[]
-  user_cv                                      user_cv[]
-  user_education                               user_education[]
-  user_project                                 user_project[]
-  user_skill                                   user_skill[]
-  work_experience                              work_experience[]
+  id               Int                @id(map: "user_pk") @default(autoincrement())
+  name             String?            @db.VarChar
+  email            String?            @db.VarChar
+  phone            String?            @db.VarChar
+  gender           String?            @db.Char(1)
+  dob              DateTime?          @db.Date
+  current_address  String?            @db.VarChar
+  about_me         String?            @db.VarChar
+  cover_letter     String?            @db.VarChar
+  personal_link    String?            @db.VarChar
+  role             Int
+  password         Bytes?
+  img_url          String?            @db.VarChar
+  blog             blog[]
+  follow           follow[]
+  job_apply        job_apply[]
+  job_preferences  job_preferences?
+  job_saved        job_saved[]
+  review           review[]
+  user_award       user_award[]
+  user_certificate user_certificate[]
+  user_cv          user_cv[]
+  user_education   user_education[]
+  user_project     user_project[]
+  user_skill       user_skill[]
+  work_experience  work_experience[]
 }
 
 model user_award {
-  id           Int       @id(map: "user_award_pk") @default(autoincrement())
-  user_id      Int
-  name         String?   @db.VarChar
-  organization String?   @db.VarChar
-  issue_date   DateTime? @db.Date
-  description  String?   @db.VarChar
-  user         user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_award_fk")
+  id          Int     @id(map: "user_award_pk") @default(autoincrement())
+  user_id     Int
+  award_name  String? @db.VarChar
+  org_name    String? @db.VarChar
+  issue_date  String? @db.VarChar
+  description String? @db.VarChar
+  user        user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_award_fk")
+}
+
+model user_certificate {
+  id          Int     @id(map: "certificate_pk") @default(autoincrement())
+  user_id     Int
+  cert_name   String? @db.VarChar
+  org_name    String? @db.VarChar
+  cert_url    String? @db.VarChar
+  description String? @db.VarChar
+  issue_date  String? @db.VarChar
+  user        user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "certificate_fk")
+}
+
+model user_cv {
+  id            Int       @id(map: "user_cv_pk") @default(autoincrement())
+  user_id       Int
+  date_uploaded DateTime? @db.Date
+  url           String?   @db.VarChar
+  user          user      @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "user_cv_fk")
 }
 
 model user_education {
@@ -189,14 +245,15 @@ model user_education {
 }
 
 model user_project {
-  id           Int       @id(map: "user_project_pk") @default(autoincrement())
-  user_id      Int
-  project_name String?   @db.VarChar
-  start_date   DateTime? @db.Date
-  end_date     DateTime? @db.Date
-  description  String?   @db.VarChar
-  project_url  String?   @db.VarChar
-  user         user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_project_fk")
+  id                     Int       @id(map: "user_project_pk") @default(autoincrement())
+  user_id                Int
+  project_name           String?   @db.VarChar
+  start_date             DateTime? @db.Date
+  end_date               DateTime? @db.Date
+  description            String?   @db.VarChar
+  project_url            String?   @db.VarChar
+  currently_working_here Boolean?
+  user                   user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_project_fk")
 }
 
 model user_skill {
@@ -208,49 +265,16 @@ model user_skill {
 }
 
 model work_experience {
-  id                  Int       @default(autoincrement())
-  user_id             Int
-  job_title           String?   @db.VarChar
-  currently_work_here Boolean?
-  from_date           DateTime? @db.Date
-  to_date             DateTime? @db.Date
-  description         String?   @db.VarChar
-  company             String?   @db.VarChar
-  projects            String?   @db.VarChar
-  user                user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "work_experience_fk")
+  id                     Int       @default(autoincrement())
+  user_id                Int
+  job_title              String?   @db.VarChar
+  currently_working_here Boolean?
+  from_date              DateTime? @db.Date
+  to_date                DateTime? @db.Date
+  description            String?   @db.VarChar
+  company                String?   @db.VarChar
+  projects               String?   @db.VarChar
+  user                   user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "work_experience_fk")
 
   @@id([id, user_id], map: "work_experience_pk")
-}
-
-model blog_tag {
-  blog_id Int
-  tag_id  Int
-  blog    blog @relation(fields: [blog_id], references: [id], onDelete: Cascade, map: "blog_tag_fk")
-  tag     tag  @relation(fields: [tag_id], references: [id], onDelete: Cascade, map: "blog_tag_fk_1")
-
-  @@id([blog_id, tag_id], map: "blog_tag_pk")
-}
-
-model tag {
-  id       Int        @id(map: "tag_pk") @default(autoincrement())
-  tag_name String     @db.VarChar
-  blog_tag blog_tag[]
-}
-
-model user_certificate {
-  id          Int     @id(map: "certificate_pk") @default(autoincrement())
-  user_id     Int
-  cert_name   String? @db.VarChar
-  org_name    String? @db.VarChar
-  cert_url    String? @db.VarChar
-  description String? @db.VarChar
-  user        user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "certificate_fk")
-}
-
-model user_cv {
-  id            Int       @id(map: "user_cv_pk") @default(autoincrement())
-  user_id       Int
-  date_uploaded DateTime? @db.Date
-  url           String?   @db.VarChar
-  user          user      @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "user_cv_fk")
 }

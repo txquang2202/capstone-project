@@ -1,0 +1,12 @@
+[
+  {
+    "user_id": 1,
+    "date_uploaded": "2024-03-03T14:43:55.772Z",
+    "url": "https://example.com/user1_cv.pdf"
+  },
+  {
+    "user_id": 2,
+    "date_uploaded": "2024-03-03T14:43:55.772Z",
+    "url": "https://example.com/user2_cv.pdf"
+  }
+]

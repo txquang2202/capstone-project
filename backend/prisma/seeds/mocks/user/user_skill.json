@@ -1,0 +1,52 @@
+[
+  {
+    "user_id": 1,
+    "name": "Java",
+    "level": "Excellent"
+  },
+  {
+    "user_id": 1,
+    "name": "Python",
+    "level": "Excellent"
+  },
+  {
+    "user_id": 1,
+    "name": "JavaScript",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": 1,
+    "name": "SQL",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": 1,
+    "name": "React",
+    "level": "Beginner"
+  },
+  {
+    "user_id": 2,
+    "name": "C++",
+    "level": "Excellent"
+  },
+  {
+    "user_id": 2,
+    "name": "JavaScript",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": 2,
+    "name": "React",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": 2,
+    "name": "MongoDB",
+    "level": "Beginner"
+  },
+  {
+    "user_id": 2,
+    "name": "Node.js",
+    "level": "Beginner"
+  }
+]

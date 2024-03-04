@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "company_id": 1,
+    "address": "123 Tech Street, District 1, Ho Chi Minh City, Vietnam",
+    "long": 106.6958,
+    "lat": 10.7769
+  },
+  {
+    "id": 2,
+    "company_id": 1,
+    "address": "456 Innovation Avenue, District 3, Ho Chi Minh City, Vietnam",
+    "long": 106.6866,
+    "lat": 10.7761
+  },
+  {
+    "id": 3,
+    "company_id": 2,
+    "address": "789 Tech Park, District 7, Ho Chi Minh City, Vietnam",
+    "long": 106.7443,
+    "lat": 10.7384
+  },
+  {
+    "id": 4,
+    "company_id": 2,
+    "address": "101 Innovator Lane, Binh Thanh District, Ho Chi Minh City, Vietnam",
+    "long": 106.7215,
+    "lat": 10.8039
+  },
+  {
+    "id": 5,
+    "company_id": 3,
+    "address": "321 Talent Towers, District 5, Ho Chi Minh City, Vietnam",
+    "long": 106.6662,
+    "lat": 10.762622
+  },
+  {
+    "id": 6,
+    "company_id": 3,
+    "address": "654 Career Center, District 10, Ho Chi Minh City, Vietnam",
+    "long": 106.6653,
+    "lat": 10.7818
+  },
+  {
+    "id": 7,
+    "company_id": 4,
+    "address": "987 Consultation Street, District 4, Ho Chi Minh City, Vietnam",
+    "long": 106.7022,
+    "lat": 10.7654
+  },
+  {
+    "id": 8,
+    "company_id": 4,
+    "address": "210 Solutions Plaza, Tan Binh District, Ho Chi Minh City, Vietnam",
+    "long": 106.6576,
+    "lat": 10.8009
+  },
+  {
+    "id": 9,
+    "company_id": 5,
+    "address": "543 Green Gardens, District 2, Ho Chi Minh City, Vietnam",
+    "long": 106.7531,
+    "lat": 10.7889
+  },
+  {
+    "id": 10,
+    "company_id": 5,
+    "address": "876 Sustainable Street, Phu Nhuan District, Ho Chi Minh City, Vietnam",
+    "long": 106.677,
+    "lat": 10.7993
+  }
+]

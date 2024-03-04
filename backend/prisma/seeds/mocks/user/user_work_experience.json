@@ -1,0 +1,42 @@
+[
+  {
+    "user_id": 1,
+    "job_title": "Senior Software Engineer",
+    "currently_working_here": false,
+    "from_date": "2020-03-15T14:43:55.772Z",
+    "to_date": "2022-05-20T14:43:55.772Z",
+    "description": "<p>As a Senior Software Engineer at TechSolutions, I played a key role in developing innovative solutions for clients in the tech industry. Collaborating with a talented team, I contributed to the success of multiple projects.</p>",
+    "company": "TechSolutions",
+    "projects": "<p>Project: Smart Inventory Management System<br/>Role: Lead Developer<br/>Technologies: Java, Spring Boot, Hibernate<br/>Team Size: 5</p><p>Project: Customer Relationship Management App<br/>Role: Full-stack Developer<br/>Technologies: React, Node.js, MongoDB<br/>Team Size: 7</p>"
+  },
+  {
+    "user_id": 1,
+    "job_title": "UX/UI Designer",
+    "currently_working_here": true,
+    "from_date": "2022-08-01T14:43:55.772Z",
+    "to_date": null,
+    "description": "<p>Currently working as a UX/UI Designer at TechSolutions, where I'm responsible for creating user-centered designs and ensuring a seamless user experience. Collaborating closely with cross-functional teams to bring creative concepts to life.</p>",
+    "company": "TechSolutions",
+    "projects": "<p>Project: E-commerce Platform Redesign<br/>Role: UX/UI Designer<br/>Technologies: Figma, Adobe Creative Suite<br/>Team Size: 4</p><p>Project: Mobile Banking App Interface<br/>Role: Lead UI Designer<br/>Technologies: Sketch, InVision<br/>Team Size: 3</p>"
+  },
+  {
+    "user_id": 2,
+    "job_title": "Data Scientist",
+    "currently_working_here": false,
+    "from_date": "2019-06-10T14:43:55.772Z",
+    "to_date": "2021-09-30T14:43:55.772Z",
+    "description": "<p>As a Data Scientist at InnovateTech, I applied advanced analytics to extract meaningful insights from complex datasets. Contributed to the development of machine learning models and improved data-driven decision-making processes.</p>",
+    "company": "InnovateTech",
+    "projects": "<p>Project: Predictive Maintenance System<br/>Role: Data Scientist<br/>Technologies: Python, TensorFlow, Pandas<br/>Team Size: 6</p><p>Project: Customer Segmentation Analysis<br/>Role: Statistical Analyst<br/>Technologies: R, SQL<br/>Team Size: 5</p>"
+  },
+  {
+    "user_id": 2,
+    "job_title": "Senior Android Developer",
+    "currently_working_here": true,
+    "from_date": "2021-11-05T14:43:55.772Z",
+    "to_date": null,
+    "description": "<p>Currently serving as a Senior Android Developer at InnovateTech, contributing to the design and development of cutting-edge mobile applications. Collaborating with cross-functional teams to deliver high-quality and user-friendly mobile solutions.</p>",
+    "company": "InnovateTech",
+    "projects": "<p>Project: Mobile Health Tracking App<br/>Role: Lead Android Developer<br/>Technologies: Kotlin, Android Studio<br/>Team Size: 8</p><p>Project: Social Networking App Upgrade<br/>Role: Android Developer<br/>Technologies: Java, Firebase<br/>Team Size: 6</p>"
+  }
+]
