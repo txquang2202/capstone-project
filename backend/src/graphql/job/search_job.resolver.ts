@@ -9,12 +9,15 @@ const Query = {
   search: async (
     _: any,
     _args: any,
-    { elastic }: ContextInterface,
+    { prisma, elastic }: ContextInterface,
   ): Promise<job[]> => {
     const logger = new Logger();
     const { query } = _args;
     logger.info(`searching for jobs with query: ${query}`);
     try {
+      if (!query || query === "") {
+        return prisma.job.findMany();
+      }
       const result = await elastic.search({
         index: "job",
         body: {
