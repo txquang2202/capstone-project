@@ -1,0 +1,38 @@
+[
+  {
+    "job_id": 1,
+    "working_location": 1
+  },
+  {
+    "job_id": 1,
+    "working_location": 2
+  },
+  {
+    "job_id": 2,
+    "working_location": 1
+  },
+  {
+    "job_id": 4,
+    "working_location": 4
+  },
+  {
+    "job_id": 5,
+    "working_location": 5
+  },
+  {
+    "job_id": 6,
+    "working_location": 5
+  },
+  {
+    "job_id": 7,
+    "working_location": 7
+  },
+  {
+    "job_id": 8,
+    "working_location": 8
+  },
+  {
+    "job_id": 10,
+    "working_location": 9
+  }
+]

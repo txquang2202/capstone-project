@@ -1,56 +1,52 @@
 [
   {
-    "user_skills": [
-      {
-        "user_id": 1,
-        "skill_name": "Java",
-        "skill_level": "Excellent"
-      },
-      {
-        "user_id": 1,
-        "skill_name": "Python",
-        "skill_level": "Excellent"
-      },
-      {
-        "user_id": 1,
-        "skill_name": "JavaScript",
-        "skill_level": "Intermediate"
-      },
-      {
-        "user_id": 1,
-        "skill_name": "SQL",
-        "skill_level": "Intermediate"
-      },
-      {
-        "user_id": 1,
-        "skill_name": "React",
-        "skill_level": "Beginner"
-      },
-      {
-        "user_id": 2,
-        "skill_name": "C++",
-        "skill_level": "Excellent"
-      },
-      {
-        "user_id": 2,
-        "skill_name": "JavaScript",
-        "skill_level": "Intermediate"
-      },
-      {
-        "user_id": 2,
-        "skill_name": "React",
-        "skill_level": "Intermediate"
-      },
-      {
-        "user_id": 2,
-        "skill_name": "MongoDB",
-        "skill_level": "Beginner"
-      },
-      {
-        "user_id": 2,
-        "skill_name": "Node.js",
-        "skill_level": "Beginner"
-      }
-    ]
+    "user_id": 1,
+    "name": "Java",
+    "level": "Excellent"
+  },
+  {
+    "user_id": 1,
+    "name": "Python",
+    "level": "Excellent"
+  },
+  {
+    "user_id": 1,
+    "name": "JavaScript",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": 1,
+    "name": "SQL",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": 1,
+    "name": "React",
+    "level": "Beginner"
+  },
+  {
+    "user_id": 2,
+    "name": "C++",
+    "level": "Excellent"
+  },
+  {
+    "user_id": 2,
+    "name": "JavaScript",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": 2,
+    "name": "React",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": 2,
+    "name": "MongoDB",
+    "level": "Beginner"
+  },
+  {
+    "user_id": 2,
+    "name": "Node.js",
+    "level": "Beginner"
   }
 ]

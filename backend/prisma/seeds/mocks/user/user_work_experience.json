@@ -1,56 +1,42 @@
 [
   {
     "user_id": 1,
-    "project_name": "Smart Home Automation System",
-    "start_date": "01/05/2019",
-    "end_date": "30/11/2019",
+    "job_title": "Senior Software Engineer",
     "currently_working_here": false,
-    "description": "<p>Developed a smart home automation system that allows users to control devices remotely. Integrated with voice recognition for seamless user interaction.</p><ul><li>Implemented remote control functionality for various home devices</li><li>Integrated voice recognition using natural language processing</li><li>Ensured security measures for user data and device control</li></ul>",
-    "project_url": "https://github.com/user1/smart-home-automation"
+    "from_date": "2020-03-15T14:43:55.772Z",
+    "to_date": "2022-05-20T14:43:55.772Z",
+    "description": "<p>As a Senior Software Engineer at TechSolutions, I played a key role in developing innovative solutions for clients in the tech industry. Collaborating with a talented team, I contributed to the success of multiple projects.</p>",
+    "company": "TechSolutions",
+    "projects": "<p>Project: Smart Inventory Management System<br/>Role: Lead Developer<br/>Technologies: Java, Spring Boot, Hibernate<br/>Team Size: 5</p><p>Project: Customer Relationship Management App<br/>Role: Full-stack Developer<br/>Technologies: React, Node.js, MongoDB<br/>Team Size: 7</p>"
   },
   {
     "user_id": 1,
-    "project_name": "E-commerce Platform Enhancement",
-    "start_date": "01/03/2020",
-    "end_date": "30/06/2020",
-    "currently_working_here": false,
-    "description": "<p>Enhanced an existing e-commerce platform with new features, improved user interfaces, and optimized performance for better customer experience.</p><ul><li>Implemented new features based on user feedback and market trends</li><li>Optimized front-end performance for faster loading times</li><li>Collaborated with cross-functional teams for successful project delivery</li></ul>",
-    "project_url": "https://github.com/user1/ecommerce-enhancement"
-  },
-  {
-    "user_id": 1,
-    "project_name": "Data Analytics Dashboard",
-    "start_date": "01/02/2021",
-    "end_date": null,
+    "job_title": "UX/UI Designer",
     "currently_working_here": true,
-    "description": "<p>Developed a data analytics dashboard for visualizing and analyzing large datasets. Implemented various charts and graphs for data representation.</p><ul><li>Designed and implemented interactive charts for data visualization</li><li>Integrated data processing algorithms for accurate analysis</li><li>Collaborated with data scientists to ensure dashboard effectiveness</li></ul>",
-    "project_url": "https://github.com/user1/data-analytics-dashboard"
+    "from_date": "2022-08-01T14:43:55.772Z",
+    "to_date": null,
+    "description": "<p>Currently working as a UX/UI Designer at TechSolutions, where I'm responsible for creating user-centered designs and ensuring a seamless user experience. Collaborating closely with cross-functional teams to bring creative concepts to life.</p>",
+    "company": "TechSolutions",
+    "projects": "<p>Project: E-commerce Platform Redesign<br/>Role: UX/UI Designer<br/>Technologies: Figma, Adobe Creative Suite<br/>Team Size: 4</p><p>Project: Mobile Banking App Interface<br/>Role: Lead UI Designer<br/>Technologies: Sketch, InVision<br/>Team Size: 3</p>"
   },
   {
     "user_id": 2,
-    "project_name": "Social Media Analytics Tool",
-    "start_date": "01/08/2017",
-    "end_date": "30/12/2017",
+    "job_title": "Data Scientist",
     "currently_working_here": false,
-    "description": "<p>Created a tool for analyzing social media trends and user engagement. Utilized machine learning algorithms to predict popular topics.</p><ul><li>Implemented sentiment analysis for user-generated content</li><li>Developed algorithms to predict trending topics based on historical data</li><li>Collaborated with data scientists to refine machine learning models</li></ul>",
-    "project_url": "https://github.com/user2/social-media-analytics"
+    "from_date": "2019-06-10T14:43:55.772Z",
+    "to_date": "2021-09-30T14:43:55.772Z",
+    "description": "<p>As a Data Scientist at InnovateTech, I applied advanced analytics to extract meaningful insights from complex datasets. Contributed to the development of machine learning models and improved data-driven decision-making processes.</p>",
+    "company": "InnovateTech",
+    "projects": "<p>Project: Predictive Maintenance System<br/>Role: Data Scientist<br/>Technologies: Python, TensorFlow, Pandas<br/>Team Size: 6</p><p>Project: Customer Segmentation Analysis<br/>Role: Statistical Analyst<br/>Technologies: R, SQL<br/>Team Size: 5</p>"
   },
   {
     "user_id": 2,
-    "project_name": "Portfolio Website",
-    "start_date": "01/04/2018",
-    "end_date": "30/06/2018",
-    "currently_working_here": false,
-    "description": "<p>Designed and developed a personal portfolio website to showcase skills, projects, and experience. Implemented responsive design for optimal viewing on various devices.</p><ul><li>Created a visually appealing and user-friendly design</li><li>Implemented responsive web design for optimal user experience</li><li>Integrated project showcase and resume download functionality</li></ul>",
-    "project_url": "https://github.com/user2/portfolio-website"
-  },
-  {
-    "user_id": 2,
-    "project_name": "Online Task Management System",
-    "start_date": "01/01/2019",
-    "end_date": null,
+    "job_title": "Senior Android Developer",
     "currently_working_here": true,
-    "description": "<p>Developed an online task management system for efficient project collaboration. Integrated features for task assignment, progress tracking, and file sharing.</p><ul><li>Designed and implemented task assignment and tracking features</li><li>Integrated file sharing functionality for seamless collaboration</li><li>Continuously enhancing system features based on user feedback</li></ul>",
-    "project_url": "https://github.com/user2/task-management-system"
+    "from_date": "2021-11-05T14:43:55.772Z",
+    "to_date": null,
+    "description": "<p>Currently serving as a Senior Android Developer at InnovateTech, contributing to the design and development of cutting-edge mobile applications. Collaborating with cross-functional teams to deliver high-quality and user-friendly mobile solutions.</p>",
+    "company": "InnovateTech",
+    "projects": "<p>Project: Mobile Health Tracking App<br/>Role: Lead Android Developer<br/>Technologies: Kotlin, Android Studio<br/>Team Size: 8</p><p>Project: Social Networking App Upgrade<br/>Role: Android Developer<br/>Technologies: Java, Firebase<br/>Team Size: 6</p>"
   }
 ]

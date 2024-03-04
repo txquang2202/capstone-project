@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "job_id": 3,
+    "cover_letter": "I am excited about the Senior Software Engineer position at TechSolutions. My expertise in Java and the Spring Framework makes me an ideal candidate for this role.",
+    "cv": "http://example.com/user1_cv.pdf"
+  },
+  {
+    "id": 2,
+    "user_id": 2,
+    "job_id": 8,
+    "cover_letter": "As a seasoned Data Scientist, I am eager to contribute my skills to InnovateTech's projects. My experience with data analysis and machine learning aligns well with the requirements of the role.",
+    "cv": "http://example.com/user2_cv.pdf"
+  },
+  {
+    "id": 3,
+    "user_id": 1,
+    "job_id": 5,
+    "cover_letter": "I am applying for the UX/UI Designer position at TechSolutions. My creative skills in UI/UX design, along with proficiency in Adobe Creative Suite, make me a valuable addition to the team.",
+    "cv": "http://example.com/user1_cv.pdf"
+  },
+  {
+    "id": 4,
+    "user_id": 2,
+    "job_id": 1,
+    "cover_letter": "I am excited about the Senior Android Developer role at InnovateTech. My experience in Android app development and proficiency in Kotlin position me as a strong candidate for this position.",
+    "cv": "http://example.com/user2_cv.pdf"
+  },
+  {
+    "id": 5,
+    "user_id": 1,
+    "job_id": 10,
+    "cover_letter": "I am applying for the Environmental Analyst position at GreenInnovations. My background in environmental science and data analysis aligns with the responsibilities of the role.",
+    "cv": "http://example.com/user1_cv.pdf"
+  },
+  {
+    "id": 6,
+    "user_id": 2,
+    "job_id": 6,
+    "cover_letter": "As an IT Consultant, I am eager to contribute to ConsultTech's diverse consulting projects. My skills in project management and client communication make me well-suited for this role.",
+    "cv": "http://example.com/user2_cv.pdf"
+  },
+  {
+    "id": 7,
+    "user_id": 1,
+    "job_id": 2,
+    "cover_letter": "I am excited about the role of a Recruitment Specialist at TalentSearch. My experience in talent acquisition and strong interviewing skills make me a valuable asset to the team.",
+    "cv": "http://example.com/user1_cv.pdf"
+  },
+  {
+    "id": 8,
+    "user_id": 2,
+    "job_id": 9,
+    "cover_letter": "I am applying for the Remote Software Tester position at ConsultTech. My expertise in manual and automated testing, coupled with a keen eye for detail, positions me as a strong candidate.",
+    "cv": "http://example.com/user2_cv.pdf"
+  },
+  {
+    "id": 9,
+    "user_id": 1,
+    "job_id": 4,
+    "cover_letter": "I am eager to contribute as an HR Generalist at TalentSearch. My experience in employee relations and conflict resolution, coupled with excellent interpersonal skills, aligns with the requirements of the role.",
+    "cv": "http://example.com/user1_cv.pdf"
+  },
+  {
+    "id": 10,
+    "user_id": 2,
+    "job_id": 7,
+    "cover_letter": "As a Community Engagement Coordinator, I am excited about the opportunity at GreenInnovations. My experience in community outreach and event planning aligns with the goals of the position.",
+    "cv": "http://example.com/user2_cv.pdf"
+  }
+]
