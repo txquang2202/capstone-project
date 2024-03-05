@@ -5,9 +5,9 @@ on:
     branches:
       - main
 
-concurrency:
-  group: ${{ github.head_ref }}
-  cancel-in-progress: true
+# concurrency:
+#   group: ${{ github.head_ref }}-backend
+#   cancel-in-progress: true
 
 jobs:
   typecheck:
