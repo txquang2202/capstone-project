@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "9bf98d48-29c9-4fbd-a341-cfe940028e66",
     "company_name": "Golden Owl Consulting Company",
     "company_type": "IT Outsourcing",
     "company_size": "51-150",
@@ -13,7 +13,7 @@
     "company_facebook": "http://www.facebook.com/TechSolutions"
   },
   {
-    "id": 2,
+    "id": "e3e1a88f-d32b-44f9-99a4-1011a8c0e54a",
     "company_name": "Bosch Global Software Technologies Company Limited",
     "company_type": "IT Product",
     "company_size": "1000+",
@@ -26,7 +26,7 @@
     "company_facebook": "http://www.facebook.com/InnovateTech"
   },
   {
-    "id": 3,
+    "id": "381d63ca-54b4-4fc6-8c9a-d6f22ac12b35",
     "company_name": "TalentSearch",
     "company_type": "Headhunt",
     "country": "Australia",
@@ -39,7 +39,7 @@
     "company_facebook": "http://www.facebook.com/TalentSearch"
   },
   {
-    "id": 4,
+    "id": "367b208a-493f-4a10-9747-d487af4f0864",
     "company_name": "Employment Hero",
     "company_type": "IT Product",
     "company_size": "501-1000",
@@ -52,7 +52,7 @@
     "company_facebook": "http://www.facebook.com/EmploymentHeroVN"
   },
   {
-    "id": 5,
+    "id": "a24b1722-518c-40af-b9ac-478a5f79db48",
     "company_name": "GreenInnovations",
     "company_type": "Non-IT",
     "company_size": "151-300",
