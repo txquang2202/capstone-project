@@ -23,10 +23,20 @@ const BlogSchema = gql`
   # ---------------------------------------------------------
   # Input Objects
   # ---------------------------------------------------------
+  input BlogInput {
+    user_id: Int!
+    content: String! @constraint(minLength: 1)
+    title: String! @constraint(minLength: 5, maxLength: 255)
+  }
 
   # ---------------------------------------------------------
   # Mutations
   # --------------------------------------------------------
+  extend type Mutation {
+    createBlog(input: BlogInput!): Blog
+    updateBlog(id: Int!, input: BlogInput!): Blog
+    deleteBlog(id: Int!): Blog
+  }
 `;
 
 export default BlogSchema;
