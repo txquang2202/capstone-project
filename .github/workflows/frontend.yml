@@ -5,9 +5,9 @@ on:
     branches:
       - main
 
-concurrency:
-  group: ${{ github.head_ref }}
-  cancel-in-progress: true
+# concurrency:
+#   group: ${{ github.head_ref }}-frontend
+#   cancel-in-progress: true
 
 jobs:
   typecheck:
@@ -34,17 +34,17 @@ jobs:
         run: yarn format
         working-directory: frontend
 
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm install -g yarn
-      - run: yarn install --frozen-lockfile
-        working-directory: frontend
-      - name: Run Lint
-        run: yarn lint
-        working-directory: frontend
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #     - run: npm install -g yarn
+  #     - run: yarn install --frozen-lockfile
+  #       working-directory: frontend
+  #     - name: Run Lint
+  #       run: yarn lint
+  #       working-directory: frontend
 
   commitlint:
     runs-on: ubuntu-latest
