@@ -907,3 +907,235 @@
     right: 0;
   }
 }
+
+
+/* ******************************* COMPANIES PAGE ***************************** */
+
+
+.company-info {
+  .logo {
+    width: 120px;
+    height: 120px;
+    background-color: #fff;
+    border: 1px solid #dedede;
+  }
+  .ipt-4 {
+    padding-top: 16px !important;
+  }
+  .ipb-2 {
+    padding-bottom: 8px !important;
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+}
+
+.companies-landing-container{
+  .col {
+    flex: 1 0 0%;
+  }
+  .paragraph {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.8 !important;
+  }
+  .text-break {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+  .border-top-dashed {
+    border-top: 1px dashed #dedede;
+  }
+  .border-bottom-dashed {
+    border-bottom: 1px dashed #dedede;
+  }
+  .itag-sm {
+      padding: 4px 10px;
+      font-size: 12px;
+      gap: 4px;
+  }
+  .itag {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 1.5;
+      user-select: none;
+      border-radius: 20px;
+      border: 1px solid transparent;
+      cursor: pointer;
+  }
+  .itag-light {
+    color: #414042;
+    background-color: #fff;
+    border-color: #dedede;
+  }
+  .itag-light:hover {
+    color: #121212;
+    border-color: #121212;
+  }
+  .read-more-container {
+    height: 500px;
+    overflow: hidden;
+  }
+  .read-more-container.show{
+    height: auto;
+    overflow: auto;
+  }
+  .read-more {
+    height: 120px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+  }
+  .box-shadow-normal {
+    box-shadow: 0px 4px 20px rgba(0,0,0,.06);
+  }
+  .box-shadow-medium {
+    box-shadow: 0px 6px 32px rgba(0,0,0,.08);
+  }
+  .location {
+    border: 1px solid transparent;
+  }
+  .location.active {
+    border: 1px solid #ed1b2f;
+  }
+  .location.active .map-pin {
+    color: #ed1b2f;
+  }
+  .job-listing-wrapper .item-card {
+    padding-bottom: 20px;
+  }
+  /* .i-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  } */
+  .job-card.super-hot {
+    border: 1px solid #ffdfdf;
+  }
+  .ilabel {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .ilabel-danger {
+    background-color: #ed1b2f;
+    gap: 4px;
+  }
+  .ilabel-danger::after {
+    border-top: 8px solid #ed1b2f;
+  }
+  .ilabel-warning {
+    background-color: #ff9119;
+  }
+  .ilabel-warning:after {
+    border-top: 8px solid #ff9119;
+  }
+  .ilabel::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+  }
+  .job-card-logo {
+    width: 48px;
+    height: 48px;
+    box-sizing: content-box;
+  }
+  .border-solid {
+    border: 1px solid #dedede;
+  }
+  .itabs .tab-link {
+    padding: 24px 0;
+    opacity: .7;
+    color: #121212;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+  }
+  .itabs .tab-link:hover, .itabs .tab-link:focus {
+    opacity: 1;
+    border-color: #414042;
+    transition: .3s;
+  }
+  .itabs .tab-link.active {
+    opacity: 1;
+    color: #ed1b2f;
+    border-color: #ed1b2f;
+  }
+  .itabs .badge-counter {
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 12px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #121212;
+    background-color: #dedede;
+  }
+  .itabs .tab-link.active>.badge-counter {
+    opacity: 1;
+    color: #fff;
+    background-color: #ed1b2f;
+  }
+}
+
+@media (min-width: 768px) {
+  .company-info {
+    .logo{
+      width: 160px;
+      height: 160px;
+    }
+    .text-md-start {
+      text-align: left !important;
+    }
+    .ipt-md-0 {
+      padding-top: 0px !important;
+    }
+    .ime-md-6 {
+      margin-right: 24px !important;
+    }
+    .ipb-md-0 {
+      padding-bottom: 0px !important;
+    }
+  }
+  .companies-landing-container {
+    .read-more-container {
+      height: 400px;
+    }
+    .col-md-4 {
+      flex: 0 0 auto;
+      width: 33.33333333%;
+    }
+    .col-md-8 {
+      flex: 0 0 auto;
+      width: 66.66666667%;
+    }
+    .col-md-12 {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+    .locations {
+      height: 450px;
+      overflow: auto;
+    }
+    .job-listing-wrapper {
+      position: sticky;
+      top: 153px;
+      height: 100vh;
+    }
+    .job-listing-wrapper .official-jobs-scroll {
+      overflow: auto;
+      height: calc(100vh - 89px);
+      display: flow-root;
+    }
+    .job-listing-wrapper .item-card {
+      padding-bottom: 16px;
+    }
+    .job-listing-wrapper .job-card {
+      box-shadow: none;
+    }
+  }
+}
