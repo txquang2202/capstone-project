@@ -21,8 +21,6 @@
     "pretty": "prettier --write \"./**/*.{ts,tsx,js,jsx,json}\" --end-of-line lf",
     "pretty:check": "prettier --check \"./**/*.{ts,tsx,js,jsx,json}\" --end-of-line lf",
     "generate:prisma": "npx prisma generate",
-    "prepare": "husky install",
-    "lint-staged": "lint-staged",
     "test": "jest --forceExit",
     "test-e2e": "jest --silent --config jest-integ.config.js",
     "migrate:init": "npx prisma migrate dev --name init",
