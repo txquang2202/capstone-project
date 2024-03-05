@@ -1,0 +1,59 @@
+name: capstone-frontend
+
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+        working-directory: frontend
+      - name: Run Typecheck
+        run: yarn typecheck --noEmit --noErrorTruncation --pretty false --incremental false --watch false --skipLibCheck
+        working-directory: frontend
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+        working-directory: frontend
+      - name: Run Format
+        run: yarn format
+        working-directory: frontend
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+        working-directory: frontend
+      - name: Run Lint
+        run: yarn lint
+        working-directory: frontend
+
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+        working-directory: frontend
+      - name: Lint commit message
+        run: yarn lint:commit
+        working-directory: frontend

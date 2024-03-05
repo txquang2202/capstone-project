@@ -38,6 +38,18 @@ const Blog = {
   },
 };
 
-const Mutation = {};
+const Mutation = {
+  createBlog: async (
+    _: any,
+    { input }: { input: blog },
+    { prisma }: ContextInterface,
+  ): Promise<blog> => {
+    const newBlog = await prisma.blog.create({
+      data: input,
+    });
+
+    return newBlog;
+  },
+};
 
 export default { Query, Mutation, Blog };
