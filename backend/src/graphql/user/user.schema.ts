@@ -3,20 +3,27 @@ const ShopSchema = gql`
   # ---------------------------------------------------------
   # Model Objects
   # ---------------------------------------------------------
-  type UserPayload {
-    id: ID!
+  type User {
+    id: Int!
     name: String!
     email: String!
-    password: String!
-    bod: Date
+    bod: String
+    phone: String
+    gender: String
+    current_address: String
+    about_me: String
+    cover_letter: String
+    personal_link: String
+    role: Int
+    img_url: String
   }
 
   # ---------------------------------------------------------
   # Queries
   # ---------------------------------------------------------
   extend type Query {
-    user(id: ID!): UserPayload
-    users: [UserPayload]
+    user(id: ID!): User
+    users: [User]
     helloWord: String
   }
 
@@ -35,9 +42,9 @@ const ShopSchema = gql`
   # ---------------------------------------------------------
 
   extend type Mutation {
-    createUser(input: UserInput!): UserPayload
-    updateUser(id: ID!, input: UserInput!): UserPayload
-    deleteUser(id: ID!): UserPayload
+    createUser(input: UserInput!): User
+    updateUser(id: ID!, input: UserInput!): User
+    deleteUser(id: ID!): User
   }
 `;
 
