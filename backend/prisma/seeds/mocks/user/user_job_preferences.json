@@ -1,6 +1,6 @@
 [
   {
-    "user_id": 1,
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
     "skills": "[\"Java\", \"Python\", \"JavaScript\", \"SQL\", \"React\"]",
     "job_level": "[\"junior\", \"senior\"]",
     "current_salary": 12000000,
@@ -12,7 +12,7 @@
     "location": "Ho Chi Minh"
   },
   {
-    "user_id": 2,
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
     "skills": "[\"C++\", \"JavaScript\", \"MongoDB\", \"Node.js\"]",
     "job_level": "[\"senior\", \"manager\"]",
     "current_salary": 15000000,
