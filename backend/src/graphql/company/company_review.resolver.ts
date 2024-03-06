@@ -12,7 +12,7 @@ const Query = {
 
   companyReview: async (
     _: any,
-    { id }: { id: number },
+    { id }: { id: string },
     { prisma }: ContextInterface,
   ): Promise<review | null> => {
     const review = await prisma.review.findUnique({
@@ -63,7 +63,7 @@ const Mutation = {
 
   updateCompanyReview: async (
     _: any,
-    { id, input }: { id: number; input: review },
+    { id, input }: { id: string; input: review },
     { prisma }: ContextInterface,
   ): Promise<review | null> => {
     const existingReview = await prisma.review.findUnique({
@@ -82,7 +82,7 @@ const Mutation = {
 
   deleteCompanyReview: async (
     _: any,
-    { id }: { id: number },
+    { id }: { id: string },
     { prisma }: ContextInterface,
   ): Promise<review | null> => {
     const existingReview = await prisma.review.findUnique({
