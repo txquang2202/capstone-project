@@ -5,7 +5,7 @@ const Query = {
   //Show list of companies
   company: async (
     _: any,
-    { id }: { id: number },
+    { id }: { id: string },
     { prisma }: ContextInterface,
   ): Promise<company | null> => {
     const companyByID = await prisma.company.findUnique({
@@ -39,7 +39,7 @@ const Mutation = {
   // Update an existing company by ID
   updateCompany: async (
     _: any,
-    { id, input }: { id: number; input: company },
+    { id, input }: { id: string; input: company },
     { prisma }: ContextInterface,
   ): Promise<company | null> => {
     const existingCompany = await prisma.company.findUnique({
@@ -61,7 +61,7 @@ const Mutation = {
   // Delete a company by ID
   deleteCompany: async (
     _: any,
-    { id }: { id: number },
+    { id }: { id: string },
     { prisma }: ContextInterface,
   ): Promise<company | null> => {
     const existingCompany = await prisma.company.findUnique({

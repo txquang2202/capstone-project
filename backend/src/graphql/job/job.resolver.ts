@@ -5,7 +5,7 @@ const Query = {
   //show job application by id
   jobApplication: async (
     _: any,
-    { id }: { id: number },
+    { id }: { id: string },
     { prisma }: ContextInterface,
   ): Promise<job_apply | null> => {
     const jobApplication = await prisma.job_apply.findUnique({
