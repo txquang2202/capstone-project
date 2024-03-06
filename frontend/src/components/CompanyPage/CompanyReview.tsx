@@ -1,12 +1,8 @@
 'use client';
 
-import CompanyBenefit from './Benefit';
 import CompanyJobs from './CompanyJobs';
-import CompanyGeneralInformation from './GeneralInformation';
-import CompanyKeySkill from './KeySkills';
-import CompanyLocation from './Location';
 import CompanyNavbar from './Navbar';
-import CompanyOverview from './Overview';
+import CompanyReviewList from './Review/CompanyReviewList';
 import CompanyReviewRating from './Review/CompanyReviewRating';
 import CompanyWriteReview from './Review/WriteReview';
 
@@ -20,11 +16,7 @@ const CompanyReviewBody = () => {
             <CompanyNavbar />
             <CompanyReviewRating />
             <CompanyWriteReview />
-            {/* <CompanyGeneralInformation /> */}
-            {/* <CompanyOverview /> */}
-            {/* <CompanyKeySkill /> */}
-            {/* <CompanyBenefit /> */}
-            {/* <CompanyLocation /> */}
+            <CompanyReviewList />
           </div>
           {/* Jobs Listing */}
           <div className='job-listing-wrapper col-span-12 pl-[14px] md:col-span-4'>
