@@ -5,7 +5,7 @@ const JobApplicationSchema = gql`
   # Model Objects
   # ---------------------------------------------------------
   type JobApplication {
-    id: ID!
+    id: Int!
     user_id: Int!
     job_id: Int!
     cv: String!
@@ -17,7 +17,7 @@ const JobApplicationSchema = gql`
   # ---------------------------------------------------------
   extend type Query {
     jobApplicaitons: [JobApplication!]
-    jobApplication(id: ID!): JobApplication
+    jobApplication(id: Int!): JobApplication
   }
   # ---------------------------------------------------------
   # Input Objects

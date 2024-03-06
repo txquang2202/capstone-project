@@ -4,7 +4,7 @@ const CompanySchema = gql`
   # Model Objects
   # ---------------------------------------------------------
   type CompanyPayload {
-    id: ID!
+    id: Int!
     company_name: String!
     company_type: String
     country: String
@@ -18,7 +18,7 @@ const CompanySchema = gql`
   }
 
   type CompanyReview {
-    id: ID!
+    id: Int!
     company_id: Int!
     user_id: Int!
     summary: String!
@@ -34,9 +34,9 @@ const CompanySchema = gql`
   # ---------------------------------------------------------
   extend type Query {
     companies: [CompanyPayload!]
-    company(id: ID!): CompanyPayload
+    company(id: Int!): CompanyPayload
     companyReviews: [CompanyReview!]
-    companyReview(id: ID!): CompanyReview
+    companyReview(id: Int!): CompanyReview
   }
   # ---------------------------------------------------------
   # Input Objects
@@ -81,14 +81,14 @@ const CompanySchema = gql`
 
   extend type Mutation {
     createCompany(input: CompanyInput!): CompanyPayload
-    updateCompany(id: ID!, input: CompanyInput!): CompanyPayload
-    deleteCompany(id: ID!): CompanyPayload
+    updateCompany(id: Int!, input: CompanyInput!): CompanyPayload
+    deleteCompany(id: Int!): CompanyPayload
     createCompanyReview(input: CompanyReviewInput!): CompanyReview!
     updateCompanyReview(
-      id: ID!
+      id: Int!
       input: UpdateCompanyReviewInput!
     ): CompanyReview!
-    deleteCompanyReview(id: ID!): CompanyReview!
+    deleteCompanyReview(id: Int!): CompanyReview!
   }
 `;
 
