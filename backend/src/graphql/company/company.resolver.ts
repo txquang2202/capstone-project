@@ -3,6 +3,17 @@ import { ContextInterface } from "../context";
 
 const Query = {
   //Show list of companies
+  company: async (
+    _: any,
+    { id }: { id: string },
+    { prisma }: ContextInterface,
+  ): Promise<company | null> => {
+    const companyId = parseInt(id);
+    const companyByID = await prisma.company.findUnique({
+      where: { id: companyId },
+    });
+    return companyByID;
+  },
   companies: async (
     _: any,
     _args: any,
@@ -15,7 +26,6 @@ const Query = {
 
 const Mutation = {
   //Add a new company
-  //Trường size hiện tại đang bị xung đột kiểu dữ liệu nên tạm thời không thêm trường size nhé <3
   createCompany: async (
     _: any,
     { input }: { input: company },

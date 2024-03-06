@@ -12,14 +12,14 @@ const Query = {
 
   companyReview: async (
     _: any,
+    { id }: { id: string },
     { prisma }: ContextInterface,
-    { id }: { id: number },
   ): Promise<review | null> => {
-    return await prisma.review.findUnique({
-      where: {
-        id,
-      },
+    const reviewID = parseInt(id);
+    const review = await prisma.review.findUnique({
+      where: { id: reviewID },
     });
+    return review;
   },
 };
 
@@ -75,7 +75,7 @@ const Mutation = {
     if (!existingReview) {
       throw new Error(`Company review with ID ${id} does not exist`);
     }
-    console.log(id);
+    // console.log(id);
     return await prisma.review.update({
       where: { id: companyReviewId },
       data: input,

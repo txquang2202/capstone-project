@@ -5,26 +5,28 @@ const CompanySchema = gql`
   # ---------------------------------------------------------
   type CompanyPayload {
     id: ID!
-    name: String!
-    type: String
+    company_name: String!
+    company_type: String
     country: String
     working_day: String
     ot_policy: String
-    size: Int
+    company_size: String
     overview: String
+    company_website: String
+    company_facebook: String
+    brief_overview: String
   }
 
   type CompanyReview {
     id: ID!
     company_id: Int!
     user_id: Int!
-    over_rating: Float!
     summary: String!
-    ot_satisfy: Float!
     ot_satisfy_reason: String
     input_experience: String
     input_improvement_suggestion: String
-    is_recommned: Boolean
+    is_recommended: Boolean
+    ot_satisfy: Boolean
   }
 
   # ---------------------------------------------------------
@@ -41,34 +43,37 @@ const CompanySchema = gql`
   # ---------------------------------------------------------
 
   input CompanyInput {
-    name: String!
-    type: String
-    country: String
+    company_name: String!
+    company_type: String!
+    country: String!
     working_day: String
-    ot_policy: String
-    size: Int
-    overview: String
+    ot_policy: String!
+    company_size: String!
+    overview: String @constraint(minLength: 10, maxLength: 80)
+    company_website: String
+    company_facebook: String
+    brief_overview: String @constraint(minLength: 1, maxLength: 80)
   }
 
   input CompanyReviewInput {
     company_id: Int!
     user_id: Int!
-    over_rating: Float!
-    summary: String!
-    ot_satisfy: Float!
-    ot_satisfy_reason: String
-    input_experience: String
+    summary: String! @constraint(minLength: 10, maxLength: 80)
+    ot_satisfy_reason: String @constraint(minLength: 50, maxLength: 140)
+    input_experience: String @constraint(minLength: 50, maxLength: 10000)
     input_improvement_suggestion: String
-    is_recommned: Boolean
+      @constraint(minLength: 50, maxLength: 10000)
+    is_recommended: Boolean!
+    ot_satisfy: Boolean!
   }
   input UpdateCompanyReviewInput {
-    over_rating: Float!
-    summary: String!
-    ot_satisfy: Float!
-    ot_satisfy_reason: String
-    input_experience: String
+    summary: String! @constraint(minLength: 10, maxLength: 80)
+    ot_satisfy_reason: String @constraint(minLength: 50, maxLength: 140)
+    input_experience: String @constraint(minLength: 50, maxLength: 10000)
     input_improvement_suggestion: String
-    is_recommned: Boolean
+      @constraint(minLength: 50, maxLength: 10000)
+    is_recommended: Boolean
+    ot_satisfy: Boolean
   }
   # ---------------------------------------------------------
   # Mutations
