@@ -954,6 +954,11 @@
       font-size: 12px;
       gap: 4px;
   }
+  .itag-md {
+    padding: 4px 12px;
+    font-size: 14px;
+    gap: 4px;
+  }
   .itag {
       display: inline-flex;
       justify-content: center;
@@ -972,6 +977,11 @@
   .itag-light:hover {
     color: #121212;
     border-color: #121212;
+  }
+  .itag-light.selected {
+    color: #ed1b2f;
+    border-color: #ed1b2f;
+    background-color: #ffdfdf;
   }
   .read-more-container {
     height: 500px;
@@ -1003,9 +1013,6 @@
   .job-listing-wrapper .item-card {
     padding-bottom: 20px;
   }
-  /* .i-scrollbar::-webkit-scrollbar {
-    width: 8px;
-  } */
   .job-card.super-hot {
     border: 1px solid #ffdfdf;
   }
@@ -1084,6 +1091,10 @@
     width: 128px;
     height: 24px;
   }
+  .box-star-icons.box-icon-sm {
+    width: 88px;
+    height: 16px;
+  }
   .star-icons {
     display: inline-flex;
     gap: 2px;
@@ -1099,6 +1110,14 @@
     min-height: 1em;
     background-color: currentColor;
     opacity: 1;
+  }
+  .reviews-list-container .recommend-icon-wrapper {
+    color: #0ab305;
+    margin-left: 30px;
+  }
+  .reviews-list-container .no-recommend-icon-wrapper {
+    color: #f60d00;
+    margin-left: 30px;
   }
 }
 

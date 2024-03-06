@@ -37,4 +37,6 @@ export {
   Edit as IconEdit,
   Briefcase as IconBriefcase,
   Star as IconStar,
+  ThumbsUp as IconThumbsUp,
+  ThumbsDown as IconThumbsDown,
 } from 'react-feather';
