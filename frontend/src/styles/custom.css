@@ -1080,6 +1080,26 @@
     color: #fff;
     background-color: #ed1b2f;
   }
+  .box-star-icons.box-icon-lg {
+    width: 128px;
+    height: 24px;
+  }
+  .star-icons {
+    display: inline-flex;
+    gap: 2px;
+  }
+  .review-rating-container .progress-line-bar {
+    height: 8px;
+    width: 120px;
+  }
+  .vr {
+    display: inline-block;
+    align-self: stretch;
+    width: 1px;
+    min-height: 1em;
+    background-color: currentColor;
+    opacity: 1;
+  }
 }
 
 @media (min-width: 768px) {
@@ -1136,6 +1156,9 @@
     }
     .job-listing-wrapper .job-card {
       box-shadow: none;
+    }
+    .review-rating-container .progress-line-bar {
+      width: 200px;
     }
   }
 }

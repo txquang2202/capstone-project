@@ -8,6 +8,7 @@ import CompanyLocation from './Location';
 import CompanyNavbar from './Navbar';
 import CompanyOverview from './Overview';
 import CompanyReviewRating from './Review/CompanyReviewRating';
+import CompanyWriteReview from './Review/WriteReview';
 
 const CompanyReviewBody = () => {
   return (
@@ -18,6 +19,7 @@ const CompanyReviewBody = () => {
           <div className='col-span-12 pr-[14px] md:col-span-8'>
             <CompanyNavbar />
             <CompanyReviewRating />
+            <CompanyWriteReview />
             {/* <CompanyGeneralInformation /> */}
             {/* <CompanyOverview /> */}
             {/* <CompanyKeySkill /> */}
