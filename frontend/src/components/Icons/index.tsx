@@ -35,4 +35,6 @@ export {
   Gift as IconGift,
   User as IconUser,
   Edit as IconEdit,
+  Briefcase as IconBriefcase,
+  Star as IconStar,
 } from 'react-feather';
