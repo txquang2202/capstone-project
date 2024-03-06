@@ -5,9 +5,10 @@ const JobApplicationSchema = gql`
   # Model Objects
   # ---------------------------------------------------------
   type JobApplication {
+    id: Int!
     user_id: Int!
     job_id: Int!
-    cv: Int!
+    cv: String!
     cover_letter: String
   }
 
@@ -16,7 +17,7 @@ const JobApplicationSchema = gql`
   # ---------------------------------------------------------
   extend type Query {
     jobApplicaitons: [JobApplication!]
-    jobApplication(id: ID!): JobApplication
+    jobApplication(id: Int!): JobApplication
   }
   # ---------------------------------------------------------
   # Input Objects
@@ -24,8 +25,8 @@ const JobApplicationSchema = gql`
   input ApplyJobInput {
     user_id: Int!
     job_id: Int!
-    cv: Int!
-    cover_letter: String!
+    cv: String! @constraint(minLength: 1)
+    cover_letter: String
   }
   # ---------------------------------------------------------
   # Mutations

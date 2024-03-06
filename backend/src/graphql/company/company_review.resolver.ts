@@ -12,14 +12,13 @@ const Query = {
 
   companyReview: async (
     _: any,
-    { prisma }: ContextInterface,
     { id }: { id: number },
+    { prisma }: ContextInterface,
   ): Promise<review | null> => {
-    return await prisma.review.findUnique({
-      where: {
-        id,
-      },
+    const review = await prisma.review.findUnique({
+      where: { id },
     });
+    return review;
   },
 };
 
@@ -64,32 +63,30 @@ const Mutation = {
 
   updateCompanyReview: async (
     _: any,
-    { id, input }: { id: string; input: review },
+    { id, input }: { id: number; input: review },
     { prisma }: ContextInterface,
   ): Promise<review | null> => {
-    const companyReviewId = parseInt(id);
     const existingReview = await prisma.review.findUnique({
-      where: { id: companyReviewId },
+      where: { id },
     });
 
     if (!existingReview) {
       throw new Error(`Company review with ID ${id} does not exist`);
     }
-    console.log(id);
+    // console.log(id);
     return await prisma.review.update({
-      where: { id: companyReviewId },
+      where: { id },
       data: input,
     });
   },
 
   deleteCompanyReview: async (
     _: any,
-    { id }: { id: string },
+    { id }: { id: number },
     { prisma }: ContextInterface,
   ): Promise<review | null> => {
-    const companyReviewId = parseInt(id);
     const existingReview = await prisma.review.findUnique({
-      where: { id: companyReviewId },
+      where: { id },
     });
 
     if (!existingReview) {
@@ -97,7 +94,7 @@ const Mutation = {
     }
 
     return await prisma.review.delete({
-      where: { id: companyReviewId },
+      where: { id },
     });
   },
 };
