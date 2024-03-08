@@ -5,9 +5,9 @@ const JobApplicationSchema = gql`
   # Model Objects
   # ---------------------------------------------------------
   type JobApplication {
-    id: Int!
-    user_id: Int!
-    job_id: Int!
+    id: String!
+    user_id: String!
+    job_id: String!
     cv: String!
     cover_letter: String
   }
@@ -32,15 +32,15 @@ const JobApplicationSchema = gql`
   # ---------------------------------------------------------
   extend type Query {
     jobApplicaitons: [JobApplication!]
-    jobApplication(id: ID!): JobApplication
-    search(query: String!): [Job]
+    jobApplications: [JobApplication!]
+    jobApplication(id: String!): JobApplication
   }
   # ---------------------------------------------------------
   # Input Objects
   # ---------------------------------------------------------
   input ApplyJobInput {
-    user_id: Int!
-    job_id: Int!
+    user_id: String!
+    job_id: String!
     cv: String! @constraint(minLength: 1)
     cover_letter: String
   }
