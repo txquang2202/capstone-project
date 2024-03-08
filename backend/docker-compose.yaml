@@ -1,32 +1,32 @@
 version: "3.4"
 
 services:
-  app:
-    image: capstone
-    build:
-      context: .
-    ports:
-      - "4000:4000"
-    # volumes: # Comment this "volumes" section when run in PRODUCTION mode
-    #   - .:/app
-    #   - /app/node_modules
-    # command: /bin/sh -c "yarn generate:prisma && yarn migrate:init && yarn seed && yarn start" # Comment this line when run in PRODUCTION mode
-    environment:
-      - NODE_ENV=development
-      - PORT=4000
-      - DATABASE_URL=postgresql://postgres:localdb@postgres:5432/capstone
-      - APOLLO_PLAYGROUND=true
-      - APOLLO_INTROSPECTION=true
-      - APOLLO_DEBUG=true
-      - APOLLO_TRACING=true
-      - LOGGER_ROUTE_NAME=capstone
-      - LOGGER_ROUTE_STORAGE=false
-      - KEY_AUTHORIZATION=test
-      - KEY_CONSOLE=test_key
-    env_file:
-      - .env
-    depends_on:
-      - postgres
+  # app:
+  #   image: capstone
+  #   build:
+  #     context: .
+  #   ports:
+  #     - "4000:4000"
+  #   # volumes: # Comment this "volumes" section when run in PRODUCTION mode
+  #   #   - .:/app
+  #   #   - /app/node_modules
+  #   # command: /bin/sh -c "yarn generate:prisma && yarn migrate:init && yarn seed && yarn start" # Comment this line when run in PRODUCTION mode
+  #   environment:
+  #     - NODE_ENV=development
+  #     - PORT=4000
+  #     - DATABASE_URL=postgresql://postgres:localdb@postgres:5432/capstone
+  #     - APOLLO_PLAYGROUND=true
+  #     - APOLLO_INTROSPECTION=true
+  #     - APOLLO_DEBUG=true
+  #     - APOLLO_TRACING=true
+  #     - LOGGER_ROUTE_NAME=capstone
+  #     - LOGGER_ROUTE_STORAGE=false
+  #     - KEY_AUTHORIZATION=test
+  #     - KEY_CONSOLE=test_key
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - postgres
 
   postgres:
     image: postgres:12.1-alpine
@@ -39,6 +39,22 @@ services:
       - "5432:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
+
+  # setup keycloak
+  keycloak:
+    image: jboss/keycloak:16.1.1
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_DATABASE: capstone
+      DB_USER: postgres
+      DB_PASSWORD: localdb
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
 
 volumes:
   postgres:
