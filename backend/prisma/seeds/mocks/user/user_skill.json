@@ -1,0 +1,52 @@
+[
+  {
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "name": "Java",
+    "level": "Excellent"
+  },
+  {
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "name": "Python",
+    "level": "Excellent"
+  },
+  {
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "name": "JavaScript",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "name": "SQL",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "name": "React",
+    "level": "Beginner"
+  },
+  {
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "name": "C++",
+    "level": "Excellent"
+  },
+  {
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "name": "JavaScript",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "name": "React",
+    "level": "Intermediate"
+  },
+  {
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "name": "MongoDB",
+    "level": "Beginner"
+  },
+  {
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "name": "Node.js",
+    "level": "Beginner"
+  }
+]

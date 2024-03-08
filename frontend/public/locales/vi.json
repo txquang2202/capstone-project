@@ -1,0 +1,31 @@
+{
+  "signinText": "Đăng nhập",
+  "signupText": "Đăng ký",
+  "enText": "EN",
+  "viText": "VI",
+  "signinTitleText": "Đăng nhập để truy cập ngay vào hàng ngàn đánh giá và dữ liệu lương thị trường IT",
+  "signinContentText": [
+    "Xem trước mức lương để có thể lợi thế khi thoả thuận lương",
+    "Tìm hiểu về phúc lợi, con người, văn hóa công ty qua các đánh giá chân thật",
+    "Dễ dàng ứng tuyển chỉ với một thao tác",
+    "Quản lý hồ sơ và quyền riêng tư của bạn"
+  ],
+  "welcomeToText": "Chào mừng bạn đến với",
+  "termsOfServiceAndPrivacyPolicyText": "Bằng việc đăng nhập, bạn đồng ý với các <a href=''>Điều khoản dịch vụ</a> và <a href=''>Chính sách quyền riêng tư</a> của ITviec liên quan đến thông tin riêng tư của bạn.",
+  "signinWithText": "Đăng nhập bằng {0}",
+  "signupWithText": "Đăng ký bằng {0}",
+  "orText": "Hoặc",
+  "emailAddressText": "Địa chỉ Email",
+  "passwordText": "Mật khẩu",
+  "forgotPasswordText": "Quên mật khẩu",
+  "requiredText": "Thông tin bắt buộc",
+  "doNotHaveAnAccountText": "Bạn chưa có tài khoản?",
+  "youHaveAnAccountText": "Bạn đã có tài khoản",
+  "signupNowText": "Đăng ký ngay",
+  "signinNowText": "Đăng nhập ngay",
+  "userNameText": "Tên đăng nhập",
+  "registerAccountText": "Đăng ký tài khoản",
+  "agreeTermsOfServiceAndPrivacyPolicyText": "Tôi đã đọc và đồng ý với các <a href=''>Điều khoản dịch vụ</a> và <a href=''>Chính sách quyền riêng tư</a> của ITviec liên quan đến thông tin riêng tư của tôi.",
+  "yourEmailText": "Email của bạn",
+  "resetPasswordText": "Đặt lại mật khẩu"
+}

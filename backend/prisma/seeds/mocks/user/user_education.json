@@ -1,0 +1,29 @@
+[
+  {
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "school": "University of Techville",
+    "major": "Computer Science",
+    "current_studying_here": false,
+    "from_date": "2010-09-01T14:43:55.772Z",
+    "to_date": "2014-06-30T14:43:55.772Z",
+    "additional_detail": "Bachelor's Degree"
+  },
+  {
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "school": "Tech Institute",
+    "major": "Software Engineering",
+    "current_studying_here": false,
+    "from_date": "2015-08-01T14:43:55.772Z",
+    "to_date": "2019-05-30T14:43:55.772Z",
+    "additional_detail": "Bachelor's Degree"
+  },
+  {
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "school": "Master's University",
+    "major": "Computer Science",
+    "current_studying_here": false,
+    "from_date": "2019-09-01T14:43:55.772Z",
+    "to_date": "2019-05-30T14:43:55.772Z",
+    "additional_detail": "Master's in Progress"
+  }
+]

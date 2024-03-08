@@ -1,0 +1,61 @@
+name: capstone-backend
+
+on:
+  pull_request:
+    branches:
+      - main
+
+# concurrency:
+#   group: ${{ github.head_ref }}-backend
+#   cancel-in-progress: true
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+        working-directory: backend
+      - name: Run Typecheck
+        run: yarn typecheck --noEmit --noErrorTruncation --pretty false --incremental false --watch false --skipLibCheck
+        working-directory: backend
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+        working-directory: backend
+      - name: Run Format
+        run: yarn format
+        working-directory: backend
+
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #     - run: npm install -g yarn
+  #     - run: yarn install --frozen-lockfile
+  #       working-directory: backend
+  #     - name: Run Lint
+  #       run: yarn lint
+  #       working-directory: backend
+
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+        working-directory: backend
+      - name: Lint commit message
+        run: yarn lint:commit
+        working-directory: backend

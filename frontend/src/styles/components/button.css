@@ -1,0 +1,103 @@
+:root {
+  --button-box-shadow: rgba(244, 33, 114, 0.8);
+  --button-primary-disabled-color: #d9d9d9;
+  --button-secondary-disabled-color: #bcbcbc;
+  --button-transparent-disabled-color: #bcbcbc;
+  --button-icon-color: #a0a0a0;
+  --button-icon-disabled-color: #d9d9d9;
+  --button-border-radius: 4px;
+  --button-icon-other-color: #f5f5f5;
+}
+
+.it-button {
+  @apply inline-flex h-8 items-center justify-center px-4 py-2 text-base font-medium;
+
+  &-medium {
+    @apply h-10 px-4 py-3 text-base leading-none;
+  }
+
+  &-large {
+    @apply h-12 px-6 py-3 text-base leading-none;
+  }
+
+  &-xl {
+    @apply h-14 px-6 py-3 text-lg font-semibold leading-none;
+  }
+
+  &-border {
+    @apply border-primary rounded-[var(--button-border-radius)] border;
+  }
+
+  &-variant {
+    &-icon {
+      @apply rounded-full border-0 border-white bg-transparent text-[var(--button-icon-color)] hover:bg-white;
+
+      &.poc-button-active,
+      &:hover:not(:disabled),
+      &:focus-visible:not(:disabled) {
+        background: transparent;
+        color: var(--primary);
+      }
+
+      &-disabled {
+        @apply text-[var(--button-icon-disabled-color)] hover:bg-white hover:shadow-none;
+      }
+    }
+
+    &-icon-button {
+      @apply rounded-full p-0;
+
+      &-other {
+        @apply border-[var(--button-icon-disabled-color)] bg-[var(--button-icon-other-color)] text-[var(--text-primary-color)] hover:bg-[var(--button-icon-other-color)] hover:shadow-[0_0_5px_var(--subtle)];
+      }
+
+      &-subtle {
+        @apply border-[var(--subtle)] bg-white text-[var(--subtle)] hover:bg-white hover:shadow-[0_0_5px_var(--subtle)];
+      }
+
+      &-disabled {
+        @apply border-0 bg-[var(--button-icon-other-color)] text-[var(--text-primary-color)] shadow-none hover:bg-[var(--button-icon-other-color)];
+      }
+    }
+  }
+
+  &-primary {
+    @apply bg-primary hover:bg-dark-red focus-visible:outline-primary text-white;
+
+    &-disabled {
+      @apply border-[var(--button-primary-disabled-color)] bg-[var(--button-primary-disabled-color)] shadow-none hover:bg-[var(--button-primary-disabled-color)];
+    }
+  }
+
+  &-secondary {
+    @apply text-primary hover:border-primary hover:bg-white-red focus-visible:outline-primary bg-white;
+
+    &-disabled {
+      @apply border-[var(--button-secondary-disabled-color)] bg-[var(--white)] text-[var(--button-secondary-disabled-color)] hover:border-[var(--button-secondary-disabled-color)] hover:bg-[var(--white)];
+    }
+  }
+
+  &-other {
+    @apply border-[var(--button-icon-disabled-color)] bg-[var(--button-icon-other-color)] text-[var(--text-primary-color)] hover:bg-[var(--button-icon-other-color)] hover:shadow-[0_0_5px_var(--subtle)];
+
+    &-disabled {
+      @apply text-[var(--button-secondary-disabled-color)] hover:shadow-none;
+    }
+  }
+
+  &-subtle {
+    @apply border-[var(--subtle)] bg-white text-[var(--subtle)] hover:border-[var(--subtle)] hover:bg-white hover:shadow-[0_0_5px_var(--subtle)] focus-visible:outline-[var(--subtle)];
+
+    &-disabled {
+      @apply border-disabled-color hover:border-disabled-color text-[var(--button-secondary-disabled-color)] hover:shadow-none;
+    }
+  }
+
+  &-transparent {
+    @apply focus-visible:outline-primary [&.poc-button-active]:text-primary focus:text-primary hover:text-primary rounded-[var(--button-border-radius)] border-[var(--primary)] bg-transparent;
+
+    &-disabled {
+      @apply text-[var(--button-transparent-disabled-color)] hover:text-[var(--button-transparent-disabled-color)];
+    }
+  }
+}

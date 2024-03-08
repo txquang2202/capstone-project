@@ -1,33 +1,11 @@
+@import url('variables.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-
-:root {
-  /* #region  /**=========== Primary Color =========== */
-  /* !STARTERCONF Customize these variable, copy and paste from /styles/colors.css for list of colors */
-  --tw-color-primary-50: 240 249 255;
-  --tw-color-primary-100: 224 242 254;
-  --tw-color-primary-200: 186 230 253;
-  --tw-color-primary-300: 125 211 252;
-  --tw-color-primary-400: 56 189 248;
-  --tw-color-primary-500: 14 165 233;
-  --tw-color-primary-600: 2 132 199;
-  --tw-color-primary-700: 3 105 161;
-  --tw-color-primary-800: 7 89 133;
-  --tw-color-primary-900: 12 74 110;
-  --color-primary-50: rgb(var(--tw-color-primary-50)); /* #f0f9ff */
-  --color-primary-100: rgb(var(--tw-color-primary-100)); /* #e0f2fe */
-  --color-primary-200: rgb(var(--tw-color-primary-200)); /* #bae6fd */
-  --color-primary-300: rgb(var(--tw-color-primary-300)); /* #7dd3fc */
-  --color-primary-400: rgb(var(--tw-color-primary-400)); /* #38bdf8 */
-  --color-primary-500: rgb(var(--tw-color-primary-500)); /* #0ea5e9 */
-  --color-primary-600: rgb(var(--tw-color-primary-600)); /* #0284c7 */
-  --color-primary-700: rgb(var(--tw-color-primary-700)); /* #0369a1 */
-  --color-primary-800: rgb(var(--tw-color-primary-800)); /* #075985 */
-  --color-primary-900: rgb(var(--tw-color-primary-900)); /* #0c4a6e */
-  /* #endregion  /**======== Primary Color =========== */
+@layer components {
+  @import url('components.css');
 }
 
 @layer base {
@@ -36,6 +14,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 100 900;
+    font-size: 1rem;
     font-display: optional;
     src: url('/fonts/inter-var-latin.woff2') format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
@@ -48,30 +27,6 @@
   }
 
   /* #region  /**=========== Typography =========== */
-  .h0 {
-    @apply font-primary text-3xl font-bold md:text-5xl;
-  }
-
-  h1,
-  .h1 {
-    @apply font-primary text-2xl font-bold md:text-4xl;
-  }
-
-  h2,
-  .h2 {
-    @apply font-primary text-xl font-bold md:text-3xl;
-  }
-
-  h3,
-  .h3 {
-    @apply font-primary text-lg font-bold md:text-2xl;
-  }
-
-  h4,
-  .h4 {
-    @apply font-primary text-base font-bold md:text-lg;
-  }
-
   body,
   .p {
     @apply font-primary text-sm md:text-base;
@@ -92,9 +47,123 @@
   .min-h-main {
     @apply min-h-[calc(100vh-56px)];
   }
+
+  h1,
+  .h1 {
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  h2,
+  .h2 {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  h3,
+  .h3 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  h4,
+  .h4 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4 {
+    line-height: 1.5;
+  }
+
+  @media (max-width: 575.98px) {
+    h1,
+    .h1 {
+      font-size: 22px;
+    }
+
+    h2,
+    .h2 {
+      font-size: 20px;
+    }
+  }
+
+  .normal-text {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .paragraph {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.8 !important;
+  }
+
+  .text-contain-hyperlink a {
+    color: #0e2eed;
+  }
+
+  .text-contain-hyperlink a:hover {
+    color: #192fb5;
+  }
+
+  .small-text {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .lg-text,
+  .lg-title {
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  .tiny-text {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  pre {
+    margin: 0;
+    padding: 15px;
+    background-color: var(--i-light-grey);
+    border-radius: 4px;
+  }
+
+  ul {
+    padding-left: 18px;
+  }
+
+  ul > li::marker {
+    color: #ed1b2f;
+  }
+
+  @media (max-width: 575.98px) {
+    .lg-text,
+    .lg-title {
+      font-size: 26px;
+    }
+
+    .tiny-text {
+      font-size: 14px;
+    }
+  }
+
+  img {
+    max-width: none;
+  }
 }
 
 @layer utilities {
+  @import url('custom.css');
+
   .animated-underline {
     background-image: linear-gradient(#33333300, #33333300),
       linear-gradient(
@@ -117,4 +186,10 @@
   .animated-underline:focus-visible {
     background-size: 0 2px, 100% 2px;
   }
+}
+
+.position-sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
 }

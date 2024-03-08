@@ -1,0 +1,47 @@
+[
+  {
+    "review_id": "c222d295-563d-4245-9a48-4fe26ad235f2",
+    "overall_rating": 5,
+    "salary_benefits": 4,
+    "training_learning": 4,
+    "management_cares": 5,
+    "culture_fun": 3,
+    "office_workspace": 4
+  },
+  {
+    "review_id": "320e1b91-222f-447b-919a-8a5e319f3d83",
+    "overall_rating": 4,
+    "salary_benefits": 3,
+    "training_learning": 5,
+    "management_cares": 4,
+    "culture_fun": 5,
+    "office_workspace": 4
+  },
+  {
+    "review_id": "3aa52032-8ecc-4865-bfdc-39126a2c349f",
+    "overall_rating": 2,
+    "salary_benefits": 3,
+    "training_learning": 1,
+    "management_cares": 2,
+    "culture_fun": 3,
+    "office_workspace": 4
+  },
+  {
+    "review_id": "1bd6c0a4-0d51-4271-bd7f-91d17ec3a41d",
+    "overall_rating": 5,
+    "salary_benefits": 5,
+    "training_learning": 3,
+    "management_cares": 5,
+    "culture_fun": 4,
+    "office_workspace": 4
+  },
+  {
+    "review_id": "7c68eb7a-9832-4887-9a5b-1459e4058a7f",
+    "overall_rating": 1,
+    "salary_benefits": 2,
+    "training_learning": 3,
+    "management_cares": 2,
+    "culture_fun": 3,
+    "office_workspace": 2
+  }
+]

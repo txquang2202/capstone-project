@@ -1,0 +1,20 @@
+[
+  {
+    "id": "42b675eb-8db6-4c6a-be39-61164cc47dfe",
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "created_at": "2024-03-03T14:43:55.772Z",
+    "content": "<h2>The Evolution of Programming Paradigms</h2><p>In the dynamic landscape of software engineering, programming paradigms play a crucial role in shaping the way developers approach problem-solving and code organization. Let's explore the journey of programming paradigms over the years.</p><ul><li><strong>Imperative Programming:</strong> Traditional and procedural, focusing on explicit instructions and control flow.</li><li><strong>Object-Oriented Programming (OOP):</strong> Emphasizing the organization of code into objects and classes for better modularity and reusability.</li><li><strong>Functional Programming:</strong> A paradigm centered around functions, immutability, and declarative style, promoting simplicity and ease of testing.</li><li><strong>Event-Driven Programming:</strong> Reacting to events and triggers, common in user interface development and asynchronous operations.</li></ul><p>As we navigate the ever-changing landscape of software development, understanding these paradigms empowers us to make informed decisions and adapt to emerging trends.</p>",
+    "time_read": 12,
+    "title": "The Evolution of Programming Paradigms",
+    "slug": "the-evolution-of-programming-paradigms"
+  },
+  {
+    "id": "7ee8b55d-99f6-473d-b9d9-96ca95bebc47",
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "created_at": "2024-03-04T14:43:55.772Z",
+    "content": "<h2>Demystifying Cloud Computing: A Primer for Developers</h2><p>Cloud computing has revolutionized the IT industry, providing scalable and flexible solutions for developers. Let's delve into the key concepts that every developer should understand about cloud computing.</p><ul><li><strong>Infrastructure as a Service (IaaS):</strong> Provisioning virtualized computing resources over the internet.</li><li><strong>Platform as a Service (PaaS):</strong> Offering a platform with tools and services to simplify application development and deployment.</li><li><strong>Software as a Service (SaaS):</strong> Delivering software applications over the internet, eliminating the need for local installations.</li><li><strong>Serverless Computing:</strong> Executing code without managing the underlying infrastructure, enhancing scalability and reducing costs.</li></ul><p>By embracing cloud computing, developers can optimize resource utilization, enhance collaboration, and build robust and scalable applications. Stay tuned for more insights into the ever-expanding realm of cloud technology.</p>",
+    "time_read": 15,
+    "title": "Demystifying Cloud Computing: A Primer for Developers",
+    "slug": "demystifying-cloud-computing"
+  }
+]

@@ -1,0 +1,31 @@
+.it-checkbox {
+  &[type='checkbox'] {
+    @apply border-dark-grey hover:after:bg-dark-grey relative h-6 w-6 rounded border-2 outline-0 transition-all hover:border-black hover:after:absolute hover:after:left-1/2 hover:after:top-1/2 hover:after:h-12 hover:after:w-12 hover:after:-translate-x-1/2 hover:after:-translate-y-1/2 hover:after:rounded-full hover:after:opacity-15 focus:ring-0;
+
+    &:checked,
+    &:indeterminate {
+      @apply text-primary border-primary hover:after:bg-primary hover:after:opacity-[.06];
+      animation: checkbox-animation 0.2s ease-in-out;
+    }
+
+    &:focus {
+      --tw-ring-offset-width: unset;
+    }
+
+    &:disabled {
+      @apply text-disabled-color border-disabled-color cursor-not-allowed;
+    }
+  }
+}
+
+@keyframes checkbox-animation {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}

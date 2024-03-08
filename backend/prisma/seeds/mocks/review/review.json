@@ -1,0 +1,57 @@
+[
+  {
+    "id": "c222d295-563d-4245-9a48-4fe26ad235f2",
+    "company_id": "9bf98d48-29c9-4fbd-a341-cfe940028e66",
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "summary": "Great Work-Life Balance",
+    "ot_satisfy": true,
+    "ot_satisfy_reason": "The company's OT policy allows for flexibility, ensuring a healthy work-life balance.",
+    "input_experience": "TechSolutions provides a collaborative environment with exciting projects. The supportive team and flexible hours make it an excellent place to work.",
+    "input_improvement_suggestion": "Consider more team-building activities to strengthen team bonds.",
+    "is_recommended": true
+  },
+  {
+    "id": "320e1b91-222f-447b-919a-8a5e319f3d83",
+    "company_id": "9bf98d48-29c9-4fbd-a341-cfe940028e66",
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "summary": "Positive Experience",
+    "ot_satisfy": true,
+    "ot_satisfy_reason": "The no OT policy is a huge plus, allowing me to manage my time effectively.",
+    "input_experience": "TechSolutions fosters a culture of continuous learning. The leadership is approachable, and the projects are challenging and rewarding.",
+    "input_improvement_suggestion": "Expand the training programs for professional development.",
+    "is_recommended": true
+  },
+  {
+    "id": "3aa52032-8ecc-4865-bfdc-39126a2c349f",
+    "company_id": "e3e1a88f-d32b-44f9-99a4-1011a8c0e54a",
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "summary": "Overwhelming Workload",
+    "ot_satisfy": false,
+    "ot_satisfy_reason": "The workload is overwhelming, and the 'No OT' policy adds pressure.",
+    "input_experience": "The workload can be overwhelming, especially during peak periods. The 'No OT' policy adds pressure, making it challenging to meet tight project deadlines.",
+    "input_improvement_suggestion": "Reevaluate the 'No OT' policy during peak project periods.",
+    "is_recommended": false
+  },
+  {
+    "id": "1bd6c0a4-0d51-4271-bd7f-91d17ec3a41d",
+    "company_id": "e3e1a88f-d32b-44f9-99a4-1011a8c0e54a",
+    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "summary": "Rewarding Career Growth",
+    "ot_satisfy": true,
+    "ot_satisfy_reason": "The company values employees' time and promotes a healthy work-life balance.",
+    "input_experience": "InnovateTech provides excellent opportunities for career growth. The mentorship programs are valuable, and the company's focus on employee well-being is evident.",
+    "input_improvement_suggestion": "Increase transparency in the promotion process.",
+    "is_recommended": true
+  },
+  {
+    "id": "7c68eb7a-9832-4887-9a5b-1459e4058a7f",
+    "company_id": "381d63ca-54b4-4fc6-8c9a-d6f22ac12b35",
+    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "summary": "Disappointed with OT Policy",
+    "ot_satisfy": false,
+    "ot_satisfy_reason": "The 'No OT' policy is restrictive and hinders project deadlines.",
+    "input_experience": "While TechSolutions has a great team and interesting projects, I'm disappointed with the 'No OT' policy. There are times when overtime is necessary to meet project deadlines, and this policy is too restrictive.",
+    "input_improvement_suggestion": "Consider a more flexible approach to overtime during peak project periods.",
+    "is_recommended": false
+  }
+]
