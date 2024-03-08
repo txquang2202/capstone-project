@@ -14,7 +14,7 @@ const Query = {
     return jobApplication;
   },
   //Show list of job applications
-  jobApplicaitons: async (
+  jobApplications: async (
     _: any,
     _args: any,
     { prisma }: ContextInterface,
@@ -31,6 +31,7 @@ const Mutation = {
     { input }: { input: job_apply },
     { prisma }: ContextInterface,
   ): Promise<job_apply> => {
+    // console.log(input);
     const userExists = await prisma.user.findUnique({
       where: {
         id: input.user_id,
@@ -58,7 +59,7 @@ const Mutation = {
     // console.log(jobApplicationExists);
     if (jobApplicationExists) {
       throw new Error(
-        `Job application already exists for user ${input.user_id} and job ${input.job_id}`,
+        `Job application already exists for user with id:${input.user_id} and job with id:${input.job_id}`,
       );
     }
     // console.log(input);
