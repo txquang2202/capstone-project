@@ -1,9 +1,24 @@
 import { gql } from "apollo-server-express";
 
-const JobApplicationSchema = gql`
+const JobSchema = gql`
   # ---------------------------------------------------------
   # Model Objects
   # ---------------------------------------------------------
+  type JobPayLoad {
+    id: ID!
+    name: String!
+    salary: Int
+    country: String
+    skills: String!
+    working_type: String!
+    top_3_reason: String!
+    job_description: String
+    skill_demand: String!
+    why_you_love_working_here: String!
+    date_posted: Date!
+    company_id: ID!
+    is_closed: Boolean!
+  }
   type JobApplication {
     id: ID!
     user_id: ID!
@@ -18,6 +33,8 @@ const JobApplicationSchema = gql`
   extend type Query {
     jobApplications: [JobApplication!]
     jobApplication(id: ID!): JobApplication
+    job(id: ID!): JobPayLoad
+    jobs: [JobPayLoad!]
   }
   # ---------------------------------------------------------
   # Input Objects
@@ -28,13 +45,42 @@ const JobApplicationSchema = gql`
     cv: String! @constraint(minLength: 1)
     cover_letter: String
   }
+  input JobInput {
+    name: String!
+    salary: Int!
+    country: String!
+    skills: String!
+    working_type: String!
+    top_3_reason: String!
+    job_description: String!
+    skill_demand: String!
+    why_you_love_working_here: String!
+    # date_posted: Date!
+    company_id: ID!
+    is_closed: Boolean!
+  }
+  input updateJobInput {
+    name: String!
+    salary: Int!
+    country: String!
+    skills: String!
+    working_type: String!
+    top_3_reason: String!
+    job_description: String!
+    skill_demand: String!
+    why_you_love_working_here: String!
+    is_closed: Boolean!
+  }
   # ---------------------------------------------------------
   # Mutations
   # --------------------------------------------------------
 
   extend type Mutation {
     applyJob(input: ApplyJobInput!): JobApplication!
+    createJob(input: JobInput): JobPayLoad!
+    updateJob(id: ID!, input: updateJobInput): JobPayLoad!
+    deleteJob(id: ID!): JobPayLoad!
   }
 `;
 
-export default JobApplicationSchema;
+export default JobSchema;
