@@ -1,72 +1,92 @@
-import { job_apply } from "@prisma/client";
+import { job } from "@prisma/client";
 import { ContextInterface } from "../context";
 
 const Query = {
-  //show job application by id
-  jobApplication: async (
+  //show job by id
+  job: async (
     _: any,
     { id }: { id: string },
     { prisma }: ContextInterface,
-  ): Promise<job_apply | null> => {
-    const jobApplication = await prisma.job_apply.findUnique({
+  ): Promise<job | null> => {
+    const job = await prisma.job.findUnique({
       where: { id },
     });
-    return jobApplication;
+    return job;
   },
-  //Show list of job applications
-  jobApplications: async (
+  //Show list of jobs
+  jobs: async (
     _: any,
     _args: any,
     { prisma }: ContextInterface,
-  ): Promise<job_apply[]> => {
-    const jobApplications = await prisma.job_apply.findMany();
-    return jobApplications;
+  ): Promise<job[]> => {
+    const jobs = await prisma.job.findMany();
+    return jobs;
   },
 };
 
 const Mutation = {
-  //Add to application list
-  applyJob: async (
+  //Add to job list
+  createJob: async (
     _: any,
-    { input }: { input: job_apply },
+    { input }: { input: job },
     { prisma }: ContextInterface,
-  ): Promise<job_apply> => {
-    // console.log(input);
-    const userExists = await prisma.user.findUnique({
+  ): Promise<job> => {
+    input.date_posted = new Date();
+    const companyExist = await prisma.company.findUnique({
       where: {
-        id: input.user_id,
-      },
-    });
-    const jobExists = await prisma.job.findUnique({
-      where: {
-        id: input.job_id,
+        id: input.company_id,
       },
     });
 
-    if (!userExists) {
-      throw new Error(`User with ID ${input.user_id} does not exist`);
-    }
-    if (!jobExists) {
-      throw new Error(`Job with ID ${input.job_id} does not exist`);
+    if (!companyExist) {
+      throw new Error(`Company with ID ${input.company_id} does not exist`);
     }
 
-    const jobApplicationExists = await prisma.job_apply.findFirst({
-      where: {
-        user_id: input.user_id,
-        job_id: input.job_id,
-      },
-    });
-    // console.log(jobApplicationExists);
-    if (jobApplicationExists) {
-      throw new Error(
-        `Job application already exists for user with id:${input.user_id} and job with id:${input.job_id}`,
-      );
-    }
-    // console.log(input);
-    const newJobApplication = await prisma.job_apply.create({
+    const newJob = await prisma.job.create({
       data: input,
     });
-    return newJobApplication;
+    return newJob;
+  },
+  //updating job by id
+  updateJob: async (
+    _: any,
+    { id, input }: { id: string; input: job },
+    { prisma }: ContextInterface,
+  ): Promise<job | null> => {
+    const existingJob = await prisma.job.findUnique({
+      where: { id },
+    });
+
+    if (!existingJob) {
+      throw new Error(`Job with ID ${id} does not exist`);
+    }
+
+    const updatedJob = await prisma.job.update({
+      where: { id },
+      data: input,
+    });
+
+    return updatedJob;
+  },
+
+  // Delete a job by ID
+  deleteJob: async (
+    _: any,
+    { id }: { id: string },
+    { prisma }: ContextInterface,
+  ): Promise<job | null> => {
+    const existingJob = await prisma.job.findUnique({
+      where: { id },
+    });
+
+    if (!existingJob) {
+      throw new Error(`Job with ID ${id} does not exist`);
+    }
+    const deletedJob = await prisma.job.delete({
+      where: { id },
+    });
+
+    return deletedJob;
   },
 };
 
