@@ -4,10 +4,22 @@ const JobSchema = gql`
   # ---------------------------------------------------------
   # Model Objects
   # ---------------------------------------------------------
+  type JobWorkingLocation {
+    id: ID!
+    company_location: CompanyLocation
+  }
+
+  type CompanyLocation {
+    address: String
+  }
+
   type JobPayLoad {
     id: ID!
     name: String!
-    salary: Int
+    salary_from: Int
+    salary_to: Int
+    unit: String
+    hide_salary: Boolean
     country: String
     skills: String!
     working_type: String!
@@ -16,9 +28,10 @@ const JobSchema = gql`
     skill_demand: String!
     why_you_love_working_here: String!
     date_posted: Date!
-    company_id: ID!
     is_closed: Boolean!
+    job_working_location: [JobWorkingLocation!]!
   }
+
   type JobApplication {
     id: ID!
     user_id: ID!
@@ -47,7 +60,10 @@ const JobSchema = gql`
   }
   input JobInput {
     name: String!
-    salary: Int!
+    salary_from: Int
+    salary_to: Int
+    unit: String
+    hide_salary: Boolean
     country: String!
     skills: String!
     working_type: String!
@@ -55,13 +71,15 @@ const JobSchema = gql`
     job_description: String!
     skill_demand: String!
     why_you_love_working_here: String!
-    # date_posted: Date!
     company_id: ID!
     is_closed: Boolean!
   }
   input updateJobInput {
     name: String!
-    salary: Int!
+    salary_from: Int
+    salary_to: Int
+    unit: String
+    hide_salary: Boolean
     country: String!
     skills: String!
     working_type: String!
