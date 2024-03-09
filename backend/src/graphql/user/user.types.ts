@@ -1,6 +1,10 @@
 export interface IUser {
-  name: string;
+  id: string;
+  username: string;
   email: string;
-  password: string;
-  bod: Date;
+  firstName: string;
+  lastName: string;
+  emailVerified: boolean;
+  createdTimestamp: number;
+  enabled: boolean;
 }

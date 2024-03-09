@@ -1,9 +1,6 @@
 /**
  * DEMO CLIENT COMPONENT - FETCH DATA
  */
-'use client';
-
-import { useSuspenseQuery } from '@apollo/client';
 
 import ListCard from '@/components/BlogPage/ListCard';
 import ListLatest from '@/components/BlogPage/ListLatest';
@@ -14,16 +11,20 @@ import ListSkill from '@/components/BlogPage/ListSkill';
 import SearchBox from '@/components/BlogPage/SearchBox';
 import Sharing from '@/components/BlogPage/Sharing';
 import { GET_BLOGS } from '@/graphql/blog';
+import { getClient } from '@/lib/client';
 
-const BlogPage = () => {
-  const { data } = useSuspenseQuery(GET_BLOGS, {
+const BlogPage = async () => {
+  const {
+    data: { blogs },
+  } = await getClient().query({
+    query: GET_BLOGS,
     variables: {
       skip: 0,
       take: 10,
     },
   });
 
-  console.log('data', data);
+  console.log('blogs', blogs);
 
   return (
     <main>

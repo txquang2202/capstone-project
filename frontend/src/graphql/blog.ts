@@ -6,24 +6,16 @@ export const GET_BLOGS = gql`
       title
       id
       content
-      user {
-        id
-        name
-      }
     }
   }
 `;
 
 export const GET_BLOG = gql`
-  query GetBlog($id: Int!) {
+  query GetBlog($id: ID!) {
     blog(id: $id) {
       title
       id
       content
-      user {
-        id
-        name
-      }
     }
   }
 `;
