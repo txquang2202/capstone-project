@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { RedisClient } from "redis";
+import { KeycloakApiClient } from "src/services/keycloak";
 
 export interface AuthUser {
   name: string;
@@ -27,7 +28,7 @@ export interface ContextInterface {
   prisma: PrismaClient;
   redis: RedisClient;
   authUser: AuthUser;
-
+  keycloak: KeycloakApiClient;
   // no need to authenticate, using for testing api
   isRoot: boolean;
 }

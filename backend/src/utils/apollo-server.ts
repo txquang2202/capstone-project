@@ -1,3 +1,4 @@
+import keycloakApiClient from "../services/keycloak";
 import { ApolloServerPluginInlineTraceDisabled } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-express";
 import {
@@ -69,7 +70,7 @@ export const createApolloServer = (
       const isRoot =
         req.headers.authorization === process.env.KEY_AUTHORIZATION;
 
-      let authUser: AuthUser;
+      let authUser: AuthUser | null = null;
       if (!isRoot && req.headers.authorization != null) {
         const user: any = await checkAuthorization(
           req.headers.authorization || "",
@@ -81,7 +82,8 @@ export const createApolloServer = (
           authUser = user;
         }
       }
-      return Object.assign({ isRoot, authUser, prisma });
+      const keycloak = keycloakApiClient;
+      return Object.assign({ isRoot, authUser, prisma, keycloak });
     },
     validationRules: [depthLimit(20)],
     formatError: (error) => {
