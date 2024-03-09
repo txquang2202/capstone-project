@@ -27,7 +27,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${IPADDRESS}:9092
       KAFKA_LISTENERS: PLAINTEXT://:9092
-      KAFKA_CREATE_TOPICS: "sit.catalogue.item:1:1,uat.catalogue.item:1:1"
+      KAFKA_CREATE_TOPICS: "capstone:1:1"
     depends_on:
       - zookeeper
     networks:

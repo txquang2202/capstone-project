@@ -12,8 +12,8 @@ const JobApplicationSchema = gql`
     cover_letter: String
   }
   type Job {
-    job_id: Int
-    company_id: Int
+    id: String
+    company_id: String
     working_location: Int
     name: String
     salary: Int

@@ -10,6 +10,7 @@ import { rateLimitDirective } from "graphql-rate-limit-directive";
 import jwt from "jsonwebtoken";
 import prisma from "./prisma";
 import elastic from "./elasticsearch";
+import kafka from "./kafka";
 import { executor } from "./executor";
 import Logger from "./logger";
 require("dotenv").config();
@@ -72,7 +73,7 @@ export const createApolloServer = (
           authUser.role = "admin";
         }
       }
-      return Object.assign({ isRoot, authUser, prisma, elastic });
+      return Object.assign({ isRoot, authUser, prisma, elastic, kafka });
     },
     validationRules: [depthLimit(20)],
     formatError: (error) => {
