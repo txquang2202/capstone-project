@@ -10,6 +10,7 @@ import { DEFAULT_LOCALE, siteConfig } from '@/constant/config';
 import '@/styles/globals.css';
 import '@mantine/core/styles.css';
 
+import ApolloWrapper from '@/lib/apolloWrapper';
 import SessionProviderWrapper from '@/lib/sessionProviderWrapper';
 
 export async function generateMetadata({
@@ -80,7 +81,9 @@ export default function RootLayout({
     <SessionProviderWrapper>
       <html lang={params.lang} className={font.className}>
         <body>
-          <MantineProvider>{children}</MantineProvider>
+          <ApolloWrapper>
+            <MantineProvider>{children}</MantineProvider>
+          </ApolloWrapper>
         </body>
       </html>
     </SessionProviderWrapper>
