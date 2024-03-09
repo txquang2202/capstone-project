@@ -2,7 +2,7 @@ import { job } from "@prisma/client";
 import { ContextInterface } from "../context";
 
 const Query = {
-  //show job by id
+  // Show job by id
   job: async (
     _: any,
     { id }: { id: string },
@@ -10,16 +10,40 @@ const Query = {
   ): Promise<job | null> => {
     const job = await prisma.job.findUnique({
       where: { id },
+      include: {
+        job_working_location: {
+          include: {
+            company_location: {
+              select: {
+                address: true,
+              },
+            },
+          },
+        },
+      },
     });
     return job;
   },
-  //Show list of jobs
+
+  // Show list of jobs
   jobs: async (
     _: any,
     _args: any,
     { prisma }: ContextInterface,
   ): Promise<job[]> => {
-    const jobs = await prisma.job.findMany();
+    const jobs = await prisma.job.findMany({
+      include: {
+        job_working_location: {
+          include: {
+            company_location: {
+              select: {
+                address: true,
+              },
+            },
+          },
+        },
+      },
+    });
     return jobs;
   },
 };
