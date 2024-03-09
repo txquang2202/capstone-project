@@ -31,4 +31,7 @@ export interface ContextInterface {
   elastic: Client;
   kafkaProducer: Producer;
   authUser: AuthUser;
+
+  // no need to authenticate, using for testing api
+  isRoot: boolean;
 }
