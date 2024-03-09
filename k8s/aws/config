@@ -1,0 +1,55 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJVjhRaExjNmI2NEl3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TkRBek1Ea3hNekF3TXpKYUZ3MHpOREF6TURjeE16QTFNekphTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURMOGdvY1FNampoNjRUcE1tb1VjcFpHR0NLMGhHR2dWeWlJd2ludlIyWmFKU1RDbUZ6TWtoajVVY2MKckRta2s2RnVzWU1GZjdCRndEYnNVaHBiRjhveGREbUYrK1d3WDhma2RvN250YmxieVM0YVlkWFY5RVF5MlE1QgpGOUd1NE1EK3JmWm12NS9sTXdIR0ZMK3BCcGp1cWQyVndTeUt1UUI2bWhyMDZyaFA0MjRua0drQ2sxU2lPK3lTCmhhRnkzbjRURElYRDI1c0F2dysyN0taWk9iL0lHNzNJL0hBUVNYclZ1aUVZVzR4VDVYK3dlY2pGeXAxeTJVd24KendkQXZvbVpaSG5UUUpPWkJ6eDRIellXRzAzcGltem8ralJtMUNaZVRsalpybVhQcmgxR1REemd6SEdwMWNlWApQaHkrUElxaXpicE8yODNqQ2ZrSXhNMi9DSUJEQWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJUWGx5MklsOXlFeFdwdVZadEdhM1hQazM4TTFUQVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQThTK3lDbmxzSAo1UXQ5WWQ1SVFuUU5DUFp1enpkUDRkQWZUc24wY09Pd0JyMkU1aEpsSTB3SkVLMFU2cmtHblptV0Rxbzl4bE9rCmxieXFRRENEOTlkZ2xtOFVIeDVpU2k5NlNGaUFUaitVcGFCazdYTUV2QmxWT3BBWldGRnFyWDF6VTNSbFd1Qm8KYmF3VklHaitmNkFuZHFLR1lPbGE0RS92YnExaHR0dHhDdXp0amQ0eHpONThPajFVYkpTa3J2MFQyV1grMStKQQpRRmIyV29lWHdEOFB5b2lCR0E5VlRkem1ib1A2YldPUjVHWVFzVElVeUlzY1lmRXA0WkZvdWR4YWEwZm0vSm1JCnFsODY2eWdMY2trUnBCNWRJVDJOTVoxN0lQY1dhdFFRUlV0YW1xSmxQVW50aWROY3F5Ym5wU25uaGZseXhrQVYKWWp2WFlXWWJ2TXVZCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://CE08912D41EF7C58CE8B2BD307C27AC5.gr7.ap-southeast-1.eks.amazonaws.com
+  name: findyourjob.ap-southeast-1.eksctl.io
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJVjhRaExjNmI2NEl3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TkRBek1Ea3hNekF3TXpKYUZ3MHpOREF6TURjeE16QTFNekphTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURMOGdvY1FNampoNjRUcE1tb1VjcFpHR0NLMGhHR2dWeWlJd2ludlIyWmFKU1RDbUZ6TWtoajVVY2MKckRta2s2RnVzWU1GZjdCRndEYnNVaHBiRjhveGREbUYrK1d3WDhma2RvN250YmxieVM0YVlkWFY5RVF5MlE1QgpGOUd1NE1EK3JmWm12NS9sTXdIR0ZMK3BCcGp1cWQyVndTeUt1UUI2bWhyMDZyaFA0MjRua0drQ2sxU2lPK3lTCmhhRnkzbjRURElYRDI1c0F2dysyN0taWk9iL0lHNzNJL0hBUVNYclZ1aUVZVzR4VDVYK3dlY2pGeXAxeTJVd24KendkQXZvbVpaSG5UUUpPWkJ6eDRIellXRzAzcGltem8ralJtMUNaZVRsalpybVhQcmgxR1REemd6SEdwMWNlWApQaHkrUElxaXpicE8yODNqQ2ZrSXhNMi9DSUJEQWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJUWGx5MklsOXlFeFdwdVZadEdhM1hQazM4TTFUQVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQThTK3lDbmxzSAo1UXQ5WWQ1SVFuUU5DUFp1enpkUDRkQWZUc24wY09Pd0JyMkU1aEpsSTB3SkVLMFU2cmtHblptV0Rxbzl4bE9rCmxieXFRRENEOTlkZ2xtOFVIeDVpU2k5NlNGaUFUaitVcGFCazdYTUV2QmxWT3BBWldGRnFyWDF6VTNSbFd1Qm8KYmF3VklHaitmNkFuZHFLR1lPbGE0RS92YnExaHR0dHhDdXp0amQ0eHpONThPajFVYkpTa3J2MFQyV1grMStKQQpRRmIyV29lWHdEOFB5b2lCR0E5VlRkem1ib1A2YldPUjVHWVFzVElVeUlzY1lmRXA0WkZvdWR4YWEwZm0vSm1JCnFsODY2eWdMY2trUnBCNWRJVDJOTVoxN0lQY1dhdFFRUlV0YW1xSmxQVW50aWROY3F5Ym5wU25uaGZseXhrQVYKWWp2WFlXWWJ2TXVZCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://CE08912D41EF7C58CE8B2BD307C27AC5.gr7.ap-southeast-1.eks.amazonaws.com
+  name: arn:aws:eks:ap-southeast-1:633589447460:cluster/findyourjob
+contexts:
+- context:
+    cluster: findyourjob.ap-southeast-1.eksctl.io
+    user: iam-root-account@findyourjob.ap-southeast-1.eksctl.io
+  name: iam-root-account@findyourjob.ap-southeast-1.eksctl.io
+- context:
+    cluster: arn:aws:eks:ap-southeast-1:633589447460:cluster/findyourjob
+    user: arn:aws:eks:ap-southeast-1:633589447460:cluster/findyourjob
+  name: arn:aws:eks:ap-southeast-1:633589447460:cluster/findyourjob
+current-context: arn:aws:eks:ap-southeast-1:633589447460:cluster/findyourjob
+kind: Config
+preferences: {}
+users:
+- name: iam-root-account@findyourjob.ap-southeast-1.eksctl.io
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - eks
+      - get-token
+      - --output
+      - json
+      - --cluster-name
+      - findyourjob
+      - --region
+      - ap-southeast-1
+      command: aws
+      env:
+      - name: AWS_STS_REGIONAL_ENDPOINTS
+        value: regional
+      provideClusterInfo: false
+- name: arn:aws:eks:ap-southeast-1:633589447460:cluster/findyourjob
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - --region
+      - ap-southeast-1
+      - eks
+      - get-token
+      - --cluster-name
+      - findyourjob
+      - --output
+      - json
+      command: aws

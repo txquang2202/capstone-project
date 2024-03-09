@@ -8,7 +8,7 @@ metadata:
   name: findyourjob-frontend-ingress
 spec:
   rules:
-    - host: www.findyourjob.com
+    - host: findyourjob.tech
       http:
         paths:
           - backend:

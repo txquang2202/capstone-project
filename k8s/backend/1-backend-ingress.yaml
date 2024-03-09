@@ -6,7 +6,7 @@ metadata:
   name: findyourjob-api-ingress
 spec:
   rules:
-    - host: api.findyourjob.com
+    - host: api.findyourjob.tech
       http:
         paths:
           - backend:
