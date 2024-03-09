@@ -46,6 +46,7 @@
     "apollo-server-errors": "^3.0.1",
     "apollo-server-express": "^3.11.1",
     "assign-deep": "^1.0.1",
+    "aws-sdk": "^2.1574.0",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "compression": "^1.7.4",
