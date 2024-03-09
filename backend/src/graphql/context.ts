@@ -27,4 +27,7 @@ export interface ContextInterface {
   prisma: PrismaClient;
   redis: RedisClient;
   authUser: AuthUser;
+
+  // no need to authenticate, using for testing api
+  isRoot: boolean;
 }
