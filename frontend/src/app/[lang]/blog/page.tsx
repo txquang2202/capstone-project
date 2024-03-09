@@ -13,6 +13,7 @@ import Sharing from '@/components/BlogPage/Sharing';
 import { GET_BLOGS } from '@/graphql/blog';
 import { getClient } from '@/lib/client';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const BlogPage = async () => {
   const {
     data: { blogs },
@@ -23,9 +24,7 @@ const BlogPage = async () => {
       take: 10,
     },
   });
-
   console.log('blogs', blogs);
-
   return (
     <main>
       <section className='scroll-smooth bg-[#f2f2f2] focus:scroll-auto'>

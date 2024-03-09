@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: findyourjob-frontend
+  labels:
+    name: findyourjob-frontend
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: findyourjob-frontend
+  template:
+    metadata:
+      labels:
+        app: findyourjob-frontend
+    spec:
+      imagePullSecrets:
+        - name: docker-config-json
+      containers:
+        - name: findyourjob-frontend
+          image: ghcr.io/nguyenphucbao68/findyourjob-frontend:latest
+          # image: findyourjob-frontend:latest
+          imagePullPolicy: Always
+          # imagePullPolicy: Never
+          env:
+            - name: NEXT_PUBLIC_CDN_URL
+              value: https://cdn.findyourjob.tech/
+            - name: NEXT_PUBLIC_ORIGIN_URL
+              value: https://www.findyourjob.tech
+            - name: NEXT_PUBLIC_API_URL
+              value: http://localhost:4000
+            - name: NEXT_PUBLIC_SHOW_LOGGER
+              value: 'true'
+            - name: DEMO_FRONTEND_CLIENT_ID
+              value: backend
+            - name: DEMO_FRONTEND_CLIENT_SECRET
+              value: j788xF7vYJRPubFHAOvAi6WZoXFX3aR9
+            - name: AUTH_ISSUER
+              value: http://localhost:8080/realms/findyourjob
+            - name: NEXTAUTH_URL
+              value: http://localhost:3000
+            - name: NEXTAUTH_SECRET
+              value: my-secret-goes-here-abc-123
+            - name: END_SESSION_URL
+              value: http://localhost:8080/realms/findyourjob/protocol/openid-connect/logout
+            - name: DEMO_BACKEND_URL
+              value: http://localhost:4000/graphql
+            - name: REFRESH_TOKEN_URL
+              value: http://localhost:8080/realms/findyourjob/protocol/openid-connect/token
+          resources:
+            requests:
+              cpu: '128m'
+              memory: '256Mi'
+            limits:
+              cpu: '500m'
+              memory: '750Mi'
+          ports:
+            - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: findyourjob-frontend-svc
+spec:
+  type: NodePort
+  selector:
+    app: findyourjob-frontend
+  ports:
+    - port: 3000
+      targetPort: 3000
+      # nodePort: 30001
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: findyourjob-frontend-hpa
+spec:
+  maxReplicas: 1
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: findyourjob-frontend
+  targetCPUUtilizationPercentage: 80
