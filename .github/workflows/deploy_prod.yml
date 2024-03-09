@@ -39,12 +39,13 @@ jobs:
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.deployTarget }}
 
       - name: Build image
         run: DOCKER_BUILDKIT=1 docker build "$PWD" --build-arg DEPLOY_KEY="${{ secrets.DEPLOY_KEY }}" --build-arg commit="$(git rev-parse --short HEAD 2>/dev/null)" --build-arg version=$VERSION -t $FRONT_END_IMAGE_NAME
+        working-directory: frontend
 
       - name: Log in to registry
         # This is where you will update the PAT to GITHUB_TOKEN
@@ -71,7 +72,7 @@ jobs:
     needs: [build-frontend]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.deployTarget }}
 
