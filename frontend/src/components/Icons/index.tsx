@@ -39,4 +39,6 @@ export {
   Star as IconStar,
   ThumbsUp as IconThumbsUp,
   ThumbsDown as IconThumbsDown,
+  Settings as IconSettings,
+  LogOut as IconLogOut,
 } from 'react-feather';

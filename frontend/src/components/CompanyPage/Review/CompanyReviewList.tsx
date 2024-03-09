@@ -8,17 +8,16 @@ import {
   IconThumbsDown,
   IconThumbsUp,
 } from '@/components/Icons';
-import Icon from '@/components/Icons/core/IconWrapper';
 
 const CompanyReviewList = () => {
   const [filter, setFilter] = useState(false);
-  const [rate, setRate] = useState(4.0);
+  const [rate] = useState(4.0);
   const [widthRate, setWidthRate] = useState(0);
 
   useEffect(() => {
     const roundedRate = Math.round((rate * 100) / 5);
     setWidthRate(roundedRate);
-  }, []);
+  }, [rate]);
 
   const handleFilterClick = () => {
     setFilter(!filter);
@@ -64,7 +63,7 @@ const CompanyReviewList = () => {
               </div>
 
               <div
-                className={`absolute inline-flex overflow-hidden`}
+                className='absolute inline-flex overflow-hidden'
                 style={{ width: `${widthRate}%` }}
               >
                 <div className='star-icons text-[#FF9019]'>
@@ -150,7 +149,7 @@ const CompanyReviewList = () => {
               </div>
 
               <div
-                className={`absolute inline-flex overflow-hidden`}
+                className='absolute inline-flex overflow-hidden'
                 style={{ width: `${widthRate}%` }}
               >
                 <div className='star-icons text-[#FF9019]'>
@@ -236,7 +235,7 @@ const CompanyReviewList = () => {
               </div>
 
               <div
-                className={`absolute inline-flex overflow-hidden`}
+                className='absolute inline-flex overflow-hidden'
                 style={{ width: `${widthRate}%` }}
               >
                 <div className='star-icons text-[#FF9019]'>

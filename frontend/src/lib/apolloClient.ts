@@ -9,6 +9,7 @@ import { onError } from '@apollo/client/link/error';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const createAuthLink = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const request = (operation: any) => {
     // const token: string = localStorage.getItem('token') || '';
     const token = 'ad';
@@ -22,6 +23,7 @@ const createAuthLink = () => {
   return new ApolloLink(
     (operation, forward) =>
       new Observable((observer) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let handle: any;
         Promise.resolve(operation)
           .then((oper) => request(oper))

@@ -6,13 +6,13 @@ import { IconChevronDown, IconStar } from '@/components/Icons';
 
 const CompanyReviewRating = () => {
   const [viewMore, setViewMore] = useState(false);
-  const [rate, setRate] = useState(4.6);
+  const [rate] = useState(4.6);
   const [widthRate, setWidthRate] = useState(0);
 
   useEffect(() => {
     const roundedRate = Math.round((rate * 100) / 5);
     setWidthRate(roundedRate);
-  }, []);
+  }, [rate]);
 
   const handleClickViewMore = () => {
     setViewMore(!viewMore);
@@ -40,7 +40,7 @@ const CompanyReviewRating = () => {
                   </div>
 
                   <div
-                    className={`absolute inline-flex overflow-hidden`}
+                    className='absolute inline-flex overflow-hidden'
                     style={{ width: `${widthRate}%` }}
                   >
                     <div className='star-icons text-[#FF9019]'>
