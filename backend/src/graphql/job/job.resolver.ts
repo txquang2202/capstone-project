@@ -2,14 +2,25 @@ import { job_apply } from "@prisma/client";
 import { ContextInterface } from "../context";
 
 const Query = {
-  //Show list of job
+  //show job application by id
+  jobApplication: async (
+    _: any,
+    { id }: { id: string },
+    { prisma }: ContextInterface,
+  ): Promise<job_apply | null> => {
+    const jobApplication = await prisma.job_apply.findUnique({
+      where: { id },
+    });
+    return jobApplication;
+  },
+  //Show list of job applications
   jobApplicaitons: async (
     _: any,
     _args: any,
     { prisma }: ContextInterface,
   ): Promise<job_apply[]> => {
-    const jobApply = await prisma.job_apply.findMany();
-    return jobApply;
+    const jobApplications = await prisma.job_apply.findMany();
+    return jobApplications;
   },
 };
 
@@ -44,13 +55,13 @@ const Mutation = {
         job_id: input.job_id,
       },
     });
-
+    // console.log(jobApplicationExists);
     if (jobApplicationExists) {
       throw new Error(
         `Job application already exists for user ${input.user_id} and job ${input.job_id}`,
       );
     }
-
+    // console.log(input);
     const newJobApplication = await prisma.job_apply.create({
       data: input,
     });

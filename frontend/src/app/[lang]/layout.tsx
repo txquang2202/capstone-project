@@ -10,6 +10,11 @@ import { DEFAULT_LOCALE, siteConfig } from '@/constant/config';
 import '@mantine/core/styles.css';
 import '@/styles/globals.css';
 
+import { ApolloProvider } from '@apollo/client';
+
+import { createApolloClient } from '@/lib/apolloClient';
+import { ApolloWrapper } from '@/lib/apolloProvider';
+
 export async function generateMetadata({
   params,
 }: {
@@ -74,10 +79,13 @@ export default function RootLayout({
   children: ReactNode;
   params: { lang: string };
 }) {
+  const client = createApolloClient();
   return (
     <html lang={params.lang} className={font.className}>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <ApolloWrapper>
+          <MantineProvider>{children}</MantineProvider>
+        </ApolloWrapper>
       </body>
     </html>
   );

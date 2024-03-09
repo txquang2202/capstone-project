@@ -1,38 +1,38 @@
 [
   {
-    "job_id": 1,
-    "working_location": 1
+    "job_id": "8f9837ab-de19-47b9-aa1b-c370c0ac6cc0",
+    "company_location_id": "ac96891e-1634-4ac8-aa55-04a4ecf7bb0f"
   },
   {
-    "job_id": 1,
-    "working_location": 2
+    "job_id": "8f9837ab-de19-47b9-aa1b-c370c0ac6cc0",
+    "company_location_id": "0ebff04c-6b29-4d87-9e1f-bcc9ad2abe86"
   },
   {
-    "job_id": 2,
-    "working_location": 1
+    "job_id": "13faa412-38dc-4bb1-92dd-1b3194e2ed50",
+    "company_location_id": "ac96891e-1634-4ac8-aa55-04a4ecf7bb0f"
   },
   {
-    "job_id": 4,
-    "working_location": 4
+    "job_id": "84bd1f1b-965d-408d-b821-f651f21789b9",
+    "company_location_id": "9757abb8-ff90-44aa-8db6-75a8ae38ee50"
   },
   {
-    "job_id": 5,
-    "working_location": 5
+    "job_id": "7981ebda-7b55-42df-bfd6-7bae92637493",
+    "company_location_id": "e70beb3f-1db1-4697-8ed3-404737401753"
   },
   {
-    "job_id": 6,
-    "working_location": 5
+    "job_id": "795fe486-50f4-4dce-9f44-57087686f2a8",
+    "company_location_id": "e70beb3f-1db1-4697-8ed3-404737401753"
   },
   {
-    "job_id": 7,
-    "working_location": 7
+    "job_id": "c1a4244b-6297-4708-a4bc-cdc62583e99b",
+    "company_location_id": "42defc3c-f75e-4ac2-b6af-b2d27e9d4450"
   },
   {
-    "job_id": 8,
-    "working_location": 8
+    "job_id": "940c0670-063e-4f2f-9b6d-438cd714eb2a",
+    "company_location_id": "83984d01-2095-482a-a3ba-5bd9ab5fbbcd"
   },
   {
-    "job_id": 10,
-    "working_location": 9
+    "job_id": "34d8afc8-57c1-4edc-a6b7-43434c1db46d",
+    "company_location_id": "3e42e871-0ce2-4e17-be53-124cbd8f7178"
   }
 ]
