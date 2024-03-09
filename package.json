@@ -27,5 +27,8 @@
       "yarn --cwd frontend eslint"
     ],
     "frontend/**/*.{css,json,md}": "yarn --cwd frontend prettier"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.5.7"
   }
 }
