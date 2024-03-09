@@ -34,27 +34,47 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: localdb
-      POSTGRES_DB: capstone
+      POSTGRES_DB: keycloak
     ports:
       - "5432:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
+      - ./keycloak/create-db.sql:/docker-entrypoint-initdb.d/create_database.sql
+    networks:
+      - demo-network
+
+  start_dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - keycloak
+    command: postgres:5432
+    networks:
+      - demo-network
 
   # setup keycloak
   keycloak:
-    image: jboss/keycloak:16.1.1
+    image: quay.io/keycloak/keycloak:24.0.1
+    command: -v start-dev --import-realm
     environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
-      DB_VENDOR: postgres
-      DB_ADDR: postgres
-      DB_DATABASE: capstone
-      DB_USER: postgres
-      DB_PASSWORD: localdb
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_URL_PORT: 5432
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: localdb
     ports:
       - "8080:8080"
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
     depends_on:
       - postgres
+    networks:
+      - demo-network
 
 volumes:
   postgres:
+
+networks:
+  demo-network:

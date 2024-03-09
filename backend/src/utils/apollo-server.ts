@@ -1,18 +1,19 @@
 import { ApolloServerPluginInlineTraceDisabled } from "apollo-server-core";
+import { ApolloServer } from "apollo-server-express";
 import {
   constraintDirective,
   constraintDirectiveTypeDefs,
 } from "graphql-constraint-directive";
-import { ApolloServer } from "apollo-server-express";
 import depthLimit from "graphql-depth-limit";
 import { applyMiddleware } from "graphql-middleware";
 import { rateLimitDirective } from "graphql-rate-limit-directive";
 import jwt from "jsonwebtoken";
-import prisma from "./prisma";
 import elastic from "./elasticsearch";
 import kafka from "./kafka";
+import { AuthUser } from "src/graphql/context";
 import { executor } from "./executor";
 import Logger from "./logger";
+import prisma from "./prisma";
 require("dotenv").config();
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 
@@ -21,8 +22,15 @@ const { rateLimitDirectiveTypeDefs, rateLimitDirectiveTransformer } =
 
 const checkAuthorization = async (token: string) => {
   try {
-    const authUser = await jwt.verify(token, process.env.KEY_CONSOLE || "");
-    return authUser;
+    // const authUser = await jwt.verify(token, process.env.KEY_CONSOLE || "");
+    // return authUser;
+    const public_key = `-----BEGIN PUBLIC KEY-----\n${process.env.KEYCLOAK_PUBLIC_KEY}\n-----END PUBLIC KEY-----`;
+
+    const decodedToken = jwt.verify(token, public_key, {
+      algorithms: ["RS256"],
+    });
+
+    return decodedToken;
   } catch (error) {
     return false;
   }
@@ -62,15 +70,17 @@ export const createApolloServer = (
       // return models;
       const isRoot =
         req.headers.authorization === process.env.KEY_AUTHORIZATION;
-      let authUser;
+
+      let authUser: AuthUser;
       if (!isRoot && req.headers.authorization != null) {
         const user: any = await checkAuthorization(
           req.headers.authorization || "",
         );
 
-        if (user.usn) {
+        console.log("User: ", user);
+
+        if (user.sid) {
           authUser = user;
-          authUser.role = "admin";
         }
       }
       return Object.assign({ isRoot, authUser, prisma, elastic, kafka });

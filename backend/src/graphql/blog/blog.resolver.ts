@@ -5,7 +5,7 @@ const Query = {
   // get blog by id
   blog: async (
     _: any,
-    { id }: { id: number },
+    { id }: { id: string },
     { prisma }: ContextInterface,
   ): Promise<blog | null> => {
     const blog = await prisma.blog.findUnique({
@@ -29,13 +29,12 @@ const Query = {
 };
 
 const Blog = {
-  user: async (parent: blog, _: any, { prisma }: ContextInterface) => {
-    const user = await prisma.user.findUnique({
-      where: { id: parent.user_id },
-    });
-
-    return user;
-  },
+  // user: async (parent: blog, _: any, { prisma }: ContextInterface) => {
+  //   const user = await prisma.user.findUnique({
+  //     where: { id: parent.user_id },
+  //   });
+  //   return user;
+  // },
 };
 
 const Mutation = {
