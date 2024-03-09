@@ -1,7 +1,6 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
 
 import { routes } from '@/configs/router';
 
@@ -10,9 +9,6 @@ import { AppLink } from '../AppLink';
 const CompanyNavbar = () => {
   const currentPage = usePathname();
 
-  useEffect(() => {
-    console.log('current page:', currentPage);
-  }, []);
   return (
     <div
       className='mb-[20px] rounded-lg bg-white'

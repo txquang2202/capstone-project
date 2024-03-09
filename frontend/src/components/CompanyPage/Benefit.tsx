@@ -45,18 +45,21 @@ const CompanyBenefit = () => {
                 <div className='relative cursor-pointer'>
                   <img
                     className='w-full rounded-[4px]'
+                    alt=''
                     src='https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBd1RCUEE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--2883ad78600e749b0d181b0c4b6afad7a1fadf73/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RTNKbGMybDZaVjkwYjE5bWFXeHNXd2RwQWhRQmFRRzRPZ2xqY205d1d3bHBBR2tBYVFJVUFXa0J1QT09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--31ad030a4f0bfbe0b7ef2a3f041666e437907425/itviec-headline-2%20(1).jpg'
                   />
                 </div>
                 <div className='relative cursor-pointer'>
                   <img
                     className='w-full rounded-[4px]'
+                    alt=''
                     src='https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMzJkUEE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--2b2e02b0a957cdb773a390aaa3b0202ed3a29034/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RTNKbGMybDZaVjkwYjE5bWFXeHNXd2RwQWhRQmFRRzRPZ2xqY205d1d3bHBBR2tBYVFJVUFXa0J1QT09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--31ad030a4f0bfbe0b7ef2a3f041666e437907425/itviec-img-1.jpg'
                   />
                 </div>
                 <div className='relative cursor-pointer'>
                   <img
                     className='w-full rounded-[4px]'
+                    alt=''
                     src='https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMzZkUEE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--de6168196dc15a286d8070f6ffa870305e87404b/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RTNKbGMybDZaVjkwYjE5bWFXeHNXd2RwQWhRQmFRRzRPZ2xqY205d1d3bHBBR2tBYVFJVUFXa0J1QT09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--31ad030a4f0bfbe0b7ef2a3f041666e437907425/itviec-img-2.jpg'
                   />
                 </div>
