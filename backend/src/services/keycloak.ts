@@ -1,6 +1,7 @@
 //global helper method :
 
 import KeycloakAdminClient from "@keycloak/keycloak-admin-client";
+require("dotenv").config();
 
 export interface KeycloakConfig {
   baseUrl: string;
@@ -15,14 +16,13 @@ export class KeycloakApiClient {
 
   constructor(
     config: KeycloakConfig = {
-      baseUrl: "http://localhost:8080",
-      realmName: "itviec",
-      clientId: "backend",
-      clientSecret: "j788xF7vYJRPubFHAOvAi6WZoXFX3aR9",
+      baseUrl: process.env.KEYCLOAK_BASE_URL || "http://localhost:8080",
+      realmName: process.env.KEYCLOAK_REALM_NAME || "master",
+      clientId: process.env.KEYCLOAK_CLIENT_ID || "admin-cli",
+      clientSecret: process.env.KEYCLOAK_CLIENT_SECRET || "admin-cli-secret",
     },
   ) {
     this.config = config;
-
     this.keycloak = new KeycloakAdminClient({
       baseUrl: this.config.baseUrl,
       realmName: this.config.realmName,
@@ -34,26 +34,7 @@ export class KeycloakApiClient {
       grantType: "client_credentials",
       clientId: this.config.clientId,
       clientSecret: this.config.clientSecret,
-      // username: "admin",
-      // password: "admin",
-      // grantType: "password",
-      // clientId: this.config.clientId,
     });
-  }
-
-  async authenticateAndGetToken() {
-    try {
-      await this.keycloak.auth({
-        grantType: "client_credentials",
-        clientId: this.config.clientId,
-        clientSecret: this.config.clientSecret,
-      });
-
-      return this.keycloak.accessToken;
-    } catch (error: any) {
-      console.error("Error authenticating:", error.message);
-      throw error;
-    }
   }
 
   async getUserData(userId: string): Promise<any> {
