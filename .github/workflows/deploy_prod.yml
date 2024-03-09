@@ -1,10 +1,10 @@
-name: Build Image
+name: Deploy Production
 
 on:
   # push:
-  #   # Publish `master` as Docker `latest` image.
+  #   # Publish `main` as Docker `latest` image.
   #   branches:
-  #     - master
+  #     - main
 
   #   # Publish `v1.2.3` tags as releases.
   #   tags:
@@ -14,7 +14,7 @@ on:
       deployTarget:
         description: 'Deploy to production with target'
         required: true
-        default: 'master'
+        default: 'main'
       # deployBackend:
       #   description: 'Deploy backend? (yes/no)'
       #   required: true
@@ -39,12 +39,13 @@ jobs:
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.deployTarget }}
 
       - name: Build image
         run: DOCKER_BUILDKIT=1 docker build "$PWD" --build-arg DEPLOY_KEY="${{ secrets.DEPLOY_KEY }}" --build-arg commit="$(git rev-parse --short HEAD 2>/dev/null)" --build-arg version=$VERSION -t $FRONT_END_IMAGE_NAME
+        working-directory: frontend
 
       - name: Log in to registry
         # This is where you will update the PAT to GITHUB_TOKEN
@@ -60,7 +61,7 @@ jobs:
           # Strip "v" prefix from tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
           # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
+          [ "$VERSION" == "main" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
           docker tag $FRONT_END_IMAGE_NAME $IMAGE_ID:$VERSION
@@ -71,7 +72,7 @@ jobs:
     needs: [build-frontend]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.deployTarget }}
 
