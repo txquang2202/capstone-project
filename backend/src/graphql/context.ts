@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { RedisClient } from "redis";
 import { Client } from "@elastic/elasticsearch";
 import { Producer } from "node-rdkafka";
+import { KeycloakApiClient } from "src/services/keycloak";
 
 export interface AuthUser {
   name: string;
@@ -31,7 +32,7 @@ export interface ContextInterface {
   elastic: Client;
   kafkaProducer: Producer;
   authUser: AuthUser;
-
+  keycloak: KeycloakApiClient;
   // no need to authenticate, using for testing api
   isRoot: boolean;
 }
