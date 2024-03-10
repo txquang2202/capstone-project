@@ -1,5 +1,6 @@
 import { routes } from '@/configs/router';
 import dayjs from '@/lib/dayjs';
+import { formatCurrency } from '@/lib/number';
 import { Job } from '@/types/job';
 
 import { AppLink } from '../AppLink';
@@ -33,9 +34,12 @@ const JobDetail = ({ job }: Props) => {
             <div className='text-rich-grey'>{job.company.company_name}</div>
             <div className='text-success-color flex items-center gap-2 font-medium'>
               <IconSalary />
-              {!job.salary
+              {!job.salary_from && !job.salary_to
                 ? "You'll love it"
-                : `${job.salary} - ${job.salary} VND`}
+                : `${formatCurrency(
+                    job.salary_from || 0,
+                    job.unit
+                  )} - ${formatCurrency(job.salary_to || 0, job.unit)}`}
             </div>
           </div>
         </div>

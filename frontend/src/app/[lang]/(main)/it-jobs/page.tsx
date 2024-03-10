@@ -47,7 +47,6 @@ export default function Page() {
   const {
     data: { jobs },
   } = useSuspenseQuery<DataResponse<'jobs', Job[]>>(GET_JOBS);
-
   return (
     <div>
       <div className='bg-header-gradient px-[160px]'>

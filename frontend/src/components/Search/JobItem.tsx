@@ -1,5 +1,6 @@
 import { cn } from '@/lib/classNames';
 import dayjs from '@/lib/dayjs';
+import { formatCurrency } from '@/lib/number';
 import { Job, WorkingType } from '@/types/job';
 
 import { IconMapPin, IconRemote, IconSalary } from '../Icons';
@@ -56,9 +57,12 @@ const JobItem = ({ company, isHot, selected, onSelect, ...job }: Props) => {
         </div>
         <div className='text-success-color border-silver-grey flex items-center gap-2 border-b border-dashed pb-3 font-medium'>
           <IconSalary />
-          {!job.salary
+          {!job.salary_from && !job.salary_to
             ? "You'll love it"
-            : `${job.salary} - ${job.salary} ${job.unit}`}
+            : `${formatCurrency(
+                job.salary_from || 0,
+                job.unit
+              )} - ${formatCurrency(job.salary_to || 0, job.unit)}`}
         </div>
         <div className='mb-1 mt-3 flex items-center gap-1'>
           <IconRemote size={16} color='var(--dark-grey)' viewBox='0 0 24 25' />

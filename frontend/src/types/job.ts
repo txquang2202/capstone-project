@@ -8,7 +8,9 @@ export type Job = {
   id: string;
   is_closed: boolean;
   job_description: null;
-  salary: number | null;
+  salary_from: number | null;
+  salary_to: number | null;
+  unit: string;
   name: string;
   skill_demand: string;
   skills: string;

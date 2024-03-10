@@ -36,7 +36,8 @@ export const GET_JOBS = gql`
       id
       is_closed
       job_description
-      salary
+      salary_from
+      salary_to
       name
       skill_demand
       skills
