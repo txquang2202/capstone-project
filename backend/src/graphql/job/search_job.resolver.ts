@@ -19,7 +19,10 @@ const Query = {
     logger.info(`searching for jobs with query: ${query}`);
     try {
       if (!query || query === "") {
-        return prisma.job.findMany();
+        return prisma.job.findMany({
+          skip,
+          take,
+        });
       }
       const result = await elastic.search({
         index: "job",
