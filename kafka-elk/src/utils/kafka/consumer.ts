@@ -50,13 +50,15 @@ export default class KafkaElasticConsumer {
               await this.pushToElasticsearch(body.index, JSON.stringify(body.data));
             }
             if (body.event === 'BULK') {
-
+              const body: CustomMessageFormat[] = JSON.parse(message.value.toString());
+              const data = body.map((b) => JSON.stringify(b.data))
+              await this.bulkPushToElasticsearch(body[0].index, data);
             }
             if (body.event === 'UPDATE') {
-
+              await this.updateToElasticsearch(body.index, JSON.stringify(body.data));
             }
             if (body.event === 'DELETE') {
-
+              await this.deleteFromElasticsearch(body.index, JSON.stringify(body.data));
             }
           } catch (error) {
             console.error(`Error parsing JSON or processing message: ${error}`);
@@ -108,19 +110,15 @@ export default class KafkaElasticConsumer {
 
   private async bulkPushToElasticsearch(index: string, data: string[]): Promise<void> {
     try {
-      // Adjust this logic based on your actual data structure and Elasticsearch index
-      const index = process.env.ELASTICSEARCH_INDEX || 'capstone'
-      const operations = data.flatMap(doc => {
-        const docID = JSON.parse(doc.toString()).data.id;
-        return [{ index: { _index: index, _id: docID } }, doc];
-      })
-
+      const body = data.map((d) => JSON.parse(d))
       await this.elasticsearchClient.bulk({
-        index,
-        operations,
+        index: index,
+        body: body,
+      }).then((response) => {
+        console.log(`Data pushed to Elasticsearch successfully. Response: ${JSON.stringify(response)}`);
+      }).catch((error) => {
+        console.error('Error pushing data to Elasticsearch:', error);
       })
-
-      console.log('Data pushed to Elasticsearch successfully.')
     } catch (error) {
       console.error('Error pushing data to Elasticsearch:', error)
     }
@@ -144,6 +142,23 @@ export default class KafkaElasticConsumer {
       console.error('Error updating data in Elasticsearch:', error)
     }
   }
+
+  private async deleteFromElasticsearch(index: string, data: string): Promise<void> {
+    try {
+      const body = JSON.parse(data)
+      await this.elasticsearchClient.delete({
+        index: index,
+        id: body.id,
+      }).then((response) => {
+        console.log(`Data deleted from Elasticsearch successfully. Response: ${JSON.stringify(response)}`);
+      }).catch((error) => {
+        console.error('Error deleting data from Elasticsearch:', error);
+      })
+    } catch (error) {
+      console.error('Error deleting data from Elasticsearch:', error)
+    }
+  }
+
   private createKafkaConsumer(): Consumer {
     const kafka = new Kafka({
       clientId: process.env.KAFKA_CLIENTID || 'capstone-consumer',

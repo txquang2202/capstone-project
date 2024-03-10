@@ -36,7 +36,7 @@ const Mutation = {
     });
     kafkaProducer.send(process.env.KAFKA_TOPIC_COMPANY || "", {
       index: process.env.ELASTIC_COMPANY_INDEX || "company",
-      event: EVENT.BULK,
+      event: EVENT.CREATE,
       data: newCompany,
     });
     return newCompany;

@@ -9,10 +9,10 @@ In order to run this container you'll need docker installed.
 * [OS X](https://docs.docker.com/mac/started/)
 * 4 GB of RAM on docker
 
-#### Environment Variables
+#### Set Environment Variables
 
 * `ELASTIC_VERSION` - elastic search version variables
-* `IPADDRESS` - Your ipaddress network 
+* `HOST_IP` - Your ipaddress network 
 
 ### Usage
 First, Check IP Address in your network and set environment variable IPADDRESS and run command line:
