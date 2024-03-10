@@ -7,17 +7,26 @@ const UploadSchema = gql`
   scalar Upload
 
   type UploadedFileResponse {
-    fileName: String!
-    mimeTye: String!
+    filename: String!
+    mimetype: String!
     encoding: String!
     url: String!
+    size: Int!
+    lastModified: Date!
+  }
+
+  # ---------------------------------------------------------
+  # Queries
+  # ---------------------------------------------------------
+  extend type Query {
+    file(key: String!): UploadedFileResponse
   }
 
   # ---------------------------------------------------------
   # Mutations
   # ---------------------------------------------------------
   extend type Mutation {
-    singleUpload(file: Upload!): UploadedFileResponse!
+    singleUpload(prefix: String!, file: Upload!): UploadedFileResponse!
   }
 `;
 

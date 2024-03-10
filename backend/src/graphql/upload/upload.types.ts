@@ -1,22 +1,23 @@
-import { ReadStream } from "fs";
-
 export type File = {
-  fileName: string;
-  mimeType: string;
+  fieldName?: string;
+  filename: string;
+  mimetype: string;
   encoding: string;
-  stream?: ReadStream;
+  createReadStream: () => NodeJS.ReadableStream;
 };
 
 export interface UploadedFileResponse {
-  fileName: string;
-  mimeType: string;
+  filename: string;
+  mimetype: string;
   encoding: string;
   url: string;
+  size: number;
+  lastModified?: Date;
 }
 
 export interface IUploader {
   singleFileUploadResolver: (
     parent: any,
-    { file }: { file: Promise<File> },
+    { prefix, file }: { prefix: string; file: Promise<File> },
   ) => Promise<UploadedFileResponse>;
 }

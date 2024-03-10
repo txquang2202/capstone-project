@@ -4,7 +4,7 @@ import companyResolver from "./company/company.resolver";
 import company_reviewResolver from "./company/company_review.resolver";
 import blogResolver from "./blog/blog.resolver";
 import jobResolver from "./job/job.resolver";
-import uploadResolver from './upload/upload.resolver'
+import uploadResolver from "./upload/upload.resolver";
 
 export default [
   userResolver,
@@ -13,5 +13,5 @@ export default [
   company_reviewResolver,
   blogResolver,
   jobResolver,
-  uploadResolver
+  uploadResolver,
 ];
