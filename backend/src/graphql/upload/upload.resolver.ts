@@ -1,9 +1,7 @@
-const Mutation = {
-  singleUpload: async (parent, { file }) => {
-    const { stream, filename, mimetype, encoding } = await file;
+import s3Uploader from "../../services/s3";
 
-    return { filename, mimetype, encoding, url: "" };
-  },
+const Mutation = {
+  singleUpload: s3Uploader.singleFileUploadResolver.bind(s3Uploader),
 };
 
 export default { Mutation };

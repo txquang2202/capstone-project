@@ -4,6 +4,8 @@ const UploadSchema = gql`
   # ---------------------------------------------------------
   # Model Objects
   # ---------------------------------------------------------
+  scalar Upload
+
   type UploadedFileResponse {
     fileName: String!
     mimeTye: String!

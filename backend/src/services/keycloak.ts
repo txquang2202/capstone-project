@@ -52,5 +52,5 @@ export class KeycloakApiClient {
 }
 
 const keycloakApiClient = new KeycloakApiClient();
-keycloakApiClient.init();
+// keycloakApiClient.init();
 export default keycloakApiClient;
