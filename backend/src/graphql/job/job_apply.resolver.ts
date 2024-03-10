@@ -22,6 +22,37 @@ const Query = {
     const jobApplications = await prisma.job_apply.findMany();
     return jobApplications;
   },
+  companyJobApplications: async (
+    _: any,
+    { companyId }: { companyId: string },
+    { prisma }: ContextInterface,
+  ) => {
+    const companyJobApplications = await prisma.job_apply.findMany({
+      where: {
+        job: {
+          company: {
+            id: companyId,
+          },
+        },
+      },
+      include: {
+        job: {
+          include: {
+            company: true,
+          },
+        },
+        user: {
+          select: {
+            name: true,
+            email: true,
+            img_url: true,
+          },
+        },
+      },
+    });
+
+    return companyJobApplications;
+  },
 };
 
 const Mutation = {

@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { RedisClient } from "redis";
+import { Client } from "@elastic/elasticsearch";
+import ProducerFactory from "src/utils/kafka";
 import { KeycloakApiClient } from "src/services/keycloak";
 
 export interface AuthUser {
@@ -27,6 +29,8 @@ export interface AuthUser {
 export interface ContextInterface {
   prisma: PrismaClient;
   redis: RedisClient;
+  elastic: Client;
+  kafkaProducer: ProducerFactory;
   authUser: AuthUser;
   keycloak: KeycloakApiClient;
   // no need to authenticate, using for testing api

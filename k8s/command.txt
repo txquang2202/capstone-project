@@ -1,0 +1,24 @@
+docker run -it -v ${PWD}:/work -v ~/.aws:/root/.aws -w /work --entrypoint /bin/sh amazon/aws-cli:2.15.27  
+yum install curl tar gzip sudo
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+
+eksctl create cluster \
+    --name findyourjob \
+    --version 1.29 \
+    --region ap-southeast-1 \
+    --nodegroup-name group-nodes \
+    --node-type t3.medium \
+    --nodes 1 \
+    --nodes-min 1 \
+    --nodes-max 1 \
+    --node-volume-size 40
+
+    eksctl create iamserviceaccount     --name ebs-csi-controller-sa     --namespace kube-system     --cluster findyourjob     --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy     --approve       --role-name AmazonEKS_EBS_CSI_DriverRole_FindYourJob --role-only
+    eksctl create addon --name aws-ebs-csi-driver --cluster findyourjob --service-account-role-arn arn:aws:iam::633589447460:role/AmazonEKS_EBS_CSI_DriverRole_FindYourJob --force
+
+    helm install -f values.yaml findyourjob-keycloak bitnami/keycloak
+
+    openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout auth-tls.key -out auth-tls.crt -subj "/CN=auth.findyourjob.tech/0=Test"
+    kubectl create secret tls auth-tls-secret --key auth-tls.key --cert auth-tls.crt

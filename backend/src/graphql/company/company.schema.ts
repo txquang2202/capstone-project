@@ -37,6 +37,7 @@ const CompanySchema = gql`
     company(id: String!): CompanyPayload
     companyReviews: [CompanyReview!]
     companyReview(id: String!): CompanyReview
+    searchCompany(query: String!, skip: Int, take: Int): [CompanyPayload]
   }
   # ---------------------------------------------------------
   # Input Objects

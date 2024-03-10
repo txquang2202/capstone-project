@@ -31,6 +31,8 @@ const corsOptions: any = {
   },
 };
 
+app.use(express.json());
+
 const loggingMiddleware = (req: any, res: any, next: any) => {
   if (process.env.APOLLO_PLAYGROUND === "false") return next();
 

@@ -1,5 +1,9 @@
 import { job } from "@prisma/client";
+import dotenv from "dotenv";
+import { EVENT } from "../../constants/elasticsearch";
 import { ContextInterface } from "../context";
+import { JobListResponseDto } from "./dtos/JobListResponseDto";
+dotenv.config();
 
 const Query = {
   // Show job by id
@@ -7,10 +11,11 @@ const Query = {
     _: any,
     { id }: { id: string },
     { prisma }: ContextInterface,
-  ): Promise<job | null> => {
+  ): Promise<JobListResponseDto | null> => {
     const job = await prisma.job.findUnique({
       where: { id },
       include: {
+        company: true,
         job_working_location: {
           include: {
             company_location: {
@@ -33,6 +38,7 @@ const Query = {
   ): Promise<job[]> => {
     const jobs = await prisma.job.findMany({
       include: {
+        company: true,
         job_working_location: {
           include: {
             company_location: {
@@ -53,7 +59,7 @@ const Mutation = {
   createJob: async (
     _: any,
     { input }: { input: job },
-    { prisma }: ContextInterface,
+    { prisma, kafkaProducer }: ContextInterface,
   ): Promise<job> => {
     input.date_posted = new Date();
     const companyExist = await prisma.company.findUnique({
@@ -69,13 +75,18 @@ const Mutation = {
     const newJob = await prisma.job.create({
       data: input,
     });
+    kafkaProducer.send(process.env.KAFKA_TOPIC_JOB || "", {
+      index: process.env.ELASTIC_JOB_INDEX || "job",
+      event: EVENT.CREATE,
+      data: newJob,
+    });
     return newJob;
   },
   //updating job by id
   updateJob: async (
     _: any,
     { id, input }: { id: string; input: job },
-    { prisma }: ContextInterface,
+    { prisma, kafkaProducer }: ContextInterface,
   ): Promise<job | null> => {
     const existingJob = await prisma.job.findUnique({
       where: { id },
@@ -89,6 +100,11 @@ const Mutation = {
       where: { id },
       data: input,
     });
+    kafkaProducer.send(process.env.KAFKA_TOPIC_JOB || "", {
+      index: process.env.ELASTIC_JOB_INDEX || "job",
+      event: EVENT.UPDATE,
+      data: updatedJob,
+    });
 
     return updatedJob;
   },
@@ -97,7 +113,7 @@ const Mutation = {
   deleteJob: async (
     _: any,
     { id }: { id: string },
-    { prisma }: ContextInterface,
+    { prisma, kafkaProducer }: ContextInterface,
   ): Promise<job | null> => {
     const existingJob = await prisma.job.findUnique({
       where: { id },
@@ -109,7 +125,11 @@ const Mutation = {
     const deletedJob = await prisma.job.delete({
       where: { id },
     });
-
+    kafkaProducer.send(process.env.KAFKA_TOPIC_JOB || "", {
+      index: process.env.ELASTIC_JOB_INDEX || "job",
+      event: EVENT.DELETE,
+      data: deletedJob,
+    });
     return deletedJob;
   },
 };

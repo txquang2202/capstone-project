@@ -39,6 +39,7 @@ export {
   Star as IconStar,
   ThumbsUp as IconThumbsUp,
   ThumbsDown as IconThumbsDown,
+  Eye as IconEye,
   Settings as IconSettings,
   LogOut as IconLogOut,
   FileText as IconFileText,

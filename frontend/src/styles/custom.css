@@ -908,9 +908,7 @@
   }
 }
 
-
 /* ******************************* COMPANIES PAGE ***************************** */
-
 
 .company-info {
   .logo {
@@ -930,7 +928,7 @@
   }
 }
 
-.companies-landing-container{
+.companies-landing-container {
   .col {
     flex: 1 0 0%;
   }
@@ -950,9 +948,9 @@
     border-bottom: 1px dashed #dedede;
   }
   .itag-sm {
-      padding: 4px 10px;
-      font-size: 12px;
-      gap: 4px;
+    padding: 4px 10px;
+    font-size: 12px;
+    gap: 4px;
   }
   .itag-md {
     padding: 4px 12px;
@@ -960,14 +958,14 @@
     gap: 4px;
   }
   .itag {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      line-height: 1.5;
-      user-select: none;
-      border-radius: 20px;
-      border: 1px solid transparent;
-      cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5;
+    user-select: none;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    cursor: pointer;
   }
   .itag-light {
     color: #414042;
@@ -987,19 +985,23 @@
     height: 500px;
     overflow: hidden;
   }
-  .read-more-container.show{
+  .read-more-container.show {
     height: auto;
     overflow: auto;
   }
   .read-more {
     height: 120px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      #ffffff 100%
+    );
   }
   .box-shadow-normal {
-    box-shadow: 0px 4px 20px rgba(0,0,0,.06);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.06);
   }
   .box-shadow-medium {
-    box-shadow: 0px 6px 32px rgba(0,0,0,.08);
+    box-shadow: 0px 6px 32px rgba(0, 0, 0, 0.08);
   }
   .location {
     border: 1px solid transparent;
@@ -1040,7 +1042,7 @@
     border-top: 8px solid #ff9119;
   }
   .ilabel::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 100%;
     right: 0%;
@@ -1058,15 +1060,16 @@
   }
   .itabs .tab-link {
     padding: 24px 0;
-    opacity: .7;
+    opacity: 0.7;
     color: #121212;
     font-weight: 600;
     border-bottom: 2px solid transparent;
   }
-  .itabs .tab-link:hover, .itabs .tab-link:focus {
+  .itabs .tab-link:hover,
+  .itabs .tab-link:focus {
     opacity: 1;
     border-color: #414042;
-    transition: .3s;
+    transition: 0.3s;
   }
   .itabs .tab-link.active {
     opacity: 1;
@@ -1082,7 +1085,7 @@
     color: #121212;
     background-color: #dedede;
   }
-  .itabs .tab-link.active>.badge-counter {
+  .itabs .tab-link.active > .badge-counter {
     opacity: 1;
     color: #fff;
     background-color: #ed1b2f;
@@ -1123,7 +1126,7 @@
 
 @media (min-width: 768px) {
   .company-info {
-    .logo{
+    .logo {
       width: 160px;
       height: 160px;
     }
@@ -1180,4 +1183,26 @@
       width: 200px;
     }
   }
+}
+
+.gradient-light-grey-background {
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #f7f7f7;
+  z-index: -1;
+}
+
+.gradient-light-grey-background:before {
+  content: ' ';
+  width: 120vw;
+  position: absolute;
+  left: -12%;
+  top: 0;
+  height: 400px;
+  background: linear-gradient(270.08deg, #54151c 7.4%, #121212 54.81%);
+  border-radius: 0 0 70% 50%;
 }

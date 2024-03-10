@@ -1,0 +1,59 @@
+:root {
+  --radio-size: 24px;
+  --radio-size-hover: 48px;
+  --radio-border-size: 2px;
+  --radio-circle-size: calc(var(--radio-size) / 2);
+}
+
+.it-radio {
+  &[type='radio'] {
+    @apply border-dark-grey hover:before:bg-dark-grey relative z-[2] h-[var(--radio-size)] w-[var(--radio-size)] cursor-pointer appearance-none border-2 text-white outline-0 ring-offset-0 transition-all hover:before:absolute hover:before:left-1/2 hover:before:top-1/2 hover:before:h-[var(--radio-size-hover)] hover:before:w-[var(--radio-size-hover)] hover:before:-translate-x-1/2 hover:before:-translate-y-1/2 hover:before:rounded-full hover:before:opacity-20 focus:ring-0;
+
+    &:checked {
+      @apply border-primary hover:border-primary focus:border-primary after:bg-primary hover:before:bg-primary text-white hover:before:opacity-[.08];
+      animation: checkbox-animation 0.2s ease-in-out;
+    }
+
+    &:disabled {
+      @apply checked:border-silver-grey;
+    }
+
+    &:focus {
+      --tw-ring-offset-width: unset;
+    }
+
+    &:disabled,
+    &:checked:disabled {
+      @apply border-silver-grey hover:border-silver-grey checked:after:bg-disabled-color cursor-not-allowed;
+    }
+
+    &::after {
+      @apply absolute left-1/2 top-1/2 h-[var(--radio-circle-size)] w-[var(--radio-circle-size)] -translate-x-1/2 -translate-y-1/2 rounded-full content-[''];
+    }
+  }
+
+  &.large {
+    --radio-size: 24px;
+    --radio-circle-size: calc(var(24px) / 2);
+  }
+
+  &.medium {
+    --radio-circle-size: calc(var(--radio-size) / 2 + 2);
+  }
+
+  &.small {
+    --radio-size: 18px;
+  }
+}
+
+@keyframes checkbox-animation {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
