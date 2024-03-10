@@ -1,7 +1,8 @@
 import { job } from "@prisma/client";
-import { ContextInterface } from "../context";
-import { EVENT } from "../../constants/elasticsearch";
 import dotenv from "dotenv";
+import { EVENT } from "../../constants/elasticsearch";
+import { ContextInterface } from "../context";
+import { JobListResponseDto } from "./dtos/JobListResponseDto";
 dotenv.config();
 
 const Query = {
@@ -10,10 +11,11 @@ const Query = {
     _: any,
     { id }: { id: string },
     { prisma }: ContextInterface,
-  ): Promise<job | null> => {
+  ): Promise<JobListResponseDto | null> => {
     const job = await prisma.job.findUnique({
       where: { id },
       include: {
+        company: true,
         job_working_location: {
           include: {
             company_location: {
@@ -36,6 +38,7 @@ const Query = {
   ): Promise<job[]> => {
     const jobs = await prisma.job.findMany({
       include: {
+        company: true,
         job_working_location: {
           include: {
             company_location: {

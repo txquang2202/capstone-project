@@ -22,6 +22,10 @@ spec:
         - name: findyourjob-api
           image: ghcr.io/nguyenphucbao68/findyourjob-api:latest
           # image: findyourjob-api:latest
+          command:
+            - /bin/sh
+            - -c
+            - yarn migrate:db --accept-data-loss && dumb-init node dist/server.js
           env:
             - name: API_PORT
               value: '4000'
@@ -38,7 +42,7 @@ spec:
             - name: ENABLE_CORS
               value: 'false'
             - name: SERVER_WHITE_LIST
-              value: 'http://findyourjob-admin-svc.default.svc.cluster.local:3000'
+              value: ''
             - name: APOLLO_PLAYGROUND
               value: 'false'
             - name: APOLLO_INTROSPECTION
@@ -113,7 +117,7 @@ spec:
   ports:
     - port: 4000
       targetPort: 4000
-      nodePort: 30001
+      # nodePort: 30001
 
 ---
 apiVersion: autoscaling/v1
