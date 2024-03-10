@@ -1,5 +1,11 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  StorageReference,
+  uploadBytes,
+} from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,21 +17,31 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 
-const storage = getStorage();
-const storageRef = ref(storage, 'some-child');
+const storage = getStorage(app, `gs://${firebaseConfig.storageBucket}`);
 
-// 'file' comes from the Blob or File API
-const uploadFile = (file: Blob) =>
-  uploadBytes(storageRef, file)
-    .then((snapshot) => {
+const storageRef = (url: string) => ref(storage, url);
+
+const uploadFile = (file: Blob, storageRef: StorageReference) => {
+  return uploadBytes(storageRef, file)
+    .then((res) => {
       console.log('Uploaded a blob or file!');
-      return snapshot;
+      return res;
     })
-    .catch(() => {
+    .catch((e) => {
+      console.log('Upload fail!', e);
       return null;
     });
+};
 
-export { app, uploadFile };
+const getUrl = (storageRef: StorageReference) => {
+  return getDownloadURL(storageRef)
+    .then((url: string) => {
+      return url;
+      // Insert url into an <img> tag to "download"
+    })
+    .catch(() => '');
+};
+
+export { storage, uploadFile, storageRef, getUrl };

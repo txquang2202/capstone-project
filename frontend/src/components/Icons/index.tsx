@@ -40,4 +40,11 @@ export {
   ThumbsUp as IconThumbsUp,
   ThumbsDown as IconThumbsDown,
   Eye as IconEye,
+  Settings as IconSettings,
+  LogOut as IconLogOut,
+  FileText as IconFileText,
+  CheckCircle as IconCheckCircle,
+  Loader as IconLoader,
+  Users as IconUsers,
+  Menu as IconMenu,
 } from 'react-feather';

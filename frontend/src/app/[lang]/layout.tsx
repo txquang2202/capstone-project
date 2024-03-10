@@ -4,14 +4,13 @@ import { Lexend } from 'next/font/google';
 import { headers } from 'next/headers';
 import { type ReactNode } from 'react';
 
+import ApolloWrapper from '@/components/Layout/ApolloWrapper';
+import SessionProviderWrapper from '@/components/Layout/SessionProviderWrapper';
 import { getRouteByPath } from '@/configs/router';
 import { DEFAULT_LOCALE, siteConfig } from '@/constant/config';
 
-import '@/styles/globals.css';
 import '@mantine/core/styles.css';
-
-import { createApolloClient } from '@/lib/apolloClient';
-import { ApolloWrapper } from '@/lib/apolloProvider';
+import '@/styles/globals.css';
 
 export async function generateMetadata({
   params,
@@ -77,20 +76,21 @@ export default function RootLayout({
   children: ReactNode;
   params: { lang: string };
 }) {
-  const _client = createApolloClient();
   return (
-    <html lang={params.lang} className={font.className}>
-      <body>
-        <ApolloWrapper>
-          <MantineProvider
-            theme={{
-              ...font.style,
-            }}
-          >
-            {children}
-          </MantineProvider>
-        </ApolloWrapper>
-      </body>
-    </html>
+    <SessionProviderWrapper>
+      <html lang={params.lang} className={font.className}>
+        <body>
+          <ApolloWrapper>
+            <MantineProvider
+              theme={{
+                ...font.style,
+              }}
+            >
+              {children}
+            </MantineProvider>
+          </ApolloWrapper>
+        </body>
+      </html>
+    </SessionProviderWrapper>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useSuspenseQuery } from '@apollo/client';
+import { useMutation, useSuspenseQuery } from '@apollo/client';
 import { Textarea } from '@mantine/core';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
@@ -11,12 +11,16 @@ import { IconChevronLeft, IconEye } from '@/components/Icons';
 import { InputBox } from '@/components/InputBox';
 import { Radio, RadioGroup } from '@/components/Radio';
 import {
+  APPLY_JOBS,
+  ApplyJobResponse,
+  ApplyJobVariable,
   GET_JOB,
   type GetJobResponse,
   type GetJobVariable,
 } from '@/graphql/job';
 import { useForm } from '@/hooks/useForm';
 import { cn } from '@/lib/classNames';
+import { upload } from '@/lib/file';
 
 type Form = {
   cv: string;
@@ -27,10 +31,15 @@ const ApplyJob = () => {
   const router = useRouter();
   const params = useParams();
   const [value, setValue] = useState('default');
-  const { setError } = useForm<Form>({
-    defaultState: { cv: '', coverLetter: '' },
-    config: { cv: { required: { value: true, message: 'requiredText' } } },
-  });
+  const [mutate, { loading }] = useMutation<ApplyJobResponse, ApplyJobVariable>(
+    APPLY_JOBS
+  );
+
+  const { fields, error, setError, onChangeField, handleSubmit } =
+    useForm<Form>({
+      defaultState: { cv: '', coverLetter: '' },
+      config: { cv: { required: { value: true, message: 'requiredText' } } },
+    });
 
   const {
     data: { job },
@@ -40,11 +49,26 @@ const ApplyJob = () => {
     },
   });
 
-  const uploadCv = (e: ChangeEvent<HTMLInputElement>) => {
+  const uploadCv = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file && file.size > 3145728) {
+    if (!file) return;
+    if (file.size > 3145728) {
       setError((prev) => ({ ...prev, cv: 'maxSizeText' }));
+    } else {
+      const url = await upload(file);
+      onChangeField('cv', url as string);
     }
+  };
+
+  const onSubmit = () => {
+    mutate({
+      variables: {
+        job_id: job.id,
+        cv: fields.cv,
+        cover_letter: fields.coverLetter || '',
+        user_id: 'a50efdd4-03d1-4885-bde0-8f6d337b6b20',
+      },
+    });
   };
 
   return (
@@ -112,6 +136,9 @@ const ApplyJob = () => {
                       accept='application/doc,application/docx,application/pdf'
                     />
                   </div>
+                  {error.cv && (
+                    <div className='text-primary mt-1'>Can't be blank</div>
+                  )}
                   <div className='text-dark-grey mt-1 text-sm'>
                     We accept .doc .docx, .pdf files, no password protected, up
                     to 3MB
@@ -133,6 +160,7 @@ const ApplyJob = () => {
               candidate?
             </div>
             <Textarea
+              onChange={(e) => onChangeField('coverLetter', e.target.value)}
               placeholder='Details and specific examples will make your application stronger...'
               classNames={{
                 input: 'text-base h-[120px]',
@@ -142,7 +170,12 @@ const ApplyJob = () => {
               500 of 500 characters remaining
             </div>
           </div>
-          <Button className='w-full' size='large'>
+          <Button
+            loading={loading}
+            onClick={() => handleSubmit(onSubmit)}
+            className='w-full'
+            size='large'
+          >
             Send my CV
           </Button>
         </div>

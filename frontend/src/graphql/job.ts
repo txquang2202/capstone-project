@@ -47,6 +47,15 @@ export const GET_JOBS = gql`
   }
 `;
 
+export type ApplyJobResponse = DataResponse<'job', Job>;
+export type ApplyJobriable = {
+  cover_letter: string;
+  cv: string;
+  id: string;
+  job_id: string;
+  user_id: string;
+};
+
 export const APPLY_JOBS = gql`
   mutation Mutation($input: ApplyJobInput!) {
     applyJob(input: $input) {

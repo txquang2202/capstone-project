@@ -86,7 +86,6 @@ model follow {
 
 model job {
   name                      String?                @db.VarChar
-  salary                    Int?
   country                   String?                @db.VarChar
   skills                    String?                @db.VarChar
   working_type              String?                @db.VarChar
@@ -98,6 +97,10 @@ model job {
   id                        String                 @id(map: "job_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   company_id                String                 @db.Uuid
   is_closed                 Boolean?               @default(false)
+  hide_salary               Boolean?               @default(false)
+  salary_from               Int?
+  salary_to                 Int?
+  unit                      String?                @db.VarChar
   company                   company                @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_company_fk")
   job_apply                 job_apply[]
   job_saved                 job_saved[]
@@ -105,13 +108,15 @@ model job {
 }
 
 model job_apply {
-  cv           String? @db.VarChar
-  cover_letter String? @db.VarChar
-  id           String  @id(map: "job_apply_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user_id      String  @db.Uuid
-  job_id       String  @db.Uuid
-  job          job     @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_apply_job_fk")
-  user         user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_apply_user_fk")
+  cv           String?   @db.VarChar
+  cover_letter String?   @db.VarChar
+  id           String    @id(map: "job_apply_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id      String    @db.Uuid
+  job_id       String    @db.Uuid
+  status       String?   @default("Submitting") @db.VarChar
+  date_apply   DateTime? @default(dbgenerated("CURRENT_DATE")) @db.Date
+  job          job       @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_apply_job_fk")
+  user         user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_apply_user_fk")
 }
 
 model job_preferences {

@@ -1,0 +1,16 @@
+docker run -it -v ${PWD}:/work -v ~/.aws:/root/.aws -w /work --entrypoint /bin/sh amazon/aws-cli:2.15.27  
+yum install curl tar gzip sudo
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+
+eksctl create cluster \
+    --name findyourjob \
+    --version 1.29 \
+    --region ap-southeast-1 \
+    --nodegroup-name group-nodes \
+    --node-type t3.medium \
+    --nodes 1 \
+    --nodes-min 1 \
+    --nodes-max 1 \
+    --node-volume-size 40

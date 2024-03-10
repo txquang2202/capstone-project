@@ -29,13 +29,12 @@ const Query = {
 };
 
 const Blog = {
-  user: async (parent: blog, _: any, { prisma }: ContextInterface) => {
-    const user = await prisma.user.findUnique({
-      where: { id: parent.user_id },
-    });
-
-    return user;
-  },
+  // user: async (parent: blog, _: any, { prisma }: ContextInterface) => {
+  //   const user = await prisma.user.findUnique({
+  //     where: { id: parent.user_id },
+  //   });
+  //   return user;
+  // },
 };
 
 const Mutation = {
