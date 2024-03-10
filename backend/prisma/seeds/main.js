@@ -33,7 +33,6 @@ const apply = require("./mocks/company/job/apply.json");
 /* eslint-disable camelcase */
 /* eslint-disable no-console */
 const { PrismaClient } = require("@prisma/client");
-
 const prisma = new PrismaClient();
 
 async function main() {

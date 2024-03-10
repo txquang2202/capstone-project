@@ -73,6 +73,7 @@ const JobSchema = gql`
   extend type Query {
     jobApplications: [JobApplication!]
     jobApplication(id: ID!): JobApplication
+    searchJob(query: String!, skip: Int, take: Int): [JobPayLoad]
     companyJobApplications(companyId: ID!): [JobApplication!]!
     job(id: ID!): JobPayLoad
 
