@@ -124,6 +124,12 @@ const createCompanyIndex = async () => {
 // Call the function to create the company index
 createCompanyIndex();
 
+// Register cleanup logic when the process exits
+process.on('exit', () => {
+  console.log('Exiting process. Closing Elasticsearch client.');
+  client.close(); // Close the Elasticsearch client
+});
+
 export default client;
 
 // export const createIndex = async (indexName: string) => {

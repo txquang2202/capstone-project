@@ -6,13 +6,12 @@ dotenv.config();
 
 const Query = {
   //Show list of job
-  search: async (
+  searchJob: async (
     _: any,
-    _args: any,
+    { query, skip = 0, take = 10 }: { query: string, skip: number; take: number },
     { prisma, elastic }: ContextInterface,
   ): Promise<job[]> => {
     const logger = new Logger();
-    const { query } = _args;
     logger.info(`searching for jobs with query: ${query}`);
     try {
       if (!query || query === "") {
@@ -27,6 +26,8 @@ const Query = {
               fields: ["name", "skills"],
             },
           },
+          from: skip,
+          size: take,
         },
       });
       logger.info(`search result: ${JSON.stringify(result)}`);
