@@ -97,13 +97,11 @@ const Mutation = {
       where: { id },
       data: input,
     });
-    kafkaProducer.sendBatch(process.env.KAFKA_TOPIC_JOB || "", [
-      {
-        index: process.env.ELASTIC_JOB_INDEX || "job",
-        event: EVENT.UPDATE,
-        data: updatedJob,
-      },
-    ]);
+    kafkaProducer.send(process.env.KAFKA_TOPIC_JOB || "", {
+      index: process.env.ELASTIC_JOB_INDEX || "job",
+      event: EVENT.UPDATE,
+      data: updatedJob,
+    });
 
     return updatedJob;
   },
@@ -124,13 +122,11 @@ const Mutation = {
     const deletedJob = await prisma.job.delete({
       where: { id },
     });
-    kafkaProducer.sendBatch(process.env.KAFKA_TOPIC_JOB || "", [
-      {
-        index: process.env.ELASTIC_JOB_INDEX || "job",
-        event: EVENT.DELETE,
-        data: deletedJob,
-      },
-    ]);
+    kafkaProducer.send(process.env.KAFKA_TOPIC_JOB || "", {
+      index: process.env.ELASTIC_JOB_INDEX || "job",
+      event: EVENT.DELETE,
+      data: deletedJob,
+    });
     return deletedJob;
   },
 };

@@ -4,8 +4,7 @@
   "description": "Nodejs, TypeScript, Kafkajs and Express",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon -r tsconfig-paths/register src/app.ts",
+    "start": "nodemon -r tsconfig-paths/register src/app.ts",
     "lint": "eslint --fix --ext .ts src/",
     "format": "prettier --write src/**/*.ts"
   },

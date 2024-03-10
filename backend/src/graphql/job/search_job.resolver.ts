@@ -8,7 +8,11 @@ const Query = {
   //Show list of job
   searchJob: async (
     _: any,
-    { query, skip = 0, take = 10 }: { query: string, skip: number; take: number },
+    {
+      query,
+      skip = 0,
+      take = 10,
+    }: { query: string; skip: number; take: number },
     { prisma, elastic }: ContextInterface,
   ): Promise<job[]> => {
     const logger = new Logger();

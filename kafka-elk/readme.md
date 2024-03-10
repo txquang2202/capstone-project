@@ -15,16 +15,28 @@ In order to run this container you'll need docker installed.
 * `HOST_IP` - Your ipaddress network 
 
 ### Usage
-First, Check IP Address in your network and set environment variable IPADDRESS and run command line:
+#### 1. Run command line:
 ```sh
 cd kafka-elk
 ```
-Then, run this command to build docker.
+#### 2. First, Check IP Address in your network and set .env `HOST_IP`
+  ```
+  HOST_IP=${your_ip_addres}
+  ```
+#### 3. Then, run this command to build docker.
 ```sh
 docker-compose up -d
 ```
+#### 4. Install dependencies
+```sh
+npm install
+```
+#### 5. Waiting start kafka server and run 
+```sh
+npm run start
+```
 
-#### Volumes
+### Volumes
 
 * `/logstash/config/` - Configure logstash
 * `/logstash/pipeline/` - Data pipeline logstash

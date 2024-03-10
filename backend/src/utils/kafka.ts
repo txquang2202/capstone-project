@@ -65,20 +65,8 @@ export default class ProducerFactory {
       });
     } catch (error) {
       this.logger.error("Error sending message: ", error);
-      await this.shutdown();
     } finally {
-      // Handle graceful shutdown
-      process.on("SIGINT", async () => {
-        console.log("Received SIGINT. Shutting down gracefully...");
-        await this.shutdown();
-        process.exit(0);
-      });
-
-      process.on("SIGTERM", async () => {
-        console.log("Received SIGTERM. Shutting down gracefully...");
-        await this.shutdown();
-        process.exit(0);
-      });
+      await this.shutdown();
     }
   }
 
@@ -107,6 +95,8 @@ export default class ProducerFactory {
       await this.shutdown();
     } catch (error) {
       this.logger.error("Error sending batch: ", error);
+    } finally {
+      await this.shutdown();
     }
   }
 

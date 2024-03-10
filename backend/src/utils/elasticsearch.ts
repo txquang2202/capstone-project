@@ -125,8 +125,8 @@ const createCompanyIndex = async () => {
 createCompanyIndex();
 
 // Register cleanup logic when the process exits
-process.on('exit', () => {
-  console.log('Exiting process. Closing Elasticsearch client.');
+process.on("exit", () => {
+  console.log("Exiting process. Closing Elasticsearch client.");
   client.close(); // Close the Elasticsearch client
 });
 
