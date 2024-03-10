@@ -30,15 +30,16 @@ const JobSchema = gql`
     skill_demand: String!
     why_you_love_working_here: String!
     date_posted: Date!
-    date_apply: Date!
+    # date_apply: Date!
     is_closed: Boolean!
-    job_working_location: [JobWorkingLocation!]!
+    job_working_location: [JobWorkingLocation!]
   }
   #job_apply_description
   type Applicant {
     id: ID!
     name: String!
     email: String!
+    img_url: String!
   }
   type Job {
     id: ID!
@@ -53,6 +54,7 @@ const JobSchema = gql`
     job: Job!
     user: Applicant!
   }
+  #applying_job
   type JobApplying {
     id: ID!
     cv: String!
