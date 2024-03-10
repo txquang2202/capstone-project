@@ -30,7 +30,9 @@ const JobSchema = gql`
     skill_demand: String!
     why_you_love_working_here: String!
     date_posted: Date!
-    # date_apply: Date!
+    company_id: ID!
+    company: CompanyPayload
+    date_apply: Date!
     is_closed: Boolean!
     job_working_location: [JobWorkingLocation!]
   }

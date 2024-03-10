@@ -177,6 +177,7 @@ const useForm = <T extends FieldValues>({
     setFields,
     reset,
     handleSubmit,
+    setError,
   };
 };
 
