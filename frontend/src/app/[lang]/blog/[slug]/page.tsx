@@ -1,6 +1,7 @@
 /**
  * DEMO SERVER COMPONENT - FETCH DATA
  */
+import Head from 'next/head';
 import Link from 'next/link';
 
 import Author from '@/components/DetailBlogPage/Author';
@@ -14,12 +15,12 @@ import { getClient } from '@/lib/client';
 export default async function DetailPage({
   params,
 }: {
-  params: { id: string };
+  params: { slug: string };
 }) {
   const tags = ['Dành cho nhà tuyển dụng IT', 'Xu hướng tuyển dụng IT'];
-  const id = params.id;
+  const slug = params.slug;
 
-  if (!id) {
+  if (!slug) {
     return null;
   }
 
@@ -28,12 +29,15 @@ export default async function DetailPage({
   } = await getClient().query({
     query: GET_BLOG,
     variables: {
-      id: parseInt(id),
+      slug,
     },
   });
 
   return (
     <main>
+      <Head>
+        <title>{blog.title}</title>
+      </Head>
       <section className='scroll-smooth bg-[#f2f2f2] focus:scroll-auto'>
         {/* tags */}
         <div className='container-xxl px-4 pt-4 sm:px-6 lg:px-8'>

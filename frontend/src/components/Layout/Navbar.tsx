@@ -73,22 +73,22 @@ const Header = () => {
           <div className='navbar-collapse'>
             <ul className='navbar-nav me-auto items-center gap-2'>
               <li className='nav-item main-menu relative'>
-                <a href='/#' className='flex items-center px-2'>
+                <Link href='/it-jobs/all' className='flex items-center px-2'>
                   Việc Làm IT
                   <IconChevronDown />
-                </a>
+                </Link>
               </li>
               <li className='nav-item main-menu relative'>
-                <a href='/#' className='flex items-center px-2'>
+                <Link href='/companies' className='flex items-center px-2'>
                   Top Công ty IT
                   <IconChevronDown />
-                </a>
+                </Link>
               </li>
               <li className='nav-item main-menu relative'>
-                <a href='/blog' className='flex items-center px-2'>
+                <Link href='/blog' className='flex items-center px-2'>
                   Blog
                   <IconChevronDown />
-                </a>
+                </Link>
               </li>
             </ul>
 

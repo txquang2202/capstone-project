@@ -21,7 +21,7 @@ export default function ListLatest() {
           title='Spring là gì? Spring Framework là gì?'
           description='Spring Framework giúp lập trình viên dễ dàng tạo các ứng dụng Java Enterprise (Java EE) và cung cấp mọi thứ bạn cần để sử dụng ngôn ngữ Java. Là mã nguồn mở, Spring có cộng đồng rộng lớn và…'
           tags={['Chuyên môn IT']}
-          url='#!'
+          url='/blog/the-evolution-of-programming-paradigms'
           readTime='15 phút'
         />
         <SpringCard
@@ -29,7 +29,7 @@ export default function ListLatest() {
           title='Bí quyết xây dựng quy trình tuyển dụng giúp tăng tỷ lệ thành công'
           description='Việc xây dựng một quy trình tuyển dụng chỉ dựa vào nhu cầu tìm kiếm nhân tài của công ty mà không cân nhắc hành vi tìm kiếm và ứng tuyển của ứng viên IT thường sẽ xa rời thực…'
           tags={['Dành cho Nhà tuyển dụng IT', 'Xu hướng tuyển dụng IT']}
-          url='/blog/detail-blog'
+          url='/blog/the-evolution-of-programming-paradigms'
           readTime='7 phút'
         />
         <SpringCard
@@ -37,7 +37,7 @@ export default function ListLatest() {
           title='Những điều cần biết về jQuery – Thư viện Javascript hàng đầu'
           description='jQuery là gì? Trong danh sách các công cụ và thư viện cho lập trình viên, jQuery nổi bật là một thư viện JavaScript mạnh mẽ và linh hoạt, được sử dụng rộng rãi trong cộng đồng phát triển web….'
           tags={['Chuyên môn IT', 'Tài liệu JS']}
-          url='#!'
+          url='/blog/the-evolution-of-programming-paradigms'
           readTime='10 phút'
         />
       </div>

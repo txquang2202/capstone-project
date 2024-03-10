@@ -11,8 +11,8 @@ export const GET_BLOGS = gql`
 `;
 
 export const GET_BLOG = gql`
-  query GetBlog($id: ID!) {
-    blog(id: $id) {
+  query GetBlog($slug: String!) {
+    blog(slug: $slug) {
       title
       id
       content

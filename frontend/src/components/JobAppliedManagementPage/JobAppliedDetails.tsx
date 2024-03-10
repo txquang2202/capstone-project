@@ -15,6 +15,7 @@ interface JobAppliedDetailsProps {
   applicationDate: string;
   status: string;
   coverLetter: string;
+  nameCV: string;
 }
 
 const JobAppliedDetails: React.FC<JobAppliedDetailsProps> = ({
@@ -25,6 +26,7 @@ const JobAppliedDetails: React.FC<JobAppliedDetailsProps> = ({
   applicationDate,
   status,
   coverLetter,
+  nameCV,
 }) => {
   const { t } = useLocale();
 
@@ -74,7 +76,7 @@ const JobAppliedDetails: React.FC<JobAppliedDetailsProps> = ({
         <div>
           <p className='mt-10 text-[20px] font-[600]'>{t('Resume')}</p>
           <div className='mt-4 space-y-2'>
-            <PDFDownloader capacity='10 MB' fileName='My CV' />
+            <PDFDownloader capacity='10 MB' fileName={nameCV} />
           </div>
         </div>
         {/* Button */}
