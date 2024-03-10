@@ -1,0 +1,67 @@
+image:
+  registry: docker.io
+  repository: bitnami/postgresql
+  tag: 16.2.0-debian-12-r6
+  ## Specify a imagePullPolicy
+  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: IfNotPresent
+  ## Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ## Example:
+  ## pullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  pullSecrets: []
+  ## Set to true if you would like to see extra information on logs
+  ## It turns BASH and/or NAMI debugging in the image
+  ##
+  debug: false
+
+architecture: replication
+
+primary:
+  service:
+    type: NodePort
+    nodePorts:
+      postgresql: 30075
+
+auth:
+  ## @param auth.enablePostgresUser Assign a password to the "postgres" admin user. Otherwise, remote access will be blocked for this user
+  ##
+  enablePostgresUser: true
+  ## @param auth.postgresPassword Password for the "postgres" admin user
+  ##
+  # postgresPassword: '123456'
+  ## @param auth.username Name for a custom user to create
+  ##
+  username: ''
+  ## @param auth.password Password for the custom user to create
+  ##
+  password: ''
+  ## @param auth.database Name for a custom database to create
+  ##
+  database: 'keycloak'
+  ## @param auth.replicationUsername Name of the replication user
+  ##
+  replicationUsername: repl_user
+  ## @param auth.replicationPassword Password for the replication user
+  ##
+  # replicationPassword: '123456'
+  ## @param auth.existingSecret Name of existing secret to use for PostgreSQL credentials
+  ## `auth.postgresPassword`, `auth.password`, and `auth.replicationPassword` will be ignored and picked up from this secret
+  ## The secret must contain the keys `postgres-password` (which is the password for "postgres" admin user),
+  ## `password` (which is the password for the custom user to create when `auth.username` is set),
+  ## and `replication-password` (which is the password for replication user).
+  ## The secret might also contains the key `ldap-password` if LDAP is enabled. `ldap.bind_password` will be ignored and
+  ## picked from this secret in this case.
+  ## The value is evaluated as a template.
+  ##
+  existingSecret: 'findyourjob-secrets'
+  ## @param auth.usePasswordFiles Mount credentials as a files instead of using an environment variable
+  ##
+  # usePasswordFiles: false
+#
+
