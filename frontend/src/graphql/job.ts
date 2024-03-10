@@ -49,10 +49,9 @@ export const GET_JOBS = gql`
 `;
 
 export type ApplyJobResponse = DataResponse<'job', Job>;
-export type ApplyJobriable = {
+export type ApplyJobVariable = {
   cover_letter: string;
   cv: string;
-  id: string;
   job_id: string;
   user_id: string;
 };

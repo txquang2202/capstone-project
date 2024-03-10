@@ -100,7 +100,6 @@ export default function Page() {
                 isHot={!!(index % 2)}
                 selected={selected === index}
                 onSelect={() => setSelected(index)}
-                unit='VND'
                 {...job}
               />
             ))}
