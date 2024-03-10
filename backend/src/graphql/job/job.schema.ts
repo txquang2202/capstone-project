@@ -30,15 +30,16 @@ const JobSchema = gql`
     skill_demand: String!
     why_you_love_working_here: String!
     date_posted: Date!
-    date_apply: Date!
+    # date_apply: Date!
     is_closed: Boolean!
-    job_working_location: [JobWorkingLocation!]!
+    job_working_location: [JobWorkingLocation!]
   }
   #job_apply_description
   type Applicant {
     id: ID!
     name: String!
     email: String!
+    img_url: String!
   }
   type Job {
     id: ID!
@@ -53,6 +54,7 @@ const JobSchema = gql`
     job: Job!
     user: Applicant!
   }
+  #applying_job
   type JobApplying {
     id: ID!
     cv: String!
@@ -62,27 +64,11 @@ const JobSchema = gql`
     job_id: ID!
     user_id: ID!
   }
-  type Job {
-    id: String
-    company_id: String
-    working_location: Int
-    name: String
-    salary: Int
-    country: String
-    skills: String
-    working_type: String
-    overview: String
-    top_3_reason: String
-    job_description: String
-    skill_demand: String
-    why_you_love_working_here: String
-  }
 
   # ---------------------------------------------------------
   # Queries
   # ---------------------------------------------------------
   extend type Query {
-    jobApplicaitons: [JobApplication!]
     jobApplications: [JobApplication!]
     jobApplication(id: ID!): JobApplication
     searchJob(query: String!, skip: Int, take: Int): [JobPayLoad]

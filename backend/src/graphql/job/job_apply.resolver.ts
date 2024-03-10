@@ -45,6 +45,7 @@ const Query = {
           select: {
             name: true,
             email: true,
+            img_url: true,
           },
         },
       },

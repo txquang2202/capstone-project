@@ -6,6 +6,8 @@ import search_jobResolver from "./job/search_job.resolver";
 import blogResolver from "./blog/blog.resolver";
 import jobResolver from "./job/job.resolver";
 import search_companyResolver from "./company/search_company.resolver";
+import uploadResolver from "./upload/upload.resolver";
+import mailerResolver from "./mailer/mailer.resolver";
 
 export default [
   userResolver,
@@ -17,4 +19,6 @@ export default [
   search_companyResolver,
   blogResolver,
   jobResolver,
+  uploadResolver,
+  mailerResolver,
 ];
