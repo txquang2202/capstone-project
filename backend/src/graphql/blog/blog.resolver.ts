@@ -5,7 +5,7 @@ const Query = {
   // get blog by id
   blog: async (
     _: any,
-    { id }: { id: number },
+    { id }: { id: string },
     { prisma }: ContextInterface,
   ): Promise<blog | null> => {
     const blog = await prisma.blog.findUnique({

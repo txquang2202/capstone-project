@@ -7,10 +7,8 @@ import { type ReactNode } from 'react';
 import { getRouteByPath } from '@/configs/router';
 import { DEFAULT_LOCALE, siteConfig } from '@/constant/config';
 
-import '@mantine/core/styles.css';
 import '@/styles/globals.css';
-
-import { ApolloProvider } from '@apollo/client';
+import '@mantine/core/styles.css';
 
 import { createApolloClient } from '@/lib/apolloClient';
 import { ApolloWrapper } from '@/lib/apolloProvider';
@@ -79,12 +77,18 @@ export default function RootLayout({
   children: ReactNode;
   params: { lang: string };
 }) {
-  const client = createApolloClient();
+  const _client = createApolloClient();
   return (
     <html lang={params.lang} className={font.className}>
       <body>
         <ApolloWrapper>
-          <MantineProvider>{children}</MantineProvider>
+          <MantineProvider
+            theme={{
+              ...font.style,
+            }}
+          >
+            {children}
+          </MantineProvider>
         </ApolloWrapper>
       </body>
     </html>

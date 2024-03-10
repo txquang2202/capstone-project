@@ -1,5 +1,6 @@
 import { job } from "@prisma/client";
 import { ContextInterface } from "../context";
+import { JobListResponseDto } from "./dtos/JobListResponseDto";
 
 const Query = {
   //show job by id
@@ -7,9 +8,10 @@ const Query = {
     _: any,
     { id }: { id: string },
     { prisma }: ContextInterface,
-  ): Promise<job | null> => {
+  ): Promise<JobListResponseDto | null> => {
     const job = await prisma.job.findUnique({
       where: { id },
+      include: { company: true },
     });
     return job;
   },
@@ -18,8 +20,8 @@ const Query = {
     _: any,
     _args: any,
     { prisma }: ContextInterface,
-  ): Promise<job[]> => {
-    const jobs = await prisma.job.findMany();
+  ): Promise<JobListResponseDto[]> => {
+    const jobs = await prisma.job.findMany({ include: { company: true } });
     return jobs;
   },
 };

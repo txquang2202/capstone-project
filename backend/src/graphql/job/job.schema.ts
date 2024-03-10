@@ -17,6 +17,7 @@ const JobSchema = gql`
     why_you_love_working_here: String!
     date_posted: Date!
     company_id: ID!
+    company: CompanyPayload
     is_closed: Boolean!
   }
   type JobApplication {

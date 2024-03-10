@@ -39,4 +39,5 @@ export {
   Star as IconStar,
   ThumbsUp as IconThumbsUp,
   ThumbsDown as IconThumbsDown,
+  Eye as IconEye,
 } from 'react-feather';
