@@ -10,11 +10,11 @@ import { applyMiddleware } from "graphql-middleware";
 import { rateLimitDirective } from "graphql-rate-limit-directive";
 import jwt from "jsonwebtoken";
 import elastic from "./elasticsearch";
-import kafka from "./kafka";
 import { AuthUser } from "src/graphql/context";
 import { executor } from "./executor";
 import Logger from "./logger";
 import prisma from "./prisma";
+import ProducerFactory from "./kafka";
 require("dotenv").config();
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 
@@ -34,6 +34,18 @@ const checkAuthorization = async (token: string) => {
     return decodedToken;
   } catch (error) {
     return false;
+  }
+};
+const initKafkaProducer = async () => {
+  const kafkaProducer = new ProducerFactory();
+  try {
+    // await kafkaProducer.start();
+    // await kafkaProducer.healthCheck();
+    // await kafkaProducer.shutdown();
+    return kafkaProducer;
+  } catch (error) {
+    console.error("Failed to initialize Kafka producer:", error);
+    return null; // Return null or any default value to indicate failure
   }
 };
 
@@ -85,7 +97,16 @@ export const createApolloServer = (
         }
       }
       const keycloak = keycloakApiClient;
-      return Object.assign({ isRoot, authUser, prisma, keycloak, elastic, kafka });
+      const kafkaProducer = await initKafkaProducer();
+
+      return Object.assign({
+        isRoot,
+        authUser,
+        prisma,
+        keycloak,
+        elastic,
+        kafkaProducer,
+      });
     },
     validationRules: [depthLimit(20)],
     formatError: (error) => {
