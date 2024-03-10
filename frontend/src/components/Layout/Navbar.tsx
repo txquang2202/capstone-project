@@ -17,6 +17,7 @@ import { cn } from '@/lib/classNames';
 import { useLocale } from '@/locale';
 
 import { AppLink } from '../AppLink';
+import UserMenu from './UserMenu';
 
 const Header = () => {
   const router = useRouter();
@@ -90,44 +91,15 @@ const Header = () => {
                 </a>
               </li>
             </ul>
-            {/* <div className='item-center ml-auto flex gap-6 text-base text-white'>
-        <div>{`${t('signinText')}/${t('signupText')}`}</div>
-        <div className='text-dark-grey flex items-center'>
-          <span
-            onClick={() => onChangeLang('en')}
-            className={cn('cursor-pointer', {
-              'text-white': _locale === 'en',
-            })}
-          >
-            {t('enText')}
-          </span>
-          <span className='mx-2 h-4 w-[1px] bg-white'></span>
-          <span
-            onClick={() => onChangeLang('vi')}
-            className={cn('cursor-pointer', {
-              'text-white': _locale === 'vi',
-            })}
-          >
-            {t('viText')}
-          </span>
-        </div>
-      </div> */}
+
             <ul className='navbar-nav ms-auto items-center gap-6'>
               <li className='nav-item main-menu'>
                 <Link href={routes.employer.path} className='text-it-white'>
                   Nhà Tuyển Dụng
                 </Link>
               </li>
-              <li className='nav-item'>
-                <AppLink
-                  hrefLang='vi-VN'
-                  rel='nofollow'
-                  className='text-it-white'
-                  href={routes.signin.path}
-                >
-                  Đăng Nhập/Đăng Ký
-                </AppLink>
-              </li>
+              <UserMenu />
+
               <li className='nav-item'>
                 <div className='switch-language flex'>
                   <a

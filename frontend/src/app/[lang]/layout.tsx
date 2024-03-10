@@ -7,13 +7,11 @@ import { type ReactNode } from 'react';
 import { getRouteByPath } from '@/configs/router';
 import { DEFAULT_LOCALE, siteConfig } from '@/constant/config';
 
-import '@mantine/core/styles.css';
 import '@/styles/globals.css';
+import '@mantine/core/styles.css';
 
-import { ApolloProvider } from '@apollo/client';
-
-import { createApolloClient } from '@/lib/apolloClient';
-import { ApolloWrapper } from '@/lib/apolloProvider';
+import ApolloWrapper from '@/lib/apolloWrapper';
+import SessionProviderWrapper from '@/lib/sessionProviderWrapper';
 
 export async function generateMetadata({
   params,
@@ -79,14 +77,15 @@ export default function RootLayout({
   children: ReactNode;
   params: { lang: string };
 }) {
-  const client = createApolloClient();
   return (
-    <html lang={params.lang} className={font.className}>
-      <body>
-        <ApolloWrapper>
-          <MantineProvider>{children}</MantineProvider>
-        </ApolloWrapper>
-      </body>
-    </html>
+    <SessionProviderWrapper>
+      <html lang={params.lang} className={font.className}>
+        <body>
+          <ApolloWrapper>
+            <MantineProvider>{children}</MantineProvider>
+          </ApolloWrapper>
+        </body>
+      </html>
+    </SessionProviderWrapper>
   );
 }

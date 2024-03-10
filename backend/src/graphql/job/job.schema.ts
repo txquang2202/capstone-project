@@ -4,10 +4,24 @@ const JobSchema = gql`
   # ---------------------------------------------------------
   # Model Objects
   # ---------------------------------------------------------
+
+  #job
+  type JobWorkingLocation {
+    id: ID!
+    company_location: CompanyLocation
+  }
+
+  type CompanyLocation {
+    address: String
+  }
+
   type JobPayLoad {
     id: ID!
     name: String!
-    salary: Int
+    salary_from: Int
+    salary_to: Int
+    unit: String
+    hide_salary: Boolean
     country: String
     skills: String!
     working_type: String!
@@ -16,15 +30,37 @@ const JobSchema = gql`
     skill_demand: String!
     why_you_love_working_here: String!
     date_posted: Date!
-    company_id: ID!
+    date_apply: Date!
     is_closed: Boolean!
+    job_working_location: [JobWorkingLocation!]!
+  }
+  #job_apply_description
+  type Applicant {
+    id: ID!
+    name: String!
+    email: String!
+  }
+  type Job {
+    id: ID!
+    name: String!
   }
   type JobApplication {
     id: ID!
-    user_id: ID!
-    job_id: ID!
     cv: String!
     cover_letter: String
+    date_apply: Date!
+    status: String!
+    job: Job!
+    user: Applicant!
+  }
+  type JobApplying {
+    id: ID!
+    cv: String!
+    cover_letter: String
+    date_apply: Date!
+    status: String!
+    job_id: ID!
+    user_id: ID!
   }
 
   # ---------------------------------------------------------
@@ -33,7 +69,9 @@ const JobSchema = gql`
   extend type Query {
     jobApplications: [JobApplication!]
     jobApplication(id: ID!): JobApplication
+    companyJobApplications(companyId: ID!): [JobApplication!]!
     job(id: ID!): JobPayLoad
+
     jobs: [JobPayLoad!]
   }
   # ---------------------------------------------------------
@@ -47,7 +85,10 @@ const JobSchema = gql`
   }
   input JobInput {
     name: String!
-    salary: Int!
+    salary_from: Int
+    salary_to: Int
+    unit: String
+    hide_salary: Boolean
     country: String!
     skills: String!
     working_type: String!
@@ -55,13 +96,15 @@ const JobSchema = gql`
     job_description: String!
     skill_demand: String!
     why_you_love_working_here: String!
-    # date_posted: Date!
     company_id: ID!
     is_closed: Boolean!
   }
   input updateJobInput {
     name: String!
-    salary: Int!
+    salary_from: Int
+    salary_to: Int
+    unit: String
+    hide_salary: Boolean
     country: String!
     skills: String!
     working_type: String!
@@ -76,7 +119,7 @@ const JobSchema = gql`
   # --------------------------------------------------------
 
   extend type Mutation {
-    applyJob(input: ApplyJobInput!): JobApplication!
+    applyJob(input: ApplyJobInput!): JobApplying!
     createJob(input: JobInput): JobPayLoad!
     updateJob(id: ID!, input: updateJobInput): JobPayLoad!
     deleteJob(id: ID!): JobPayLoad!

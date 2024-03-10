@@ -2,18 +2,17 @@ import { ApolloError } from "apollo-server-express";
 import assign from "assign-deep";
 import { shield } from "graphql-shield";
 import { RESPONSE_CODE } from "../constants/response";
-import { isAdminAndUser, isAdminOnly, isPublic } from "./rules";
+import { isPublic } from "./rules";
 
 const permissions = [
   {
     Query: {
       user: isPublic,
-      users: isPublic,
     },
     Mutation: {
-      createUser: isAdminOnly,
-      updateUser: isAdminAndUser,
-      deleteUser: isAdminOnly,
+      // createUser: isAdminOnly,
+      // updateUser: isAdminAndUser,
+      // deleteUser: isAdminOnly,
     },
   },
 ];

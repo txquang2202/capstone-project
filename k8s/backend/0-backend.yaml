@@ -1,0 +1,130 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: findyourjob-api
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: findyourjob-api
+  template:
+    metadata:
+      labels:
+        app: findyourjob-api
+    spec:
+      imagePullSecrets:
+        - name: docker-config-json
+      containers:
+        - name: findyourjob-api
+          image: ghcr.io/nguyenphucbao68/findyourjob-api:latest
+          # image: findyourjob-api:latest
+          env:
+            - name: API_PORT
+              value: '4000'
+            - name: LOGGER_ROUTE_NAME
+              value: 'findyourjob'
+            - name: LOGGER_ROUTE_STORAGE
+              value: 'true'
+            - name: MONGO_DB
+              value: findyourjob
+            - name: NODE_ENV
+              value: production
+            - name: ENABLE_DEBUG_QUERY
+              value: 'false'
+            - name: ENABLE_CORS
+              value: 'false'
+            - name: SERVER_WHITE_LIST
+              value: 'http://findyourjob-admin-svc.default.svc.cluster.local:3000'
+            - name: APOLLO_PLAYGROUND
+              value: 'false'
+            - name: APOLLO_INTROSPECTION
+              value: 'false'
+            - name: APOLLO_DEBUG
+              value: 'false'
+            - name: APOLLO_TRACING
+              value: 'false'
+            - name: KEY_AUTHORIZATION
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: KEY_AUTHORIZATION
+            - name: KEY_CONSOLE
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: KEY_CONSOLE
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: main-secrets
+                  key: postgres-password
+            - name: DATABASE_URL
+              value: postgresql://postgres:$(POSTGRESQL_PASSWORD)@findyourjob-postgresql-primary.default.svc.cluster.local:5432/capstone
+            - name: KEYCLOAK_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: KEYCLOAK_PUBLIC_KEY
+            - name: KEYCLOAK_REALM_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: KEYCLOAK_REALM_NAME
+            - name: KEYCLOAK_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: KEYCLOAK_CLIENT_ID
+            - name: KEYCLOAK_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: KEYCLOAK_CLIENT_SECRET
+            - name: KEYCLOAK_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: findyourjob-configmap
+                  key: keycloak-uri
+          imagePullPolicy: Always
+          # imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: '500m'
+              memory: '1024Mi'
+            limits:
+              cpu: '1000m'
+              memory: '2048Mi'
+          ports:
+            - containerPort: 4000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: findyourjob-api-svc
+spec:
+  type: NodePort
+  selector:
+    app: findyourjob-api
+  ports:
+    - port: 4000
+      targetPort: 4000
+      nodePort: 30001
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: findyourjob-api-hpa
+spec:
+  maxReplicas: 10
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: findyourjob-api
+  targetCPUUtilizationPercentage: 80
