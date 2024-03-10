@@ -7,8 +7,8 @@ export type MailerBody = {
 };
 
 export interface MailerResponse {
-  sendTo: String;
-  message: String;
+  sendTo: string;
+  message: string;
   sentDate: Date;
 }
 
