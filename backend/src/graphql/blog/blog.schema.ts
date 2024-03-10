@@ -18,7 +18,7 @@ const BlogSchema = gql`
   # ---------------------------------------------------------
   extend type Query {
     blogs(skip: Int, take: Int): [Blog]
-    blog(id: ID!): Blog
+    blog(slug: String!): Blog
   }
   # ---------------------------------------------------------
   # Input Objects

@@ -5,11 +5,11 @@ const Query = {
   // get blog by id
   blog: async (
     _: any,
-    { id }: { id: string },
+    { slug }: { slug: string },
     { prisma }: ContextInterface,
   ): Promise<blog | null> => {
-    const blog = await prisma.blog.findUnique({
-      where: { id },
+    const blog = await prisma.blog.findFirst({
+      where: { slug },
     });
 
     return blog;

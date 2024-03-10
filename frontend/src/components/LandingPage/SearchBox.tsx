@@ -1,5 +1,3 @@
-'use client';
-
 import { IconSearch } from '@/components/Icons';
 import { routes } from '@/configs/router';
 
