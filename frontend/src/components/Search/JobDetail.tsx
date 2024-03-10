@@ -33,9 +33,9 @@ const JobDetail = ({ job }: Props) => {
             <div className='text-rich-grey'>{job.company.company_name}</div>
             <div className='text-success-color flex items-center gap-2 font-medium'>
               <IconSalary />
-              {!job.salary
+              {job.hide_salary
                 ? "You'll love it"
-                : `${job.salary} - ${job.salary} VND`}
+                : `${job.salary_from} - ${job.salary_to} ${job.unit}`}
             </div>
           </div>
         </div>

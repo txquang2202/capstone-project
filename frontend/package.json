@@ -17,8 +17,7 @@
     "format:check": "prettier -c .",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "prepare": "husky install"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@apollo/client": "^3.9.0-rc.1",

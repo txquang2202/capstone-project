@@ -9,6 +9,7 @@ import { ChangeEvent, useState } from 'react';
 import { Button } from '@/components/Button';
 import { IconChevronLeft, IconEye } from '@/components/Icons';
 import { InputBox } from '@/components/InputBox';
+import { CancelApply } from '@/components/Modal';
 import { Radio, RadioGroup } from '@/components/Radio';
 import {
   APPLY_JOBS,
@@ -31,6 +32,7 @@ const ApplyJob = () => {
   const router = useRouter();
   const params = useParams();
   const [value, setValue] = useState('default');
+  const [show, setShow] = useState(false);
   const [mutate, { loading }] = useMutation<ApplyJobResponse, ApplyJobVariable>(
     APPLY_JOBS
   );
@@ -63,10 +65,12 @@ const ApplyJob = () => {
   const onSubmit = () => {
     mutate({
       variables: {
-        job_id: job.id,
-        cv: fields.cv,
-        cover_letter: fields.coverLetter || '',
-        user_id: 'a50efdd4-03d1-4885-bde0-8f6d337b6b20',
+        input: {
+          job_id: job.id,
+          cv: fields.cv,
+          cover_letter: fields.coverLetter || '',
+          user_id: '964f1a07-db4c-4c23-b39b-fbd4be3aaeb4',
+        },
       },
     });
   };
@@ -76,7 +80,7 @@ const ApplyJob = () => {
       <div className='relative mx-auto h-full max-w-[884px]'>
         <div className='relative flex py-6'>
           <Button
-            onClick={() => router.back()}
+            onClick={() => setShow(true)}
             intent='transparent'
             icon={<IconChevronLeft size={20} />}
             className='px-0 !text-white'
@@ -180,6 +184,11 @@ const ApplyJob = () => {
           </Button>
         </div>
       </div>
+      <CancelApply
+        opened={show}
+        onClose={() => setShow(false)}
+        onBack={() => router.back()}
+      />
     </div>
   );
 };

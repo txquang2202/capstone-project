@@ -47,4 +47,5 @@ export {
   Loader as IconLoader,
   Users as IconUsers,
   Menu as IconMenu,
+  X as IconX,
 } from 'react-feather';
