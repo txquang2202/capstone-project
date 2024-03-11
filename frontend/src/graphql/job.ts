@@ -65,6 +65,8 @@ export const GET_JOBS = gql`
       job_description
       salary_from
       salary_to
+      hide_salary
+      unit
       name
       skill_demand
       skills
