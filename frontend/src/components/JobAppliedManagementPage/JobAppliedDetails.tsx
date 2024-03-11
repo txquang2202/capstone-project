@@ -1,13 +1,11 @@
 import { useMutation } from '@apollo/client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button } from '@/components/Button';
-import { IconCheckCircle, IconLoader } from '@/components/Icons';
+import { IconCheckCircle, IconFileText, IconLoader } from '@/components/Icons';
 import { UPDATE_JOB_STATUS } from '@/graphql/jobs-applied';
 import { cn } from '@/lib/classNames';
 import { useLocale } from '@/locale';
-
-import PDFDownloader from './PDFDowloader';
 
 interface JobAppliedDetailsProps {
   id: string;
@@ -35,7 +33,10 @@ const JobAppliedDetails: React.FC<JobAppliedDetailsProps> = ({
   onUpdateStatus,
 }) => {
   const { t } = useLocale();
-  console.log(id);
+  const [fileSize, setFileSize] = useState<number | null>(null);
+  const url = nameCV;
+  const fileName = url.substring(url.lastIndexOf('/') + 1);
+
   const [updateJobApplication, { loading: updatingStatus }] =
     useMutation(UPDATE_JOB_STATUS);
 
@@ -60,6 +61,31 @@ const JobAppliedDetails: React.FC<JobAppliedDetailsProps> = ({
       .catch((error) => {
         console.error('Error updating job application status:', error);
       });
+  };
+
+  useEffect(() => {
+    fetch(nameCV)
+      .then((response) => {
+        const contentLength = response.headers.get('Content-Length');
+        if (contentLength) {
+          const fileSizeInBytes = parseInt(contentLength, 10);
+
+          setFileSize(fileSizeInBytes);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching file size:', error);
+      });
+  }, [nameCV]);
+
+  const renderFileSize = () => {
+    if (fileSize !== null) {
+      const fileSizeInKB = fileSize / 1024;
+      const fileSizeInMB = fileSizeInKB / 1024;
+      return `${fileSizeInMB.toFixed(2)} MB`;
+    } else {
+      return 'Unknown';
+    }
   };
 
   return (
@@ -102,7 +128,18 @@ const JobAppliedDetails: React.FC<JobAppliedDetailsProps> = ({
         <div>
           <p className='mt-10 text-[20px] font-[600]'>{t('Resume')}</p>
           <div className='mt-4 space-y-2'>
-            <PDFDownloader capacity='10 MB' fileName={nameCV} />
+            <a
+              href={nameCV}
+              className='border-silver-grey hover:text-red hover:border-red mr-2 inline-block cursor-pointer rounded-md border px-4 py-2'
+            >
+              <div className='flex flex-row items-center gap-2'>
+                <IconFileText />
+                <div>
+                  <p className='text-[16px]'>{fileName}</p>
+                  <p className=' text-[13px]'>{renderFileSize()}</p>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
         {/* Button */}

@@ -1,5 +1,3 @@
-// components/PDFDownloader.tsx
-
 import React from 'react';
 
 import { IconFileText } from '@/components/Icons';
@@ -14,22 +12,17 @@ const PDFDownloader: React.FC<PDFDownloaderProps> = ({
   capacity,
 }) => {
   const downloadPDF = () => {
-    // Tạo một tệp PDF mới
     const pdf = new Blob([fileName], { type: 'application/pdf' });
 
-    // Tạo một URL cho tệp PDF
     const url = URL.createObjectURL(pdf);
 
-    // Tạo một thẻ a để tải xuống tệp PDF
     const link = document.createElement('a');
     link.href = url;
     link.download = capacity + '.pdf';
 
-    // Thêm thẻ a vào body và nhấp vào nó để bắt đầu quá trình tải xuống
     document.body.appendChild(link);
     link.click();
 
-    // Loại bỏ thẻ a khỏi body sau khi tải xuống hoàn tất
     document.body.removeChild(link);
   };
 
