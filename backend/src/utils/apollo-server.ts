@@ -15,6 +15,7 @@ import { executor } from "./executor";
 import Logger from "./logger";
 import prisma from "./prisma";
 import ProducerFactory from "./kafka";
+import mailerService from "../services/mailer";
 require("dotenv").config();
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 
@@ -106,6 +107,7 @@ export const createApolloServer = (
         keycloak,
         elastic,
         kafkaProducer,
+        mailer: mailerService,
       });
     },
     validationRules: [depthLimit(20)],

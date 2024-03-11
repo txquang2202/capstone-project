@@ -13,9 +13,14 @@ export const JOB_TYPE = {
 };
 
 export const JOB_TYPE_TEXT = {
-  [JOB_TYPE.ONSITE]: 'onsiteText',
-  [JOB_TYPE.REMOTE]: 'remoteText',
-  [JOB_TYPE.HYBRID]: 'hybridText',
+  // [JOB_TYPE.ONSITE]: 'onsiteText',
+  // [JOB_TYPE.REMOTE]: 'remoteText',
+  // [JOB_TYPE.HYBRID]: 'hybridText',
+
+  // TODO: convert to translations
+  [JOB_TYPE.ONSITE]: 'Onsite',
+  [JOB_TYPE.REMOTE]: 'Remote',
+  [JOB_TYPE.HYBRID]: 'Hybrid',
 };
 
 type Props = Job & {

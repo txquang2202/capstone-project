@@ -1,5 +1,9 @@
+import fs from "fs";
 import { OAuth2Client } from "google-auth-library";
+import path from "path";
 import * as MailerTypes from "src/graphql/mailer/mailer.types";
+import Mustache from "mustache";
+
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
@@ -34,14 +38,26 @@ export class MailerApiClient implements MailerTypes.IMailerApiClient {
     });
   }
 
-  async sendEmail(
-    _: any,
-    {
-      email,
-      subject,
-      content,
-    }: { email: string; subject: string; content: string },
-  ): Promise<MailerTypes.MailerResponse> {
+  handleContent(variables: MailerTypes.MailerVars) {
+    const content: string = fs.readFileSync(
+      path.join(__dirname) + "/mailer.template.html",
+      "utf8",
+    );
+
+    const rendered: string = Mustache.render(content.toString(), variables);
+
+    return rendered;
+  }
+
+  async sendEmail({
+    email,
+    subject,
+    content,
+  }: {
+    email: string;
+    subject: string;
+    content: string;
+  }): Promise<MailerTypes.MailerResponse> {
     try {
       const myAccessTokenObject = await this.oauthClient.getAccessToken();
       const myAccessToken = myAccessTokenObject?.token;
@@ -59,10 +75,10 @@ export class MailerApiClient implements MailerTypes.IMailerApiClient {
       });
 
       const mailOptions = {
-        from: `IT_VIEC <${this.config.hostEmail}>`,
+        from: `Find Your Job <${this.config.hostEmail}>`,
         to: email,
         subject: subject,
-        html: `<h3>${content}</h3>`,
+        html: content,
       };
 
       await transport.sendMail(mailOptions);

@@ -1,7 +1,16 @@
 import mailerService from "../../services/mailer";
 
 const Mutation = {
-  sendEmail: mailerService.sendEmail.bind(mailerService),
+  sendEmail: (
+    _: any,
+    {
+      email,
+      subject,
+      content,
+    }: { email: string; subject: string; content: string },
+  ) => {
+    return mailerService.sendEmail({ email, subject, content });
+  },
 };
 
 export default { Mutation };

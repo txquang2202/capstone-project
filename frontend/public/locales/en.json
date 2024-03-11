@@ -156,5 +156,11 @@
   "Hired": "Hired",
   "Submitting": "Submitting",
   "Interviewing": "Interviewing",
-  "Resume": "Resume"
+  "Resume": "Resume",
+
+  "job_type": {
+    "hybridText": "Hybrid",
+    "remoteText": "Remote",
+    "onsiteText": "Onsite"
+  }
 }

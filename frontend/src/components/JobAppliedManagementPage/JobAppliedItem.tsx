@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IconCheckCircle, IconLoader, IconUsers } from '@/components/Icons';
+import { IconCheckCircle, IconLoader } from '@/components/Icons';
 import { cn } from '@/lib/classNames';
 
 interface JobAppliedItemProps {
@@ -23,9 +23,8 @@ const JobAppliedItem: React.FC<JobAppliedItemProps> = ({
   isSelected,
 }) => {
   const statusIcons: { [key: string]: JSX.Element } = {
-    Hired: <IconCheckCircle className='h-4 w-4' />,
+    Accepted: <IconCheckCircle className='h-4 w-4' />,
     Submitting: <IconLoader className='h-4 w-4' />,
-    Interviewing: <IconUsers className='h-4 w-4' />,
   };
 
   return (
@@ -49,9 +48,8 @@ const JobAppliedItem: React.FC<JobAppliedItemProps> = ({
             className={cn(
               'mt-1 flex items-center gap-2 text-[12px] text-[600]',
               {
-                'text-green': status === 'Hired',
-                'text-orange': status === 'Submitting',
-                'text-blue': status === 'Interviewing',
+                'text-green': status === 'Accepted',
+                'text-blue': status === 'Submitting',
               }
             )}
           >
