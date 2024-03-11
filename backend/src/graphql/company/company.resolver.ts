@@ -22,8 +22,20 @@ const Query = {
     const companies = await prisma.company.findMany();
     return companies;
   },
+  jobCompany: async (
+    _: any,
+    { id }: { id: string },
+    { prisma }: ContextInterface,
+  ) => {
+    const jobs = await prisma.job.findMany({
+      where: {
+        company_id: id,
+      },
+    });
+    //console.log(jobs);
+    return jobs;
+  },
 };
-
 const Mutation = {
   //Add a new company
   createCompany: async (

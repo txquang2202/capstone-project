@@ -4,7 +4,7 @@ const CompanySchema = gql`
   # Model Objects
   # ---------------------------------------------------------
   type CompanyPayload {
-    id: String!
+    id: ID!
     company_name: String!
     company_type: String
     country: String
@@ -16,9 +16,15 @@ const CompanySchema = gql`
     company_facebook: String
     brief_overview: String
   }
+  # type JobPayLoad{
+
+  # }
+  type jobCompanyPayload {
+    jobs: [String]
+  }
 
   type CompanyReview {
-    id: String!
+    id: ID!
     company_id: String!
     user_id: String!
     summary: String!
@@ -33,10 +39,11 @@ const CompanySchema = gql`
   # Queries
   # ---------------------------------------------------------
   extend type Query {
+    jobCompany(id: ID!): [JobPayLoad]
     companies: [CompanyPayload!]
-    company(id: String!): CompanyPayload
+    company(id: ID!): CompanyPayload
     companyReviews: [CompanyReview!]
-    companyReview(id: String!): CompanyReview
+    companyReview(id: ID!): CompanyReview
     searchCompany(query: String!, skip: Int, take: Int): [CompanyPayload]
   }
   # ---------------------------------------------------------
@@ -57,7 +64,7 @@ const CompanySchema = gql`
   }
 
   input CompanyReviewInput {
-    company_id: String!
+    company_id: ID!
     user_id: String!
     summary: String! @constraint(minLength: 10, maxLength: 80)
     ot_satisfy_reason: String @constraint(minLength: 50, maxLength: 140)
@@ -82,14 +89,14 @@ const CompanySchema = gql`
 
   extend type Mutation {
     createCompany(input: CompanyInput!): CompanyPayload
-    updateCompany(id: String!, input: CompanyInput!): CompanyPayload
-    deleteCompany(id: String!): CompanyPayload
+    updateCompany(id: ID!, input: CompanyInput!): CompanyPayload
+    deleteCompany(id: ID!): CompanyPayload
     createCompanyReview(input: CompanyReviewInput!): CompanyReview!
     updateCompanyReview(
-      id: String!
+      id: ID!
       input: UpdateCompanyReviewInput!
     ): CompanyReview!
-    deleteCompanyReview(id: String!): CompanyReview!
+    deleteCompanyReview(id: ID!): CompanyReview!
   }
 `;
 
