@@ -490,6 +490,23 @@
         "groups": []
       },
       {
+        "id": "09c863ee-7f79-4598-9901-097612d468cb",
+        "username": "duyhq47@gmail.com",
+        "firstName": "Duy",
+        "lastName": "Quoc",
+        "email": "duyhq47@gmail.com",
+        "emailVerified": false,
+        "createdTimestamp": 1710145613102,
+        "enabled": true,
+        "totp": false,
+        "credentials": [],
+        "disableableCredentialTypes": [],
+        "requiredActions": [],
+        "realmRoles": ["default-roles-itviec"],
+        "notBefore": 0,
+        "groups": []
+      },
+      {
         "id": "2b9ffabc-b69e-4c4e-8303-b1c48ab92590",
         "username": "editor@gmail.com",
         "firstName": "Hoa",
@@ -520,23 +537,6 @@
         "disableableCredentialTypes": [],
         "requiredActions": [],
         "realmRoles": ["default-roles-itviec", "employer"],
-        "notBefore": 0,
-        "groups": []
-      },
-      {
-        "id": "09c863ee-7f79-4598-9901-097612d468cb",
-        "username": "khanhndq2002@gmail.com",
-        "firstName": "Khanh",
-        "lastName": "Nguyen",
-        "email": "khanhndq2002@gmail.com",
-        "emailVerified": false,
-        "createdTimestamp": 1710145613102,
-        "enabled": true,
-        "totp": false,
-        "credentials": [],
-        "disableableCredentialTypes": [],
-        "requiredActions": [],
-        "realmRoles": ["default-roles-itviec"],
         "notBefore": 0,
         "groups": []
       },

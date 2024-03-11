@@ -3,6 +3,7 @@ import { RedisClient } from "redis";
 import { Client } from "@elastic/elasticsearch";
 import ProducerFactory from "src/utils/kafka";
 import { KeycloakApiClient } from "src/services/keycloak";
+import { MailerApiClient } from "src/services/mailer";
 
 export interface AuthUser {
   name: string;
@@ -33,6 +34,7 @@ export interface ContextInterface {
   kafkaProducer: ProducerFactory;
   authUser: AuthUser;
   keycloak: KeycloakApiClient;
+  mailer: MailerApiClient;
   // no need to authenticate, using for testing api
   isRoot: boolean;
 }
