@@ -78,6 +78,7 @@ export const SEARCH_JOBS = gql`
       top_3_reason
       why_you_love_working_here
       working_type
+      was_applied
     }
   }
 `;

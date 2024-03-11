@@ -17,6 +17,7 @@ export type Job = {
   top_3_reason: string;
   why_you_love_working_here: string;
   working_type: WorkingType;
+  was_applied?: boolean;
 };
 
 export type JobApplication = {

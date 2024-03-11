@@ -74,7 +74,6 @@ const ApplyJob = () => {
 
       onChangeField('cv', fileData?.data?.singleUpload?.url as string);
       if (fileData?.data?.singleUpload?.url) {
-        console.log('fileData', fileData);
         setFileData(fileData?.data?.singleUpload);
       }
     }
@@ -187,7 +186,7 @@ const ApplyJob = () => {
                       href={fileData.url}
                       className='text-hyperlink mt-3 flex items-center gap-2'
                     >
-                      {fileData.filename} - {fileData.size} KB
+                      {fileData.filename}
                       <IconEye size={20} />
                     </a>
                   )}

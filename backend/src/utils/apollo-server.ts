@@ -91,8 +91,6 @@ export const createApolloServer = (
           req.headers.authorization || "",
         );
 
-        console.log("User: ", user);
-
         if (user.sid) {
           authUser = user;
         }

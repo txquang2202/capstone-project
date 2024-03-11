@@ -31,8 +31,8 @@ const Query = {
 };
 
 const User = {
-  imgUrl: (parent: any) => parent.attributes?.avatarUrl[0],
-  companyId: (parent: any) => parent.attributes?.companyId[0],
+  imgUrl: (parent: any) => parent.attributes?.avatarUrl?.[0],
+  companyId: (parent: any) => parent.attributes?.companyId?.[0],
 };
 
 const Mutation = {};

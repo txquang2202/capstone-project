@@ -13,7 +13,7 @@ const Query = {
       skip = 0,
       take = 10,
     }: { query: string; skip: number; take: number },
-    { prisma, elastic }: ContextInterface,
+    { prisma, elastic, authUser }: ContextInterface,
   ): Promise<job[]> => {
     const logger = new Logger();
     logger.info(`searching for jobs with query: ${query}`);
@@ -38,6 +38,24 @@ const Query = {
         },
       });
       logger.info(`search result: ${JSON.stringify(result)}`);
+      const job_ids = result.hits.hits.map((hit: any) => hit._source.id);
+
+      // check applied jobs
+      const appliedJobs = await prisma.job_apply.findMany({
+        where: {
+          user_id: authUser.sub,
+          job_id: {
+            in: job_ids,
+          },
+        },
+      });
+
+      const appliedJobIds = appliedJobs.map((job) => job.job_id);
+      console.log("appliedJobIds", appliedJobIds);
+      result.hits.hits.forEach((hit: any) => {
+        hit._source.was_applied = appliedJobIds.includes(hit._source.id);
+      });
+
       return result.hits.hits.map((hit: any) => hit._source);
     } catch (error) {
       logger.error("error searching for jobs", error);

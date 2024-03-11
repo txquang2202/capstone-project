@@ -35,6 +35,7 @@ const JobSchema = gql`
     date_apply: Date!
     is_closed: Boolean!
     job_working_location: [JobWorkingLocation!]
+    was_applied: Boolean
   }
   #job_apply_description
 
