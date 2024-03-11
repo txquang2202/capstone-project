@@ -103,7 +103,7 @@ export class AWSS3Uploader implements ApolloServerFileUploads.IUploader {
     stream.pipe(uploadStream.writeStream);
 
     // Start the stream
-    const result = await uploadStream.promise;
+    // const result = await uploadStream.promise;
     const { size, lastModified } = await this.getFileResolver(_, {
       key: prefix + "/" + filename,
     });
@@ -112,7 +112,8 @@ export class AWSS3Uploader implements ApolloServerFileUploads.IUploader {
       filename,
       mimetype,
       encoding,
-      url: result.Location,
+      // url: result.Location,
+      url: `https://${this.config.destinationBucketName}/${prefix}/${filename}`,
       size,
       lastModified,
     };

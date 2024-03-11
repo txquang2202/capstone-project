@@ -13,7 +13,7 @@ import {
   IconSearch,
 } from '@/components/Icons';
 import { JobDetail, JobItem, Spotlight } from '@/components/Search';
-import { GET_JOBS } from '@/graphql/job';
+import { SEARCH_JOBS } from '@/graphql/job';
 import { cn } from '@/lib/classNames';
 import { Job } from '@/types/job';
 
@@ -40,13 +40,20 @@ const OPTIONS = [
   },
 ];
 
-export default function Page() {
-  // const { t } = useLocale();
+export default function Page({ params }: { params: { keyword: string } }) {
   const [selected, setSelected] = useState(0);
   const [page, setPage] = useState(0);
-  const {
-    data: { jobs },
-  } = useSuspenseQuery<DataResponse<'jobs', Job[]>>(GET_JOBS);
+  const { data } = useSuspenseQuery<DataResponse<'searchJob', Job[]>>(
+    SEARCH_JOBS,
+    {
+      variables: {
+        query: params.keyword,
+      },
+    }
+  );
+
+  const jobs = data?.searchJob || [];
+
   return (
     <div>
       <div className='bg-header-gradient px-[160px]'>
@@ -92,7 +99,7 @@ export default function Page() {
             Filter
           </Button>
         </div>
-        <div className='relative mt-6 flex gap-4'>
+        <div className='relative mt-6 flex min-h-[500px] gap-4'>
           <div className='flex w-[40%] flex-col gap-4'>
             {jobs.map((job, index) => (
               <JobItem

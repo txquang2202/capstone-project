@@ -17,9 +17,14 @@ const Query = {
   jobApplications: async (
     _: any,
     _args: any,
-    { prisma }: ContextInterface,
+    { prisma, authUser }: ContextInterface,
   ): Promise<job_apply[]> => {
-    const jobApplications = await prisma.job_apply.findMany();
+    console.log("test", authUser.sub);
+    const jobApplications = await prisma.job_apply.findMany({
+      where: {
+        user_id: authUser.sub,
+      },
+    });
     return jobApplications;
   },
   companyJobApplications: async (
@@ -55,50 +60,54 @@ const Query = {
   },
 };
 
+const JobApplication = {
+  job: async (parent: job_apply, _args: any, { prisma }: ContextInterface) => {
+    return await prisma.job.findUnique({
+      where: { id: parent.job_id },
+    });
+  },
+  // user: async (parent: job_apply, _args: any, { prisma }: ContextInterface) => {
+  //   return await prisma.user.findUnique({
+  //     where: { id: parent.user_id },
+  //   });
+  // },
+};
+
 const Mutation = {
   //Add to application list
   applyJob: async (
     _: any,
     { input }: { input: job_apply },
-    { prisma }: ContextInterface,
+    { prisma, authUser }: ContextInterface,
   ): Promise<job_apply> => {
-    // console.log(input);
-    const userExists = await prisma.user.findUnique({
-      where: {
-        id: input.user_id,
-      },
-    });
     const jobExists = await prisma.job.findUnique({
       where: {
         id: input.job_id,
       },
     });
 
-    if (!userExists) {
-      throw new Error(`User with ID ${input.user_id} does not exist`);
-    }
     if (!jobExists) {
       throw new Error(`Job with ID ${input.job_id} does not exist`);
     }
 
     const jobApplicationExists = await prisma.job_apply.findFirst({
       where: {
-        user_id: input.user_id,
+        user_id: authUser.sub,
         job_id: input.job_id,
       },
     });
     // console.log(jobApplicationExists);
     if (jobApplicationExists) {
       throw new Error(
-        `Job application already exists for user with id:${input.user_id} and job with id:${input.job_id}`,
+        `Job application already exists for user with id:${authUser.sub} and job with id:${input.job_id}`,
       );
     }
     // console.log(input);
     const newJobApplication = await prisma.job_apply.create({
-      data: input,
+      data: { ...input, user_id: authUser.sub },
     });
     return newJobApplication;
   },
 };
 
-export default { Query, Mutation };
+export default { Query, Mutation, JobApplication };

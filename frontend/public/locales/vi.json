@@ -171,5 +171,11 @@
   "Hired": "Đã nhận việc",
   "Submitting": "Đang nộp hồ sơ",
   "Interviewing": "Đang phỏng vấn",
-  "Resume": "Hồ sơ cá nhân"
+  "Resume": "Hồ sơ cá nhân",
+
+  "job_type": {
+    "hybridText": "Hybrid",
+    "remoteText": "Remote",
+    "onsiteText": "Onsite"
+  }
 }

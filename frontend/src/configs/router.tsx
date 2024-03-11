@@ -100,7 +100,7 @@ export const routes = {
     },
   }),
   search: route({
-    path: '/it-jobs/all',
+    path: '/it-jobs/[keyword]',
     requiredAuth: false,
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,

@@ -8,6 +8,29 @@ declare module 'next-auth/jwt' {
     id_token: string;
     expires_at: number;
     refresh_token: string;
+    decoded: {
+      exp: number;
+      iat: number;
+      auth_time: number;
+      jti: string;
+      iss: string;
+      aud: string;
+      sub: string;
+      typ: string;
+      azp: string;
+      session_state: string;
+      acr: string;
+      realm_access: {
+        roles: string[];
+      };
+      resource_access: Record<string, { roles: string[] }>;
+      scope: string;
+      email_verified: boolean;
+      preferred_username: string;
+      given_name: string;
+      family_name: string;
+      email: string;
+    };
     // decoded?: {
     //   realm_access?: {
     //     roles?: string[];
@@ -31,5 +54,10 @@ declare module 'next-auth' {
     refresh_token: string;
     roles: string[];
     error: string | unknown;
+    user: {
+      email: string;
+      id: string;
+      name: string;
+    };
   }
 }
