@@ -17,7 +17,6 @@ model blog {
   slug       String?    @db.VarChar
   id         String     @id(map: "blog_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id    String     @db.Uuid
-  user       user       @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "blog_user_fk")
   blog_tag   blog_tag[]
 }
 
@@ -79,7 +78,6 @@ model follow {
   user_id    String  @db.Uuid
   company_id String  @db.Uuid
   company    company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "follow_company_fk")
-  user       user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "follow_user_fk")
 
   @@id([user_id, company_id], map: "follow_pk")
 }
@@ -135,7 +133,6 @@ model job_saved {
   user_id String @db.Uuid
   job_id  String @db.Uuid
   job     job    @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_saved_job_fk")
-  user    user   @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_saved_user_fk")
 
   @@id([user_id, job_id], map: "job_saved_pk")
 }
@@ -160,7 +157,6 @@ model review {
   user_id                      String         @db.Uuid
   id                           String         @id(map: "review_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   company                      company        @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_company_fk")
-  user                         user           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_user_fk")
   review_rating                review_rating?
 }
 
@@ -182,30 +178,19 @@ model tag {
 }
 
 model user {
-  name             String?            @db.VarChar
-  email            String?            @db.VarChar
-  phone            String?            @db.VarChar
-  gender           String?            @db.Char(1)
-  dob              DateTime?          @db.Date
-  current_address  String?            @db.VarChar
-  about_me         String?            @db.VarChar
-  cover_letter     String?            @db.VarChar
-  personal_link    String?            @db.VarChar
-  role             Int
-  password         Bytes?
-  img_url          String?            @db.VarChar
-  id               String             @id(map: "user_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  blog             blog[]
-  follow           follow[]
-  job_saved        job_saved[]
-  review           review[]
-  user_award       user_award[]
-  user_certificate user_certificate[]
-  user_cv          user_cv[]
-  user_education   user_education[]
-  user_project     user_project[]
-  user_skill       user_skill[]
-  work_experience  work_experience[]
+  name            String?   @db.VarChar
+  email           String?   @db.VarChar
+  phone           String?   @db.VarChar
+  gender          String?   @db.Char(1)
+  dob             DateTime? @db.Date
+  current_address String?   @db.VarChar
+  about_me        String?   @db.VarChar
+  cover_letter    String?   @db.VarChar
+  personal_link   String?   @db.VarChar
+  role            Int
+  password        Bytes?
+  img_url         String?   @db.VarChar
+  id              String    @id(map: "user_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 }
 
 model user_award {
@@ -215,7 +200,6 @@ model user_award {
   description String? @db.VarChar
   id          String  @id(map: "user_award_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id     String  @db.Uuid
-  user        user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_award_user_fk")
 }
 
 model user_certificate {
@@ -226,7 +210,6 @@ model user_certificate {
   issue_date  String? @db.VarChar
   user_id     String  @db.Uuid
   id          String  @id(map: "user_certificate_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user        user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_certificate_user_fk")
 }
 
 model user_cv {
@@ -234,7 +217,6 @@ model user_cv {
   url           String?   @db.VarChar
   id            String    @id(map: "user_cv_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id       String    @db.Uuid
-  user          user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_cv_user_fk")
 }
 
 model user_education {
@@ -246,7 +228,6 @@ model user_education {
   current_studying_here Boolean?
   id                    String    @id(map: "user_education_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id               String    @db.Uuid
-  user                  user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_education_user_fk")
 }
 
 model user_project {
@@ -258,7 +239,6 @@ model user_project {
   currently_working_here Boolean?
   id                     String    @id(map: "user_project_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id                String    @db.Uuid
-  user                   user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_project_user_fk")
 }
 
 model user_skill {
@@ -266,7 +246,6 @@ model user_skill {
   level   String? @db.VarChar
   id      String  @id(map: "user_skill_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id String  @db.Uuid
-  user    user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_skill_user_fk")
 }
 
 model work_experience {
@@ -279,5 +258,4 @@ model work_experience {
   projects               String?   @db.VarChar
   id                     String    @id(map: "work_experience_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id                String    @db.Uuid
-  user                   user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "work_experience_user_fk")
 }
