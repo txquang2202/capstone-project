@@ -112,8 +112,8 @@ const JobSchema = gql`
     is_closed: Boolean!
   }
   input updateJobApplication {
-    cv: String!
-    cover_letter: String
+    # cv: String!
+    # cover_letter: String
     status: String!
   }
   # ---------------------------------------------------------

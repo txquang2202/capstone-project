@@ -14,3 +14,18 @@ export const APPLIED_JOB_VARS: MailerVars = {
   contact:
     "If you have any questions, send us an email to support@findyourjob.tech",
 };
+
+export const APPROVED_JOB_VARS: MailerVars = {
+  subject: "You got the job",
+  title: "You got the job",
+  preheader: "Congrats! You got the job you applied for.",
+  big_heading: "Congrats!",
+  prev_content:
+    "Your application has been approved successfully for the position of",
+  verification_code: "Software Engineer",
+  after_content: "Thanks for using our service.",
+  cheers: "Cheers",
+  footer_content: "We hope you can advance in your career.",
+  contact:
+    "If you have any questions, send us an email to support@findyourjob.tech",
+};

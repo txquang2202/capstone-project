@@ -1,7 +1,7 @@
 import { job_apply } from "@prisma/client";
 import { ContextInterface } from "../context";
-import mailerService from "../../services/mailer";
 import { APPLIED_JOB_VARS } from "../mailer/mailer.constant";
+import { APPROVED_JOB_VARS } from "./../mailer/mailer.constant";
 
 const Query = {
   //show job application by id
@@ -68,7 +68,7 @@ const Mutation = {
   applyJob: async (
     _: any,
     { input }: { input: job_apply },
-    { prisma, authUser }: ContextInterface,
+    { prisma, authUser, mailer }: ContextInterface,
   ): Promise<job_apply> => {
     const jobExists = await prisma.job.findUnique({
       where: {
@@ -112,10 +112,10 @@ const Mutation = {
     vars.subject = `You submitted a job application for ${company.company_name}`;
     vars.title = vars.subject;
 
-    mailerService.sendEmail({
+    mailer.sendEmail({
       email: authUser.email,
       subject: vars.subject,
-      content: mailerService.handleContent(APPLIED_JOB_VARS),
+      content: mailer.handleContent(vars),
     });
 
     return newJobApplication;
@@ -123,10 +123,17 @@ const Mutation = {
   updateJobApplication: async (
     _: any,
     { id, input }: { id: string; input: job_apply },
-    { prisma }: ContextInterface,
+    { prisma, mailer, keycloak }: ContextInterface,
   ): Promise<job_apply | null> => {
     const existingJobApply = await prisma.job_apply.findUnique({
       where: { id },
+      include: {
+        job: {
+          include: {
+            company: true,
+          },
+        },
+      },
     });
 
     if (!existingJobApply) {
@@ -137,6 +144,20 @@ const Mutation = {
       where: { id },
       data: input,
     });
+
+    if (input.status === "Accepted") {
+      const vars = { ...APPROVED_JOB_VARS };
+      vars.subject =
+        vars.subject + " from " + existingJobApply.job.company.company_name;
+      vars.title = vars.subject;
+
+      const user = await keycloak.getUserData(existingJobApply.user_id);
+      mailer.sendEmail({
+        email: user.email,
+        subject: vars.subject,
+        content: mailer.handleContent(vars),
+      });
+    }
 
     return updatedJobApply;
   },
