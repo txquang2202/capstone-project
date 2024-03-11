@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { IconFilter } from '@/components/Icons';
 import JobAppliedDetails from '@/components/JobAppliedManagementPage/JobAppliedDetails';
 import JobAppliedItem from '@/components/JobAppliedManagementPage/JobAppliedItem';
+import { GET_JOB } from '@/graphql/job';
 import { GET_JOBS_APPLIED } from '@/graphql/jobs-applied';
 import { useLocale } from '@/locale';
 
@@ -74,7 +75,20 @@ export default function JobManageMentPage({
         {/* <CompanyCard /> */}
         {/* <Navigation selected='' /> */}
         {/* <AppliedManagement params={{ id }} /> */}
-        <div className='container-xxl grid grid-cols-1 gap-4 px-4 py-8 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:px-8'>
+        <div className='container-xxl py-4 sm:px-6  lg:px-8'>
+          <select
+            name=''
+            id=''
+            className='w-64 cursor-pointer appearance-none rounded py-2 pl-3 pr-8 focus:border-red-200 focus:outline-none focus:ring-red-200'
+          >
+            <option value=''>1</option>
+            <option value=''>2</option>
+            <option value=''>3</option>
+            <option value=''>4</option>
+            <option value=''>5</option>
+          </select>
+        </div>
+        <div className='container-xxl grid grid-cols-1 gap-4 px-4 pb-8 pt-2 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:px-8'>
           {/* left */}
           <div className='col-span-2 rounded-md border border-gray-200 bg-white shadow-sm md:col-span-2 lg:col-span-1'>
             <div className='container-xxl bg-red rounded-t-md px-6 py-3'>
