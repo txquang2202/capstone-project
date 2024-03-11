@@ -116,12 +116,18 @@ const JobSchema = gql`
     why_you_love_working_here: String!
     is_closed: Boolean!
   }
+  input updateJobApplication {
+    cv: String!
+    cover_letter: String
+    status: String!
+  }
   # ---------------------------------------------------------
   # Mutations
   # --------------------------------------------------------
 
   extend type Mutation {
     applyJob(input: ApplyJobInput!): JobApplying!
+    updateJobApplication(id: ID!, input: updateJobApplication): JobApplication!
     createJob(input: JobInput): JobPayLoad!
     updateJob(id: ID!, input: updateJobInput): JobPayLoad!
     deleteJob(id: ID!): JobPayLoad!

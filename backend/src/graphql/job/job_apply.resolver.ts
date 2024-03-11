@@ -99,6 +99,26 @@ const Mutation = {
     });
     return newJobApplication;
   },
+  updateJobApplication: async (
+    _: any,
+    { id, input }: { id: string; input: job_apply },
+    { prisma }: ContextInterface,
+  ): Promise<job_apply | null> => {
+    const existingJobApply = await prisma.job_apply.findUnique({
+      where: { id },
+    });
+
+    if (!existingJobApply) {
+      throw new Error(`Job application with ID ${id} does not exist`);
+    }
+
+    const updatedJobApply = await prisma.job_apply.update({
+      where: { id },
+      data: input,
+    });
+
+    return updatedJobApply;
+  },
 };
 
 export default { Query, Mutation };
