@@ -156,5 +156,9 @@
   "Hired": "Hired",
   "Submitting": "Submitting",
   "Interviewing": "Interviewing",
-  "Resume": "Resume"
+  "Resume": "Resume",
+
+  "onsiteText": "On-site",
+  "hybridText": "Hybrid",
+  "remoteText": "Remote"
 }

@@ -8,8 +8,35 @@ export type GetJobVariable = { jobId: string };
 export const GET_JOB = gql`
   query Job($jobId: ID!) {
     job(id: $jobId) {
+      company_id
+      company {
+        brief_overview
+        company_facebook
+        company_name
+        company_size
+        company_type
+        company_website
+        country
+        id
+        ot_policy
+        overview
+        working_day
+      }
+      country
+      date_posted
       id
+      is_closed
+      job_description
+      salary_from
+      salary_to
+      hide_salary
+      unit
       name
+      skill_demand
+      skills
+      top_3_reason
+      why_you_love_working_here
+      working_type
     }
   }
 `;
@@ -48,12 +75,14 @@ export const GET_JOBS = gql`
   }
 `;
 
-export type ApplyJobResponse = DataResponse<'job', Job>;
+export type ApplyJobResponse = DataResponse<'applyJob', Job>;
 export type ApplyJobVariable = {
-  cover_letter: string;
-  cv: string;
-  job_id: string;
-  user_id: string;
+  input: {
+    cover_letter: string;
+    cv: string;
+    job_id: string;
+    user_id: string;
+  };
 };
 
 export const APPLY_JOBS = gql`
@@ -61,9 +90,36 @@ export const APPLY_JOBS = gql`
     applyJob(input: $input) {
       cover_letter
       cv
-      id
       job_id
       user_id
+    }
+  }
+`;
+
+export type CreateJobResponse = DataResponse<'createJob', { id: string }>;
+export type CreateJobVariable = {
+  input: {
+    company_id: string;
+    country: string;
+    hide_salary: boolean;
+    is_closed: boolean;
+    job_description: string;
+    name: string;
+    salary_from: number;
+    salary_to: number;
+    skill_demand: string;
+    skills: string;
+    top_3_reason: string;
+    unit: string;
+    why_you_love_working_here: string;
+    working_type: string;
+  };
+};
+
+export const CREATE_JOB = gql`
+  mutation Mutation($input: JobInput) {
+    createJob(input: $input) {
+      id
     }
   }
 `;

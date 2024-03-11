@@ -44,6 +44,7 @@ const Header = () => {
   };
 
   const { locale: _locale } = useLocale();
+  console.log({ _locale });
 
   const onChangeLang = (lang: string) => {
     if (!pathname) return;

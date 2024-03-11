@@ -44,15 +44,18 @@ export function middleware(request: NextRequest) {
         { headers: { 'x-pathname': pathWithoutLocale } }
       );
     }
-
+    request.cookies.set('LOCALE', pathLocale);
     response = NextResponse.next({
       headers: { 'x-pathname': pathname.slice(`/${pathLocale}`.length) },
     });
+
     nextLocale = pathLocale;
   } else {
-    const isFirstVisit = !request.cookies.has('NEXT_LOCALE');
+    const isFirstVisit = !request.cookies.has('LOCALE');
 
-    const locale = isFirstVisit ? getLocale(request) : defaultLocale;
+    const locale = isFirstVisit
+      ? getLocale(request)
+      : request.cookies.get('LOCALE')?.value;
 
     let newPath = `/${locale}${pathname}`;
     if (request.nextUrl.search) newPath += request.nextUrl.search;
@@ -71,7 +74,7 @@ export function middleware(request: NextRequest) {
   if (!response)
     response = NextResponse.next({ headers: { 'x-pathname': pathname } });
 
-  if (nextLocale) response.cookies.set('NEXT_LOCALE', nextLocale);
+  if (nextLocale) response.cookies.set('LOCALE', nextLocale);
 
   return response;
 }

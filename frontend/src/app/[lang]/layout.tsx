@@ -9,8 +9,8 @@ import SessionProviderWrapper from '@/components/Layout/SessionProviderWrapper';
 import { getRouteByPath } from '@/configs/router';
 import { DEFAULT_LOCALE, siteConfig } from '@/constant/config';
 
-import '@mantine/core/styles.css';
 import '@/styles/globals.css';
+import '@mantine/core/styles.css';
 
 export async function generateMetadata({
   params,

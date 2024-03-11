@@ -1,22 +1,12 @@
+import { JOB_TYPE_TEXT } from '@/constant/job';
 import { cn } from '@/lib/classNames';
 import dayjs from '@/lib/dayjs';
 import { formatCurrency } from '@/lib/number';
-import { Job, WorkingType } from '@/types/job';
+import { useLocale } from '@/locale';
+import { Job } from '@/types/job';
 
 import { IconMapPin, IconRemote, IconSalary } from '../Icons';
 import { StickyTag } from '../StickyTag';
-
-export const JOB_TYPE = {
-  ONSITE: WorkingType.AtOffice,
-  REMOTE: WorkingType.Remote,
-  HYBRID: WorkingType.Hybrid,
-};
-
-export const JOB_TYPE_TEXT = {
-  [JOB_TYPE.ONSITE]: 'onsiteText',
-  [JOB_TYPE.REMOTE]: 'remoteText',
-  [JOB_TYPE.HYBRID]: 'hybridText',
-};
 
 type Props = Job & {
   selected?: boolean;
@@ -26,6 +16,8 @@ type Props = Job & {
 };
 
 const JobItem = ({ company, isHot, selected, onSelect, ...job }: Props) => {
+  const { t } = useLocale();
+
   return (
     <StickyTag
       type={isHot ? 'hot' : 'highlight'}
@@ -61,23 +53,29 @@ const JobItem = ({ company, isHot, selected, onSelect, ...job }: Props) => {
             ? "You'll love it"
             : `${formatCurrency(
                 job.salary_from || 0,
-                job.unit
-              )} - ${formatCurrency(job.salary_to || 0, job.unit)}`}
+                job.unit,
+                job.unit === 'VND' ? 'vi-VN' : 'en'
+              )} - ${formatCurrency(
+                job.salary_to || 0,
+                job.unit,
+                job.unit === 'VND' ? 'vi-VN' : 'en'
+              )}`}
         </div>
         <div className='mb-1 mt-3 flex items-center gap-1'>
           <IconRemote size={16} color='var(--dark-grey)' viewBox='0 0 24 25' />
-          {JOB_TYPE_TEXT[job.working_type]}
+          {t(JOB_TYPE_TEXT[job.working_type])}
         </div>
         <div className='flex items-center gap-1'>
           <IconMapPin size={16} color='var(--dark-grey)' />
-          {[].join('-')}
+          {job.country}
         </div>
         <div className='mb-2 mt-3 flex items-center gap-2'>
-          {JSON.parse(job.skills).map((tag: string, index: number) => (
-            <div key={index} className='itag itag-light itag-sm'>
-              {tag}
-            </div>
-          ))}
+          {job.skills &&
+            JSON.parse(job.skills).map((tag: string, index: number) => (
+              <div key={index} className='itag itag-light itag-sm'>
+                {tag}
+              </div>
+            ))}
         </div>
       </div>
     </StickyTag>

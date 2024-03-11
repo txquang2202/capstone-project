@@ -1,6 +1,6 @@
 'use client';
 
-import { TextInput } from '@mantine/core';
+import { PasswordInput, TextInput } from '@mantine/core';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 
@@ -88,7 +88,7 @@ export default function Page() {
                 >
                   {`${t('forgotPasswordText')}?`}
                 </AppLink>
-                <TextInput
+                <PasswordInput
                   withAsterisk
                   size='md'
                   label={t('passwordText')}

@@ -32,7 +32,7 @@ const JobSchema = gql`
     date_posted: Date!
     company_id: ID!
     company: CompanyPayload
-    date_apply: Date!
+    # date_apply: Date!
     is_closed: Boolean!
     job_working_location: [JobWorkingLocation!]
   }
