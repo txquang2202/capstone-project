@@ -79,14 +79,13 @@ export type JobApplicationResponse = DataResponse<
 //   });
 //   console.log(companyJobApplications);
 
-//   return companyJobApplications;
-// };
-// export const GET_BLOG = gql`
-//   query GetBlog($id: ID!) {
-//     blog(id: $id) {
-//       title
-//       id
-//       content
-//     }
-//   }
-// `;
+export const UPDATE_JOB_STATUS = gql`
+  mutation UpdateJobApplication(
+    $input: updateJobApplication
+    $updateJobApplicationId: ID!
+  ) {
+    updateJobApplication(input: $input, id: $updateJobApplicationId) {
+      status
+    }
+  }
+`;
