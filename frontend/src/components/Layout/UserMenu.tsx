@@ -9,6 +9,7 @@ import {
   IconSettings,
   IconUser,
 } from '@/components/Icons';
+import useAuthData from '@/hooks/useAuthData';
 
 import { AppLink } from '../AppLink';
 
@@ -24,6 +25,7 @@ const UserMenu = () => {
       signOut({ callbackUrl: '/' });
     }
   }, [session, status]);
+  const authUser = useAuthData();
 
   const keycloakSessionLogOut = async () => {
     try {
@@ -35,13 +37,13 @@ const UserMenu = () => {
 
   if (status === 'loading') return null;
 
-  return session ? (
+  return session && authUser ? (
     <li className='nav-item main-menu relative'>
       <div className='user-avatar-wrapper flex items-center'>
         <div className='sign-in-user-avatar'>
           <img
             className='user-avatar'
-            src='https://lh3.googleusercontent.com/-mt9DfcfLMe4/AAAAAAAAAAI/AAAAAAAAA30/QJ-xWs2aI98/photo.jpg?sz=50'
+            src={authUser.imgUrl}
             width={32}
             height={32}
             alt=''
