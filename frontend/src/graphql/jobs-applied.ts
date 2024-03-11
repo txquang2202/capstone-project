@@ -19,26 +19,14 @@ export const GET_JOBS_APPLIED = gql`
     }
   }
 `;
-// const companyJobApplications = async () => {
-//   const id = 'đá';
-//   const {
-//     data: { companyJobApplications },
-//   } = await getClient().query({
-//     query: GET_JOBS_APPLIED, // Assuming GET_JOBS_APPLIED is a valid GraphQL query
-//     variables: {
-//       id: id,
-//     },
-//   });
-//   console.log(companyJobApplications);
 
-//   return companyJobApplications;
-// };
-// export const GET_BLOG = gql`
-//   query GetBlog($id: ID!) {
-//     blog(id: $id) {
-//       title
-//       id
-//       content
-//     }
-//   }
-// `;
+export const UPDATE_JOB_STATUS = gql`
+  mutation UpdateJobApplication(
+    $input: updateJobApplication
+    $updateJobApplicationId: ID!
+  ) {
+    updateJobApplication(input: $input, id: $updateJobApplicationId) {
+      status
+    }
+  }
+`;

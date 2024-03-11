@@ -35,6 +35,7 @@ export default function JobManageMentPage({
   const { loading, error, data } = useQuery(GET_JOBS_APPLIED, {
     variables: { companyId },
   });
+
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [appliedJobs, setAppliedJobs] = useState<Job[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
@@ -42,7 +43,7 @@ export default function JobManageMentPage({
 
   React.useEffect(() => {
     if (!loading && !error && data) {
-      setAppliedJobs(data.companyJobApplications);
+      setAppliedJobs(JSON.parse(JSON.stringify(data.companyJobApplications)));
     }
   }, [loading, error, data]);
 
@@ -56,6 +57,7 @@ export default function JobManageMentPage({
     : appliedJobs;
 
   const handleJobSelect = (job: Job) => {
+    console.log(selectedJob?.id);
     setSelectedJob(job);
   };
 
@@ -65,6 +67,19 @@ export default function JobManageMentPage({
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
+  };
+
+  const handleStatusUpdate = (newStatus: string) => {
+    if (selectedJob) {
+      const updatedJobs = appliedJobs.map((job) =>
+        job.id === selectedJob.id ? { ...job, status: newStatus } : job
+      );
+      setSelectedJob((job) => {
+        if (!job) return job;
+        return { ...job, status: newStatus };
+      });
+      setAppliedJobs([...updatedJobs]);
+    }
   };
 
   return (
@@ -89,9 +104,8 @@ export default function JobManageMentPage({
                     onChange={handleFilterChange}
                   >
                     <option value='all'>All</option>
-                    <option value='Hired'>Hired</option>
+                    <option value='Accepted'>Accepted</option>
                     <option value='Submitting'>Submitting</option>
-                    <option value='Interviewing'>Interviewing</option>
                   </select>
                 </div>
               </div>
@@ -123,6 +137,7 @@ export default function JobManageMentPage({
           <div className='col-span-1  flex flex-col justify-center md:col-span-2 lg:col-span-2'>
             {selectedJob ? (
               <JobAppliedDetails
+                id={selectedJob.id}
                 title={selectedJob.job.name}
                 imageUrl={selectedJob.user.img_url}
                 applicantName={selectedJob.user.name}
@@ -131,6 +146,7 @@ export default function JobManageMentPage({
                 status={selectedJob.status}
                 coverLetter={selectedJob.cover_letter}
                 nameCV={selectedJob.cv}
+                onUpdateStatus={handleStatusUpdate}
               />
             ) : (
               <p className='py-4 text-center text-gray-500'>
