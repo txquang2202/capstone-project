@@ -22,7 +22,7 @@ type Props = {
   tags: string[];
   expires: number;
   isLiked: boolean;
-  isApplied: boolean;
+  isApplied?: boolean;
 };
 
 const JobCard = ({
@@ -36,7 +36,7 @@ const JobCard = ({
   tags,
   expires,
   isLiked,
-  isApplied,
+  isApplied = false,
 }: Props) => {
   const [liked, setLiked] = useState(isLiked);
   const { t } = useLocale();
