@@ -1,6 +1,6 @@
 [
   {
-    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "user_id": "d5cc893a-12ce-418b-9756-b79a7401efe2",
     "school": "University of Techville",
     "major": "Computer Science",
     "current_studying_here": false,
@@ -9,7 +9,7 @@
     "additional_detail": "Bachelor's Degree"
   },
   {
-    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "user_id": "09c863ee-7f79-4598-9901-097612d468cb",
     "school": "Tech Institute",
     "major": "Software Engineering",
     "current_studying_here": false,
@@ -18,7 +18,7 @@
     "additional_detail": "Bachelor's Degree"
   },
   {
-    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "user_id": "5bd3c153-5673-4f1b-8d57-322d47bf2fcc",
     "school": "Master's University",
     "major": "Computer Science",
     "current_studying_here": false,
