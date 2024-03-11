@@ -479,6 +479,11 @@
         "lastName": "Nguyễn Văn",
         "email": "admin@gmail.com",
         "emailVerified": false,
+        "attributes": {
+          "avatarUrl": [
+            "https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg"
+          ]
+        },
         "createdTimestamp": 1710148387985,
         "enabled": true,
         "totp": false,
@@ -496,6 +501,9 @@
         "lastName": "Quoc",
         "email": "duyhq47@gmail.com",
         "emailVerified": false,
+        "attributes": {
+          "avatarUrl": ["https://byuc.files.wordpress.com/2012/07/avat-2.jpg"]
+        },
         "createdTimestamp": 1710145613102,
         "enabled": true,
         "totp": false,
@@ -513,6 +521,11 @@
         "lastName": "Đào Xuân",
         "email": "editor@gmail.com",
         "emailVerified": false,
+        "attributes": {
+          "avatarUrl": [
+            "https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg"
+          ]
+        },
         "createdTimestamp": 1710148406725,
         "enabled": true,
         "totp": false,
@@ -530,10 +543,24 @@
         "lastName": "Bùi Thị",
         "email": "employer1@gmail.com",
         "emailVerified": false,
+        "attributes": {
+          "avatarUrl": [
+            "https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg"
+          ],
+          "companyId": ["a24b1722-518c-40af-b9ac-478a5f79db48"]
+        },
         "createdTimestamp": 1710148312664,
         "enabled": true,
         "totp": false,
-        "credentials": [],
+        "credentials": [
+          {
+            "id": "dfafa981-0c1c-4ba9-baa4-acc332a5a470",
+            "type": "password",
+            "createdDate": 1710152853844,
+            "secretData": "{\"value\":\"FFGHVzFc4oUz9I8LebDo+QTRnPRpNszRvZfxvlTGiF0+25VpvWOlVVr6lc0zj2y2JFQ+iFuwg8kYQZ7Gr9OmeQ==\",\"salt\":\"xw6IWgLBYl/5yGBLSudUcA==\",\"additionalParameters\":{}}",
+            "credentialData": "{\"hashIterations\":210000,\"algorithm\":\"pbkdf2-sha512\",\"additionalParameters\":{}}"
+          }
+        ],
         "disableableCredentialTypes": [],
         "requiredActions": [],
         "realmRoles": ["default-roles-itviec", "employer"],
@@ -547,6 +574,9 @@
         "lastName": "Nguyễn",
         "email": "nguyenphucbao098@gmail.com",
         "emailVerified": false,
+        "attributes": {
+          "avatarUrl": ["https://www.w3schools.com/w3images/avatar2.png"]
+        },
         "createdTimestamp": 1710144797910,
         "enabled": true,
         "totp": false,
@@ -585,11 +615,16 @@
       },
       {
         "id": "d5cc893a-12ce-418b-9756-b79a7401efe2",
-        "username": "testuser",
+        "username": "testuser@gmail.com",
         "firstName": "Bảo",
         "lastName": "Nguyễn Phúc",
         "email": "testuser@gmail.com",
         "emailVerified": false,
+        "attributes": {
+          "avatarUrl": [
+            "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png"
+          ]
+        },
         "createdTimestamp": 1709960422276,
         "enabled": true,
         "totp": false,
@@ -616,6 +651,11 @@
         "lastName": "Nguyễn Văn",
         "email": "user1@gmail.com",
         "emailVerified": false,
+        "attributes": {
+          "avatarUrl": [
+            "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png"
+          ]
+        },
         "createdTimestamp": 1710148353461,
         "enabled": true,
         "totp": false,

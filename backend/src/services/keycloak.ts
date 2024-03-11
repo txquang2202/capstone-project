@@ -23,6 +23,8 @@ export class KeycloakApiClient {
     },
   ) {
     this.config = config;
+    console.log("this.config ", this.config);
+
     this.keycloak = new KeycloakAdminClient({
       baseUrl: this.config.baseUrl,
       realmName: this.config.realmName,
@@ -43,10 +45,11 @@ export class KeycloakApiClient {
       return user;
     } catch (error: any) {
       console.error("Error getting user data:", error.message);
-      throw error;
-    } finally {
-      // Close the KeycloakAdminClient to release resources
-      // this.keycloak.authenticated && this.keycloak.authenticated();
+      await this.init();
+
+      // throw error;
+      const user = await this.keycloak.users.findOne({ id: userId });
+      return user;
     }
   }
 }

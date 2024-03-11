@@ -73,6 +73,7 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token }) {
       // Send properties to the client
+
       session.access_token = encrypt(token.access_token || ''); // see utils/sessionTokenAccessor.js
       session.id_token = encrypt(token.id_token || ''); // see utils/sessionTokenAccessor.js
       session.roles =
@@ -80,6 +81,7 @@ export const authOptions: AuthOptions = {
           ?.roles || [];
       session.error = token.error;
       session.user.id = token.decoded?.sub || '';
+      // console.log('token', token.decoded);
       return session;
     },
   },

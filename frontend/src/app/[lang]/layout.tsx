@@ -12,6 +12,8 @@ import { DEFAULT_LOCALE, siteConfig } from '@/constant/config';
 import '@mantine/core/styles.css';
 import '@/styles/globals.css';
 
+import AuthProvider from '@/provider/AuthProvider';
+
 export async function generateMetadata({
   params,
 }: {
@@ -86,7 +88,7 @@ export default function RootLayout({
                 ...font.style,
               }}
             >
-              {children}
+              <AuthProvider>{children}</AuthProvider>
             </MantineProvider>
           </ApolloWrapper>
         </body>
