@@ -1,5 +1,7 @@
 import { job_apply } from "@prisma/client";
 import { ContextInterface } from "../context";
+import mailerService from "../../services/mailer";
+import { APPLIED_JOB_VARS } from "../mailer/mailer.constant";
 
 const Query = {
   //show job application by id
@@ -106,6 +108,28 @@ const Mutation = {
     const newJobApplication = await prisma.job_apply.create({
       data: { ...input, user_id: authUser.sub },
     });
+
+    const company = await prisma.company.findUnique({
+      where: {
+        id: jobExists.company_id,
+      },
+    });
+
+    if (!company) {
+      throw new Error(`Company with ID ${jobExists.company_id} does not exist`);
+    }
+
+    const vars = { ...APPLIED_JOB_VARS };
+    vars.verification_code = jobExists.name as string;
+    vars.subject = `You submitted a job application for ${company.company_name}`;
+    vars.title = vars.subject;
+
+    mailerService.sendEmail({
+      email: authUser.email,
+      subject: vars.subject,
+      content: mailerService.handleContent(APPLIED_JOB_VARS),
+    });
+
     return newJobApplication;
   },
 };
