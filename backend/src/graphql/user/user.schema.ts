@@ -3,15 +3,23 @@ const ShopSchema = gql`
   # ---------------------------------------------------------
   # Model Objects
   # ---------------------------------------------------------
+  type UserAttributes {
+    companyId: [String]
+    avatarUrl: [String]
+  }
+
   type User {
     id: ID!
     username: String!
     email: String!
     firstName: String
     lastName: String
+    imgUrl: String
     emailVerified: Boolean
     createdTimestamp: Int
     enabled: Boolean
+    companyId: ID
+    attributes: UserAttributes
   }
 
   # ---------------------------------------------------------
@@ -19,6 +27,7 @@ const ShopSchema = gql`
   # ---------------------------------------------------------
   extend type Query {
     user(id: ID!): User
+    authUser: User
     helloWord: String
   }
 

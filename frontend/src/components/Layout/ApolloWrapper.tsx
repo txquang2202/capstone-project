@@ -1,39 +1,35 @@
 'use client';
 
-import { ApolloLink, HttpLink } from '@apollo/client';
+import { ApolloLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import {
   ApolloNextAppProvider,
   NextSSRApolloClient,
   NextSSRInMemoryCache,
   SSRMultipartLink,
 } from '@apollo/experimental-nextjs-app-support/ssr';
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 
 const makeClient = () => {
-  const httpLink = new HttpLink({
-    uri:
-      (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000') + '/graphql',
-  });
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
-  // const authLink = setContext((_, { headers }) =>
-  //   getServerSession().then((session) => {
-  //     if (session) {
-  //       return getAccessToken().then((accessToken) => {
-  //         return {
-  //           headers: {
-  //             ...headers,
-  //             authorization: accessToken,
-  //           },
-  //         };
-  //       });
-  //     } else {
-  //       return {
-  //         headers: {
-  //           ...headers,
-  //         },
-  //       };
-  //     }
-  //   })
-  // );
+  const authLink = setContext(async (_, { headers }) => {
+    const { token } = await fetch('/api/auth/token').then((res) => res.json());
+
+    return {
+      headers: {
+        ...headers,
+        authorization: token,
+      },
+    };
+  });
+  const httpLink = createUploadLink({
+    uri: apiUrl + '/graphql',
+    headers: {
+      'Apollo-Require-Preflight': 'true',
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  }) as any;
 
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
@@ -44,9 +40,10 @@ const makeClient = () => {
             new SSRMultipartLink({
               stripDefer: true,
             }),
+            authLink,
             httpLink,
           ])
-        : ApolloLink.from([httpLink]),
+        : ApolloLink.from([authLink, httpLink]),
   });
 };
 

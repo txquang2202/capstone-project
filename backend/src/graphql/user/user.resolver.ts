@@ -14,6 +14,15 @@ const Query = {
     { keycloak }: ContextInterface,
   ): Promise<any> => {
     const userData = await keycloak.getUserData(id);
+    console.log("userData", userData);
+    return userData;
+  },
+  authUser: async (
+    _: any,
+    __: any,
+    { keycloak, authUser }: ContextInterface,
+  ): Promise<any> => {
+    const userData = await keycloak.getUserData(authUser.sub);
     return userData;
   },
   helloWord: async (): Promise<string> => {
@@ -21,5 +30,10 @@ const Query = {
   },
 };
 
+const User = {
+  imgUrl: (parent: any) => parent.attributes?.avatarUrl[0],
+  companyId: (parent: any) => parent.attributes?.companyId[0],
+};
+
 const Mutation = {};
-export default { Query, Mutation };
+export default { Query, Mutation, User };

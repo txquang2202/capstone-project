@@ -44,9 +44,9 @@ export const authOptions: AuthOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, account }) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async jwt({ token, account }: any) {
       const nowTimeStamp = Math.floor(Date.now() / 1000);
-
       if (account) {
         // account is only available the first time this callback is called on a new session (after the user signs in)
         token.decoded = jwtDecode(account.access_token);
@@ -73,12 +73,15 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token }) {
       // Send properties to the client
+
       session.access_token = encrypt(token.access_token || ''); // see utils/sessionTokenAccessor.js
       session.id_token = encrypt(token.id_token || ''); // see utils/sessionTokenAccessor.js
       session.roles =
         (token.decoded as { realm_access?: { roles: string[] } })?.realm_access
           ?.roles || [];
       session.error = token.error;
+      session.user.id = token.decoded?.sub || '';
+      // console.log('token', token.decoded);
       return session;
     },
   },

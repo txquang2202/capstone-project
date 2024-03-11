@@ -15,7 +15,7 @@ const Query = {
     const job = await prisma.job.findUnique({
       where: { id },
       include: {
-        company: true,
+        // company: true,
         job_working_location: {
           include: {
             company_location: {
@@ -38,7 +38,6 @@ const Query = {
   ): Promise<job[]> => {
     const jobs = await prisma.job.findMany({
       include: {
-        company: true,
         job_working_location: {
           include: {
             company_location: {
@@ -51,6 +50,14 @@ const Query = {
       },
     });
     return jobs;
+  },
+};
+
+const JobPayLoad = {
+  company: async (parent: job, _args: any, { prisma }: ContextInterface) => {
+    return await prisma.company.findUnique({
+      where: { id: parent.company_id },
+    });
   },
 };
 
@@ -134,4 +141,4 @@ const Mutation = {
   },
 };
 
-export default { Query, Mutation };
+export default { Query, Mutation, JobPayLoad };

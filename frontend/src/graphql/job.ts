@@ -77,13 +77,46 @@ export const GET_JOBS = gql`
   }
 `;
 
-export type ApplyJobResponse = DataResponse<'applyJob', Job>;
+export const SEARCH_JOBS = gql`
+  query SearchJob($query: String!) {
+    searchJob(query: $query) {
+      company_id
+      company {
+        brief_overview
+        company_facebook
+        company_name
+        company_size
+        company_type
+        company_website
+        country
+        id
+        ot_policy
+        overview
+        working_day
+      }
+      country
+      date_posted
+      id
+      is_closed
+      job_description
+      salary_from
+      salary_to
+      name
+      skill_demand
+      skills
+      top_3_reason
+      why_you_love_working_here
+      working_type
+    }
+  }
+`;
+
+export type ApplyJobResponse = DataResponse<'job', Job>;
 export type ApplyJobVariable = {
   input: {
     cover_letter: string;
     cv: string;
     job_id: string;
-    user_id: string;
   };
 };
 

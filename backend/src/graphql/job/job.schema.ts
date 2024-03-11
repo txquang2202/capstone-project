@@ -37,24 +37,17 @@ const JobSchema = gql`
     job_working_location: [JobWorkingLocation!]
   }
   #job_apply_description
-  type Applicant {
-    id: ID!
-    name: String!
-    email: String!
-    img_url: String!
-  }
-  type Job {
-    id: ID!
-    name: String!
-  }
+
   type JobApplication {
     id: ID!
+    job_id: ID!
+    user_id: ID!
     cv: String!
     cover_letter: String
     date_apply: Date!
     status: String!
-    job: Job!
-    user: Applicant!
+    job: JobPayLoad
+    user: User
   }
   #applying_job
   type JobApplying {
@@ -83,7 +76,6 @@ const JobSchema = gql`
   # Input Objects
   # ---------------------------------------------------------
   input ApplyJobInput {
-    user_id: ID!
     job_id: ID!
     cv: String! @constraint(minLength: 1)
     cover_letter: String
@@ -119,12 +111,18 @@ const JobSchema = gql`
     why_you_love_working_here: String!
     is_closed: Boolean!
   }
+  input updateJobApplication {
+    # cv: String!
+    # cover_letter: String
+    status: String!
+  }
   # ---------------------------------------------------------
   # Mutations
   # --------------------------------------------------------
 
   extend type Mutation {
     applyJob(input: ApplyJobInput!): JobApplying!
+    updateJobApplication(id: ID!, input: updateJobApplication): JobApplication!
     createJob(input: JobInput): JobPayLoad!
     updateJob(id: ID!, input: updateJobInput): JobPayLoad!
     deleteJob(id: ID!): JobPayLoad!

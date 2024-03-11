@@ -20,6 +20,21 @@ export type Job = {
   working_type: WorkingType;
 };
 
+export type JobApplication = {
+  id: string;
+  cv: string;
+  cover_letter: string;
+  date_apply: Date;
+  status: string;
+  job: Job;
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    imgUrl: string;
+  };
+};
+
 export enum WorkingType {
   AtOffice = 'At office',
   Hybrid = 'Hybrid',

@@ -1,9 +1,21 @@
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
 import { IconSearch } from '@/components/Icons';
 import { routes } from '@/configs/router';
 
 import { AppLink } from '../AppLink';
 
 const SearchBox = () => {
+  const router = useRouter();
+
+  const [keyword, setKeyword] = useState('');
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push(routes.search.path + '/' + keyword);
+  };
+
   return (
     <div className='search-box bg-header-gradient px-40 py-[64px]'>
       <h1 className='pb-[32px] font-bold text-white'>
@@ -49,10 +61,14 @@ const SearchBox = () => {
             id='search'
             type='text'
             placeholder='Nhập từ khoá theo kỹ năng, chức vụ, công ty...'
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
           />
           <AppLink
             nextLink={false}
-            href={routes.search.path}
+            // href={routes.search.path}
+            href='#'
+            onClick={handleSearch}
             intent='primary'
             size='xl'
             className='w-[240px]'
