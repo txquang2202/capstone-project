@@ -42,20 +42,6 @@ const Query = {
           },
         },
       },
-      include: {
-        job: {
-          include: {
-            company: true,
-          },
-        },
-        user: {
-          select: {
-            name: true,
-            email: true,
-            img_url: true,
-          },
-        },
-      },
     });
 
     return companyJobApplications;
@@ -68,11 +54,13 @@ const JobApplication = {
       where: { id: parent.job_id },
     });
   },
-  // user: async (parent: job_apply, _args: any, { prisma }: ContextInterface) => {
-  //   return await prisma.user.findUnique({
-  //     where: { id: parent.user_id },
-  //   });
-  // },
+  user: async (
+    parent: job_apply,
+    _args: any,
+    { keycloak }: ContextInterface,
+  ) => {
+    return await keycloak.getUserData(parent.user_id);
+  },
 };
 
 const Mutation = {

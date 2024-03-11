@@ -9,22 +9,7 @@ import JobAppliedDetails from '@/components/JobAppliedManagementPage/JobAppliedD
 import JobAppliedItem from '@/components/JobAppliedManagementPage/JobAppliedItem';
 import { GET_JOBS_APPLIED } from '@/graphql/jobs-applied';
 import { useLocale } from '@/locale';
-
-interface Job {
-  id: string;
-  cv: string;
-  cover_letter: string;
-  date_apply: string;
-  status: string;
-  job: {
-    name: string;
-  };
-  user: {
-    name: string;
-    email: string;
-    img_url: string;
-  };
-}
+import { JobApplication } from '@/types/job';
 
 export default function JobManageMentPage({
   params,
@@ -36,8 +21,8 @@ export default function JobManageMentPage({
     variables: { companyId },
   });
 
-  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
-  const [appliedJobs, setAppliedJobs] = useState<Job[]>([]);
+  const [selectedJob, setSelectedJob] = useState<JobApplication | null>(null);
+  const [appliedJobs, setAppliedJobs] = useState<JobApplication[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
   const { t } = useLocale();
 
@@ -56,7 +41,7 @@ export default function JobManageMentPage({
     ? appliedJobs.filter((job) => job.status === filterStatus)
     : appliedJobs;
 
-  const handleJobSelect = (job: Job) => {
+  const handleJobSelect = (job: JobApplication) => {
     console.log(selectedJob?.id);
     setSelectedJob(job);
   };
@@ -121,8 +106,8 @@ export default function JobManageMentPage({
                   <JobAppliedItem
                     key={job.id}
                     title={job.job.name}
-                    imageUrl={job.user.img_url}
-                    timePosted={formatDate(job.date_apply)}
+                    imageUrl={job.user.imgUrl}
+                    timePosted={formatDate(job.date_apply.toString())}
                     description={job.cover_letter}
                     status={job.status}
                     onSelect={() => handleJobSelect(job)}
@@ -139,10 +124,12 @@ export default function JobManageMentPage({
               <JobAppliedDetails
                 id={selectedJob.id}
                 title={selectedJob.job.name}
-                imageUrl={selectedJob.user.img_url}
-                applicantName={selectedJob.user.name}
+                imageUrl={selectedJob.user.imgUrl}
+                applicantName={
+                  selectedJob.user.firstName + ' ' + selectedJob.user.lastName
+                }
                 applicantEmail={selectedJob.user.email}
-                applicationDate={formatDate(selectedJob.date_apply)}
+                applicationDate={formatDate(selectedJob.date_apply.toString())}
                 status={selectedJob.status}
                 coverLetter={selectedJob.cover_letter}
                 nameCV={selectedJob.cv}

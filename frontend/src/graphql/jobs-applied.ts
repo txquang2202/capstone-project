@@ -14,9 +14,10 @@ export const GET_JOBS_APPLIED = gql`
         name
       }
       user {
-        name
+        firstName
+        lastName
         email
-        img_url
+        imgUrl
       }
     }
   }

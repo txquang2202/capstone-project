@@ -41,12 +41,13 @@ const JobSchema = gql`
   type JobApplication {
     id: ID!
     job_id: ID!
+    user_id: ID!
     cv: String!
     cover_letter: String
     date_apply: Date!
     status: String!
     job: JobPayLoad
-    # user: UserPayload
+    user: User
   }
   #applying_job
   type JobApplying {

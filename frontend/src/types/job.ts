@@ -26,6 +26,12 @@ export type JobApplication = {
   date_apply: Date;
   status: string;
   job: Job;
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    imgUrl: string;
+  };
 };
 
 export enum WorkingType {

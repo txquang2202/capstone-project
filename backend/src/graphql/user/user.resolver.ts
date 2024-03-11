@@ -21,5 +21,9 @@ const Query = {
   },
 };
 
+const User = {
+  imgUrl: () => "https://www.w3schools.com/w3images/avatar2.png",
+};
+
 const Mutation = {};
-export default { Query, Mutation };
+export default { Query, Mutation, User };
