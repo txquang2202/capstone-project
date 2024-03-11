@@ -13,7 +13,7 @@ import { useLocale } from '@/locale';
 import { JobApplication } from '@/types/job';
 
 export default function JobManageMentPage() {
-  const authUser = useAuthData();
+  const { authUser } = useAuthData();
 
   const [getJobsApplied, { loading, error, data }] =
     useLazyQuery(GET_JOBS_APPLIED);

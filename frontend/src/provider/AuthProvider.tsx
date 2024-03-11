@@ -8,11 +8,13 @@ import { AuthUser } from '@/types/auth';
 
 export const AuthContext = createContext<{
   authUser: AuthUser | null;
+  loading: boolean;
 }>({
   authUser: null,
+  loading: false,
 });
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const { data } = useQuery(AUTH_USER);
+  const { data, loading } = useQuery(AUTH_USER);
   const [authUser, setAuthUser] = useState<AuthUser | null>(null);
 
   useEffect(() => {
@@ -20,7 +22,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [data]);
 
   return (
-    <AuthContext.Provider value={{ authUser }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ authUser, loading }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
