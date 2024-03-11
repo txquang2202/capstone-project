@@ -9,6 +9,7 @@ const ShopSchema = gql`
     email: String!
     firstName: String
     lastName: String
+    imgUrl: String
     emailVerified: Boolean
     createdTimestamp: Int
     enabled: Boolean

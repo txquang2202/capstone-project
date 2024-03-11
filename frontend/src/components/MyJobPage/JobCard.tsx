@@ -22,6 +22,7 @@ type Props = {
   tags: string[];
   expires: number;
   isLiked: boolean;
+  isApplied?: boolean;
 };
 
 const JobCard = ({
@@ -35,6 +36,7 @@ const JobCard = ({
   tags,
   expires,
   isLiked,
+  isApplied = false,
 }: Props) => {
   const [liked, setLiked] = useState(isLiked);
   const { t } = useLocale();
@@ -99,8 +101,9 @@ const JobCard = ({
             intent='primary'
             size='large'
             className='h-[40px] text-[16px] font-[600] hover:bg-red-700 '
+            disabled={isApplied}
           >
-            {t('Apply now')}
+            {isApplied ? 'Applied' : t('Apply now')}
           </Button>
           <button onClick={handleLike}>
             <IconHeart

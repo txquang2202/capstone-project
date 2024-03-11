@@ -120,7 +120,7 @@ const JobDetail = ({ job }: Props) => {
                 {job.company.company_name}
               </div>
               <AppLink
-                href='/'
+                href='/companies'
                 className='text-hyperlink flex items-center gap-1 whitespace-nowrap'
               >
                 View company

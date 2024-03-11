@@ -9,22 +9,7 @@ import JobAppliedDetails from '@/components/JobAppliedManagementPage/JobAppliedD
 import JobAppliedItem from '@/components/JobAppliedManagementPage/JobAppliedItem';
 import { GET_JOBS_APPLIED } from '@/graphql/jobs-applied';
 import { useLocale } from '@/locale';
-
-interface Job {
-  id: string;
-  cv: string;
-  cover_letter: string;
-  date_apply: string;
-  status: string;
-  job: {
-    name: string;
-  };
-  user: {
-    name: string;
-    email: string;
-    img_url: string;
-  };
-}
+import { JobApplication } from '@/types/job';
 
 export default function JobManageMentPage({
   params,
@@ -35,14 +20,15 @@ export default function JobManageMentPage({
   const { loading, error, data } = useQuery(GET_JOBS_APPLIED, {
     variables: { companyId },
   });
-  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
-  const [appliedJobs, setAppliedJobs] = useState<Job[]>([]);
+
+  const [selectedJob, setSelectedJob] = useState<JobApplication | null>(null);
+  const [appliedJobs, setAppliedJobs] = useState<JobApplication[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
   const { t } = useLocale();
 
   React.useEffect(() => {
     if (!loading && !error && data) {
-      setAppliedJobs(data.companyJobApplications);
+      setAppliedJobs(JSON.parse(JSON.stringify(data.companyJobApplications)));
     }
   }, [loading, error, data]);
 
@@ -55,7 +41,8 @@ export default function JobManageMentPage({
     ? appliedJobs.filter((job) => job.status === filterStatus)
     : appliedJobs;
 
-  const handleJobSelect = (job: Job) => {
+  const handleJobSelect = (job: JobApplication) => {
+    console.log(selectedJob?.id);
     setSelectedJob(job);
   };
 
@@ -65,6 +52,19 @@ export default function JobManageMentPage({
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
+  };
+
+  const handleStatusUpdate = (newStatus: string) => {
+    if (selectedJob) {
+      const updatedJobs = appliedJobs.map((job) =>
+        job.id === selectedJob.id ? { ...job, status: newStatus } : job
+      );
+      setSelectedJob((job) => {
+        if (!job) return job;
+        return { ...job, status: newStatus };
+      });
+      setAppliedJobs([...updatedJobs]);
+    }
   };
 
   return (
@@ -89,9 +89,8 @@ export default function JobManageMentPage({
                     onChange={handleFilterChange}
                   >
                     <option value='all'>All</option>
-                    <option value='Hired'>Hired</option>
+                    <option value='Accepted'>Accepted</option>
                     <option value='Submitting'>Submitting</option>
-                    <option value='Interviewing'>Interviewing</option>
                   </select>
                 </div>
               </div>
@@ -107,8 +106,8 @@ export default function JobManageMentPage({
                   <JobAppliedItem
                     key={job.id}
                     title={job.job.name}
-                    imageUrl={job.user.img_url}
-                    timePosted={formatDate(job.date_apply)}
+                    imageUrl={job.user.imgUrl}
+                    timePosted={formatDate(job.date_apply.toString())}
                     description={job.cover_letter}
                     status={job.status}
                     onSelect={() => handleJobSelect(job)}
@@ -123,14 +122,18 @@ export default function JobManageMentPage({
           <div className='col-span-1  flex flex-col justify-center md:col-span-2 lg:col-span-2'>
             {selectedJob ? (
               <JobAppliedDetails
+                id={selectedJob.id}
                 title={selectedJob.job.name}
-                imageUrl={selectedJob.user.img_url}
-                applicantName={selectedJob.user.name}
+                imageUrl={selectedJob.user.imgUrl}
+                applicantName={
+                  selectedJob.user.firstName + ' ' + selectedJob.user.lastName
+                }
                 applicantEmail={selectedJob.user.email}
-                applicationDate={formatDate(selectedJob.date_apply)}
+                applicationDate={formatDate(selectedJob.date_apply.toString())}
                 status={selectedJob.status}
                 coverLetter={selectedJob.cover_letter}
                 nameCV={selectedJob.cv}
+                onUpdateStatus={handleStatusUpdate}
               />
             ) : (
               <p className='py-4 text-center text-gray-500'>

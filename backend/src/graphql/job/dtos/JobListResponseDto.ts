@@ -1,3 +1,3 @@
-import { company, job } from "@prisma/client";
+import { job } from "@prisma/client";
 
-export type JobListResponseDto = job & { company: company };
+export type JobListResponseDto = job;
