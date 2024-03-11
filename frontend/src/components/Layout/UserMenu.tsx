@@ -9,6 +9,7 @@ import {
   IconSettings,
   IconUser,
 } from '@/components/Icons';
+import useAuthData from '@/hooks/useAuthData';
 
 import { AppLink } from '../AppLink';
 
@@ -24,6 +25,7 @@ const UserMenu = () => {
       signOut({ callbackUrl: '/' });
     }
   }, [session, status]);
+  const { authUser, loading } = useAuthData();
 
   const keycloakSessionLogOut = async () => {
     try {
@@ -35,13 +37,13 @@ const UserMenu = () => {
 
   if (status === 'loading') return null;
 
-  return session ? (
+  return session && authUser ? (
     <li className='nav-item main-menu relative'>
       <div className='user-avatar-wrapper flex items-center'>
         <div className='sign-in-user-avatar'>
           <img
             className='user-avatar'
-            src='https://lh3.googleusercontent.com/-mt9DfcfLMe4/AAAAAAAAAAI/AAAAAAAAA30/QJ-xWs2aI98/photo.jpg?sz=50'
+            src={authUser.imgUrl}
             width={32}
             height={32}
             alt=''
@@ -54,26 +56,41 @@ const UserMenu = () => {
       </div>
       <div className='bg-it-black sub-menu vbit-menu absolute top-full'>
         <ul className='bg-it-black relative m-0 p-0' data-controller='sub-menu'>
-          <li className='menu-title small-text category px-4'>
-            <Link
-              className='text-reset flex items-center'
-              data-controller='utm-tracking'
-              href='/profile-cv'
-            >
-              <IconUser className='icon-md' />
-              <span className='ms-2'>Hồ sơ và CV</span>
-            </Link>
-          </li>
-          <li className='menu-title small-text category px-4'>
-            <Link
-              className='text-reset flex items-center'
-              data-controller='utm-tracking'
-              href='/my-jobs'
-            >
-              <IconBriefcase className='icon-md' />
-              <span className='ms-2'>Việc làm của tôi</span>
-            </Link>
-          </li>
+          {authUser.companyId ? (
+            <li className='menu-title small-text category px-4'>
+              <Link
+                className='text-reset flex items-center'
+                data-controller='utm-tracking'
+                href='/applied-management'
+              >
+                <IconBriefcase className='icon-md' />
+                <span className='ms-2'>Quản lý ứng viên</span>
+              </Link>
+            </li>
+          ) : (
+            <>
+              <li className='menu-title small-text category px-4'>
+                <Link
+                  className='text-reset flex items-center'
+                  data-controller='utm-tracking'
+                  href='/profile-cv'
+                >
+                  <IconUser className='icon-md' />
+                  <span className='ms-2'>Hồ sơ và CV</span>
+                </Link>
+              </li>
+              <li className='menu-title small-text category px-4'>
+                <Link
+                  className='text-reset flex items-center'
+                  data-controller='utm-tracking'
+                  href='/my-jobs'
+                >
+                  <IconBriefcase className='icon-md' />
+                  <span className='ms-2'>Việc làm của tôi</span>
+                </Link>
+              </li>
+            </>
+          )}
 
           <li className='menu-title small-text category px-4'>
             <Link
@@ -105,20 +122,22 @@ const UserMenu = () => {
       </div>
     </li>
   ) : (
-    <li className='nav-item'>
-      <AppLink
-        hrefLang='vi-VN'
-        rel='nofollow'
-        className='text-it-white'
-        href='#'
-        onClick={(e) => {
-          e.preventDefault();
-          signIn('keycloak');
-        }}
-      >
-        Đăng Nhập/Đăng Ký
-      </AppLink>
-    </li>
+    !loading && (
+      <li className='nav-item'>
+        <AppLink
+          hrefLang='vi-VN'
+          rel='nofollow'
+          className='text-it-white'
+          href='#'
+          onClick={(e) => {
+            e.preventDefault();
+            signIn('keycloak');
+          }}
+        >
+          Đăng Nhập/Đăng Ký
+        </AppLink>
+      </li>
+    )
   );
 };
 
