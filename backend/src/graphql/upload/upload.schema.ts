@@ -11,8 +11,8 @@ const UploadSchema = gql`
     mimetype: String!
     encoding: String!
     url: String!
-    size: Int!
-    lastModified: Date!
+    size: Int
+    lastModified: Date
   }
 
   # ---------------------------------------------------------

@@ -4,69 +4,69 @@
     "user_id": "09c863ee-7f79-4598-9901-097612d468cb",
     "job_id": "248fd965-a6e1-411f-a719-5f5ebe440ca2",
     "cover_letter": "I am excited about the Senior Software Engineer position at TechSolutions. My expertise in Java and the Spring Framework makes me an ideal candidate for this role.",
-    "cv": "http://example.com/user1_cv.pdf"
+    "cv": "https://cdn.findyourjob.tech/usr/cv.pdf"
   },
   {
     "id": "debcc5ab-1ef0-4d7d-979f-7b329b9593e5",
-    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "user_id": "52fe191d-abc8-4087-a045-e2244b43df6e",
     "job_id": "940c0670-063e-4f2f-9b6d-438cd714eb2a",
     "cover_letter": "As a seasoned Data Scientist, I am eager to contribute my skills to InnovateTech's projects. My experience with data analysis and machine learning aligns well with the requirements of the role.",
-    "cv": "http://example.com/user2_cv.pdf"
+    "cv": "https://cdn.findyourjob.tech/usr/cv.pdf"
   },
   {
     "id": "2f4e908c-9e52-4db3-b8eb-c00219a35773",
-    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "user_id": "d5cc893a-12ce-418b-9756-b79a7401efe2",
     "job_id": "7981ebda-7b55-42df-bfd6-7bae92637493",
     "cover_letter": "I am applying for the UX/UI Designer position at TechSolutions. My creative skills in UI/UX design, along with proficiency in Adobe Creative Suite, make me a valuable addition to the team.",
-    "cv": "http://example.com/user1_cv.pdf"
+    "cv": "https://cdn.findyourjob.tech/usr/cv.pdf"
   },
   {
     "id": "1eb5b209-fac3-4294-9baf-2643da6f3597",
-    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "user_id": "52fe191d-abc8-4087-a045-e2244b43df6e",
     "job_id": "8f9837ab-de19-47b9-aa1b-c370c0ac6cc0",
     "cover_letter": "I am excited about the Senior Android Developer role at InnovateTech. My experience in Android app development and proficiency in Kotlin position me as a strong candidate for this position.",
-    "cv": "http://example.com/user2_cv.pdf"
+    "cv": "https://cdn.findyourjob.tech/usr/cv.pdf"
   },
   {
     "id": "33f5b21e-3398-4742-83a2-cd4d7e514a9b",
-    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "user_id": "d5cc893a-12ce-418b-9756-b79a7401efe2",
     "job_id": "34d8afc8-57c1-4edc-a6b7-43434c1db46d",
     "cover_letter": "I am applying for the Environmental Analyst position at GreenInnovations. My background in environmental science and data analysis aligns with the responsibilities of the role.",
-    "cv": "http://example.com/user1_cv.pdf"
+    "cv": "https://cdn.findyourjob.tech/usr/cv.pdf"
   },
   {
     "id": "8065a72c-2574-4ed6-b21e-30ed9f64cdb8",
-    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "user_id": "52fe191d-abc8-4087-a045-e2244b43df6e",
     "job_id": "795fe486-50f4-4dce-9f44-57087686f2a8",
     "cover_letter": "As an IT Consultant, I am eager to contribute to ConsultTech's diverse consulting projects. My skills in project management and client communication make me well-suited for this role.",
-    "cv": "http://example.com/user2_cv.pdf"
+    "cv": "https://cdn.findyourjob.tech/usr/cv.pdf"
   },
   {
     "id": "6a8b653d-288a-48b1-8f1e-e0d7ed0786c1",
-    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "user_id": "d5cc893a-12ce-418b-9756-b79a7401efe2",
     "job_id": "13faa412-38dc-4bb1-92dd-1b3194e2ed50",
     "cover_letter": "I am excited about the role of a Recruitment Specialist at TalentSearch. My experience in talent acquisition and strong interviewing skills make me a valuable asset to the team.",
-    "cv": "http://example.com/user1_cv.pdf"
+    "cv": "https://cdn.findyourjob.tech/usr/cv.pdf"
   },
   {
     "id": "02c9fee8-2b79-407e-ad5c-e4914d86b35c",
-    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "user_id": "52fe191d-abc8-4087-a045-e2244b43df6e",
     "job_id": "b8f65670-e0b6-4bb8-b5be-e634d7bc6f3c",
     "cover_letter": "I am applying for the Remote Software Tester position at ConsultTech. My expertise in manual and automated testing, coupled with a keen eye for detail, positions me as a strong candidate.",
-    "cv": "http://example.com/user2_cv.pdf"
+    "cv": "https://cdn.findyourjob.tech/usr/cv.pdf"
   },
   {
     "id": "92f62caa-bb0c-4bed-9ad3-67bddad1c9dc",
-    "user_id": "a50efdd4-03d1-4885-bde0-8f6d337b6b20",
+    "user_id": "d5cc893a-12ce-418b-9756-b79a7401efe2",
     "job_id": "84bd1f1b-965d-408d-b821-f651f21789b9",
     "cover_letter": "I am eager to contribute as an HR Generalist at TalentSearch. My experience in employee relations and conflict resolution, coupled with excellent interpersonal skills, aligns with the requirements of the role.",
-    "cv": "http://example.com/user1_cv.pdf"
+    "cv": "https://cdn.findyourjob.tech/usr/cv.pdf"
   },
   {
     "id": "ad52d04d-619a-4189-8345-0944cbd27695",
-    "user_id": "7b01345c-a780-46d7-af1a-1c140f4d4df8",
+    "user_id": "52fe191d-abc8-4087-a045-e2244b43df6e",
     "job_id": "c1a4244b-6297-4708-a4bc-cdc62583e99b",
     "cover_letter": "As a Community Engagement Coordinator, I am excited about the opportunity at GreenInnovations. My experience in community outreach and event planning aligns with the goals of the position.",
-    "cv": "http://example.com/user2_cv.pdf"
+    "cv": "https://cdn.findyourjob.tech/usr/cv.pdf"
   }
 ]

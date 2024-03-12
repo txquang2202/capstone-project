@@ -11,7 +11,7 @@ export interface UploadedFileResponse {
   mimetype: string;
   encoding: string;
   url: string;
-  size: number;
+  size?: number;
   lastModified?: Date;
 }
 

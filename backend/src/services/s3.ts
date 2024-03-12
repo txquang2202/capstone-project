@@ -104,9 +104,9 @@ export class AWSS3Uploader implements ApolloServerFileUploads.IUploader {
 
     // Start the stream
     // const result = await uploadStream.promise;
-    const { size, lastModified } = await this.getFileResolver(_, {
-      key: prefix + "/" + filename,
-    });
+    // const { size, lastModified } = await this.getFileResolver(_, {
+    //   key: prefix + "/" + filename,
+    // });
 
     return {
       filename,
@@ -114,8 +114,8 @@ export class AWSS3Uploader implements ApolloServerFileUploads.IUploader {
       encoding,
       // url: result.Location,
       url: `https://${this.config.destinationBucketName}/${prefix}/${filename}`,
-      size,
-      lastModified,
+      // size: fileSize,
+      // lastModified: new Date(),
     };
   }
 }

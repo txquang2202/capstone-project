@@ -115,6 +115,33 @@ const Mutation = {
 
     return updatedJob;
   },
+  sendAllJobsToEls: async (
+    _: any,
+    { ids }: { ids: string[] },
+    { prisma, kafkaProducer }: ContextInterface,
+  ): Promise<job[] | null> => {
+    const jobs = await prisma.job.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+    });
+
+    if (!jobs) {
+      throw new Error(`Job with IDs ${ids} does not exist`);
+    }
+
+    jobs.forEach((job) => {
+      kafkaProducer.send(process.env.KAFKA_TOPIC_JOB || "", {
+        index: process.env.ELASTIC_JOB_INDEX || "job",
+        event: EVENT.CREATE,
+        data: job,
+      });
+    });
+
+    return jobs;
+  },
 
   // Delete a job by ID
   deleteJob: async (
