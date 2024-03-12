@@ -22,7 +22,7 @@ import { WorkingType } from '@/types/job';
 
 import { Button } from '../Button';
 import { Checkbox } from '../Checkbox';
-import { IconPlus } from '../Icons';
+import { CustomMultiSelect } from '../CustomMultiSelect';
 import { Radio, RadioGroup } from '../Radio';
 import { RangeInput } from '../RangeInput';
 import { TextEditor } from '../TextEditor/';
@@ -113,6 +113,7 @@ const AddJob = () => {
   const { isEmptyDraftJs } = useEmptyText();
   const router = useRouter();
   const [range, setRange] = useState(RANGE.USD);
+  const [reasons, setReasons] = useState<string[]>([]);
 
   const { fields, onChangeField, error, handleSubmit } = useForm<AddJob>({
     defaultState: {
@@ -254,24 +255,16 @@ const AddJob = () => {
         className='items-start'
         title='Top 3 reasons to join us'
         content={
-          <MultiSelect
+          <CustomMultiSelect
             size='lg'
             searchable
             placeholder='Top 3 reasons to join us'
             value={fields.top_3_reason}
-            data={[
-              'International projects, global development team',
-              'Monthly Allowances',
-              'A 90-minute break between sessions',
-            ]}
-            nothingFoundMessage={
-              <div className='text-primary flex cursor-pointer items-center justify-center gap-2'>
-                <IconPlus /> Add reasons
-              </div>
-            }
+            data={reasons}
             onChange={(value) => onChangeField('top_3_reason', value)}
             styles={{ inputField: { boxShadow: 'none', paddingLeft: 0 } }}
             error={error.top_3_reason}
+            onChangeData={setReasons}
           />
         }
       />
