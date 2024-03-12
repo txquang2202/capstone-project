@@ -12,6 +12,7 @@ import {
   CreateJobResponse,
   CreateJobVariable,
 } from '@/graphql/job';
+import useAuthData from '@/hooks/useAuthData';
 import useEmptyText from '@/hooks/useEmptyText';
 import { useForm } from '@/hooks/useForm';
 import { cn } from '@/lib/classNames';
@@ -105,6 +106,7 @@ const RANGE: Record<
 
 const AddJob = () => {
   const { t } = useLocale();
+  const { authUser } = useAuthData();
   const [mutate] = useMutation<CreateJobResponse, CreateJobVariable>(
     CREATE_JOB
   );
@@ -149,11 +151,14 @@ const AddJob = () => {
     },
   });
 
+  console.log('authUser', authUser);
+
   const onSubmit = () => {
     mutate({
       variables: {
         input: {
-          company_id: '9bf98d48-29c9-4fbd-a341-cfe940028e66',
+          company_id:
+            authUser?.companyId || '9bf98d48-29c9-4fbd-a341-cfe940028e66',
           country: fields.country.join(', '),
           hide_salary: fields.hide_salary,
           is_closed: false,
