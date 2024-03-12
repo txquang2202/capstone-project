@@ -313,6 +313,17 @@ export const routes = {
       },
     },
   }),
+  viewCV: route({
+    path: '/view-cv',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec',
+      },
+    },
+  }),
 };
 
 export const getRouteByPath = (path = '') => {

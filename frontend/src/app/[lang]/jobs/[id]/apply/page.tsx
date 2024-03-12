@@ -13,6 +13,7 @@ import { IconChevronLeft, IconEye } from '@/components/Icons';
 import { InputBox } from '@/components/InputBox';
 import { CancelApply } from '@/components/Modal';
 import { Radio, RadioGroup } from '@/components/Radio';
+import { routes } from '@/configs/router';
 import {
   APPLY_JOBS,
   ApplyJobResponse,
@@ -150,10 +151,14 @@ const ApplyJob = () => {
                 <Radio value='default' size='large' />
                 <div>
                   Use your current CV
-                  <div className='text-hyperlink mt-3 flex items-center gap-2'>
+                  <a
+                    target='_blank'
+                    href={routes.viewCV.path}
+                    className='text-hyperlink mt-3 flex items-center gap-2'
+                  >
                     VyDo-Resume.pdf
                     <IconEye size={20} />
-                  </div>
+                  </a>
                 </div>
               </div>
               <div
