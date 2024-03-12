@@ -67,7 +67,8 @@ const JobItem = ({ company, isHot, selected, onSelect, ...job }: Props) => {
         </div>
         <div className='flex items-center gap-1'>
           <IconMapPin size={16} color='var(--dark-grey)' />
-          {job.country}
+          {/* {[].join('-')} */}
+          {company.country}
         </div>
         <div className='mb-2 mt-3 flex items-center gap-2'>
           {job.skills &&

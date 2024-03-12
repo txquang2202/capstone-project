@@ -35,6 +35,7 @@ const JobSchema = gql`
     # date_apply: Date!
     is_closed: Boolean!
     job_working_location: [JobWorkingLocation!]
+    was_applied: Boolean
   }
   #job_apply_description
 
@@ -67,7 +68,7 @@ const JobSchema = gql`
     jobApplications: [JobApplication!]
     jobApplication(id: ID!): JobApplication
     searchJob(query: String!, skip: Int, take: Int): [JobPayLoad]
-    companyJobApplications(companyId: ID!): [JobApplication!]!
+    companyJobApplications(companyId: ID!): [JobApplication]
     job(id: ID!): JobPayLoad
 
     jobs: [JobPayLoad!]
@@ -126,6 +127,7 @@ const JobSchema = gql`
     createJob(input: JobInput): JobPayLoad!
     updateJob(id: ID!, input: updateJobInput): JobPayLoad!
     deleteJob(id: ID!): JobPayLoad!
+    sendAllJobsToEls: [JobPayLoad]
   }
 `;
 

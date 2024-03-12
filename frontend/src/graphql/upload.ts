@@ -7,8 +7,6 @@ export const UPLOAD_FILE = gql`
       mimetype
       encoding
       url
-      size
-      lastModified
     }
   }
 `;
@@ -17,8 +15,6 @@ export type FilePayload = {
   mimetype: string;
   encoding: string;
   url: string;
-  size: number;
-  lastModified: Date;
 };
 
 export type UploadFileResponse = DataResponse<'singleUpload', FilePayload>;

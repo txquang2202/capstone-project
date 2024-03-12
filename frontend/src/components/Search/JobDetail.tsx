@@ -56,8 +56,9 @@ const JobDetail = ({ job }: Props) => {
             href={routes.applyJob.pathParams({ id: job.id })}
             size='medium'
             className='flex-1'
+            disabled={job.was_applied}
           >
-            Apply
+            {job.was_applied ? 'Applied' : 'Apply'}
           </Button>
           <IconHeart color='var(--primary)' size={32} />
         </div>
