@@ -2,6 +2,7 @@
 
 import { useSuspenseQuery } from '@apollo/client';
 import { Autocomplete, Select } from '@mantine/core';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/Button';
@@ -41,8 +42,10 @@ const OPTIONS = [
 ];
 
 export default function Page({ params }: { params: { keyword: string } }) {
+  const [keyword, setKeyword] = useState(params.keyword);
   const [selected, setSelected] = useState(0);
   const [page, setPage] = useState(0);
+  const router = useRouter();
   const { data } = useSuspenseQuery<DataResponse<'searchJob', Job[]>>(
     SEARCH_JOBS,
     {
@@ -53,6 +56,10 @@ export default function Page({ params }: { params: { keyword: string } }) {
   );
 
   const jobs = data?.searchJob || [];
+
+  const handleSearch = () => {
+    router.push(`/it-jobs/${keyword}`);
+  };
 
   return (
     <div>
@@ -74,8 +81,15 @@ export default function Page({ params }: { params: { keyword: string } }) {
             size='lg'
             className='it-input flex-[3] [&_input]:h-[56px]'
             placeholder='Nhập từ khoá theo kỹ năng, chức vụ, công ty...'
+            value={keyword}
+            onChange={(value) => setKeyword(value)}
           />
-          <Button size='xl' icon={<IconSearch />} className='flex-1'>
+          <Button
+            size='xl'
+            icon={<IconSearch />}
+            className='flex-1'
+            onClick={handleSearch}
+          >
             Tìm kiếm
           </Button>
         </div>

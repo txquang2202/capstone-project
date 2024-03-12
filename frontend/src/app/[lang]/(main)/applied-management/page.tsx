@@ -17,7 +17,7 @@ export default function JobManageMentPage() {
 
   const [getJobsApplied, { loading, error, data }] =
     useLazyQuery(GET_JOBS_APPLIED);
-
+  console.log('data', data);
   const [selectedJob, setSelectedJob] = useState<JobApplication | null>(null);
   const [appliedJobs, setAppliedJobs] = useState<JobApplication[]>([]);
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
@@ -25,6 +25,7 @@ export default function JobManageMentPage() {
 
   useEffect(() => {
     if (authUser && authUser.companyId) {
+      console.log('authUser.companyId', authUser.companyId);
       getJobsApplied({
         variables: {
           companyId: authUser.companyId,

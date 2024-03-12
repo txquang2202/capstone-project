@@ -79,6 +79,7 @@ export const SEARCH_JOBS = gql`
       why_you_love_working_here
       working_type
       was_applied
+      unit
     }
   }
 `;

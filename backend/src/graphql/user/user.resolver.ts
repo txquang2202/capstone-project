@@ -31,7 +31,9 @@ const Query = {
 };
 
 const User = {
-  imgUrl: (parent: any) => parent.attributes?.avatarUrl?.[0],
+  imgUrl: (parent: any) =>
+    parent.attributes?.avatarUrl?.[0] ||
+    "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
   companyId: (parent: any) => parent.attributes?.companyId?.[0],
 };
 

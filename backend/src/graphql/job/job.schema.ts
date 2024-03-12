@@ -68,7 +68,7 @@ const JobSchema = gql`
     jobApplications: [JobApplication!]
     jobApplication(id: ID!): JobApplication
     searchJob(query: String!, skip: Int, take: Int): [JobPayLoad]
-    companyJobApplications(companyId: ID!): [JobApplication!]!
+    companyJobApplications(companyId: ID!): [JobApplication]
     job(id: ID!): JobPayLoad
 
     jobs: [JobPayLoad!]
