@@ -127,6 +127,7 @@ const JobSchema = gql`
     createJob(input: JobInput): JobPayLoad!
     updateJob(id: ID!, input: updateJobInput): JobPayLoad!
     deleteJob(id: ID!): JobPayLoad!
+    sendAllJobsToEls: [JobPayLoad]
   }
 `;
 

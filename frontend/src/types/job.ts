@@ -3,7 +3,7 @@ import { type Company } from './company';
 export type Job = {
   company_id: string;
   company: Company;
-  country: null;
+  country: string;
   date_posted: Date;
   id: string;
   is_closed: boolean;

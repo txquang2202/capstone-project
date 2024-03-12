@@ -12,7 +12,8 @@
     "hide_salary": false,
     "salary_from": 80000,
     "salary_to": 120000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "13faa412-38dc-4bb1-92dd-1b3194e2ed50",
@@ -27,7 +28,8 @@
     "hide_salary": false,
     "salary_from": 70000,
     "salary_to": 100000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "248fd965-a6e1-411f-a719-5f5ebe440ca2",
@@ -42,7 +44,8 @@
     "hide_salary": false,
     "salary_from": 60000,
     "salary_to": 90000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "84bd1f1b-965d-408d-b821-f651f21789b9",
@@ -57,7 +60,8 @@
     "hide_salary": false,
     "salary_from": 80000,
     "salary_to": 110000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "7981ebda-7b55-42df-bfd6-7bae92637493",
@@ -72,7 +76,8 @@
     "hide_salary": false,
     "salary_from": 55000,
     "salary_to": 80000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "795fe486-50f4-4dce-9f44-57087686f2a8",
@@ -87,7 +92,8 @@
     "hide_salary": false,
     "salary_from": 60000,
     "salary_to": 90000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "c1a4244b-6297-4708-a4bc-cdc62583e99b",
@@ -102,7 +108,8 @@
     "hide_salary": false,
     "salary_from": 50000,
     "salary_to": 70000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "940c0670-063e-4f2f-9b6d-438cd714eb2a",
@@ -117,7 +124,8 @@
     "hide_salary": false,
     "salary_from": 80000,
     "salary_to": 120000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "b8f65670-e0b6-4bb8-b5be-e634d7bc6f3c",
@@ -132,7 +140,8 @@
     "hide_salary": false,
     "salary_from": 60000,
     "salary_to": 100000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "34d8afc8-57c1-4edc-a6b7-43434c1db46d",
@@ -147,7 +156,8 @@
     "hide_salary": false,
     "salary_from": 10000,
     "salary_to": 100000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "1a7b971f-89c8-4b8a-91b4-2634e5a32056",
@@ -162,7 +172,8 @@
     "hide_salary": false,
     "salary_from": 70000,
     "salary_to": 100000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "f8c6c5a7-25a0-4823-bb49-8d7e9b8498b8",
@@ -177,7 +188,8 @@
     "hide_salary": false,
     "salary_from": 90000,
     "salary_to": 130000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "d1e1a47d-84b5-4d7b-9c9a-4b2a71e2eae1",
@@ -192,7 +204,8 @@
     "hide_salary": false,
     "salary_from": 60000,
     "salary_to": 90000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "6d9a0427-40df-45f0-bb44-121240b169e7",
@@ -207,7 +220,8 @@
     "hide_salary": false,
     "salary_from": 80000,
     "salary_to": 110000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "23b8cb11-5c71-4863-b186-85e9ad5e4789",
@@ -222,7 +236,8 @@
     "hide_salary": false,
     "salary_from": 70000,
     "salary_to": 100000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "f2f16744-9eb7-4c7e-8df0-7b165d9c3cfc",
@@ -237,7 +252,8 @@
     "hide_salary": false,
     "salary_from": 90000,
     "salary_to": 120000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "db04bade-7073-4b6d-b20b-8fc6125c8f48",
@@ -252,7 +268,8 @@
     "hide_salary": false,
     "salary_from": 100000,
     "salary_to": 140000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "97e10d35-d1eb-4a67-8e32-2d3a49bc2337",
@@ -267,7 +284,8 @@
     "hide_salary": false,
     "salary_from": 80000,
     "salary_to": 110000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "829cd084-8a41-4cc0-8e5f-5ef55b85f72b",
@@ -282,7 +300,8 @@
     "hide_salary": false,
     "salary_from": 75000,
     "salary_to": 100000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "b85d0e34-e67b-4ab5-bac6-3f1b6c352ed5",
@@ -297,7 +316,8 @@
     "hide_salary": false,
     "salary_from": 85000,
     "salary_to": 120000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "bf4f0c34-7be2-4b4d-aa01-fb3a3e7f5a7f",
@@ -312,7 +332,8 @@
     "hide_salary": false,
     "salary_from": 85000,
     "salary_to": 110000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "5c7e3b78-715e-4a36-b0ed-d45844f77a9f",
@@ -327,7 +348,8 @@
     "hide_salary": false,
     "salary_from": 80000,
     "salary_to": 120000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "c6b17ef0-ba69-498d-95fb-eb9a74c9b4a4",
@@ -342,7 +364,8 @@
     "hide_salary": false,
     "salary_from": 90000,
     "salary_to": 130000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "c1f00cd5-f97f-4261-bfb7-d80b3b0f18c2",
@@ -357,7 +380,8 @@
     "hide_salary": false,
     "salary_from": 95000,
     "salary_to": 130000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "5f8452aa-9e77-486e-bca5-8db2ee118e1d",
@@ -372,7 +396,8 @@
     "hide_salary": false,
     "salary_from": 85000,
     "salary_to": 120000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "a1b75bbd-d6e0-4fd1-8c58-ebd384f72863",
@@ -387,7 +412,8 @@
     "hide_salary": false,
     "salary_from": 95000,
     "salary_to": 130000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "754628a0-7c5b-4e1c-8136-c89cb86b4482",
@@ -402,7 +428,8 @@
     "hide_salary": false,
     "salary_from": 90000,
     "salary_to": 120000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "571af4d1-3d43-4417-932a-729ffdb4a4a6",
@@ -417,7 +444,8 @@
     "hide_salary": false,
     "salary_from": 100000,
     "salary_to": 140000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "ae0b7a8b-d53c-45d4-8de3-3a5434b4fd7c",
@@ -432,7 +460,8 @@
     "hide_salary": false,
     "salary_from": 95000,
     "salary_to": 130000,
-    "unit": "USD"
+    "unit": "USD",
+    "country": "VN"
   },
   {
     "id": "c8a6a57d-b0c7-4084-bb1f-fa184e2141e1",
