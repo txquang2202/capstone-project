@@ -1,6 +1,6 @@
 'use client';
 
-import { TextInput } from '@mantine/core';
+import { PasswordInput, TextInput } from '@mantine/core';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -72,14 +72,14 @@ export default function Page() {
                 placeholder={t('userNameText')}
                 classNames={{ label: 'mb-1' }}
               />
-              <TextInput
+              <PasswordInput
                 withAsterisk
                 size='md'
                 label={t('emailAddressText')}
                 placeholder={t('emailAddressText')}
                 classNames={{ label: 'mb-1' }}
               />
-              <TextInput
+              <PasswordInput
                 withAsterisk
                 size='md'
                 label={t('passwordText')}

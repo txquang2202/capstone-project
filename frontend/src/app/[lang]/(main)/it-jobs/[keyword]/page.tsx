@@ -42,7 +42,7 @@ const OPTIONS = [
 ];
 
 export default function Page({ params }: { params: { keyword: string } }) {
-  const [keyword, setKeyword] = useState(params.keyword);
+  const [keyword, setKeyword] = useState(decodeURI(params.keyword));
   const [selected, setSelected] = useState(0);
   const [page, setPage] = useState(0);
   const router = useRouter();
@@ -50,7 +50,7 @@ export default function Page({ params }: { params: { keyword: string } }) {
     SEARCH_JOBS,
     {
       variables: {
-        query: params.keyword,
+        query: decodeURI(params.keyword),
       },
     }
   );

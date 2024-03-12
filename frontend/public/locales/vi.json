@@ -173,9 +173,7 @@
   "Interviewing": "Đang phỏng vấn",
   "Resume": "Hồ sơ cá nhân",
 
-  "job_type": {
-    "hybridText": "Hybrid",
-    "remoteText": "Remote",
-    "onsiteText": "Onsite"
-  }
+  "onsiteText": "On-site",
+  "hybridText": "Hybrid",
+  "remoteText": "Remote"
 }

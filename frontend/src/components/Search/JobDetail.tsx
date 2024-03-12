@@ -1,6 +1,8 @@
 import { routes } from '@/configs/router';
+import { JOB_TYPE_TEXT } from '@/constant/job';
 import dayjs from '@/lib/dayjs';
 import { formatCurrency } from '@/lib/number';
+import { useLocale } from '@/locale';
 import { Job } from '@/types/job';
 
 import { AppLink } from '../AppLink';
@@ -13,13 +15,14 @@ import {
   IconRemote,
   IconSalary,
 } from '../Icons';
-import { JOB_TYPE_TEXT } from './JobItem';
 
 type Props = {
   job: Job;
 };
 
 const JobDetail = ({ job }: Props) => {
+  const { t } = useLocale();
+
   return (
     <div className='rounded-lg bg-white'>
       <div className='border-silver-grey mx-6 border-b pb-2 pt-6'>
@@ -38,8 +41,13 @@ const JobDetail = ({ job }: Props) => {
                 ? "You'll love it"
                 : `${formatCurrency(
                     job.salary_from || 0,
-                    job.unit
-                  )} - ${formatCurrency(job.salary_to || 0, job.unit)}`}
+                    job.unit,
+                    job.unit === 'VND' ? 'vi-VN' : 'en'
+                  )} - ${formatCurrency(
+                    job.salary_to || 0,
+                    job.unit,
+                    job.unit === 'VND' ? 'vi-VN' : 'en'
+                  )}`}
             </div>
           </div>
         </div>
@@ -63,7 +71,7 @@ const JobDetail = ({ job }: Props) => {
           </div>
           <div className='flex items-center gap-1'>
             <IconRemote size={16} viewBox='0 0 24 25' color='var(--dark-grey' />
-            {JOB_TYPE_TEXT[job.working_type]}
+            {t(JOB_TYPE_TEXT[job.working_type])}
           </div>
           <div className='flex items-center gap-1'>
             <IconClock size={16} color='var(--dark-grey' />
@@ -71,11 +79,12 @@ const JobDetail = ({ job }: Props) => {
           </div>
           <div className='flex items-center gap-1'>
             <span className='mr-3'>Skills:</span>
-            {JSON.parse(job.skills).map((tag: string, index: number) => (
-              <div key={index} className='itag itag-light itag-sm'>
-                {tag}
-              </div>
-            ))}
+            {job.skills &&
+              JSON.parse(job.skills).map((tag: string, index: number) => (
+                <div key={index} className='itag itag-light itag-sm'>
+                  {tag}
+                </div>
+              ))}
           </div>
         </div>
         <div className='border-silver-grey my-6 border-b border-dashed'></div>

@@ -11,7 +11,9 @@ import ApplyJobSuccessModal from '@/components/ApplyJob/SuccessModal';
 import { Button } from '@/components/Button';
 import { IconChevronLeft, IconEye } from '@/components/Icons';
 import { InputBox } from '@/components/InputBox';
+import { CancelApply } from '@/components/Modal';
 import { Radio, RadioGroup } from '@/components/Radio';
+import { routes } from '@/configs/router';
 import {
   APPLY_JOBS,
   ApplyJobResponse,
@@ -39,6 +41,7 @@ const ApplyJob = () => {
   const router = useRouter();
   const params = useParams();
   const [value, setValue] = useState('default');
+  const [show, setShow] = useState(false);
   const [modalSuccessVisible, setModalSuccessVisible] = useState(false);
   const [uploadFile, { loading: loadingUploadFile }] = useMutation<
     UploadFileResponse,
@@ -100,7 +103,7 @@ const ApplyJob = () => {
       <div className='relative mx-auto mb-10 max-w-[884px]'>
         <div className='relative flex py-6'>
           <Button
-            onClick={() => router.back()}
+            onClick={() => setShow(true)}
             intent='transparent'
             icon={<IconChevronLeft size={20} />}
             className='px-0 !text-white'
@@ -148,10 +151,14 @@ const ApplyJob = () => {
                 <Radio value='default' size='large' />
                 <div>
                   Use your current CV
-                  <div className='text-hyperlink mt-3 flex items-center gap-2'>
+                  <a
+                    target='_blank'
+                    href={routes.viewCV.path}
+                    className='text-hyperlink mt-3 flex items-center gap-2'
+                  >
                     VyDo-Resume.pdf
                     <IconEye size={20} />
-                  </div>
+                  </a>
                 </div>
               </div>
               <div
@@ -231,6 +238,11 @@ const ApplyJob = () => {
           </Button>
         </div>
       </div>
+      <CancelApply
+        opened={show}
+        onClose={() => setShow(false)}
+        onBack={() => router.back()}
+      />
 
       {modalSuccessVisible && <ApplyJobSuccessModal />}
     </div>

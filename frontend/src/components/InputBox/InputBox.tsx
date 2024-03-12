@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export type InputProps = {
   label: string;
-  floatingClass?: string;
+  floatingclass?: string;
   formClass?: string;
   required?: boolean;
   error?: string;
@@ -36,7 +36,7 @@ export const InputBox = (
   };
 
   return (
-    <div className={`form-floating ${props.floatingClass}`}>
+    <div className={`form-floating ${props.floatingclass}`}>
       <input
         className={`form-control mb-1 block w-full appearance-none rounded border border-gray-200 bg-red-700 bg-white px-2 py-1 text-base leading-normal text-gray-800 ${props.formClass}`}
         placeholder={props.label}

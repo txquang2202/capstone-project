@@ -258,11 +258,83 @@ export const routes = {
       },
     },
   }),
+  customerLogin: route({
+    path: '/customer/login',
+    requiredAuth: true,
+    locales: ['en'],
+    defaultLocale: 'en',
+    metadata: {
+      en: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  customerAddJob: route({
+    path: '/customer/add-job',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  customerJobList: route({
+    path: '/customer/jobs',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  customerJobDetail: route({
+    path: '/customer/jobs/[id]',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  customerDashboard: route({
+    path: '/customer',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  viewCV: route({
+    path: '/view-cv',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec',
+      },
+    },
+  }),
 };
 
 export const getRouteByPath = (path = '') => {
   const removedQuery = path.includes('?')
     ? path.substring(0, path.indexOf('?'))
     : path;
-  return Object.values(routes).find((route) => route.path === removedQuery);
+
+  return Object.values(routes).find((route) => {
+    if (route.path === removedQuery) return true;
+    return !!route.locales.find(
+      (locale) => `/${locale}${route.path}` === removedQuery
+    );
+  });
 };

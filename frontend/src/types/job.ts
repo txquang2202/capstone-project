@@ -14,6 +14,7 @@ export type Job = {
   name: string;
   skill_demand: string;
   skills: string;
+  hide_salary: boolean;
   top_3_reason: string;
   why_you_love_working_here: string;
   working_type: WorkingType;
