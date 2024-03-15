@@ -26,7 +26,10 @@ npm install
 ```sh
 npm run start
 ```
-
+#### *NOTE: if windows don't, please change your host Docker in file `C:\Windows\System32\drivers\etc\host`, set localhost to 127.0.0.1 as:
+``` 
+127.0.0.1 localhost
+```
 ### Volumes
 
 * `/logstash/config/` - Configure logstash
