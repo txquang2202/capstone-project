@@ -15,6 +15,13 @@ type CustomMessageFormat = {
   event: string
   data: any
 }
+
+const EVENT = {
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
+  BULK: 'BULK',
+}
 export default class KafkaElasticConsumer {
   private kafkaConsumer: Consumer
   private elasticsearchClient: Client
@@ -42,7 +49,7 @@ export default class KafkaElasticConsumer {
         eachMessage: async (messagePayload: EachMessagePayload) => {
           const { topic, partition, message } = messagePayload
           const prefix = `${topic}[${partition} | ${message.offset}] / ${message.timestamp}`
-          console.log(`- ${prefix} ${message.key}#${message.value}`)
+          Logger.info(`- ${prefix} ${message.key}#${message.value}`)
           try {
             const body: CustomMessageFormat = JSON.parse(
               message.value.toString()
@@ -50,38 +57,38 @@ export default class KafkaElasticConsumer {
             // Process the message (Example: push it to Elasticsearch)
             console.log(`Processing message: ${JSON.stringify(body)}`)
             await this.createIndexIfNotExists(body.index)
-            if (body.event === 'CREATE') {
+            if (body.event === EVENT.CREATE) {
               await this.pushToElasticsearch(
                 body.index,
                 JSON.stringify(body.data)
               )
             }
-            if (body.event === 'BULK') {
+            if (body.event === EVENT.BULK) {
               const body: CustomMessageFormat[] = JSON.parse(
                 message.value.toString()
               )
               const data = body.map((b) => JSON.stringify(b.data))
               await this.bulkPushToElasticsearch(body[0].index, data)
             }
-            if (body.event === 'UPDATE') {
+            if (body.event === EVENT.UPDATE) {
               await this.updateToElasticsearch(
                 body.index,
                 JSON.stringify(body.data)
               )
             }
-            if (body.event === 'DELETE') {
+            if (body.event === EVENT.DELETE) {
               await this.deleteFromElasticsearch(
                 body.index,
                 JSON.stringify(body.data)
               )
             }
           } catch (error) {
-            console.error(`Error parsing JSON or processing message: ${error}`)
+            Logger.error(`Error parsing JSON or processing message: ${error}`)
           }
         },
       })
     } catch (error) {
-      console.log('Error: ', error)
+      Logger.error('Error: ', error)
     }
   }
 
@@ -99,10 +106,10 @@ export default class KafkaElasticConsumer {
           index: index,
         })
 
-        console.log(`Index '${index}' created successfully.`)
+        Logger.info(`Index '${index}' created successfully.`)
       }
     } catch (error) {
-      console.error(`Error creating index '${index}':`, error)
+      Logger.error(`Error creating index '${index}':`, error)
     }
   }
   private async pushToElasticsearch(
@@ -119,17 +126,17 @@ export default class KafkaElasticConsumer {
           body: body,
         })
         .then((response) => {
-          console.log(
+          Logger.info(
             `Data pushed to Elasticsearch successfully. Response: ${JSON.stringify(
               response
             )}`
           )
         })
         .catch((error) => {
-          console.error('Error pushing data to Elasticsearch:', error)
+          Logger.error('Error pushing data to Elasticsearch:', error)
         })
     } catch (error) {
-      console.error('Error pushing data to Elasticsearch:', error)
+      Logger.error('Error pushing data to Elasticsearch:', error)
     }
   }
 
@@ -145,14 +152,14 @@ export default class KafkaElasticConsumer {
           body: body,
         })
         .then((response) => {
-          console.log(
+          Logger.info(
             `Data pushed to Elasticsearch successfully. Response: ${JSON.stringify(
               response
             )}`
           )
         })
         .catch((error) => {
-          console.error('Error pushing data to Elasticsearch:', error)
+          Logger.error('Error pushing data to Elasticsearch:', error)
         })
     } catch (error) {
       console.error('Error pushing data to Elasticsearch:', error)
@@ -174,17 +181,17 @@ export default class KafkaElasticConsumer {
           },
         })
         .then((response) => {
-          console.log(
+          Logger.info(
             `Data updated in Elasticsearch successfully. Response: ${JSON.stringify(
               response
             )}`
           )
         })
         .catch((error) => {
-          console.error('Error updating data in Elasticsearch:', error)
+          Logger.error('Error updating data in Elasticsearch:', error)
         })
     } catch (error) {
-      console.error('Error updating data in Elasticsearch:', error)
+      Logger.error('Error updating data in Elasticsearch:', error)
     }
   }
 
@@ -200,17 +207,17 @@ export default class KafkaElasticConsumer {
           id: body.id,
         })
         .then((response) => {
-          console.log(
+          Logger.info(
             `Data deleted from Elasticsearch successfully. Response: ${JSON.stringify(
               response
             )}`
           )
         })
         .catch((error) => {
-          console.error('Error deleting data from Elasticsearch:', error)
+          Logger.error('Error deleting data from Elasticsearch:', error)
         })
     } catch (error) {
-      console.error('Error deleting data from Elasticsearch:', error)
+      Logger.error('Error deleting data from Elasticsearch:', error)
     }
   }
 
@@ -218,8 +225,7 @@ export default class KafkaElasticConsumer {
     const kafka = new Kafka({
       clientId: process.env.KAFKA_CLIENTID || 'capstone-consumer',
       brokers: [
-        `${process.env.HOST_IP || ip.address()}:${
-          process.env.KAFKA_PORT || 9092
+        `${process.env.HOST_IP || ip.address()}:${process.env.KAFKA_PORT || 9092
         }`,
       ],
       connectionTimeout: 3000,
