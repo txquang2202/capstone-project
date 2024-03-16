@@ -12,30 +12,24 @@ In order to run this container you'll need docker installed.
 #### Set Environment Variables
 
 * `ELASTIC_VERSION` - elastic search version variables
-* `HOST_IP` - Your ipaddress network 
 
 ### Usage
-#### 1. Run command line:
-```sh
-cd kafka-elk
-```
-#### 2. First, Check IP Address in your network and set .env `HOST_IP`
-  ```
-  HOST_IP=${your_ip_addres}
-  ```
-#### 3. Then, run this command to build docker.
+#### 1. Run this command to build docker.
 ```sh
 docker-compose up -d
 ```
-#### 4. Install dependencies
+#### 2. Install dependencies
 ```sh
 npm install
 ```
-#### 5. Waiting start kafka server and run 
+#### 3. Waiting start kafka server and run 
 ```sh
 npm run start
 ```
-
+#### *NOTE: if windows don't, please change your host Docker in file `C:\Windows\System32\drivers\etc\host`, set localhost to 127.0.0.1 as:
+``` 
+127.0.0.1 localhost
+```
 ### Volumes
 
 * `/logstash/config/` - Configure logstash
