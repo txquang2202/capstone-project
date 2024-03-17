@@ -1,9 +1,13 @@
-// import { User } from "@prisma/client";
-// import { ContextInterface } from "../context";
-
 import { ContextInterface } from "../context";
 
 const Query = {
+  users: async (
+    _: any,
+    __: any,
+    { keycloak }: ContextInterface,
+  ): Promise<any> => {
+    return await keycloak.getAllUsers();
+  },
   user: async (
     _: any,
     {
@@ -14,7 +18,6 @@ const Query = {
     { keycloak }: ContextInterface,
   ): Promise<any> => {
     const userData = await keycloak.getUserData(id);
-    console.log("userData", userData);
     return userData;
   },
   authUser: async (
@@ -37,5 +40,68 @@ const User = {
   companyId: (parent: any) => parent.attributes?.companyId?.[0],
 };
 
-const Mutation = {};
+const Mutation = {
+  //Add a new user
+  createUser: async (
+    _: any,
+    { input }: { input: any },
+    { keycloak }: ContextInterface,
+  ): Promise<any> => {
+    const { password, ...data } = input;
+    const newUser = await keycloak.addUser({ ...data, enabled: true });
+    await keycloak.resetPassword(newUser.id, password)
+    console.log(newUser)
+    return newUser;
+  },
+
+  // Update an existing usrt by ID
+  updateUser: async (
+    _: any,
+    { id, input }: { id: string; input: any },
+    { keycloak }: ContextInterface,
+  ): Promise<any> => {
+    const existingUser = await keycloak.getUserData(id);
+
+    if (!existingUser) {
+      throw new Error(`User with ID ${id} does not exist`);
+    }
+
+    const updateUser = await keycloak.editUser(id, input);
+    return await keycloak.getUserData(id);
+  },
+
+  // Soft delete a user by ID
+  deleteUser: async (
+    _: any,
+    { id }: { id: string },
+    { keycloak }: ContextInterface,
+  ): Promise<any> => {
+    const existingUser = await keycloak.getUserData(id);
+
+    if (!existingUser) {
+      throw new Error(`User with ID ${id} does not exist`);
+    }
+
+    const deleteUser = await keycloak.editUser(id, { enabled: false });
+    return await keycloak.getUserData(id);
+  },
+
+  // Hard delete a user by ID
+  hardDelUser: async (
+    _: any,
+    { id }: { id: string },
+    { keycloak }: ContextInterface,
+  ): Promise<any> => {
+    const existingUser = await keycloak.getUserData(id);
+
+    if (!existingUser) {
+      throw new Error(`User with ID ${id} does not exist`);
+    }
+
+    const deleteUser = await keycloak.hardDelUser(id);
+    return await keycloak.getUserData(id);
+  },
+
+
+};
 export default { Query, Mutation, User };
