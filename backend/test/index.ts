@@ -4,6 +4,10 @@ import { rateLimitDirective } from "graphql-rate-limit-directive";
 import { makeExecutableSchema } from "graphql-tools";
 import resolvers from "../src/graphql/resolvers";
 import schemaDefs from "../src/graphql/schema";
+import {
+  constraintDirective,
+  constraintDirectiveTypeDefs,
+} from "graphql-constraint-directive";
 const { rateLimitDirectiveTypeDefs } = rateLimitDirective();
 
 dotenv.config({ path: ".env.test" });
@@ -30,10 +34,16 @@ const getPrismaClient = (): PrismaClient => {
   return client;
 };
 
-export const schema = makeExecutableSchema({
-  typeDefs: [rateLimitDirectiveTypeDefs, schemaDefs],
-  resolvers,
-});
+export const schema = constraintDirective()(
+  makeExecutableSchema({
+    typeDefs: [
+      rateLimitDirectiveTypeDefs,
+      constraintDirectiveTypeDefs,
+      schemaDefs,
+    ],
+    resolvers,
+  }),
+);
 
 let context: any = null;
 
