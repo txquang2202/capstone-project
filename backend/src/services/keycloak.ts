@@ -1,7 +1,6 @@
 //global helper method :
 
 import KeycloakAdminClient from "@keycloak/keycloak-admin-client";
-import { query } from "express";
 require("dotenv").config();
 
 export interface KeycloakConfig {

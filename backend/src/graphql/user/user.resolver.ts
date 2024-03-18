@@ -66,7 +66,7 @@ const Mutation = {
       throw new Error(`User with ID ${id} does not exist`);
     }
 
-    const updateUser = await keycloak.editUser(id, input);
+    await keycloak.editUser(id, input);
     return await keycloak.getUserData(id);
   },
 
@@ -82,7 +82,7 @@ const Mutation = {
       throw new Error(`User with ID ${id} does not exist`);
     }
 
-    const deleteUser = await keycloak.editUser(id, { enabled: false });
+    await keycloak.editUser(id, { enabled: false });
     return await keycloak.getUserData(id);
   },
 
@@ -98,7 +98,7 @@ const Mutation = {
       throw new Error(`User with ID ${id} does not exist`);
     }
 
-    const deleteUser = await keycloak.hardDelUser(id);
+    await keycloak.hardDelUser(id);
     return await keycloak.getUserData(id);
   },
 
