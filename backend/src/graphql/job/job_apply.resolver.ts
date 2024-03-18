@@ -21,7 +21,7 @@ const Query = {
     _args: any,
     { prisma, authUser }: ContextInterface,
   ): Promise<job_apply[]> => {
-    console.log("test", authUser.sub);
+    // console.log("test", authUser.sub);
     const jobApplications = await prisma.job_apply.findMany({
       where: {
         user_id: authUser.sub,
