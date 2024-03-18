@@ -19,7 +19,8 @@
   "lint-staged": {
     "backend/**/*.{js,ts}": [
       "yarn --cwd backend prettier",
-      "yarn --cwd backend eslint"
+      "yarn --cwd backend eslint",
+      "yarn --cwd backend test"
     ],
     "backend/**/*.{json,md}": "yarn --cwd backend prettier",
     "frontend/**/*.{js,jsx,ts,tsx,}": [
