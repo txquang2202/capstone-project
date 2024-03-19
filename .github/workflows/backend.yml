@@ -70,6 +70,6 @@ jobs:
       - run: npm install -g yarn
       - run: yarn install --frozen-lockfile
         working-directory: backend
-      - name: Lint commit message
+      - name: Run tests
         run: yarn test
         working-directory: backend
