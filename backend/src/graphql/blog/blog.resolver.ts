@@ -5,11 +5,11 @@ const Query = {
   // get blog by id
   blog: async (
     _: any,
-    { id }: { id: number },
+    { slug }: { slug: string },
     { prisma }: ContextInterface,
   ): Promise<blog | null> => {
-    const blog = await prisma.blog.findUnique({
-      where: { id },
+    const blog = await prisma.blog.findFirst({
+      where: { slug },
     });
 
     return blog;
@@ -29,15 +29,26 @@ const Query = {
 };
 
 const Blog = {
-  user: async (parent: blog, _: any, { prisma }: ContextInterface) => {
-    const user = await prisma.user.findUnique({
-      where: { id: parent.user_id },
-    });
-
-    return user;
-  },
+  // user: async (parent: blog, _: any, { prisma }: ContextInterface) => {
+  //   const user = await prisma.user.findUnique({
+  //     where: { id: parent.user_id },
+  //   });
+  //   return user;
+  // },
 };
 
-const Mutation = {};
+const Mutation = {
+  createBlog: async (
+    _: any,
+    { input }: { input: blog },
+    { prisma }: ContextInterface,
+  ): Promise<blog> => {
+    const newBlog = await prisma.blog.create({
+      data: input,
+    });
+
+    return newBlog;
+  },
+};
 
 export default { Query, Mutation, Blog };

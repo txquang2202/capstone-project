@@ -27,13 +27,10 @@ const follow = require("./mocks/company/follow.json");
 const job_saved = require("./mocks/company/job/job_saved.json");
 
 const apply = require("./mocks/company/job/apply.json");
-
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable import/prefer-default-export */
 /* eslint-disable camelcase */
 /* eslint-disable no-console */
 const { PrismaClient } = require("@prisma/client");
-
 const prisma = new PrismaClient();
 
 async function main() {

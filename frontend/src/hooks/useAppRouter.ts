@@ -17,13 +17,10 @@ const useAppRouter = (href?: string) => {
 
   const getHref = (href: string) => {
     const route = getRouteByPath(href);
-    const isStartWithLocale = route?.locales.find((locale) =>
-      href.startsWith(`/${locale}`)
-    );
-    if (isStartWithLocale) return href;
+    if (!route) return href;
     const _locale =
-      route?.locales.find((_locale) => _locale === locale) ||
-      route?.defaultLocale;
+      route.locales.find((_locale) => _locale === locale) ||
+      route.defaultLocale;
     return `/${_locale}/${href.replace(/^\//, '')}`;
   };
 

@@ -10,4 +10,6 @@ declare global {
 
   type Nullable<T> = T | null;
   type KeyOf<T> = keyof T;
+
+  type DataResponse<K extends PropertyKey, T> = { [P in K]: T };
 }

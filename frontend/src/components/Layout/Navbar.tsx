@@ -17,6 +17,7 @@ import { cn } from '@/lib/classNames';
 import { useLocale } from '@/locale';
 
 import { AppLink } from '../AppLink';
+import UserMenu from './UserMenu';
 
 const Header = () => {
   const router = useRouter();
@@ -43,6 +44,7 @@ const Header = () => {
   };
 
   const { locale: _locale } = useLocale();
+  console.log({ _locale });
 
   const onChangeLang = (lang: string) => {
     if (!pathname) return;
@@ -72,62 +74,33 @@ const Header = () => {
           <div className='navbar-collapse'>
             <ul className='navbar-nav me-auto items-center gap-2'>
               <li className='nav-item main-menu relative'>
-                <a href='/#' className='flex items-center px-2'>
+                <Link href='/it-jobs/all' className='flex items-center px-2'>
                   Việc Làm IT
                   <IconChevronDown />
-                </a>
+                </Link>
               </li>
               <li className='nav-item main-menu relative'>
-                <a href='/#' className='flex items-center px-2'>
+                <Link href='/companies' className='flex items-center px-2'>
                   Top Công ty IT
                   <IconChevronDown />
-                </a>
+                </Link>
               </li>
               <li className='nav-item main-menu relative'>
-                <a href='/blog' className='flex items-center px-2'>
+                <Link href='/blog' className='flex items-center px-2'>
                   Blog
                   <IconChevronDown />
-                </a>
+                </Link>
               </li>
             </ul>
-            {/* <div className='item-center ml-auto flex gap-6 text-base text-white'>
-        <div>{`${t('signinText')}/${t('signupText')}`}</div>
-        <div className='text-dark-grey flex items-center'>
-          <span
-            onClick={() => onChangeLang('en')}
-            className={cn('cursor-pointer', {
-              'text-white': _locale === 'en',
-            })}
-          >
-            {t('enText')}
-          </span>
-          <span className='mx-2 h-4 w-[1px] bg-white'></span>
-          <span
-            onClick={() => onChangeLang('vi')}
-            className={cn('cursor-pointer', {
-              'text-white': _locale === 'vi',
-            })}
-          >
-            {t('viText')}
-          </span>
-        </div>
-      </div> */}
+
             <ul className='navbar-nav ms-auto items-center gap-6'>
               <li className='nav-item main-menu'>
                 <Link href={routes.employer.path} className='text-it-white'>
                   Nhà Tuyển Dụng
                 </Link>
               </li>
-              <li className='nav-item'>
-                <AppLink
-                  hrefLang='vi-VN'
-                  rel='nofollow'
-                  className='text-it-white'
-                  href={routes.signin.path}
-                >
-                  Đăng Nhập/Đăng Ký
-                </AppLink>
-              </li>
+              <UserMenu />
+
               <li className='nav-item'>
                 <div className='switch-language flex'>
                   <a

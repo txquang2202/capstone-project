@@ -1,61 +1,171 @@
-import { job_apply } from "@prisma/client";
+import { job } from "@prisma/client";
+import dotenv from "dotenv";
+import { EVENT } from "../../constants/elasticsearch";
 import { ContextInterface } from "../context";
+import { JobListResponseDto } from "./dtos/JobListResponseDto";
+dotenv.config();
 
 const Query = {
-  //Show list of job
-  jobApplicaitons: async (
+  // Show job by id
+  job: async (
+    _: any,
+    { id }: { id: string },
+    { prisma }: ContextInterface,
+  ): Promise<JobListResponseDto | null> => {
+    const job = await prisma.job.findUnique({
+      where: { id },
+      include: {
+        // company: true,
+        job_working_location: {
+          include: {
+            company_location: {
+              select: {
+                address: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    return job;
+  },
+
+  // Show list of jobs
+  jobs: async (
     _: any,
     _args: any,
     { prisma }: ContextInterface,
-  ): Promise<job_apply[]> => {
-    const jobApply = await prisma.job_apply.findMany();
-    return jobApply;
+  ): Promise<job[]> => {
+    const jobs = await prisma.job.findMany({
+      include: {
+        job_working_location: {
+          include: {
+            company_location: {
+              select: {
+                address: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    return jobs;
+  },
+};
+
+const JobPayLoad = {
+  company: async (parent: job, _args: any, { prisma }: ContextInterface) => {
+    return await prisma.company.findUnique({
+      where: { id: parent.company_id },
+    });
   },
 };
 
 const Mutation = {
-  //Add to application list
-  applyJob: async (
+  //Add to job list
+  createJob: async (
     _: any,
-    { input }: { input: job_apply },
-    { prisma }: ContextInterface,
-  ): Promise<job_apply> => {
-    const userExists = await prisma.user.findUnique({
+    { input }: { input: job },
+    { prisma, kafkaProducer }: ContextInterface,
+  ): Promise<job> => {
+    input.date_posted = new Date();
+    const companyExist = await prisma.company.findUnique({
       where: {
-        id: input.user_id,
-      },
-    });
-    const jobExists = await prisma.job.findUnique({
-      where: {
-        id: input.job_id,
+        id: input.company_id,
       },
     });
 
-    if (!userExists) {
-      throw new Error(`User with ID ${input.user_id} does not exist`);
-    }
-    if (!jobExists) {
-      throw new Error(`Job with ID ${input.job_id} does not exist`);
+    if (!companyExist) {
+      throw new Error(`Company with ID ${input.company_id} does not exist`);
     }
 
-    const jobApplicationExists = await prisma.job_apply.findFirst({
-      where: {
-        user_id: input.user_id,
-        job_id: input.job_id,
-      },
-    });
-
-    if (jobApplicationExists) {
-      throw new Error(
-        `Job application already exists for user ${input.user_id} and job ${input.job_id}`,
-      );
-    }
-
-    const newJobApplication = await prisma.job_apply.create({
+    const newJob = await prisma.job.create({
       data: input,
     });
-    return newJobApplication;
+    kafkaProducer.send(process.env.KAFKA_TOPIC_JOB || "", {
+      index: process.env.ELASTIC_JOB_INDEX || "job",
+      event: EVENT.CREATE,
+      data: newJob,
+    });
+    return newJob;
+  },
+  //updating job by id
+  updateJob: async (
+    _: any,
+    { id, input }: { id: string; input: job },
+    { prisma, kafkaProducer }: ContextInterface,
+  ): Promise<job | null> => {
+    const existingJob = await prisma.job.findUnique({
+      where: { id },
+    });
+
+    if (!existingJob) {
+      throw new Error(`Job with ID ${id} does not exist`);
+    }
+
+    const updatedJob = await prisma.job.update({
+      where: { id },
+      data: input,
+    });
+    kafkaProducer.send(process.env.KAFKA_TOPIC_JOB || "", {
+      index: process.env.ELASTIC_JOB_INDEX || "job",
+      event: EVENT.UPDATE,
+      data: updatedJob,
+    });
+
+    return updatedJob;
+  },
+  sendAllJobsToEls: async (
+    _: any,
+    { ids }: { ids: string[] },
+    { prisma, kafkaProducer }: ContextInterface,
+  ): Promise<job[] | null> => {
+    const jobs = await prisma.job.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+    });
+
+    if (!jobs) {
+      throw new Error(`Job with IDs ${ids} does not exist`);
+    }
+
+    jobs.forEach((job) => {
+      kafkaProducer.send(process.env.KAFKA_TOPIC_JOB || "", {
+        index: process.env.ELASTIC_JOB_INDEX || "job",
+        event: EVENT.CREATE,
+        data: job,
+      });
+    });
+
+    return jobs;
+  },
+
+  // Delete a job by ID
+  deleteJob: async (
+    _: any,
+    { id }: { id: string },
+    { prisma, kafkaProducer }: ContextInterface,
+  ): Promise<job | null> => {
+    const existingJob = await prisma.job.findUnique({
+      where: { id },
+    });
+
+    if (!existingJob) {
+      throw new Error(`Job with ID ${id} does not exist`);
+    }
+    const deletedJob = await prisma.job.delete({
+      where: { id },
+    });
+    kafkaProducer.send(process.env.KAFKA_TOPIC_JOB || "", {
+      index: process.env.ELASTIC_JOB_INDEX || "job",
+      event: EVENT.DELETE,
+      data: deletedJob,
+    });
+    return deletedJob;
   },
 };
 
-export default { Query, Mutation };
+export default { Query, Mutation, JobPayLoad };

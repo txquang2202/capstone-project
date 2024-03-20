@@ -19,7 +19,7 @@ const EmployerContact = () => {
         <div className='flex'>
           <div className='contact-form text-it-white me-7'>
             <div className='section-wrapper'>
-              <div className='rounded-lg bg-white p-12 p-5 p-8'>
+              <div className='rounded-lg bg-white p-8'>
                 <form action=''>
                   <h3 className='text-it-black pb-4'>Thông tin quý khách</h3>
                   <div className='mb-6 lg:flex'>
@@ -29,7 +29,7 @@ const EmployerContact = () => {
                       label='Họ và Tên'
                       required
                       error='Vui lòng điền tên của bạn'
-                      floatingClass='mb-6 w-full lg:mb-0 lg:me-6'
+                      floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                     <InputBox
                       type='text'
@@ -37,7 +37,7 @@ const EmployerContact = () => {
                       label='Chức vụ'
                       required
                       error='Vui lòng điền tên của bạn'
-                      floatingClass='mb-6 w-full lg:mb-0 lg:me-6'
+                      floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                   </div>
                   <div className='mb-6 lg:flex'>
@@ -47,7 +47,7 @@ const EmployerContact = () => {
                       label='Email làm việc'
                       required
                       error='Vui lòng điền tên của bạn'
-                      floatingClass='mb-6 w-full lg:mb-0 lg:me-6'
+                      floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                     <InputBox
                       type='text'
@@ -55,7 +55,7 @@ const EmployerContact = () => {
                       label='Số điện thoại'
                       required
                       error='Vui lòng điền tên của bạn'
-                      floatingClass='mb-6 w-full lg:mb-0 lg:me-6'
+                      floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                   </div>
                   <h3 className='text-it-black pb-4'>Thông tin công ty</h3>
@@ -66,7 +66,7 @@ const EmployerContact = () => {
                       label='Tên công ty'
                       required
                       error='Vui lòng điền tên công ty'
-                      floatingClass='mb-6 w-full lg:mb-0 lg:me-6'
+                      floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                   </div>
                   <div className='mb-6 lg:flex'>
@@ -76,7 +76,7 @@ const EmployerContact = () => {
                       label='Địa chỉ công ty'
                       required
                       error='Vui lòng điền địa chỉ công ty'
-                      floatingClass='mb-6 w-full lg:mb-0 lg:me-6'
+                      floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                   </div>
                   <div className='mb-6 lg:flex'>
@@ -86,7 +86,7 @@ const EmployerContact = () => {
                       label='Địa chỉ website'
                       required
                       error='Vui lòng điền địa chỉ website'
-                      floatingClass='mb-6 w-full lg:mb-0 lg:me-6'
+                      floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                   </div>
                   <div className='space-x-2'>

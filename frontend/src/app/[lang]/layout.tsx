@@ -4,16 +4,17 @@ import { Lexend } from 'next/font/google';
 import { headers } from 'next/headers';
 import { type ReactNode } from 'react';
 
+import ApolloWrapper from '@/components/Layout/ApolloWrapper';
+import SessionProviderWrapper from '@/components/Layout/SessionProviderWrapper';
 import { getRouteByPath } from '@/configs/router';
 import { DEFAULT_LOCALE, siteConfig } from '@/constant/config';
 
-import '@mantine/core/styles.css';
 import '@/styles/globals.css';
+import '@mantine/core/styles.css';
 
-import { ApolloProvider } from '@apollo/client';
+import NextTopLoader from 'nextjs-toploader';
 
-import { createApolloClient } from '@/lib/apolloClient';
-import { ApolloWrapper } from '@/lib/apolloProvider';
+import AuthProvider from '@/provider/AuthProvider';
 
 export async function generateMetadata({
   params,
@@ -79,14 +80,32 @@ export default function RootLayout({
   children: ReactNode;
   params: { lang: string };
 }) {
-  const client = createApolloClient();
   return (
-    <html lang={params.lang} className={font.className}>
-      <body>
-        <ApolloWrapper>
-          <MantineProvider>{children}</MantineProvider>
-        </ApolloWrapper>
-      </body>
-    </html>
+    <SessionProviderWrapper>
+      <html lang={params.lang} className={font.className}>
+        <body>
+          <NextTopLoader
+            color='#2299DD'
+            initialPosition={0.08}
+            crawlSpeed={200}
+            height={3}
+            crawl={true}
+            showSpinner={true}
+            easing='ease'
+            speed={200}
+            shadow='0 0 10px #2299DD,0 0 5px #2299DD'
+          />
+          <ApolloWrapper>
+            <MantineProvider
+              theme={{
+                ...font.style,
+              }}
+            >
+              <AuthProvider>{children}</AuthProvider>
+            </MantineProvider>
+          </ApolloWrapper>
+        </body>
+      </html>
+    </SessionProviderWrapper>
   );
 }

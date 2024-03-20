@@ -1,6 +1,7 @@
 'use client';
 
-import { TextInput } from '@mantine/core';
+import { PasswordInput, TextInput } from '@mantine/core';
+import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 
 import { AppLink } from '@/components/AppLink';
@@ -17,7 +18,7 @@ type LoginForm = {
 
 export default function Page() {
   const { t } = useLocale();
-  const { fields, error, handleSubmit, onChangeField } = useForm<LoginForm>({
+  const { fields, error, onChangeField } = useForm<LoginForm>({
     defaultState: { username: '', password: '' },
     config: {
       username: { required: true },
@@ -25,9 +26,9 @@ export default function Page() {
     },
   });
 
-  const onSubmit = () => {
-    console.log(fields);
-  };
+  // const onSubmit = () => {
+  //   console.log(fields);
+  // };
 
   return (
     <div className='mx-[30px]'>
@@ -87,7 +88,7 @@ export default function Page() {
                 >
                   {`${t('forgotPasswordText')}?`}
                 </AppLink>
-                <TextInput
+                <PasswordInput
                   withAsterisk
                   size='md'
                   label={t('passwordText')}
@@ -98,7 +99,12 @@ export default function Page() {
                   onChange={(e) => onChangeField('password', e.target.value)}
                 />
               </div>
-              <Button onClick={() => handleSubmit(onSubmit)}>
+              <Button
+                onClick={() => {
+                  // handleSubmit(onSubmit)
+                  signIn('keycloak');
+                }}
+              >
                 {t('signinWithText', ['Email'])}
               </Button>
               <div className='text-center'>

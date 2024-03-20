@@ -1,22 +1,22 @@
 [
   {
-    "blog_id": 1,
-    "tag_id": 1
+    "blog_id": "42b675eb-8db6-4c6a-be39-61164cc47dfe",
+    "tag_id": "fc35c24a-4df9-4915-a3c4-60afc4c5cab4"
   },
   {
-    "blog_id": 1,
-    "tag_id": 2
+    "blog_id": "42b675eb-8db6-4c6a-be39-61164cc47dfe",
+    "tag_id": "65b649f5-41de-47fc-8acc-cac1c6691ec0"
   },
   {
-    "blog_id": 1,
-    "tag_id": 4
+    "blog_id": "42b675eb-8db6-4c6a-be39-61164cc47dfe",
+    "tag_id": "edf9e8b0-12b7-4188-9d0f-2f1208930357"
   },
   {
-    "blog_id": 2,
-    "tag_id": 2
+    "blog_id": "7ee8b55d-99f6-473d-b9d9-96ca95bebc47",
+    "tag_id": "65b649f5-41de-47fc-8acc-cac1c6691ec0"
   },
   {
-    "blog_id": 1,
-    "tag_id": 5
+    "blog_id": "42b675eb-8db6-4c6a-be39-61164cc47dfe",
+    "tag_id": "27f3dc92-6a69-4fe2-b778-81f8fbbeb383"
   }
 ]

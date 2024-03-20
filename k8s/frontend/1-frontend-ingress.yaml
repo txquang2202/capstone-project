@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: findyourjob-frontend-ingress
+spec:
+  rules:
+    - host: findyourjob.tech
+      http:
+        paths:
+          - backend:
+              service:
+                name: findyourjob-frontend-svc
+                port:
+                  number: 3000
+            path: /
+            pathType: Prefix

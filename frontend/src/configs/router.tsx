@@ -105,11 +105,224 @@ export const routes = {
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
   }),
+  applyJob: route({
+    path: '/jobs/[id]/apply',
+    requiredAuth: false,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+  }),
   employer: route({
     path: '/employer',
     requiredAuth: false,
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
+  }),
+  company: route({
+    path: '/companies',
+    requiredAuth: false,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+  }),
+  companyReview: route({
+    path: '/companies/review',
+    requiredAuth: false,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+  }),
+  // settings
+  settings: route({
+    path: '/settings',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'Cài đặt | ITviec',
+      },
+      en: {
+        title: 'Settings | ITviec',
+      },
+    },
+  }),
+  // my-jobs
+  myjobs: route({
+    path: '/my-jobs',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'Việc làm của tôi | ITviec',
+      },
+      en: {
+        title: 'My jobs | ITviec',
+      },
+    },
+  }),
+  recentViewed: route({
+    path: '/my-jobs/recent-viewed',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'Việc làm của tôi | ITviec',
+      },
+      en: {
+        title: 'My jobs | ITviec',
+      },
+    },
+  }),
+  applied: route({
+    path: '/my-jobs/applied',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'Việc làm của tôi | ITviec',
+      },
+      en: {
+        title: 'My jobs | ITviec',
+      },
+    },
+  }),
+  // profile-cv
+  profileCv: route({
+    path: '/profile-cv',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'Quản lí hồ sơ | ITviec',
+      },
+      en: {
+        title: 'User profile | ITviec',
+      },
+    },
+  }),
+  manageCv: route({
+    path: '/profile-cv/manage-cv',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'Quản lí hồ sơ | ITviec',
+      },
+      en: {
+        title: 'User profile | ITviec',
+      },
+    },
+  }),
+  jobPreferences: route({
+    path: '/profile-cv/job-preferences',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'Quản lí hồ sơ | ITviec',
+      },
+      en: {
+        title: 'User profile | ITviec',
+      },
+    },
+  }),
+  blog: route({
+    path: '/blog',
+    requiredAuth: false,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'Nơi phát triển sự IT của bạn | ITviec',
+      },
+      en: {
+        title: 'User profile | ITviec',
+      },
+    },
+  }),
+  appliedManagement: route({
+    path: '/applied-management',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'Quản lí hồ sơ xin việc | ITviec',
+      },
+      en: {
+        title: 'Manage job applications | ITviec',
+      },
+    },
+  }),
+  customerLogin: route({
+    path: '/customer/login',
+    requiredAuth: true,
+    locales: ['en'],
+    defaultLocale: 'en',
+    metadata: {
+      en: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  customerAddJob: route({
+    path: '/customer/add-job',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  customerJobList: route({
+    path: '/customer/jobs',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  customerJobDetail: route({
+    path: '/customer/jobs/[id]',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  customerDashboard: route({
+    path: '/customer',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  viewCV: route({
+    path: '/view-cv',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec',
+      },
+    },
   }),
 };
 
@@ -117,5 +330,11 @@ export const getRouteByPath = (path = '') => {
   const removedQuery = path.includes('?')
     ? path.substring(0, path.indexOf('?'))
     : path;
-  return Object.values(routes).find((route) => route.path === removedQuery);
+
+  return Object.values(routes).find((route) => {
+    if (route.path === removedQuery) return true;
+    return !!route.locales.find(
+      (locale) => `/${locale}${route.path}` === removedQuery
+    );
+  });
 };

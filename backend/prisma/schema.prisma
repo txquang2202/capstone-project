@@ -1,34 +1,35 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgcrypto]
 }
 
 model blog {
-  id         Int        @id(map: "blog_pk") @default(autoincrement())
-  user_id    Int
   created_at DateTime?  @default(dbgenerated("CURRENT_DATE")) @db.Date
   content    String?    @db.VarChar
   time_read  Int?
   title      String?    @db.VarChar
-  user       user       @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "blog_fk")
+  slug       String?    @db.VarChar
+  id         String     @id(map: "blog_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String     @db.Uuid
   blog_tag   blog_tag[]
 }
 
 model blog_tag {
-  blog_id Int
-  tag_id  Int
-  blog    blog @relation(fields: [blog_id], references: [id], onDelete: Cascade, map: "blog_tag_fk")
-  tag     tag  @relation(fields: [tag_id], references: [id], onDelete: Cascade, map: "blog_tag_fk_1")
+  blog_id String @db.Uuid
+  tag_id  String @db.Uuid
+  blog    blog   @relation(fields: [blog_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "blog_tag_blog_fk")
+  tag     tag    @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "blog_tag_tag_fk")
 
   @@id([blog_id, tag_id], map: "blog_tag_pk")
 }
 
 model company {
-  id                Int                @id(map: "company_pk") @default(autoincrement())
   company_name      String             @db.VarChar
   company_type      String?            @db.VarChar
   country           String?            @db.VarChar
@@ -39,6 +40,7 @@ model company {
   company_website   String?            @db.VarChar
   company_facebook  String?            @db.VarChar
   brief_overview    String?            @db.VarChar
+  id                String             @id(map: "company_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   company_benefit   company_benefit?
   company_key_skill company_key_skill?
   company_location  company_location[]
@@ -48,44 +50,40 @@ model company {
 }
 
 model company_benefit {
-  company_id         Int     @unique(map: "company_benefit_unique")
   key_benefit        String? @db.VarChar
   detail_description String? @db.VarChar
   company_images     String? @db.VarChar
-  company            company @relation(fields: [company_id], references: [id], onDelete: Cascade, map: "company_benefit_company_fk")
+  company_id         String  @id(map: "company_benefit_pk") @db.Uuid
+  company            company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "company_benefit_company_fk")
 }
 
 model company_key_skill {
-  company_id  Int     @unique(map: "company_key_skill_unique")
   key_skills  String? @db.VarChar
   description String? @db.VarChar
-  company     company @relation(fields: [company_id], references: [id], onDelete: Cascade, map: "company_key_skill_company_fk")
+  company_id  String  @id(map: "company_key_skill_pk") @db.Uuid
+  company     company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "company_key_skill_company_fk")
 }
 
 model company_location {
-  id                   Int                    @id(map: "company_location_pk") @default(autoincrement())
-  company_id           Int
   address              String                 @db.VarChar
   long                 Decimal?               @db.Decimal
   lat                  Decimal?               @db.Decimal
-  company              company                @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "company_location_fk")
+  id                   String                 @id(map: "company_location_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  company_id           String                 @db.Uuid
+  company              company                @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "company_location_company_fk")
   job_working_location job_working_location[]
 }
 
 model follow {
-  company_id Int
-  user_id    Int
-  user       user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "follow_fk")
-  company    company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "follow_fk_1")
+  user_id    String  @db.Uuid
+  company_id String  @db.Uuid
+  company    company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "follow_company_fk")
 
   @@id([user_id, company_id], map: "follow_pk")
 }
 
 model job {
-  id                        Int                    @id(map: "job_pk") @default(autoincrement())
-  company_id                Int
   name                      String?                @db.VarChar
-  salary                    Int?
   country                   String?                @db.VarChar
   skills                    String?                @db.VarChar
   working_type              String?                @db.VarChar
@@ -94,24 +92,31 @@ model job {
   skill_demand              String?                @db.VarChar
   why_you_love_working_here String?                @db.VarChar
   date_posted               DateTime?              @db.Date
-  company                   company                @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_fk")
+  id                        String                 @id(map: "job_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  company_id                String                 @db.Uuid
+  is_closed                 Boolean?               @default(false)
+  hide_salary               Boolean?               @default(false)
+  salary_from               Int?
+  salary_to                 Int?
+  unit                      String?                @db.VarChar
+  company                   company                @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_company_fk")
   job_apply                 job_apply[]
   job_saved                 job_saved[]
   job_working_location      job_working_location[]
 }
 
 model job_apply {
-  user_id      Int
-  cv           String? @db.VarChar
-  cover_letter String? @db.VarChar
-  job_id       Int
-  id           Int     @id(map: "job_apply_pk") @default(autoincrement())
-  job          job     @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "apply_fk")
-  user         user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "apply_fk_1")
+  cv           String?   @db.VarChar
+  cover_letter String?   @db.VarChar
+  id           String    @id(map: "job_apply_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id      String    @db.Uuid
+  job_id       String    @db.Uuid
+  date_apply   DateTime? @default(dbgenerated("CURRENT_DATE")) @db.Date
+  status       String?   @default("Submitting") @db.VarChar
+  job          job       @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_apply_job_fk")
 }
 
 model job_preferences {
-  user_id              Int     @id(map: "job_preferences_pk")
   skills               String? @db.VarChar
   job_level            String? @db.VarChar
   current_salary       Int?
@@ -121,152 +126,129 @@ model job_preferences {
   company_size         String? @db.VarChar
   location             String? @db.VarChar
   expected_salary_to   Int?
-  user                 user    @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "job_preferences_fk")
+  user_id              String  @id(map: "job_preferences_pk") @db.Uuid
 }
 
 model job_saved {
-  job_id  Int
-  user_id Int
-  user    user @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_saved_fk")
-  job     job  @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_saved_fk_1")
+  user_id String @db.Uuid
+  job_id  String @db.Uuid
+  job     job    @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_saved_job_fk")
 
   @@id([user_id, job_id], map: "job_saved_pk")
 }
 
 model job_working_location {
-  job_id           Int
-  working_location Int
-  job              job              @relation(fields: [job_id], references: [id], onDelete: Cascade, map: "job_working_location_fk")
-  company_location company_location @relation(fields: [working_location], references: [id], onDelete: Cascade, map: "job_working_location_fk_1")
+  job_id              String           @db.Uuid
+  company_location_id String           @db.Uuid
+  company_location    company_location @relation(fields: [company_location_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_working_location_company_location_fk")
+  job                 job              @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "job_working_location_job_fk")
 
-  @@id([job_id, working_location], map: "job_working_location_pk")
+  @@id([job_id, company_location_id], map: "job_working_location_pk")
 }
 
 model review {
-  id                           Int            @id(map: "review_pk") @default(autoincrement())
-  company_id                   Int
-  user_id                      Int
   summary                      String         @db.VarChar
   ot_satisfy_reason            String?        @db.VarChar
   input_experience             String?        @db.VarChar
   input_improvement_suggestion String?        @db.VarChar
   is_recommended               Boolean?
   ot_satisfy                   Boolean?
-  company                      company        @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_fk")
-  user                         user           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_fk_1")
+  company_id                   String         @db.Uuid
+  user_id                      String         @db.Uuid
+  id                           String         @id(map: "review_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  company                      company        @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_company_fk")
   review_rating                review_rating?
 }
 
 model review_rating {
-  review_id         Int    @id(map: "review_rating_pk")
   overall_rating    Int?
   salary_benefits   Int?
   training_learning Int?
   management_cares  Int?
   culture_fun       Int?
   office_workspace  Int?
-  review            review @relation(fields: [review_id], references: [id], onDelete: Cascade, map: "review_rating_fk")
+  review_id         String @id(map: "review_rating_pk") @db.Uuid
+  review            review @relation(fields: [review_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "review_rating_review_fk")
 }
 
 model tag {
-  id       Int        @id(map: "tag_pk") @default(autoincrement())
   tag_name String     @db.VarChar
+  id       String     @id(map: "tag_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   blog_tag blog_tag[]
 }
 
 model user {
-  id               Int                @id(map: "user_pk") @default(autoincrement())
-  name             String?            @db.VarChar
-  email            String?            @db.VarChar
-  phone            String?            @db.VarChar
-  gender           String?            @db.Char(1)
-  dob              DateTime?          @db.Date
-  current_address  String?            @db.VarChar
-  about_me         String?            @db.VarChar
-  cover_letter     String?            @db.VarChar
-  personal_link    String?            @db.VarChar
-  role             Int
-  password         Bytes?
-  img_url          String?            @db.VarChar
-  blog             blog[]
-  follow           follow[]
-  job_apply        job_apply[]
-  job_preferences  job_preferences?
-  job_saved        job_saved[]
-  review           review[]
-  user_award       user_award[]
-  user_certificate user_certificate[]
-  user_cv          user_cv[]
-  user_education   user_education[]
-  user_project     user_project[]
-  user_skill       user_skill[]
-  work_experience  work_experience[]
+  name            String?   @db.VarChar
+  email           String?   @db.VarChar
+  phone           String?   @db.VarChar
+  gender          String?   @db.Char(1)
+  dob             DateTime? @db.Date
+  current_address String?   @db.VarChar
+  about_me        String?   @db.VarChar
+  cover_letter    String?   @db.VarChar
+  personal_link   String?   @db.VarChar
+  role            Int
+  password        Bytes?
+  img_url         String?   @db.VarChar
+  id              String    @id(map: "user_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 }
 
 model user_award {
-  id          Int     @id(map: "user_award_pk") @default(autoincrement())
-  user_id     Int
   award_name  String? @db.VarChar
   org_name    String? @db.VarChar
   issue_date  String? @db.VarChar
   description String? @db.VarChar
-  user        user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_award_fk")
+  id          String  @id(map: "user_award_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id     String  @db.Uuid
 }
 
 model user_certificate {
-  id          Int     @id(map: "certificate_pk") @default(autoincrement())
-  user_id     Int
   cert_name   String? @db.VarChar
   org_name    String? @db.VarChar
   cert_url    String? @db.VarChar
   description String? @db.VarChar
   issue_date  String? @db.VarChar
-  user        user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "certificate_fk")
+  user_id     String  @db.Uuid
+  id          String  @id(map: "user_certificate_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 }
 
 model user_cv {
-  id            Int       @id(map: "user_cv_pk") @default(autoincrement())
-  user_id       Int
   date_uploaded DateTime? @db.Date
   url           String?   @db.VarChar
-  user          user      @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "user_cv_fk")
+  id            String    @id(map: "user_cv_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id       String    @db.Uuid
 }
 
 model user_education {
-  id                    Int       @id(map: "user_education_pk") @default(autoincrement())
-  user_id               Int
   school                String?   @db.VarChar
   major                 String?   @db.VarChar
   from_date             DateTime? @db.Date
   to_date               DateTime? @db.Date
   additional_detail     String?   @db.VarChar
   current_studying_here Boolean?
-  user                  user      @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "user_education_fk")
+  id                    String    @id(map: "user_education_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id               String    @db.Uuid
 }
 
 model user_project {
-  id                     Int       @id(map: "user_project_pk") @default(autoincrement())
-  user_id                Int
   project_name           String?   @db.VarChar
   start_date             DateTime? @db.Date
   end_date               DateTime? @db.Date
   description            String?   @db.VarChar
   project_url            String?   @db.VarChar
   currently_working_here Boolean?
-  user                   user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_project_fk")
+  id                     String    @id(map: "user_project_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id                String    @db.Uuid
 }
 
 model user_skill {
-  id      Int     @id(map: "user_skill_pk") @default(autoincrement())
-  user_id Int
   name    String? @db.VarChar
   level   String? @db.VarChar
-  user    user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_skill_fk")
+  id      String  @id(map: "user_skill_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id String  @db.Uuid
 }
 
 model work_experience {
-  id                     Int       @default(autoincrement())
-  user_id                Int
   job_title              String?   @db.VarChar
   currently_working_here Boolean?
   from_date              DateTime? @db.Date
@@ -274,7 +256,6 @@ model work_experience {
   description            String?   @db.VarChar
   company                String?   @db.VarChar
   projects               String?   @db.VarChar
-  user                   user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "work_experience_fk")
-
-  @@id([id, user_id], map: "work_experience_pk")
+  id                     String    @id(map: "work_experience_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id                String    @db.Uuid
 }
