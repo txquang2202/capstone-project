@@ -35,7 +35,7 @@ Company.init(
   }
 );
 
-Company.sync();
+// Company.sync();
 
 console.log({ Company });
 
