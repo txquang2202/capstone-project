@@ -22,3 +22,14 @@ eksctl create cluster \
 
     openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout auth-tls.key -out auth-tls.crt -subj "/CN=auth.findyourjob.tech/0=Test"
     kubectl create secret tls auth-tls-secret --key auth-tls.key --cert auth-tls.crt
+
+    // copy config to the pod
+    cat keycloak.json | kubectl exec -i keycloak-6c676cd85-tnxwh -- sh -c "cat > /tmp/keycloak.json"
+
+    kubectl exec keycloak-6c676cd85-tnxwh -- \
+/opt/keycloak/bin/kc.sh import --file /tmp/keycloak.json
+
+    // create file config
+    kubectl create configmap config --from-file keycloak.json
+
+    kubectl exec -it keycloak-6899784bdd-dn78b -- /bin/bash
