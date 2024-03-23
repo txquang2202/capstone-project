@@ -62,7 +62,7 @@ spec:
             - name: POSTGRESQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: main-secrets
+                  name: findyourjob-secrets
                   key: postgres-password
             - name: DATABASE_URL
               value: postgresql://postgres:$(POSTGRESQL_PASSWORD)@findyourjob-postgresql-primary.default.svc.cluster.local:5432/capstone
@@ -87,10 +87,11 @@ spec:
                   name: findyourjob-secrets
                   key: KEYCLOAK_CLIENT_SECRET
             - name: KEYCLOAK_BASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: findyourjob-configmap
-                  key: keycloak-uri
+              value: http://keycloak.default.svc.cluster.local:8080/auth
+              # valueFrom:
+              #   configMapKeyRef:
+              #     name: findyourjob-configmap
+              #     key: keycloak-uri
             - name: AWS_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
@@ -131,11 +132,6 @@ spec:
                 secretKeyRef:
                   name: findyourjob-secrets
                   key: ADMIN_EMAIL_ADDRESS
-            - name: GOOGLE_MAILER_REFRESH_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: findyourjob-secrets
-                  key: GOOGLE_MAILER_REFRESH_TOKEN
             - name: HOST_IP
               value: localhost
             - name: KAFKA_CLIENT_ID
@@ -145,22 +141,33 @@ spec:
             - name: KAFKA_TOPIC_COMPANY
               value: company
             - name: ELASTIC_BASEURL
-              value: http://localhost:9200
+              value: http://quickstart-es-http.default.svc.cluster.local:9200
             - name: ELASTIC_JOB_INDEX
               value: job
             - name: ELASTIC_COMPANY_INDEX
               value: company
-            - name: ELASTIC_USER
+            - name: ELASTIC_USERNAME
               value: elastic
+            - name: ELASTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: quickstart-es-elastic-user
+                  key: elastic
           imagePullPolicy: Always
           # imagePullPolicy: Never
           resources:
+            # requests:
+            #   cpu: '500m'
+            #   memory: '1024Mi'
+            # limits:
+            #   cpu: '1000m'
+            #   memory: '2048Mi'
             requests:
-              cpu: '500m'
-              memory: '1024Mi'
+              cpu: '100m'
+              memory: '528Mi'
             limits:
-              cpu: '1000m'
-              memory: '2048Mi'
+              cpu: '300m'
+              memory: '528Mi'
           ports:
             - containerPort: 4000
 

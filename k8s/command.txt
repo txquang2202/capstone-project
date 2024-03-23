@@ -33,3 +33,15 @@ eksctl create cluster \
     kubectl create configmap config --from-file keycloak.json
 
     kubectl exec -it keycloak-6899784bdd-dn78b -- /bin/bash
+
+    helm -n kafka upgrade --install kafka-release bitnami/kafka --create-namespace --set persistence.size=4Gi,logPersistence.size=2Gi,volumePermissions.enabled=true,persistence.enabled=true,logPersistence.enabled=true,serviceAccount.create=true,rbac.create=true --version 23.0.7 -f values.yaml
+
+    // eck 
+    kubectl create -f https://download.elastic.co/downloads/eck/2.11.1/crds.yaml
+
+    kubectl apply -f https://download.elastic.co/downloads/eck/2.11.1/operator.yaml
+
+    https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-deploy-elasticsearch.html
+
+
+    helm install es-kb-quickstart elastic/eck-stack -n elastic-stack --create-namespace

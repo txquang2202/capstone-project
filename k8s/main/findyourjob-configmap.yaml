@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: findyourjob-configmap
 data:
-  keycloak-uri: http://keycloak.default.svc.cluster.local:8080
+  keycloak-uri: https://findyourjob.tech/keycloak
