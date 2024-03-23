@@ -80,7 +80,7 @@ jobs:
           ref: ${{ github.event.inputs.deployTarget }}
 
       - name: Build image
-        run: DOCKER_BUILDKIT=1 docker build "$PWD" --build-arg DEPLOY_KEY="${{ secrets.DEPLOY_KEY }}" --build-arg commit="$(git rev-parse --short HEAD 2>/dev/null)" --build-arg version=$VERSION -t $FRONT_END_IMAGE_NAME
+        run: DOCKER_BUILDKIT=1 docker build "$PWD" --build-arg DEPLOY_KEY="${{ secrets.DEPLOY_KEY }}" --build-arg commit="$(git rev-parse --short HEAD 2>/dev/null)" --build-arg version=$VERSION -t $BACK_END_IMAGE_NAME
         working-directory: frontend
 
       - name: Log in to registry
