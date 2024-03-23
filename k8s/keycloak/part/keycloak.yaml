@@ -1,0 +1,116 @@
+# Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 2500m
+    nginx.ingress.kubernetes.io/proxy-buffer-size: 12k
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: findyourjob.tech
+      http:
+        paths:
+          - backend:
+              service:
+                name: keycloak
+                port:
+                  number: 8080
+            path: /keycloak/(.*)
+            pathType: Prefix
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: keycloak
+  type: ClusterIP
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - name: keycloak
+          image: quay.io/keycloak/keycloak:24.0.1
+          args: ['start', '--cache-stack=kubernetes', '--import-realm']
+          env:
+            - name: KEYCLOAK_ADMIN
+              value: 'admin'
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: 'admin'
+            - name: KC_PROXY
+              value: 'edge'
+            - name: jgroups.dns.query
+              value: 'keycloak'
+            - name: PROXY_ADDRESS_FORWARDING
+              value: 'true'
+            - name: KC_HEALTH_ENABLED
+              value: 'true'
+            - name: KC_METRICS_ENABLED
+              value: 'true'
+            - name: KC_HTTP_ENABLED
+              value: 'true'
+            - name: KC_HTTP_RELATIVE_PATH
+              value: '/auth'
+            - name: KC_HOSTNAME_URL
+              value: 'https://findyourjob.tech/keycloak/auth/'
+            - name: KC_HOSTNAME_ADMIN_URL
+              value: 'https://findyourjob.tech/keycloak/auth/'
+            # - name: KC_DB
+            #   value: 'mysql'
+            # - name: KC_DB_URL
+            #   value: 'jdbc:mysql://mysql/keycloak'
+            - name: KC_DB_URL_HOST
+              value: findyourjob-postgresql-primary.default.svc.cluster.local
+            - name: KC_DB_URL_DATABASE
+              value: keycloak
+            - name: KC_DB_URL_PORT
+              value: '5432'
+            - name: KC_DB_USERNAME
+              value: 'postgres'
+            - name: KC_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: password
+
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: jgroups
+              containerPort: 7600
+
+          # mount keycloak.json
+          volumeMounts:
+            - name: config
+              mountPath: /opt/keycloak/data/import/keycloak.json
+              subPath: 'keycloak.json'
+
+      volumes:
+        - name: 'config'
+          configMap:
+            name: 'config'

@@ -40,17 +40,17 @@ spec:
             - name: DEMO_FRONTEND_CLIENT_SECRET
               value: j788xF7vYJRPubFHAOvAi6WZoXFX3aR9
             - name: AUTH_ISSUER
-              value: http://localhost:8080/realms/findyourjob
+              value: https://findyourjob.tech/keycloak/auth/realms/itviec
             - name: NEXTAUTH_URL
-              value: http://localhost:3000
+              value: https://findyourjob.tech
             - name: NEXTAUTH_SECRET
               value: my-secret-goes-here-abc-123
             - name: END_SESSION_URL
-              value: http://localhost:8080/realms/findyourjob/protocol/openid-connect/logout
+              value: https://findyourjob.tech/keycloak/auth/realms/itviec/protocol/openid-connect/logout
             - name: DEMO_BACKEND_URL
-              value: http://localhost:4000/graphql
+              value: https://api.findyourjob.tech/graphql
             - name: REFRESH_TOKEN_URL
-              value: http://localhost:8080/realms/findyourjob/protocol/openid-connect/token
+              value: https://findyourjob.tech/keycloak/auth/realms/itviec/protocol/openid-connect/token
           resources:
             requests:
               cpu: '128m'

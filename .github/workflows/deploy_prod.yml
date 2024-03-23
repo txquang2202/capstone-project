@@ -15,10 +15,10 @@ on:
         description: 'Deploy to production with target'
         required: true
         default: 'main'
-      # deployBackend:
-      #   description: 'Deploy backend? (yes/no)'
-      #   required: true
-      #   default: 'yes'
+      deployBackend:
+        description: 'Deploy backend? (yes/no)'
+        required: true
+        default: 'yes'
       deployFrontend:
         description: 'Deploy frontend? (yes/no)'
         required: true
@@ -67,9 +67,45 @@ jobs:
           docker tag $FRONT_END_IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
 
+  build-backend:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.deployBackend == 'yes' }}
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.deployTarget }}
+
+      - name: Build image
+        run: DOCKER_BUILDKIT=1 docker build "$PWD" --build-arg DEPLOY_KEY="${{ secrets.DEPLOY_KEY }}" --build-arg commit="$(git rev-parse --short HEAD 2>/dev/null)" --build-arg version=$VERSION -t $BACK_END_IMAGE_NAME
+        working-directory: frontend
+
+      - name: Log in to registry
+        # This is where you will update the PAT to GITHUB_TOKEN
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$BACK_END_IMAGE_NAME
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "main" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $BACK_END_IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+
   deploy:
     runs-on: ubuntu-latest
-    needs: [build-frontend]
+    needs: [build-frontend, build-backend]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -95,6 +131,8 @@ jobs:
           export KUBECONFIG=${PWD}/config.yaml
           kubectl rollout restart deployment/findyourjob-frontend
           kubectl wait --for=condition=available --timeout=600s deployment/findyourjob-frontend
+          kubectl rollout restart deployment/findyourjob-api
+          kubectl wait --for=condition=available --timeout=600s deployment/findyourjob-api
 
 # kubectl wait --for=condition=available --timeout=600s deployment/findyourjob-api
 # kubectl rollout restart deployment/findyourjob-api

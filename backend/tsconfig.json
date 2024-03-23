@@ -12,7 +12,8 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "outDir": "dist",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "skipLibCheck": true
   },
   "include": ["src/**/*", "test"],
   "exclude": ["node_modules", "dist"],

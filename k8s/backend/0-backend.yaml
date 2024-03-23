@@ -33,8 +33,6 @@ spec:
               value: 'findyourjob'
             - name: LOGGER_ROUTE_STORAGE
               value: 'true'
-            - name: MONGO_DB
-              value: findyourjob
             - name: NODE_ENV
               value: production
             - name: ENABLE_DEBUG_QUERY
@@ -93,6 +91,67 @@ spec:
                 configMapKeyRef:
                   name: findyourjob-configmap
                   key: keycloak-uri
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: AWS_ACCESS_KEY
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_S3_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: AWS_S3_REGION
+            - name: AWS_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: AWS_BUCKET_NAME
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: CLIENT_ID
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: CLIENT_SECRET
+            - name: GOOGLE_MAILER_REFRESH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: GOOGLE_MAILER_REFRESH_TOKEN
+            - name: ADMIN_EMAIL_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: ADMIN_EMAIL_ADDRESS
+            - name: GOOGLE_MAILER_REFRESH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: findyourjob-secrets
+                  key: GOOGLE_MAILER_REFRESH_TOKEN
+            - name: HOST_IP
+              value: localhost
+            - name: KAFKA_CLIENT_ID
+              value: capstone-producer
+            - name: KAFKA_TOPIC_JOB
+              value: job
+            - name: KAFKA_TOPIC_COMPANY
+              value: company
+            - name: ELASTIC_BASEURL
+              value: http://localhost:9200
+            - name: ELASTIC_JOB_INDEX
+              value: job
+            - name: ELASTIC_COMPANY_INDEX
+              value: company
+            - name: ELASTIC_USER
+              value: elastic
           imagePullPolicy: Always
           # imagePullPolicy: Never
           resources:
