@@ -10,13 +10,12 @@ if (!process.env.ELASTIC_BASEURL) {
 }
 const client = new Client({
   node: process.env.ELASTIC_BASEURL || "http://localhost:9200",
+  auth: {
+    username: process.env.ELASTIC_USERNAME || "elastic",
+    password: process.env.ELASTIC_PASSWORD || "",
+  },
 });
 
-if (!client.ping()) {
-  logger.error("Elasticsearch is not running", {
-    route: "src/utils/elasticsearch.ts line 18",
-  });
-}
 const createCapstoneIndex = async () => {
   try {
     const indexExists = await client.indices.exists({
@@ -36,7 +35,6 @@ const createCapstoneIndex = async () => {
     console.error("Error creating Capstone index:", error);
   }
 };
-createCapstoneIndex();
 // Assuming you have an Elasticsearch client instantiated as 'elasticsearchClient'
 const createJobIndex = async () => {
   try {
@@ -80,8 +78,6 @@ const createJobIndex = async () => {
   }
 };
 
-createJobIndex();
-
 // Assuming you have an Elasticsearch client instantiated as 'elasticsearchClient'
 
 const createCompanyIndex = async () => {
@@ -121,8 +117,15 @@ const createCompanyIndex = async () => {
   }
 };
 
-// Call the function to create the company index
+// if (!client.ping()) {
+//   logger.error("Elasticsearch is not running", {
+//     route: "src/utils/elasticsearch.ts line 18",
+//   });
+// } else {
+createCapstoneIndex();
+createJobIndex();
 createCompanyIndex();
+// }
 
 // Register cleanup logic when the process exits
 process.on("exit", () => {
@@ -131,29 +134,3 @@ process.on("exit", () => {
 });
 
 export default client;
-
-// export const createIndex = async (indexName: string) => {
-//     await client.indices.create({ index: indexName });
-// };
-
-// export const search = async (indexName: string, query: string) => {
-//     const result = await client.search({
-//         index: indexName,
-//         body: {
-//             query: {
-//                 match: { title: query },
-//             },
-//         },
-//     });
-
-//     return result.hits.hits;
-// };
-
-// export const bulkCreateDocument = async (indexName: string, documents: any[]) => {
-//     const body = documents.flatMap((doc) => [
-//         { index: { _index: indexName } },
-//         doc,
-//     ]);
-
-//     await client.bulk({ refresh: true, body });
-// };
