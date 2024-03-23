@@ -15,10 +15,10 @@ on:
         description: 'Deploy to production with target'
         required: true
         default: 'main'
-      # deployBackend:
-      #   description: 'Deploy backend? (yes/no)'
-      #   required: true
-      #   default: 'yes'
+      deployBackend:
+        description: 'Deploy backend? (yes/no)'
+        required: true
+        default: 'yes'
       deployFrontend:
         description: 'Deploy frontend? (yes/no)'
         required: true
