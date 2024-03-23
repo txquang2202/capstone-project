@@ -81,7 +81,7 @@ jobs:
 
       - name: Build image
         run: DOCKER_BUILDKIT=1 docker build "$PWD" --build-arg DEPLOY_KEY="${{ secrets.DEPLOY_KEY }}" --build-arg commit="$(git rev-parse --short HEAD 2>/dev/null)" --build-arg version=$VERSION -t $BACK_END_IMAGE_NAME
-        working-directory: frontend
+        working-directory: backend
 
       - name: Log in to registry
         # This is where you will update the PAT to GITHUB_TOKEN
