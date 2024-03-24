@@ -22,4 +22,4 @@ COPY --from=builder --chown=appuser:appgroup /app/package.json ./
 COPY --from=builder --chown=appuser:appgroup /app/dist ./dist
 COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
 
-CMD [ "dumb-init", "node", "dist/server.js" ]
+CMD [ "dumb-init", "node", "dist/app.js" ]
