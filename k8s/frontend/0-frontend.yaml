@@ -32,13 +32,13 @@ spec:
             - name: NEXT_PUBLIC_ORIGIN_URL
               value: https://www.findyourjob.tech
             - name: NEXT_PUBLIC_API_URL
-              value: http://localhost:4000
+              value: https://api.findyourjob.tech
             - name: NEXT_PUBLIC_SHOW_LOGGER
               value: 'true'
             - name: DEMO_FRONTEND_CLIENT_ID
               value: backend
             - name: DEMO_FRONTEND_CLIENT_SECRET
-              value: j788xF7vYJRPubFHAOvAi6WZoXFX3aR9
+              value: 5EFWso7GN5mLnPkD54geeMRm6JbALgmP
             - name: AUTH_ISSUER
               value: https://findyourjob.tech/keycloak/auth/realms/itviec
             - name: NEXTAUTH_URL

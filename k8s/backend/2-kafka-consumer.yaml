@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: findyourjob-kafka-consumer
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: findyourjob-kafka-consumer
+  template:
+    metadata:
+      labels:
+        app: findyourjob-kafka-consumer
+    spec:
+      imagePullSecrets:
+        - name: docker-config-json
+      containers:
+        - name: findyourjob-kafka-consumer
+          image: ghcr.io/nguyenphucbao68/findyourjob-kafka-consumer:latest
+          # image: findyourjob-kafka-consumer:latest
+          command:
+            - /bin/sh
+            - -c
+            - dumb-init node dist/server.js
+          env:
+            - name: APP_NAME
+              value: kafka
+            - name: PORT
+              value: '4001'
+            - name: NODE_ENV
+              value: production
+            - name: URL
+              value: http://localhost
+            - name: BOOTSTRAP_SERVER
+              value: ''
+            - name: ELASTIC_VERSION
+              value: 8.12.2
+            - name: ELASTIC_BASEURL
+              value: https://quickstart-es-http.default.svc.cluster.local:9200
+            - name: ELASTIC_CA_CERT
+              valueFrom:
+                secretKeyRef:
+                  name: quickstart-es-http-ca-internal
+                  key: tls.crt
+            - name: ELASTIC_USERNAME
+              value: elastic
+            - name: ELASTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: quickstart-es-elastic-user
+                  key: elastic
+            - name: ELASTICSEARCH_INDEX
+              value: job
+            - name: HOST_IP
+              value: kafka-release.kafka.svc.cluster.local
+            - name: KAFKA_PORT
+              value: '9092'
+            - name: KAFKA_TOPICS
+              value: capstone,job,company
+            - name: KAFKA_GROUP_ID
+              value: capstone-group
+            - name: LOGGER_ROUTE_NAME
+              value: kafka
+            - name: LOGGER_ROUTE_STORAGE
+              value: 'false'
+          imagePullPolicy: Always
+          # imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: '100m'
+              memory: '528Mi'
+            limits:
+              cpu: '300m'
+              memory: '528Mi'
+          ports:
+            - containerPort: 4001
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: findyourjob-kafka-consumer-svc
+spec:
+  type: NodePort
+  selector:
+    app: findyourjob-kafka-consumer
+  ports:
+    - port: 4001
+      targetPort: 4001
+      # nodePort: 30001
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: findyourjob-kafka-consumer-hpa
+spec:
+  maxReplicas: 2
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: findyourjob-kafka-consumer
+  targetCPUUtilizationPercentage: 80

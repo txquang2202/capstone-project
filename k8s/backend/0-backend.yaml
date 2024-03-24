@@ -141,7 +141,12 @@ spec:
             - name: KAFKA_TOPIC_COMPANY
               value: company
             - name: ELASTIC_BASEURL
-              value: http://quickstart-es-http.default.svc.cluster.local:9200
+              value: https://quickstart-es-http.default.svc.cluster.local:9200
+            - name: ELASTIC_CA_CERT
+              valueFrom:
+                secretKeyRef:
+                  name: quickstart-es-http-ca-internal
+                  key: tls.crt
             - name: ELASTIC_JOB_INDEX
               value: job
             - name: ELASTIC_COMPANY_INDEX
@@ -191,7 +196,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: findyourjob-api-hpa
 spec:
-  maxReplicas: 10
+  maxReplicas: 2
   minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1

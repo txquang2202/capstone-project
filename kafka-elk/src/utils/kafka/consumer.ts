@@ -30,6 +30,14 @@ export default class KafkaElasticConsumer {
     this.kafkaConsumer = this.createKafkaConsumer()
     this.elasticsearchClient = new Client({
       node: process.env.ELASTIC_BASEURL || 'localhost:9200',
+      auth: {
+        username: process.env.ELASTIC_USERNAME || 'elastic',
+        password: process.env.ELASTIC_PASSWORD || '',
+      },
+      tls: {
+        ca: process.env.ELASTIC_CA_CERT || '',
+        rejectUnauthorized: false,
+      },
     }) // Update the Elasticsearch node URL
   }
 
@@ -225,7 +233,8 @@ export default class KafkaElasticConsumer {
     const kafka = new Kafka({
       clientId: process.env.KAFKA_CLIENTID || 'capstone-consumer',
       brokers: [
-        `${process.env.HOST_IP || ip.address()}:${process.env.KAFKA_PORT || 9092
+        `${process.env.HOST_IP || ip.address()}:${
+          process.env.KAFKA_PORT || 9092
         }`,
       ],
       connectionTimeout: 3000,

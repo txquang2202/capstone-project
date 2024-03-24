@@ -45,3 +45,12 @@ eksctl create cluster \
 
 
     helm install es-kb-quickstart elastic/eck-stack -n elastic-stack --create-namespace
+
+    aws eks update-nodegroup-config --cluster-name findyourjob --nodegroup-name group-nodes --scaling-config minSize=1,maxSize=2,desiredSize=2
+
+    kubectl cordon ip-192-168-14-140.ap-southeast-1.compute.internal
+
+    kubectl drain ip-192-168-14-140.ap-southeast-1.compute.internal --ignore-daemonsets --delete-emptydir-data
+
+    https://kubernetes.github.io/ingress-nginx/examples/customization/custom-configuration/
+
