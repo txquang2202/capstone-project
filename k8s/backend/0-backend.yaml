@@ -133,7 +133,9 @@ spec:
                   name: findyourjob-secrets
                   key: ADMIN_EMAIL_ADDRESS
             - name: HOST_IP
-              value: localhost
+              value: kafka-release.kafka.svc.cluster.local
+            - name: KAFKA_PORT
+              value: '9092'
             - name: KAFKA_CLIENT_ID
               value: capstone-producer
             - name: KAFKA_TOPIC_JOB

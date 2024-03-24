@@ -25,7 +25,7 @@ spec:
           command:
             - /bin/sh
             - -c
-            - dumb-init node dist/server.js
+            - dumb-init node dist/app.js
           env:
             - name: APP_NAME
               value: kafka
