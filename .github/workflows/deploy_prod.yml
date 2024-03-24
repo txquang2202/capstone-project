@@ -147,6 +147,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [build-frontend, build-backend, build-kafka-consumer]
+    if: ${{ github.event.inputs.deployFrontend == 'yes' || github.event.inputs.deployBackend == 'yes' || github.event.inputs.deployKafkaConsumer == 'yes' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -170,12 +171,8 @@ jobs:
         run: |
           echo "${{ secrets.KUBECONFIG }}" > config.yaml
           export KUBECONFIG=${PWD}/config.yaml
-          kubectl rollout restart deployment/findyourjob-frontend
-          kubectl wait --for=condition=available --timeout=600s deployment/findyourjob-frontend
-          kubectl rollout restart deployment/findyourjob-api
-          kubectl wait --for=condition=available --timeout=600s deployment/findyourjob-api
-          kubectl rollout restart deployment/findyourjob-kafka-consumer
-          kubectl wait --for=condition=available --timeout=600s deployment/findyourjob-kafka-consumer
+          kubectl rollout restart deployment/findyourjob-frontend deployment/findyourjob-api deployment/findyourjob-kafka-consumer
+          kubectl wait --for=condition=available --timeout=600s deployment/findyourjob-frontend deployment/findyourjob-api deployment/findyourjob-kafka-consumer
 
 # kubectl wait --for=condition=available --timeout=600s deployment/findyourjob-api
 # kubectl rollout restart deployment/findyourjob-api
