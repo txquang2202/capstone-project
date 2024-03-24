@@ -7,7 +7,7 @@
     "docs:build": "jsdoc -c jsdoc.json -r",
     "lint:commit": "commitlint --from=HEAD~1",
     "start:windows": "tsc && set NODE_ENV=production && node dist/server.js",
-    "start": "tsc && NODE_ENV=production node dist/server.js",
+    "start": "NODE_ENV=production node dist/src/server.js",
     "build": "rimraf dist & tsc -p tsconfig.json",
     "seed": "node prisma/seeds/main.js",
     "migrate:up": "migrate-mongo up",

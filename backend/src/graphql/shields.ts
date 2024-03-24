@@ -8,6 +8,7 @@ const permissions = [
   {
     Query: {
       user: isPublic,
+      blogs: isPublic,
     },
     Mutation: {
       // createUser: isAdminOnly,
