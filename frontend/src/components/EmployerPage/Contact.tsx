@@ -1,11 +1,78 @@
 'use client';
 
+import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/navigation';
+
 import { IconArrowRightCircle } from '@/components/Icons';
+import {
+  CREATE_COMPANY,
+  CreateCompaCompanyResponse,
+  CreateCompaCompanyVariable,
+} from '@/graphql/company';
+import { useForm } from '@/hooks/useForm';
 
 import { Button } from '../Button';
 import { InputBox } from '../InputBox';
 
+type Form = {
+  representative: string;
+  representativePosition: string;
+  email: string;
+  phone: string;
+  companyName: string;
+  country: string;
+  companyWebsite?: string;
+};
+
 const EmployerContact = () => {
+  const router = useRouter();
+
+  const [mutate, { loading }] = useMutation<
+    CreateCompaCompanyResponse,
+    CreateCompaCompanyVariable
+  >(CREATE_COMPANY);
+
+  const { fields, onChangeField } = useForm<Form>({
+    defaultState: {
+      representative: '',
+      representativePosition: '',
+      email: '',
+      phone: '',
+      companyName: '',
+      country: '',
+      companyWebsite: '',
+    },
+    config: {
+      representative: { required: true },
+      representativePosition: { required: true },
+      email: { required: true },
+      phone: { required: true },
+      companyName: { required: true },
+      country: { required: true },
+    },
+  });
+
+  const onSubmit = () => {
+    mutate({
+      variables: {
+        input: {
+          representative: fields.representative,
+          representative_position: fields.representativePosition,
+          email: fields.email,
+          phone: fields.phone,
+          company_name: fields.companyName,
+          country: fields.country,
+          company_website: fields.companyWebsite || '',
+        },
+      },
+      onCompleted: () => {
+        router.push('/');
+      },
+    });
+    // event.preventDefault();
+    // console.log(fields);
+  };
+
   return (
     <section className='employer-contact-container'>
       <div className='icontainer px-5 py-[120px]'>
@@ -24,6 +91,10 @@ const EmployerContact = () => {
                   <h3 className='text-it-black pb-4'>Thông tin quý khách</h3>
                   <div className='mb-6 lg:flex'>
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('representative', e.target.value)
+                      }
+                      value={fields.representative}
                       type='text'
                       name='contact_request[name]'
                       label='Họ và Tên'
@@ -32,35 +103,47 @@ const EmployerContact = () => {
                       floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('representativePosition', e.target.value)
+                      }
+                      value={fields.representativePosition}
                       type='text'
                       name='contact_request[name]'
                       label='Chức vụ'
                       required
-                      error='Vui lòng điền tên của bạn'
+                      error='Vui lòng điền chức vụ của bạn'
                       floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                   </div>
                   <div className='mb-6 lg:flex'>
                     <InputBox
+                      onChange={(e) => onChangeField('email', e.target.value)}
+                      value={fields.email}
                       type='text'
                       name='contact_request[name]'
                       label='Email làm việc'
                       required
-                      error='Vui lòng điền tên của bạn'
+                      error='Vui lòng điền email của bạn'
                       floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                     <InputBox
+                      onChange={(e) => onChangeField('phone', e.target.value)}
+                      value={fields.phone}
                       type='text'
                       name='contact_request[name]'
                       label='Số điện thoại'
                       required
-                      error='Vui lòng điền tên của bạn'
+                      error='Vui lòng điền số điện thoại của bạn'
                       floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                   </div>
                   <h3 className='text-it-black pb-4'>Thông tin công ty</h3>
                   <div className='mb-6 lg:flex'>
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('companyName', e.target.value)
+                      }
+                      value={fields.companyName}
                       type='text'
                       name='contact_request[name]'
                       label='Tên công ty'
@@ -71,6 +154,8 @@ const EmployerContact = () => {
                   </div>
                   <div className='mb-6 lg:flex'>
                     <InputBox
+                      onChange={(e) => onChangeField('country', e.target.value)}
+                      value={fields.country}
                       type='text'
                       name='contact_request[name]'
                       label='Địa chỉ công ty'
@@ -81,10 +166,13 @@ const EmployerContact = () => {
                   </div>
                   <div className='mb-6 lg:flex'>
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('companyWebsite', e.target.value)
+                      }
+                      value={fields.companyWebsite}
                       type='text'
                       name='contact_request[name]'
                       label='Địa chỉ website'
-                      required
                       error='Vui lòng điền địa chỉ website'
                       floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
@@ -114,7 +202,12 @@ const EmployerContact = () => {
                       </a>
                     </div>
                     <div className='flex justify-center'>
-                      <Button intent='primary' size='xl'>
+                      <Button
+                        loading={loading}
+                        onClick={() => onSubmit()}
+                        intent='primary'
+                        size='xl'
+                      >
                         Liên hệ tôi
                       </Button>
                     </div>

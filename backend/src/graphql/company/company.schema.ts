@@ -15,6 +15,10 @@ const CompanySchema = gql`
     company_website: String
     company_facebook: String
     brief_overview: String
+    representative: String
+    representative_position: String
+    email: String
+    phone: String
   }
   # type JobPayLoad{
 
@@ -52,15 +56,19 @@ const CompanySchema = gql`
 
   input CompanyInput {
     company_name: String!
-    company_type: String!
+    company_type: String
     country: String!
     working_day: String
-    ot_policy: String!
-    company_size: String!
+    ot_policy: String
+    company_size: String
     overview: String @constraint(minLength: 10, maxLength: 80)
     company_website: String
     company_facebook: String
     brief_overview: String @constraint(minLength: 1, maxLength: 80)
+    representative: String!
+    representative_position: String!
+    email: String! @constraint(format: "email")
+    phone: String!
   }
 
   input CompanyReviewInput {
@@ -88,7 +96,7 @@ const CompanySchema = gql`
   # --------------------------------------------------------
 
   extend type Mutation {
-    createCompany(input: CompanyInput!): CompanyPayload
+    createCompany(input: CompanyInput!): CompanyPayload!
     updateCompany(id: ID!, input: CompanyInput!): CompanyPayload
     deleteCompany(id: ID!): CompanyPayload
     createCompanyReview(input: CompanyReviewInput!): CompanyReview!

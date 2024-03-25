@@ -313,6 +313,61 @@ export const routes = {
       },
     },
   }),
+  employerAddJob: route({
+    path: '/manage-job/add-job',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Employer',
+      },
+    },
+  }),
+  employerEditJob: route({
+    path: '/manage-job/edit-job/[id]',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Employer',
+      },
+    },
+  }),
+  employerJobList: route({
+    path: '/manage-job/jobs',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Employer',
+      },
+    },
+  }),
+  employerJobDetail: route({
+    path: '/manage-job/jobs/[id]',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Employer',
+      },
+    },
+  }),
+  employerDashboard: route({
+    path: '/manage-job',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Employer',
+      },
+    },
+  }),
   viewCV: route({
     path: '/view-cv',
     requiredAuth: true,
