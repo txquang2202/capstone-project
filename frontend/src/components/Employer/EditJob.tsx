@@ -1,10 +1,18 @@
 'use client';
 
+import { useMutation } from '@apollo/client';
 import { MultiSelect, TextInput } from '@mantine/core';
+import { useRouter } from 'next/navigation';
 import { ReactNode, useState } from 'react';
 
+import { routes } from '@/configs/router';
 import { JOB_TYPE_TEXT } from '@/constant/job';
-import useAuthData from '@/hooks/useAuthData';
+import {
+  UPDATE_JOB,
+  UpdateJobResponse,
+  UpdateJobVariable,
+} from '@/graphql/job';
+// import useAuthData from '@/hooks/useAuthData';
 import useEmptyText from '@/hooks/useEmptyText';
 import { useForm } from '@/hooks/useForm';
 import { cn } from '@/lib/classNames';
@@ -102,12 +110,12 @@ type Props = {
 
 const EditJob = ({ job }: Props) => {
   const { t } = useLocale();
-  const { authUser } = useAuthData();
-  // const [mutate] = useMutation<CreateJobResponse, CreateJobVariable>(
-  //   CREATE_JOB
-  // );
+  // const { authUser } = useAuthData();
+  const [mutate] = useMutation<UpdateJobResponse, UpdateJobVariable>(
+    UPDATE_JOB
+  );
   const { isEmptyDraftJs } = useEmptyText();
-  // const router = useRouter();
+  const router = useRouter();
   const [range, setRange] = useState(RANGE.USD);
   const [reasons, setReasons] = useState<string[]>([]);
 
@@ -117,9 +125,7 @@ const EditJob = ({ job }: Props) => {
       unit: job.unit,
       skills: JSON.parse(job.skills),
       country: job.country.split(','),
-      skill_demand: job.skill_demand
-        .replace(/<\/li>/g, '\n')
-        .replace(/<[^>]+>/g, ''),
+      skill_demand: job.skill_demand,
       job_description: job.job_description || '',
       why_you_love_working_here: job.why_you_love_working_here,
       is_closed: job.is_closed,
@@ -138,11 +144,17 @@ const EditJob = ({ job }: Props) => {
       top_3_reason: ({ value }) =>
         (value as string[]).length !== 3 ? 'Chọn 3 lý do' : null,
       why_you_love_working_here: ({ value }) =>
-        isEmptyDraftJs(value as string) ? 'Thông tin bắt buộc' : null,
+        isEmptyDraftJs((value as string).replace(/<\/?[^>]+(>|$)/g, '\n'))
+          ? 'Thông tin bắt buộc'
+          : null,
       job_description: ({ value }) =>
-        isEmptyDraftJs(value as string) ? 'Thông tin bắt buộc' : null,
+        isEmptyDraftJs((value as string).replace(/<\/?[^>]+(>|$)/g, '\n'))
+          ? 'Thông tin bắt buộc'
+          : null,
       skill_demand: ({ value }) =>
-        isEmptyDraftJs(value as string) ? 'Thông tin bắt buộc' : null,
+        isEmptyDraftJs((value as string).replace(/<\/?[^>]+(>|$)/g, '\n'))
+          ? 'Thông tin bắt buộc'
+          : null,
     },
     config: {
       name: { required: true },
@@ -153,42 +165,44 @@ const EditJob = ({ job }: Props) => {
     },
   });
 
-  console.log('authUser', authUser);
-  console.log('field', fields);
-  console.log('job', job);
+  // console.log('authUser', authUser);
+  // console.log('field', fields);
+  // console.log('job', job);
+  // console.log("des", job.job_description);
 
   const onSubmit = () => {
-    // mutate({
-    //   variables: {
-    //     input: {
-    //       company_id:
-    //         job.company_id,
-    //       country: fields.country.join(', '),
-    //       hide_salary: fields.hide_salary,
-    //       is_closed: false,
-    //       job_description: fields.job_description,
-    //       name: fields.name,
-    //       salary_from: fields.salary_from,
-    //       salary_to: fields.salary_to,
-    //       skill_demand: fields.skill_demand,
-    //       skills: JSON.stringify(fields.skills),
-    //       top_3_reason:
-    //         '<ul>' +
-    //         fields.top_3_reason
-    //           .map((content) => `<li>${content}</li>`)
-    //           .join('') +
-    //         '</ul>',
-    //       unit: fields.unit,
-    //       why_you_love_working_here: fields.why_you_love_working_here,
-    //       working_type: fields.working_type,
-    //     },
-    //   },
-    //   onCompleted: (data) => {
-    //     router.push(
-    //       routes.employerJobDetail.pathParams({ id: data.createJob.id })
-    //     );
-    //   },
-    // });
+    // console.log(fields);
+    mutate({
+      variables: {
+        updateJobId: job.id,
+        updateJobInput2: {
+          country: fields.country.join(', '),
+          hide_salary: fields.hide_salary,
+          is_closed: false,
+          job_description: fields.job_description,
+          name: fields.name,
+          salary_from: fields.salary_from,
+          salary_to: fields.salary_to,
+          skill_demand: fields.skill_demand,
+          skills: JSON.stringify(fields.skills),
+          top_3_reason:
+            '<ul>' +
+            fields.top_3_reason
+              .map((content) => `<li>${content}</li>`)
+              .join('') +
+            '</ul>',
+          unit: fields.unit,
+          why_you_love_working_here: fields.why_you_love_working_here,
+          working_type: fields.working_type,
+        },
+      },
+      onCompleted: (data) => {
+        router.push(
+          routes.employerJobDetail.pathParams({ id: data.updateJob.id })
+        );
+        router.refresh();
+      },
+    });
   };
 
   return (
@@ -332,7 +346,10 @@ const EditJob = ({ job }: Props) => {
         content={
           <TextEditor
             error={error.job_description}
-            onChange={(value) => onChangeField('job_description', value)}
+            onChange={(value) => {
+              onChangeField('job_description', value);
+            }}
+            fref={job.job_description ? job.job_description : undefined}
             placeholder='Job description'
           />
         }
@@ -345,7 +362,10 @@ const EditJob = ({ job }: Props) => {
         content={
           <TextEditor
             error={error.skill_demand}
-            onChange={(value) => onChangeField('skill_demand', value)}
+            onChange={(value) => {
+              onChangeField('skill_demand', value);
+            }}
+            fref={job.skill_demand}
             placeholder='Your skills and experience'
           />
         }
@@ -358,9 +378,10 @@ const EditJob = ({ job }: Props) => {
         content={
           <TextEditor
             error={error.why_you_love_working_here}
-            onChange={(value) =>
-              onChangeField('why_you_love_working_here', value)
-            }
+            onChange={(value) => {
+              onChangeField('why_you_love_working_here', value);
+            }}
+            fref={job.why_you_love_working_here}
             placeholder="Why you'll love working here"
           />
         }
@@ -370,7 +391,7 @@ const EditJob = ({ job }: Props) => {
         size='large'
         className='mt-2 w-full'
       >
-        Edit Job
+        Save
       </Button>
     </div>
   );

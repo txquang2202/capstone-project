@@ -32,7 +32,7 @@ const EmployerContact = () => {
     CreateCompaCompanyVariable
   >(CREATE_COMPANY);
 
-  const { fields, onChangeField } = useForm<Form>({
+  const { fields, onChangeField, handleSubmit } = useForm<Form>({
     defaultState: {
       representative: '',
       representativePosition: '',
@@ -53,6 +53,7 @@ const EmployerContact = () => {
   });
 
   const onSubmit = () => {
+    console.log(fields);
     mutate({
       variables: {
         input: {
@@ -64,6 +65,9 @@ const EmployerContact = () => {
           country: fields.country,
           company_website: fields.companyWebsite || '',
         },
+      },
+      onError: (err) => {
+        console.log(err);
       },
       onCompleted: () => {
         router.push('/');
@@ -204,7 +208,7 @@ const EmployerContact = () => {
                     <div className='flex justify-center'>
                       <Button
                         loading={loading}
-                        onClick={() => onSubmit()}
+                        onClick={() => handleSubmit(onSubmit)}
                         intent='primary'
                         size='xl'
                       >

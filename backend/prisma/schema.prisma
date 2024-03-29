@@ -30,27 +30,23 @@ model blog_tag {
 }
 
 model company {
-  company_name            String             @db.VarChar
-  company_type            String?            @db.VarChar
-  country                 String?            @db.VarChar
-  working_day             String?            @db.VarChar
-  ot_policy               String?            @db.VarChar
-  company_size            String?            @db.VarChar
-  overview                String?            @db.VarChar
-  company_website         String?            @db.VarChar
-  company_facebook        String?            @db.VarChar
-  brief_overview          String?            @db.VarChar
-  id                      String             @id(map: "company_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  representative          String?            @db.VarChar
-  representative_position String?            @db.VarChar
-  email                   String?            @db.VarChar
-  phone                   String?            @db.VarChar
-  company_benefit         company_benefit?
-  company_key_skill       company_key_skill?
-  company_location        company_location[]
-  follow                  follow[]
-  job                     job[]
-  review                  review[]
+  company_name      String             @db.VarChar
+  company_type      String?            @db.VarChar
+  country           String?            @db.VarChar
+  working_day       String?            @db.VarChar
+  ot_policy         String?            @db.VarChar
+  company_size      String?            @db.VarChar
+  overview          String?            @db.VarChar
+  company_website   String?            @db.VarChar
+  company_facebook  String?            @db.VarChar
+  brief_overview    String?            @db.VarChar
+  id                String             @id(map: "company_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  company_benefit   company_benefit?
+  company_key_skill company_key_skill?
+  company_location  company_location[]
+  follow            follow[]
+  job               job[]
+  review            review[]
 }
 
 model company_benefit {
@@ -262,4 +258,18 @@ model work_experience {
   projects               String?   @db.VarChar
   id                     String    @id(map: "work_experience_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id                String    @db.Uuid
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model company_request {
+  id                      String  @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  representative_name     String? @db.VarChar
+  representative_position String? @db.VarChar
+  representative_email    String? @db.VarChar
+  representative_phone    String? @db.VarChar
+  company_name            String? @db.VarChar
+  company_location        String? @db.VarChar
+  company_weburl          String? @db.VarChar
+
+  @@ignore
 }

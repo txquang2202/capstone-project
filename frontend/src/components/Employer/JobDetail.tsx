@@ -34,13 +34,13 @@ const JobDetail = ({ job }: Props) => {
   );
 
   const onSubmit = () => {
-    console.log('cc');
     mutate({
       variables: {
         deleteJobId: job.id,
       },
       onCompleted: () => {
         router.push(routes.employerJobList.path);
+        router.refresh();
       },
     });
   };

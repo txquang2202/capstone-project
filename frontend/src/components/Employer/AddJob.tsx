@@ -152,8 +152,6 @@ const AddJob = () => {
     },
   });
 
-  console.log('authUser', authUser);
-
   const onSubmit = () => {
     mutate({
       variables: {
