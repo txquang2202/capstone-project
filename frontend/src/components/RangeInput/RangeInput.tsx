@@ -9,6 +9,7 @@ type Props = {
   range?: [number, number];
   values?: [number, number];
   defaultValues?: [number, number];
+  blockRange?: boolean;
   onChange?: (values: [number, number]) => void;
 };
 
@@ -17,6 +18,7 @@ const RangeInput = ({
   range = [500, 10_000],
   values,
   defaultValues,
+  blockRange = true,
   onChange,
 }: Props) => {
   const [value, _onChange] = useUncontrolled({
@@ -34,6 +36,11 @@ const RangeInput = ({
     const right = ((max - _right) * 100) / _range;
     return [left, right];
   }, [range, value]);
+
+  const handleChange = ([left, right]: [number, number]) => {
+    if (left > right && blockRange) return;
+    _onChange([left, right]);
+  };
 
   return (
     <div className='range-border ip-4'>
@@ -56,7 +63,7 @@ const RangeInput = ({
           step={step}
           type='range'
           value={value[0]}
-          onChange={(e) => _onChange([+e.target.value, value[1]])}
+          onChange={(e) => handleChange([+e.target.value, value[1]])}
           data-gtm-form-interact-field-id='0'
         />
         <input
@@ -70,7 +77,7 @@ const RangeInput = ({
           step={step}
           type='range'
           value={value[1]}
-          onChange={(e) => _onChange([value[0], +e.target.value])}
+          onChange={(e) => handleChange([value[0], +e.target.value])}
           data-gtm-form-interact-field-id='1'
         />
       </div>

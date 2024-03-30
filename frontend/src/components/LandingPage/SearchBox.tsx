@@ -1,19 +1,24 @@
+import { Select } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { IconSearch } from '@/components/Icons';
+import { IconChevronDown, IconSearch } from '@/components/Icons';
 import { routes } from '@/configs/router';
+import { SEARCH_OPTIONS } from '@/constant/global';
 
 import { AppLink } from '../AppLink';
 
 const SearchBox = () => {
   const router = useRouter();
+  const [selected, setSelected] = useState(SEARCH_OPTIONS[0].value);
 
   const [keyword, setKeyword] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(routes.search.path + '/' + keyword);
+    router.push(
+      routes.search.pathParams({ keyword: selected }) + `?search=${keyword}`
+    );
   };
 
   return (
@@ -23,28 +28,20 @@ const SearchBox = () => {
       </h1>
       <div className='search-box flex w-full flex-row text-white'>
         <div className='search-city imb-2 imb-md-0 search-form-city-section h-[56px] flex-shrink-0'>
-          <select
-            name='city'
-            id='city'
-            className='appearance-none rounded-md border bg-white p-2 leading-tight text-gray-700 focus:border-blue-500 focus:outline-none'
-          >
-            <option value=''>Tất cả thành phố</option>
-            <option
-              value='ho-chi-minh-hcm'
-              className='bg-gray-100 hover:bg-gray-200'
-            >
-              Ho Chi Minh
-            </option>
-            <option value='ha-noi' className='bg-gray-100 hover:bg-gray-200'>
-              Ha Noi
-            </option>
-            <option value='da-nang' className='bg-gray-100 hover:bg-gray-200'>
-              Da Nang
-            </option>
-            <option value='others' className='bg-gray-100 hover:bg-gray-200'>
-              Others
-            </option>
-          </select>
+          <Select
+            data={SEARCH_OPTIONS}
+            size='lg'
+            value={selected}
+            onChange={(value) => setSelected(value as string)}
+            className='it-input flex-1 [&_input]:h-[56px]'
+            defaultValue='hcm'
+            classNames={{
+              option: 'text-base py-1 px-3 hover:bg-white-red',
+            }}
+            rightSection={
+              <IconChevronDown color='var(--dark-grey)' size={24} />
+            }
+          />
           <div className='pointer-events-none absolute right-0 top-0 mr-2 mt-2'>
             <svg
               className='h-4 w-4 fill-current text-gray-700'

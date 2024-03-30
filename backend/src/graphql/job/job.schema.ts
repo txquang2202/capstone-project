@@ -36,6 +36,9 @@ const JobSchema = gql`
     is_closed: Boolean!
     job_working_location: [JobWorkingLocation!]
     was_applied: Boolean
+    saved: Boolean
+    is_hot: Boolean
+    applied: JobApplying
   }
   #job_apply_description
 
@@ -60,17 +63,32 @@ const JobSchema = gql`
     job_id: ID!
     user_id: ID!
   }
+  type SearchJob {
+    total: Int
+    jobs: [JobPayLoad]
+  }
 
   # ---------------------------------------------------------
   # Queries
   # ---------------------------------------------------------
   extend type Query {
     jobApplications: [JobApplication!]
+    currentJobApplication: JobApplication!
     jobApplication(id: ID!): JobApplication
-    searchJob(query: String!, skip: Int, take: Int): [JobPayLoad]
+    searchJob(
+      query: String!
+      skip: Int
+      take: Int
+      address: String
+      unit: String
+      salaryFrom: Int
+      salaryTo: Int
+      companyType: [String]
+      workingType: [String]
+    ): SearchJob
     companyJobApplications(companyId: ID!): [JobApplication]
     job(id: ID!): JobPayLoad
-
+    savedJobs: [JobPayLoad]
     jobs: [JobPayLoad!]
   }
   # ---------------------------------------------------------
@@ -128,6 +146,8 @@ const JobSchema = gql`
     updateJob(id: ID!, input: updateJobInput): JobPayLoad!
     deleteJob(id: ID!): JobPayLoad!
     sendAllJobsToEls: [JobPayLoad]
+    saveJob(id: ID!): Boolean
+    unsaveJob(id: ID!): Boolean
   }
 `;
 

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql, TypedDocumentNode } from '@apollo/client';
 
 import { type Job } from '@/types/job';
 
@@ -77,38 +77,90 @@ export const GET_JOBS = gql`
   }
 `;
 
-export const SEARCH_JOBS = gql`
-  query SearchJob($query: String!) {
-    searchJob(query: $query) {
-      company_id
-      company {
-        brief_overview
-        company_facebook
-        company_name
-        company_size
-        company_type
-        company_website
+export const SEARCH_JOBS: TypedDocumentNode<
+  {
+    searchJob: {
+      total: number;
+      jobs: Job[];
+    };
+  },
+  {
+    query: string;
+    skip?: number;
+    take?: number;
+    address?: string;
+    unit?: string;
+    salaryFrom?: number;
+    salaryTo?: number;
+    companyType?: string[];
+    workingType?: string[];
+  }
+> = gql`
+  query SearchJob(
+    $query: String!
+    $skip: Int
+    $take: Int
+    $address: String
+    $unit: String
+    $salaryFrom: Int
+    $salaryTo: Int
+    $companyType: [String]
+    $workingType: [String]
+  ) {
+    searchJob(
+      query: $query
+      skip: $skip
+      take: $take
+      address: $address
+      unit: $unit
+      salaryFrom: $salaryFrom
+      salaryTo: $salaryTo
+      companyType: $companyType
+      workingType: $workingType
+    ) {
+      total
+      jobs {
+        company_id
+        company {
+          brief_overview
+          company_facebook
+          company_name
+          company_size
+          company_type
+          company_website
+          country
+          id
+          ot_policy
+          overview
+          working_day
+        }
         country
+        date_posted
         id
-        ot_policy
-        overview
-        working_day
+        is_closed
+        job_description
+        salary_from
+        salary_to
+        name
+        skill_demand
+        skills
+        top_3_reason
+        why_you_love_working_here
+        working_type
+        was_applied
+        saved
+        is_hot
+        unit
+        job_working_location {
+          company_location {
+            address
+          }
+        }
+        applied {
+          id
+          date_apply
+        }
       }
-      country
-      date_posted
-      id
-      is_closed
-      job_description
-      salary_from
-      salary_to
-      name
-      skill_demand
-      skills
-      top_3_reason
-      why_you_love_working_here
-      working_type
-      was_applied
-      unit
     }
   }
 `;
