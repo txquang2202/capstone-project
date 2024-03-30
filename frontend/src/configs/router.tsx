@@ -366,6 +366,9 @@ export const routes = {
       vi: {
         title: 'ITviec Employer',
       },
+      en: {
+        title: 'ITviec Employer',
+      },
     },
   }),
   viewCV: route({

@@ -57,16 +57,28 @@ const UserMenu = () => {
       <div className='bg-it-black sub-menu vbit-menu absolute top-full'>
         <ul className='bg-it-black relative m-0 p-0' data-controller='sub-menu'>
           {authUser.companyId ? (
-            <li className='menu-title small-text category px-4'>
-              <Link
-                className='text-reset flex items-center'
-                data-controller='utm-tracking'
-                href='/applied-management'
-              >
-                <IconBriefcase className='icon-md' />
-                <span className='ms-2'>Quản lý ứng viên</span>
-              </Link>
-            </li>
+            <>
+              <li className='menu-title small-text category px-4'>
+                <Link
+                  className='text-reset flex items-center'
+                  data-controller='utm-tracking'
+                  href='/applied-management'
+                >
+                  <IconBriefcase className='icon-md' />
+                  <span className='ms-2'>Quản lý ứng viên</span>
+                </Link>
+              </li>
+              <li className='menu-title small-text category px-4'>
+                <Link
+                  className='text-reset flex items-center'
+                  data-controller='utm-tracking'
+                  href='/manage-job'
+                >
+                  <IconBriefcase className='icon-md' />
+                  <span className='ms-2'>Quản lý công việc</span>
+                </Link>
+              </li>
+            </>
           ) : (
             <>
               <li className='menu-title small-text category px-4'>

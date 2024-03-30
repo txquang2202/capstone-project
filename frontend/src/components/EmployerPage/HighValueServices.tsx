@@ -105,9 +105,11 @@ const EmployerHighValueServices = () => {
           Trải nghiệm dịch vụ của ITviec ngay hôm nay
         </h3>
         <div className='flex justify-center'>
-          <Button intent='primary' size='xl' className='contact-now-btn'>
-            Liên hệ ngay
-          </Button>
+          <a href='#contactme'>
+            <Button intent='primary' size='xl' className='contact-now-btn'>
+              Liên hệ ngay
+            </Button>
+          </a>
         </div>
       </div>
     </section>
