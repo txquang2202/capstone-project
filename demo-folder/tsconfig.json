@@ -5,7 +5,8 @@
     "noImplicitAny": false,
     "sourceMap": true,
     "strict": true,
-    "allowJs": false
+    "allowJs": false,
+    "outDir": "dist",
     // "resolveJsonModule": true,
     // "esModuleInterop": true
   },

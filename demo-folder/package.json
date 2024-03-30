@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "This is a simple REST API developed using node and express with typescript",
   "scripts": {
-    "start": "npm run transpile && node server.js",
+    "start": "npm run transpile && node ./dist/server.js",
     "dev": "concurrently \"npm:watch\" \"npm:serve\"",
-    "serve": "nodemon server.js",
+    "serve": "nodemon ./dist/server.js",
     "watch": "tsc -w",
     "transpile": "tsc",
-    "seed": "npm run transpile && node src/db/seed.js",
+    "seed": "npm run transpile && node ./dist/src/db/seed.js",
     "lint": "tslint -c tslint.json -p tsconfig.json"
   },
   "engines": {

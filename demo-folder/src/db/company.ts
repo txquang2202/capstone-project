@@ -1,4 +1,4 @@
-[
+export default  [
   {
     "id": 1,
     "company_name": "Golden Owl Consulting Company",

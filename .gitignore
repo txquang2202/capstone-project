@@ -44,3 +44,5 @@ volumes
 # redis
 dump.rdb
 test.js
+
+./build

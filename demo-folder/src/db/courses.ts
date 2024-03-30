@@ -1,4 +1,4 @@
-[
+export default [
     {
         "description": "30 Days to Learn HTML & CSS (Full Course)",
         "url": "https://www.youtube.com/playlist?list=PLgGbWId6zgaWZkPFI4Sc9QXDmmOWa1v5F",

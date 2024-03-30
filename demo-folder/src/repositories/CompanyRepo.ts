@@ -1,7 +1,7 @@
 import { Company } from "../models/Company";
 
-const companies: object[] = require("../db/company.json");
-
+// const companies: object[] = require("../db/company.json");
+import companies from '../db/company';
 class CompanyRepo {
   constructor() {}
 

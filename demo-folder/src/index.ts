@@ -19,6 +19,9 @@ export default class Server {
   }
 
   public config(app: Application): void {
+    if (!fs.existsSync(path.join(__dirname, './logs'))) {
+      fs.mkdirSync(path.join(__dirname, './logs'), {recursive: true})
+    }
     const accessLogStream: WriteStream = fs.createWriteStream(
       path.join(__dirname, './logs/access.log'),
       { flags: 'a' }

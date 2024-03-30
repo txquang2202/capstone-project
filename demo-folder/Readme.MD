@@ -1,5 +1,5 @@
 # REST API with Node using Typescript
-
+- Link postman : https://documenter.getpostman.com/view/28346732/2sA35G42mo#672e6856-6747-4f8e-96a3-2557e18aa640
 This is a simple REST API developed using node and express with typescript
 
 ![alt text](https://image.ibb.co/nAd9OF/logos.png "Node Typescript")
