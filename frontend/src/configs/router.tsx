@@ -404,6 +404,50 @@ export const routes = {
       },
     },
   }),
+  adminDashboard: route({
+    path: '/admin',
+    requiredAuth: true,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  adminBlogList: route({
+    path: '/admin/blogs',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  adminJobDetail: route({
+    path: '/admin/blogs/[id]',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  adminAddBlog: route({
+    path: '/admin/add-blog',
+    requiredAuth: false,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
 };
 
 export const getRouteByPath = (path = '') => {
