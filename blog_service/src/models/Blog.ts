@@ -1,7 +1,7 @@
-import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../db/db";
-import { User } from "./User";
-import { BlogTag } from "./Blog_Tag";
+import { Model, DataTypes } from 'sequelize';
+import { sequelize } from '../db/db';
+import { User } from './User';
+import { BlogTag } from './Blog_Tag';
 
 export class Blog extends Model {
     public id!: number;
@@ -25,7 +25,7 @@ Blog.init(
     },
     {
         sequelize,
-        tableName: "blog" ,// Assuming your table name is "blogs" in the database
+        tableName: 'blog' , // Assuming your table name is "blogs" in the database
         timestamps: false
     }
 );

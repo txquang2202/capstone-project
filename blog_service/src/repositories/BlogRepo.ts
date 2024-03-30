@@ -1,6 +1,6 @@
-import { create } from "domain";
-import {Blog} from "../models/Blog";
-import {BlogTag} from "../models/Blog_Tag";
+import { create } from 'domain';
+import { Blog } from '../models/Blog';
+import { BlogTag } from '../models/Blog_Tag';
 
 class BlogRepo {
   constructor() {}
@@ -13,7 +13,7 @@ class BlogRepo {
 
   getById(blogId) {
     return Blog.findByPk(blogId, {
-      
+
     });
   }
   async getPaginatedBlogs(limit: number, offset: number) {
@@ -30,7 +30,7 @@ class BlogRepo {
     const totalPages = Math.ceil(totalCount / limit);
 
     return {
-        
+
         totalItems: totalCount,
         totalPages: totalPages,
         blogs: blogs
@@ -44,12 +44,12 @@ class BlogRepo {
 
   }
   updateBlog(blogId, blogData: any) {
-    //Tim blog theo id
+    // Tim blog theo id
     const blog = Blog.findByPk(blogId);
     if (!blog) {
       throw new Error(`Blog with id ${blogId} not found`);
   }
-  //Cap nhat blog
+  // Cap nhat blog
   const updatedBlog = Blog.update({
       title: blogData.title,
       content: blogData.content,
@@ -65,12 +65,12 @@ class BlogRepo {
   return updatedBlog;
   }
   deleteBlog(blogId) {
-    //Tim blog theo id
+    // Tim blog theo id
     const blog = Blog.findByPk(blogId);
     if (!blog) {
         throw new Error(`Blog with id ${blogId} not found`);
     }
-    //Xoa blog
+    // Xoa blog
     const deletedBlog = Blog.destroy({
         where: {
             id: blogId

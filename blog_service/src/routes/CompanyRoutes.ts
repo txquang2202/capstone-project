@@ -1,5 +1,5 @@
-import { Router } from "express";
-import CompanyCtrl from "../controllers/CompanyCtrl";
+import { Router } from 'express';
+import CompanyCtrl from '../controllers/CompanyCtrl';
 
 class CompanyRouters {
   router = Router();
@@ -9,8 +9,8 @@ class CompanyRouters {
     this.intializeRoutes();
   }
   intializeRoutes() {
-    this.router.route("/").get(this.coursesCtrl.getAllCompanies);
-    this.router.route("/:id").get(this.coursesCtrl.getCompanyDetails);
+    this.router.route('/').get(this.coursesCtrl.getAllCompanies);
+    this.router.route('/:id').get(this.coursesCtrl.getCompanyDetails);
   }
 }
 export default new CompanyRouters().router;

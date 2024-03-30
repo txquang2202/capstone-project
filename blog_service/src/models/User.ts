@@ -15,6 +15,6 @@ export class User extends Model {
   public role!: number;
   public password!: string;
   public img_url!: string;
-  
+
 
 }

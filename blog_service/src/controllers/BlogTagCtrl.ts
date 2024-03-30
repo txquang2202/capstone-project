@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from "express";
-import BlogTagRepo from "./../repositories/BlogTagRepo";
-import { apiErrorHandler } from "./../handlers/errorHandler";
+import { Request, Response, NextFunction } from 'express';
+import BlogTagRepo from './../repositories/BlogTagRepo';
+import { apiErrorHandler } from './../handlers/errorHandler';
 
 export default class BlogTagCtrl {
     constructor() {}
     async getAllBlogTags(req: Request, res: Response, next: NextFunction) {
-        
+
         console.log(req.params.id);
         try {
             const blogTagList = await BlogTagRepo.getAllBlogTags(req.params.id);

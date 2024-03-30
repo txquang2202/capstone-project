@@ -1,5 +1,5 @@
-import { Router } from "express";
-import BlogCtrl from "../controllers/BlogCtrl";
+import { Router } from 'express';
+import BlogCtrl from '../controllers/BlogCtrl';
 class BlogRoutes {
     router = Router();
     blogCtrl = new BlogCtrl();
@@ -7,12 +7,12 @@ class BlogRoutes {
         this.intializeRoutes();
     }
     intializeRoutes() {
-        this.router.route("/").get(this.blogCtrl.getAllBlogs);
-        this.router.route("/:id").get(this.blogCtrl.getBlogDetails);
-        this.router.route("/pages/:page").get(this.blogCtrl.getAllBlogPages);
-        this.router.route("/").post(this.blogCtrl.addBlog);
-        this.router.route("/:id").put(this.blogCtrl.updateBlog);
-        this.router.route("/:id").delete(this.blogCtrl.deleteBlog);
+        this.router.route('/').get(this.blogCtrl.getAllBlogs);
+        this.router.route('/:id').get(this.blogCtrl.getBlogDetails);
+        this.router.route('/pages/:page').get(this.blogCtrl.getAllBlogPages);
+        this.router.route('/').post(this.blogCtrl.addBlog);
+        this.router.route('/:id').put(this.blogCtrl.updateBlog);
+        this.router.route('/:id').delete(this.blogCtrl.deleteBlog);
     }
 }
 export default new BlogRoutes().router;

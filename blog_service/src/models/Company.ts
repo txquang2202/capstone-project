@@ -1,5 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../db/db";
+import { Model, DataTypes } from 'sequelize';
+import { sequelize } from '../db/db';
 
 export class Company extends Model {
   public id!: number;
@@ -31,7 +31,7 @@ Company.init(
   },
   {
     sequelize,
-    tableName: "company",
+    tableName: 'company',
   }
 );
 

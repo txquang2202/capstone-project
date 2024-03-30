@@ -1,12 +1,12 @@
-import { Request, Response, NextFunction } from "express";
-import BlogRepo from "./../repositories/BlogRepo";
-import { apiErrorHandler } from "./../handlers/errorHandler";
+import { Request, Response, NextFunction } from 'express';
+import BlogRepo from './../repositories/BlogRepo';
+import { apiErrorHandler } from './../handlers/errorHandler';
 
 export default class BlogCtrl {
     constructor() {}
     async getAllBlogs(req: Request, res: Response, next: NextFunction) {
-        
-        
+
+
         try {
             const blogList = await BlogRepo.getAllBlogs();
             res.json(blogList);
@@ -33,16 +33,16 @@ export default class BlogCtrl {
         try {
             // Trang hiện tại (mặc định là trang 1)
             const currentPage: number = req.params.page ? parseInt(req.params.page as string) : 1;
-            
+
             // Số lượng blog trên mỗi trang (mặc định là 10)
             const blogsPerPage: number = req.query.limit ? parseInt(req.query.limit as string) : 1;
-            
+
             // Tính toán offset cho truy vấn
             const offset = (currentPage - 1) * blogsPerPage;
-    
+
             // Lấy dữ liệu blog phân trang từ BlogRepo
             const blogList = await BlogRepo.getPaginatedBlogs(blogsPerPage, offset);
-    
+
             // Trả về kết quả phân trang
             res.json(blogList);
         } catch (error) {

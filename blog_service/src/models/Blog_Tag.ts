@@ -14,7 +14,7 @@ BlogTag.init(
     {
         sequelize,
         tableName: 'blog_tag',
-        timestamps:false
+        timestamps: false
     },
 );
 BlogTag.belongsTo(Tag, { foreignKey: 'tag_id', as: 'tag' });

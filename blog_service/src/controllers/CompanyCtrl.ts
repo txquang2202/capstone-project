@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import CompanyRepo from "./../repositories/CompanyRepo";
-import { apiErrorHandler } from "./../handlers/errorHandler";
+import { Request, Response, NextFunction } from 'express';
+import CompanyRepo from './../repositories/CompanyRepo';
+import { apiErrorHandler } from './../handlers/errorHandler';
 
 export default class CompanyCtrl {
   constructor() {}
@@ -10,7 +10,7 @@ export default class CompanyCtrl {
       const company_list = await CompanyRepo.getAllCompanies();
       res.json(company_list);
     } catch (error) {
-      apiErrorHandler(error, req, res, "Fetch All Courses failed.");
+      apiErrorHandler(error, req, res, 'Fetch All Courses failed.');
     }
   }
 

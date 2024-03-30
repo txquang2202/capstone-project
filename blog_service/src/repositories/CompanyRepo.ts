@@ -1,4 +1,4 @@
-import { Company } from "../models/Company";
+import { Company } from '../models/Company';
 
 // const companies: object[] = require("../db/company.json");
 import companies from '../db/company';
@@ -15,7 +15,7 @@ class CompanyRepo {
       include: [
         {
           model: Company,
-          as: "companies",
+          as: 'companies',
         },
       ],
     });

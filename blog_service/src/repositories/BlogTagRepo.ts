@@ -1,6 +1,6 @@
-import {Blog} from "../models/Blog";
-import {BlogTag} from "../models/Blog_Tag";
-import { Tag } from "../models/Tag";
+import { Blog } from '../models/Blog';
+import { BlogTag } from '../models/Blog_Tag';
+import { Tag } from '../models/Tag';
 
 class BlogTagRepo {
   constructor() {}
@@ -9,21 +9,21 @@ class BlogTagRepo {
     console.log();
 
     return BlogTag.findAll({
-        where:{
-            blog_id:blogId
+        where: {
+            blog_id: blogId
         },
-        include:[{
-          model:Tag,
-          attributes:['tag_name'],
-          as:'tag'
+        include: [{
+          model: Tag,
+          attributes: ['tag_name'],
+          as: 'tag'
         }]
     });
-    
+
   }
 
   getById(blogId) {
     return BlogTag.findByPk(blogId, {
-      
+
     });
   }
 }

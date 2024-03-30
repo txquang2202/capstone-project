@@ -9,7 +9,8 @@
     "watch": "tsc -w",
     "transpile": "tsc",
     "seed": "npm run transpile && node ./dist/src/db/seed.js",
-    "lint": "tslint -c tslint.json -p tsconfig.json"
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "lint:fix": "tslint --fix -c tslint.json -p tsconfig.json"
   },
   "engines": {
     "node": ">=8.0"
