@@ -38,6 +38,16 @@ const CompanySchema = gql`
     is_recommended: Boolean
     ot_satisfy: Boolean
   }
+  type CompanyRequest {
+    id: ID!
+    representative_name: String!
+    representative_position: String!
+    representative_email: String!
+    representative_phone: String!
+    company_name: String!
+    company_location: String!
+    company_weburl: String
+  }
 
   # ---------------------------------------------------------
   # Queries
@@ -49,6 +59,7 @@ const CompanySchema = gql`
     companyReviews: [CompanyReview!]
     companyReview(id: ID!): CompanyReview
     searchCompany(query: String!, skip: Int, take: Int): [CompanyPayload]
+    companyRequests: [CompanyRequest!]
   }
   # ---------------------------------------------------------
   # Input Objects
@@ -91,6 +102,15 @@ const CompanySchema = gql`
     is_recommended: Boolean
     ot_satisfy: Boolean
   }
+  input CompanyRequestInput {
+    representative_name: String!
+    representative_position: String!
+    representative_email: String!
+    representative_phone: String!
+    company_name: String!
+    company_location: String!
+    company_weburl: String
+  }
   # ---------------------------------------------------------
   # Mutations
   # --------------------------------------------------------
@@ -105,6 +125,7 @@ const CompanySchema = gql`
       input: UpdateCompanyReviewInput!
     ): CompanyReview!
     deleteCompanyReview(id: ID!): CompanyReview!
+    createCompanyRequest(input: CompanyRequestInput!): CompanyRequest!
   }
 `;
 

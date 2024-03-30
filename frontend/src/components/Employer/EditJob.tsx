@@ -165,13 +165,7 @@ const EditJob = ({ job }: Props) => {
     },
   });
 
-  // console.log('authUser', authUser);
-  // console.log('field', fields);
-  // console.log('job', job);
-  // console.log("des", job.job_description);
-
   const onSubmit = () => {
-    // console.log(fields);
     mutate({
       variables: {
         updateJobId: job.id,
