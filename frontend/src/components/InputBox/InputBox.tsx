@@ -8,7 +8,7 @@ export type InputProps = {
   formClass?: string;
   required?: boolean;
   error?: string;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
 };
 
 export const InputBox = (
