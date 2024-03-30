@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ReactNode, useState } from 'react';
 
 import { routes } from '@/configs/router';
+import { RANGE } from '@/constant/global';
 import { JOB_TYPE_TEXT } from '@/constant/job';
 import {
   CREATE_JOB,
@@ -76,32 +77,6 @@ type AddJob = {
   unit: string;
   why_you_love_working_here: string;
   working_type: string;
-};
-
-const RANGE: Record<
-  string,
-  {
-    unit: string;
-    locale: string;
-    range: [number, number];
-    from: number;
-    to: number;
-  }
-> = {
-  VND: {
-    unit: 'VND',
-    locale: 'vi-VN',
-    range: [0, 100_000_000],
-    from: 10_000_000,
-    to: 20_000_000,
-  },
-  USD: {
-    unit: 'USD',
-    locale: 'en',
-    range: [0, 10_000],
-    from: 1_000,
-    to: 2_000,
-  },
 };
 
 const AddJob = () => {

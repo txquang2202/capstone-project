@@ -15,6 +15,21 @@ const Query = {
     });
     return jobApplication;
   },
+  //show newest job application
+  currentJobApplication: async (
+    _: any,
+    __: any,
+    { prisma, authUser }: ContextInterface,
+  ): Promise<job_apply | null> => {
+    const jobApplication = await prisma.job_apply.findMany({
+      where: { user_id: authUser.sub },
+      orderBy: {
+        date_apply: "desc",
+      },
+      take: 1,
+    });
+    return jobApplication[0];
+  },
   //Show list of job applications
   jobApplications: async (
     _: any,
