@@ -22,6 +22,6 @@ COPY --from=builder --chown=appuser:appgroup /app/package.json ./
 COPY --from=builder --chown=appuser:appgroup /app/dist ./dist
 COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
 COPY --from=builder --chown=appuser:appgroup /app/prisma ./prisma
-COPY --from=builder --chown=appuser:appgroup /app/src/services/mailer.template.html ./dist/src/services
+COPY --from=builder --chown=appuser:appgroup /app/src/services/mailer.template.html ./dist/services
 
 CMD [ "dumb-init", "node", "dist/server.js" ]

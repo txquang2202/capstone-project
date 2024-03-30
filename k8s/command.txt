@@ -46,7 +46,7 @@ eksctl create cluster \
 
     helm install es-kb-quickstart elastic/eck-stack -n elastic-stack --create-namespace
 
-    aws eks update-nodegroup-config --cluster-name findyourjob --nodegroup-name group-nodes --scaling-config minSize=1,maxSize=2,desiredSize=2
+    aws eks update-nodegroup-config --cluster-name findyourjob --nodegroup-name group-nodes --scaling-config minSize=1,maxSize=1,desiredSize=1
 
     kubectl cordon ip-192-168-14-140.ap-southeast-1.compute.internal
 
@@ -54,3 +54,15 @@ eksctl create cluster \
 
     https://kubernetes.github.io/ingress-nginx/examples/customization/custom-configuration/
 
+    kubectl scale deployment/inflate --replicas 5
+
+    aws ec2 create-tags --tags "Key=karpenter.sh/discovery,Value=${CLUSTER_NAME}" --resources "subnet-03a60ca85c4632b49" "subnet-0890a157d107924aa" "subnet-06fce67f55b544dc1"
+    
+    kubectl create configmap eks-loadtest-locustfile --from-file ./locustfile.py
+
+    helm upgrade --install findyourjob-locust deliveryhero/locust \
+ --set loadtest.name=eks-loadtest \
+ --set loadtest.locust_locustfile_configmap=eks-loadtest-locustfile \
+ --set loadtest.locust_locustfile=locustfile.py \
+ --set worker.hpa.enabled=true \
+ --set worker.hpa.minReplicas=2
