@@ -15,6 +15,10 @@ const CompanySchema = gql`
     company_website: String
     company_facebook: String
     brief_overview: String
+    representative: String
+    representative_position: String
+    email: String
+    phone: String
   }
   # type JobPayLoad{
 
@@ -34,6 +38,16 @@ const CompanySchema = gql`
     is_recommended: Boolean
     ot_satisfy: Boolean
   }
+  type CompanyRequest {
+    id: ID!
+    representative_name: String!
+    representative_position: String!
+    representative_email: String!
+    representative_phone: String!
+    company_name: String!
+    company_location: String!
+    company_weburl: String
+  }
 
   # ---------------------------------------------------------
   # Queries
@@ -45,6 +59,7 @@ const CompanySchema = gql`
     companyReviews: [CompanyReview!]
     companyReview(id: ID!): CompanyReview
     searchCompany(query: String!, skip: Int, take: Int): [CompanyPayload]
+    companyRequests: [CompanyRequest!]
   }
   # ---------------------------------------------------------
   # Input Objects
@@ -52,15 +67,19 @@ const CompanySchema = gql`
 
   input CompanyInput {
     company_name: String!
-    company_type: String!
+    company_type: String
     country: String!
     working_day: String
-    ot_policy: String!
-    company_size: String!
+    ot_policy: String
+    company_size: String
     overview: String @constraint(minLength: 10, maxLength: 80)
     company_website: String
     company_facebook: String
     brief_overview: String @constraint(minLength: 1, maxLength: 80)
+    representative: String!
+    representative_position: String!
+    email: String! @constraint(format: "email")
+    phone: String!
   }
 
   input CompanyReviewInput {
@@ -83,12 +102,21 @@ const CompanySchema = gql`
     is_recommended: Boolean
     ot_satisfy: Boolean
   }
+  input CompanyRequestInput {
+    representative_name: String!
+    representative_position: String!
+    representative_email: String!
+    representative_phone: String!
+    company_name: String!
+    company_location: String!
+    company_weburl: String
+  }
   # ---------------------------------------------------------
   # Mutations
   # --------------------------------------------------------
 
   extend type Mutation {
-    createCompany(input: CompanyInput!): CompanyPayload
+    createCompany(input: CompanyInput!): CompanyPayload!
     updateCompany(id: ID!, input: CompanyInput!): CompanyPayload
     deleteCompany(id: ID!): CompanyPayload
     createCompanyReview(input: CompanyReviewInput!): CompanyReview!
@@ -97,6 +125,8 @@ const CompanySchema = gql`
       input: UpdateCompanyReviewInput!
     ): CompanyReview!
     deleteCompanyReview(id: ID!): CompanyReview!
+    createCompanyRequest(input: CompanyRequestInput!): CompanyRequest!
+    deleteCompanyRequest(id: ID!): CompanyRequest!
   }
 `;
 

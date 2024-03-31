@@ -1,4 +1,10 @@
-import { Editor, EditorState, RichUtils } from 'draft-js';
+import {
+  ContentState,
+  convertFromHTML,
+  Editor,
+  EditorState,
+  RichUtils,
+} from 'draft-js';
 import { MouseEvent, useRef, useState } from 'react';
 
 import { cn } from '@/lib/classNames';
@@ -56,12 +62,23 @@ type Props = {
   placeholder?: string;
   onChange?: (content: string) => void;
   error?: string;
+  fref?: string;
 };
 
-const TextEditor = ({ placeholder, onChange, error }: Props) => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
+const TextEditor = ({ placeholder, onChange, error, fref }: Props) => {
+  const [editorState, setEditorState] = useState(() => {
+    if (fref) {
+      const blocksFromHTML = convertFromHTML(fref);
+      return EditorState.createWithContent(
+        ContentState.createFromBlockArray(
+          blocksFromHTML.contentBlocks,
+          blocksFromHTML.entityMap
+        )
+      );
+    } else {
+      return EditorState.createEmpty();
+    }
+  });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editorRef = useRef<any>();

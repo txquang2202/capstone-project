@@ -259,3 +259,15 @@ model work_experience {
   id                     String    @id(map: "work_experience_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id                String    @db.Uuid
 }
+
+model company_request {
+  id                      String  @id(map: "company_request_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  representative_name     String? @db.VarChar
+  representative_position String? @db.VarChar
+  representative_email    String? @db.VarChar
+  representative_phone    String? @db.VarChar
+  company_name            String? @db.VarChar
+  company_location        String? @db.VarChar
+  company_weburl          String? @db.VarChar
+
+}

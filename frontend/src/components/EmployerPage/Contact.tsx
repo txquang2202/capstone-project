@@ -1,13 +1,106 @@
 'use client';
 
+import { useMutation } from '@apollo/client';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+
 import { IconArrowRightCircle } from '@/components/Icons';
+import {
+  CREATE_COMPANY_REQUEST,
+  CreateCompanyRequestResponse,
+  CreateCompanyRequestVariable,
+} from '@/graphql/company';
+import { useForm } from '@/hooks/useForm';
+import { isNotEmpty } from '@/lib/validate';
 
 import { Button } from '../Button';
 import { InputBox } from '../InputBox';
 
+type Form = {
+  representativeName: string;
+  representativePosition: string;
+  representativeEmail: string;
+  representativePhone: string;
+  companyName: string;
+  companyLocation: string;
+  companyUrl: string;
+};
+
 const EmployerContact = () => {
+  const router = useRouter();
+  const [mutate] = useMutation<
+    CreateCompanyRequestResponse,
+    CreateCompanyRequestVariable
+  >(CREATE_COMPANY_REQUEST);
+
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [agreeLicense, setAgreeLicense] = useState(false);
+
+  const { fields, onChangeField, handleSubmit } = useForm<Form>({
+    defaultState: {
+      representativeName: '',
+      representativePosition: '',
+      representativeEmail: '',
+      representativePhone: '',
+      companyName: '',
+      companyLocation: '',
+      companyUrl: '',
+    },
+    config: {
+      representativeName: { required: true },
+      representativePosition: { required: true },
+      representativeEmail: { required: true },
+      representativePhone: { required: true },
+      companyName: { required: true },
+      companyLocation: { required: true },
+    },
+  });
+
+  useEffect(() => {
+    setIsFormValid(
+      isNotEmpty(fields.representativeName) &&
+        isNotEmpty(fields.representativePosition) &&
+        isNotEmpty(fields.representativeEmail) &&
+        isNotEmpty(fields.representativePhone) &&
+        isNotEmpty(fields.companyName) &&
+        isNotEmpty(fields.companyLocation) &&
+        agreeLicense
+    );
+  }, [
+    fields.representativeName,
+    fields.representativePosition,
+    fields.representativeEmail,
+    fields.representativePhone,
+    fields.companyName,
+    fields.companyLocation,
+    agreeLicense,
+  ]);
+
+  const onSubmit = () => {
+    mutate({
+      variables: {
+        input: {
+          representative_name: fields.representativeName,
+          representative_position: fields.representativePosition,
+          representative_email: fields.representativeEmail,
+          representative_phone: fields.representativePhone,
+          company_name: fields.companyName,
+          company_location: fields.companyLocation,
+          company_weburl: fields.companyUrl || '',
+        },
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+      onCompleted: () => {
+        router.push('/');
+      },
+    });
+  };
+
   return (
-    <section className='employer-contact-container'>
+    <section className='employer-contact-container' id='contactme'>
       <div className='icontainer px-5 py-[120px]'>
         <div className='text-it-white'>
           <div className='lg-title'>Tìm kiếm Nhân tài IT phù hợp</div>
@@ -24,6 +117,10 @@ const EmployerContact = () => {
                   <h3 className='text-it-black pb-4'>Thông tin quý khách</h3>
                   <div className='mb-6 lg:flex'>
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('representativeName', e.target.value)
+                      }
+                      value={fields.representativeName}
                       type='text'
                       name='contact_request[name]'
                       label='Họ và Tên'
@@ -32,35 +129,51 @@ const EmployerContact = () => {
                       floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('representativePosition', e.target.value)
+                      }
+                      value={fields.representativePosition}
                       type='text'
                       name='contact_request[name]'
                       label='Chức vụ'
                       required
-                      error='Vui lòng điền tên của bạn'
+                      error='Vui lòng điền chức vụ của bạn'
                       floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                   </div>
                   <div className='mb-6 lg:flex'>
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('representativeEmail', e.target.value)
+                      }
+                      value={fields.representativeEmail}
                       type='text'
                       name='contact_request[name]'
                       label='Email làm việc'
                       required
-                      error='Vui lòng điền tên của bạn'
+                      error='Vui lòng điền email của bạn'
                       floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('representativePhone', e.target.value)
+                      }
+                      value={fields.representativePhone}
                       type='text'
                       name='contact_request[name]'
                       label='Số điện thoại'
                       required
-                      error='Vui lòng điền tên của bạn'
+                      error='Vui lòng điền số điện thoại của bạn'
                       floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                   </div>
                   <h3 className='text-it-black pb-4'>Thông tin công ty</h3>
                   <div className='mb-6 lg:flex'>
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('companyName', e.target.value)
+                      }
+                      value={fields.companyName}
                       type='text'
                       name='contact_request[name]'
                       label='Tên công ty'
@@ -71,6 +184,10 @@ const EmployerContact = () => {
                   </div>
                   <div className='mb-6 lg:flex'>
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('companyLocation', e.target.value)
+                      }
+                      value={fields.companyLocation}
                       type='text'
                       name='contact_request[name]'
                       label='Địa chỉ công ty'
@@ -81,16 +198,21 @@ const EmployerContact = () => {
                   </div>
                   <div className='mb-6 lg:flex'>
                     <InputBox
+                      onChange={(e) =>
+                        onChangeField('companyUrl', e.target.value)
+                      }
+                      value={fields.companyUrl}
                       type='text'
                       name='contact_request[name]'
                       label='Địa chỉ website'
-                      required
                       error='Vui lòng điền địa chỉ website'
                       floatingclass='mb-6 w-full lg:mb-0 lg:me-6'
                     />
                   </div>
                   <div className='space-x-2'>
                     <input
+                      checked={agreeLicense}
+                      onChange={(e) => setAgreeLicense(e.target.checked)}
                       type='checkbox'
                       className='text-dark-grey focus:ring-silver-grey active:bg-silver-grey h-5 w-5 rounded focus:outline-none focus:ring'
                     />
@@ -107,14 +229,23 @@ const EmployerContact = () => {
                       </p>
                       <a
                         className='hyperlink'
-                        target='_blank'
-                        href='/customer/login'
+                        href='#'
+                        onClick={(e) => {
+                          e.preventDefault();
+                          signIn('keycloak');
+                        }}
                       >
                         Đăng nhập
                       </a>
                     </div>
                     <div className='flex justify-center'>
-                      <Button intent='primary' size='xl'>
+                      <Button
+                        // onClick={() => handleSubmit(onSubmit)}
+                        onClick={() => handleSubmit(onSubmit)}
+                        intent='primary'
+                        size='xl'
+                        disabled={!isFormValid}
+                      >
                         Liên hệ tôi
                       </Button>
                     </div>

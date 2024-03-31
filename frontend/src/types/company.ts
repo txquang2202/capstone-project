@@ -10,4 +10,8 @@ export type Company = {
   ot_policy: string;
   overview: string;
   working_day: string;
+  representative: string;
+  representative_position: string;
+  email: string;
+  phone: string;
 };

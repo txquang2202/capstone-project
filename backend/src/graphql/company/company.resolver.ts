@@ -1,4 +1,5 @@
-import { company } from "@prisma/client";
+import { company, company_request } from "@prisma/client";
+// import { company_request } from "@prisma/client";
 import { ContextInterface } from "../context";
 import { EVENT } from "../../constants/elasticsearch";
 
@@ -35,6 +36,15 @@ const Query = {
     //console.log(jobs);
     return jobs;
   },
+  //Show list of company request
+  companyRequests: async (
+    _: any,
+    _args: any,
+    { prisma }: ContextInterface,
+  ): Promise<company_request[]> => {
+    const companyRequests = await prisma.company_request.findMany();
+    return companyRequests;
+  },
 };
 const Mutation = {
   //Add a new company
@@ -43,15 +53,15 @@ const Mutation = {
     { input }: { input: company },
     { prisma, kafkaProducer }: ContextInterface,
   ): Promise<company> => {
-    const newCompany = await prisma.company.create({
+    const newCompanyRequest = await prisma.company.create({
       data: input,
     });
     kafkaProducer.send(process.env.KAFKA_TOPIC_COMPANY || "", {
       index: process.env.ELASTIC_COMPANY_INDEX || "company",
       event: EVENT.CREATE,
-      data: newCompany,
+      data: newCompanyRequest,
     });
-    return newCompany;
+    return newCompanyRequest;
   },
 
   // Update an existing company by ID
@@ -102,6 +112,27 @@ const Mutation = {
       data: deletedCompany,
     });
     return deletedCompany;
+  },
+  //Add a new company request
+  createCompanyRequest: async (
+    _: any,
+    { input }: { input: company_request },
+    { prisma }: ContextInterface,
+  ): Promise<company_request> => {
+    const newCompanyRequest = await prisma.company_request.create({
+      data: input,
+    });
+    return newCompanyRequest;
+  },// Delete a company request by ID
+  deleteCompanyRequest: async (
+    _: any,
+    { id }: { id: string },
+    { prisma }: ContextInterface,
+  ): Promise<company_request | null> => {
+    const deletedCompanyRequest = await prisma.company_request.delete({
+      where: { id },
+    });
+    return deletedCompanyRequest;
   },
 };
 
