@@ -2,8 +2,8 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from './../db/db';
 
 export class Tag extends Model {
-  public id!: number;
-  public tag_name!: string;
+    public id!: number;
+    public tag_name!: string;
 }
 Tag.init(
     {
@@ -13,5 +13,6 @@ Tag.init(
     {
         sequelize,
         tableName: 'tag',
+        timestamps: false,
     },
-    );
+);

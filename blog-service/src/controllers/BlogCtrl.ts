@@ -1,9 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import BlogRepo from './../repositories/BlogRepo';
+import BlogTagRepo from './../repositories/BlogTagRepo';
+
 import { apiErrorHandler } from './../handlers/errorHandler';
+import { AddBlogRequest, AddBlogResponse, AddBlogTagRequest } from './types/BlogTypes';
 
 export default class BlogCtrl {
-    constructor() {}
+    constructor() { }
     async getAllBlogs(req: Request, res: Response, next: NextFunction) {
 
 
@@ -51,10 +54,46 @@ export default class BlogCtrl {
     }
     async addBlog(req: Request, res: Response, next: NextFunction) {
         try {
-            const newBlog = await BlogRepo.addBlog(req.body);
-            res.status(201).json(newBlog);
+            const addBlogReq: AddBlogRequest = {
+                slug: req.body.slug,
+                title: req.body.title,
+                content: req.body.content,
+                user_id: req.body.user_id
+            };
+            const newBlog = await BlogRepo.addBlog({
+                content: addBlogReq.content,
+                slug: addBlogReq.slug,
+                title: addBlogReq.title,
+                time_read: 0,
+                user_id: addBlogReq.user_id,
+                created_at: new Date(),
+            });
+            const blogTagsReq = (): AddBlogTagRequest[] => {
+                if (req.body.tag_ids) {
+                    return req.body.tag_ids.map((tag_id: string) => {
+                        return { blog_id: newBlog.id, tag_id: tag_id };
+                    });
+                }
+                return [];
+            }
+            // Add tags to blog
+            const newBlogTag = BlogTagRepo.addBlogTags([...blogTagsReq().map((blogTag) => {
+                return { blog_id: blogTag.blog_id, tag_id: blogTag.tag_id };
+            })]);
+            const resp: AddBlogResponse = {
+                id: newBlog.id,
+                content: newBlog.content,
+                slug: newBlog.slug,
+                title: newBlog.title,
+                time_read: newBlog.time_read,
+                user_id: newBlog.user_id,
+                created_at: newBlog.created_at,
+                tag_ids: blogTagsReq().map((blogTag) => blogTag.tag_id),
+            };
+            res.status(200).json(resp);
         } catch (error) {
-            apiErrorHandler(error, req, res, `Add Blog failed: ${(error as Error).message}`);
+            console.log(error);
+            apiErrorHandler(error, req, res, `Add Blog or BlogTag failed: ${(error as Error).message}`);
         }
     }
     async updateBlog(req: Request, res: Response, next: NextFunction) {

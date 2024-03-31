@@ -59,6 +59,7 @@ const tools = [
 ];
 
 type Props = {
+  value?: string;
   placeholder?: string;
   onChange?: (content: string) => void;
   error?: string;

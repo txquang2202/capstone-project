@@ -4,14 +4,12 @@ import { MultiSelect, TextInput } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
 
-import { apiPost } from '@/apis/api';
-import { routes } from '@/configs/router';
-import useAuthData from '@/hooks/useAuthData';
+import { apiPut } from '@/apis/api';
 import useEmptyText from '@/hooks/useEmptyText';
 import { useForm } from '@/hooks/useForm';
 import { cn } from '@/lib/classNames';
 import { useLocale } from '@/locale';
-import { Blog, Tag } from '@/types/blog';
+import { Blog, BlogTag, Tag } from '@/types/blog';
 
 import { Button } from '../Button';
 import { TextEditor } from '../TextEditor';
@@ -51,32 +49,38 @@ const Content = ({
   );
 };
 
-type AddBlog = {
+type UpdateBlog = {
+  id: string;
   user_id: string;
   slug: string;
   title: string;
   time_read: number;
   content: string;
   tag_ids: string[];
+  created_at: Date;
 };
 
-type AddBlogProps = {
+type UpdateBlogProps = {
+  blog: UpdateBlog;
   tags: Tag[];
+  onClose: () => void;
+  onUpdate: (updatedBlog: Blog, updatedBlogTag: BlogTag[]) => void;
 };
 
-const AddBlog = (props: AddBlogProps) => {
+const UpdateBlog = ({ blog, tags, onClose, onUpdate }: UpdateBlogProps) => {
   const { t } = useLocale();
-  const { authUser } = useAuthData();
-  const { isEmptyDraftJs } = useEmptyText();
   const router = useRouter();
-  const { fields, onChangeField, error, handleSubmit } = useForm<AddBlog>({
+  const { isEmptyDraftJs } = useEmptyText();
+  const { fields, onChangeField, error, handleSubmit } = useForm<UpdateBlog>({
     defaultState: {
-      user_id: '',
-      slug: '',
-      tag_ids: [],
-      title: '',
-      content: '',
-      time_read: 0,
+      id: blog.id,
+      user_id: blog.user_id,
+      slug: blog.slug,
+      tag_ids: blog.tag_ids,
+      title: blog.title,
+      content: blog.content,
+      time_read: blog.time_read,
+      created_at: blog.created_at,
     },
     validate: {
       tag_ids: ({ value }) =>
@@ -96,31 +100,45 @@ const AddBlog = (props: AddBlogProps) => {
     },
   });
   const tagsData = (
-    props.tags || [{ tag_id: 'Loading...', tag_name: 'Loading...' }]
+    tags || [{ tag_id: 'Loading...', tag_name: 'Loading...' }]
   ).map((tag) => ({
     value: tag.id,
     label: tag.tag_name,
   }));
   const onSubmit = () => {
     const data = {
-      user_id: authUser?.id || '52fe191d-abc8-4087-a045-e2244b43df6e',
+      id: fields.id,
+      user_id: fields.id,
       tag_ids: fields.tag_ids,
       title: fields.title,
       content: fields.content,
       slug: fields.slug,
+      time_read: fields.time_read,
+      created_at: fields.created_at,
     };
-    apiPost<Blog>('/api/blogs', {
-      id: '',
-      content: data.content,
-      slug: data.slug,
-      title: data.title,
-      time_read: 0,
-      user_id: data.user_id,
-      created_at: new Date(),
-    })
+    apiPut<Blog>(`/api/blogs/${data.id}`, data)
       .then((resp) => {
         if (resp.status === 200) {
-          router.push(routes.adminBlogDetail.pathParams({ id: resp.data.id }));
+          router.refresh();
+          onUpdate(
+            {
+              content: data.content,
+              created_at: data.created_at,
+              id: data.id,
+              slug: data.slug,
+              time_read: data.time_read,
+              title: data.title,
+              user_id: data.user_id,
+            },
+            data.tag_ids.map((tag_id) => {
+              return {
+                tag_id,
+                blog_id: data.id,
+                tag: tags.find((tag) => tag.id === tag_id),
+              };
+            })
+          );
+          onClose();
         }
       })
       .catch((err) => {
@@ -137,6 +155,7 @@ const AddBlog = (props: AddBlogProps) => {
             size='lg'
             placeholder='Title'
             className='w-full'
+            value={fields.title}
             error={error.title && t(error.title)}
             onChange={(e) => onChangeField('title', e.target.value)}
           />
@@ -149,6 +168,7 @@ const AddBlog = (props: AddBlogProps) => {
             size='lg'
             placeholder='title-slug'
             className='w-full'
+            value={fields.slug}
             error={error.slug && t(error.slug)}
             onChange={(e) => onChangeField('slug', e.target.value)}
           />
@@ -177,6 +197,7 @@ const AddBlog = (props: AddBlogProps) => {
         content={
           <TextEditor
             error={error.content}
+            value={fields.content}
             onChange={(value) => onChangeField('content', value)}
             placeholder='Content'
           />
@@ -187,10 +208,10 @@ const AddBlog = (props: AddBlogProps) => {
         size='large'
         className='mt-2 w-full'
       >
-        Add Blog
+        Save Blog
       </Button>
     </div>
   );
 };
 
-export default AddBlog;
+export default UpdateBlog;

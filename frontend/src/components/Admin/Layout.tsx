@@ -44,15 +44,6 @@ const Layout = ({ children }: Props) => {
         <div className='px-2.5'>
           <div className='d-flex flex-sm-row flex-column flex items-center justify-between'>
             <div className='py-2'>
-              <div className='fw-medium'>
-                Want to post a job but have not had an Admin Account yet?
-                Contact us at:
-              </div>
-              <br />
-              Ho Chi Minh: (+84) 977 460 519 - Ha Noi: (+84) 983 131 351 -
-              Email: love@itviec.com
-            </div>
-            <div className='py-2'>
               <ul className='list-unstyled'>
                 <li>Copyright © IT VIEC JSC</li>
                 <li>Tax code: 0312192258</li>

@@ -426,7 +426,7 @@ export const routes = {
       },
     },
   }),
-  adminJobDetail: route({
+  adminBlogDetail: route({
     path: '/admin/blogs/[id]',
     requiredAuth: true,
     locales: ['vi'],

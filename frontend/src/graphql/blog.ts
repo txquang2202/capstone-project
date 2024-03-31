@@ -31,7 +31,6 @@ export type CreateBlogVariable = {
     title: string;
     time_read: number;
     content: string;
-    tag: string;
   };
 };
 

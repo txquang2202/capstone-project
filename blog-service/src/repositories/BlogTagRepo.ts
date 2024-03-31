@@ -1,30 +1,33 @@
-import { Blog } from '../models/Blog';
-import { BlogTag } from '../models/Blog_Tag';
+import { IBlogTag, BlogTagModel } from '../models/Blog_Tag';
 import { Tag } from '../models/Tag';
 
 class BlogTagRepo {
-  constructor() {}
+  constructor() { }
 
   getAllBlogTags(blogId) {
     console.log();
 
-    return BlogTag.findAll({
-        where: {
-            blog_id: blogId
-        },
-        include: [{
-          model: Tag,
-          attributes: ['tag_name'],
-          as: 'tag'
-        }]
+    return BlogTagModel.findAll({
+      where: {
+        blog_id: blogId
+      },
+      include: [{
+        model: Tag,
+        attributes: ['tag_name'],
+        as: 'tag'
+      }]
     });
 
   }
 
   getById(blogId) {
-    return BlogTag.findByPk(blogId, {
+    return BlogTagModel.findByPk(blogId, {
 
     });
+  }
+  addBlogTags(blogTagsData: IBlogTag[]) {
+    const newBlogTag = BlogTagModel.bulkCreate(blogTagsData);
+    return newBlogTag;
   }
 }
 export default new BlogTagRepo();
