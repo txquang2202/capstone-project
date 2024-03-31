@@ -130,7 +130,7 @@ const ApplyJob = () => {
             required
             value={name}
             disabled={!!session?.user?.name}
-            onChange={(value) => setName(value as string)}
+            onChange={(e) => setName(e.target.value as string)}
             error='Vui lòng điền tên của bạn'
           />
 
