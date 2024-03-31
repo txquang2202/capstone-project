@@ -19,6 +19,18 @@ export type Job = {
   why_you_love_working_here: string;
   working_type: WorkingType;
   was_applied?: boolean;
+  job_working_location: JobWorkingLocation[];
+  is_hot: boolean;
+  saved: boolean;
+  applied: JobApplication;
+};
+
+export type JobWorkingLocation = {
+  company_location: CompanyLocation;
+};
+
+export type CompanyLocation = {
+  address: string;
 };
 
 export type JobApplication = {

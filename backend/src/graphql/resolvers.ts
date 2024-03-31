@@ -1,5 +1,6 @@
 import userResolver from "./user/user.resolver";
 import job_applyResolver from "./job/job_apply.resolver";
+import jobSaveResolver from "./job/job_save.resolver";
 import companyResolver from "./company/company.resolver";
 import company_reviewResolver from "./company/company_review.resolver";
 import search_jobResolver from "./job/search_job.resolver";
@@ -14,6 +15,7 @@ export default [
   jobResolver,
   search_jobResolver,
   job_applyResolver,
+  jobSaveResolver,
   companyResolver,
   company_reviewResolver,
   search_companyResolver,

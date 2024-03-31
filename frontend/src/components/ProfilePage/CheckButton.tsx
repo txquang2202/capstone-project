@@ -1,5 +1,5 @@
 // components/YourComponent.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { IconCheck, IconPlus } from '@/components/Icons';
 import { cn } from '@/lib/classNames';
@@ -12,17 +12,38 @@ interface Button {
 }
 
 interface Props {
+  defaultValue?: number[];
+  value?: number[];
   types: Button[];
+  className?: string;
+  onChange?: (newValue: number[]) => void;
 }
 
-const CheckButton: React.FC<Props> = ({ types }) => {
-  const [selectedButtons, setSelectedButtons] = useState<number[]>([]); // Thay đổi từ string sang number
+const CheckButton: React.FC<Props> = ({
+  defaultValue = [],
+  value,
+  types,
+  className,
+  onChange,
+}) => {
+  const [selectedButtons, setSelectedButtons] = useState<number[]>(
+    value || defaultValue
+  ); // Thay đổi từ string sang number
+
+  useEffect(() => {
+    if (!value) return;
+    setSelectedButtons(value);
+  }, [value]);
 
   const handleClick = (id: number) => {
     if (selectedButtons.includes(id)) {
-      setSelectedButtons(selectedButtons.filter((item) => item !== id));
+      const newValue = selectedButtons.filter((item) => item !== id);
+      setSelectedButtons(newValue);
+      onChange?.(newValue);
     } else {
+      const newValue = [...selectedButtons, id];
       setSelectedButtons([...selectedButtons, id]);
+      onChange?.(newValue);
     }
   };
 
@@ -41,6 +62,7 @@ const CheckButton: React.FC<Props> = ({ types }) => {
             {
               'border-1 text-dark-grey border-dark-grey': !isSelected(type.id),
             },
+            className,
             { 'bg-light-red border-red text-red': isSelected(type.id) }
           )}
           onClick={() => handleClick(type.id)}

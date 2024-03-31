@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql, TypedDocumentNode } from '@apollo/client';
 
 import { type JobApplication } from '@/types/job';
 
@@ -19,6 +19,19 @@ export const GET_JOBS_APPLIED = gql`
         email
         imgUrl
       }
+    }
+  }
+`;
+
+export const GET_JOB_APPLIED: TypedDocumentNode<{
+  currentJobApplication: JobApplication;
+}> = gql`
+  query CurrentJobApplication {
+    currentJobApplication {
+      cover_letter
+      cv
+      date_apply
+      id
     }
   }
 `;

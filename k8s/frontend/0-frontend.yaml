@@ -38,7 +38,7 @@ spec:
             - name: DEMO_FRONTEND_CLIENT_ID
               value: backend
             - name: DEMO_FRONTEND_CLIENT_SECRET
-              value: 5EFWso7GN5mLnPkD54geeMRm6JbALgmP
+              value: j788xF7vYJRPubFHAOvAi6WZoXFX3aR9
             - name: AUTH_ISSUER
               value: https://findyourjob.tech/keycloak/auth/realms/itviec
             - name: NEXTAUTH_URL
@@ -81,7 +81,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: findyourjob-frontend-hpa
 spec:
-  maxReplicas: 1
+  maxReplicas: 30
   minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1

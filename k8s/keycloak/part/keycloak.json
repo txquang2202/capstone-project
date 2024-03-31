@@ -812,7 +812,7 @@
         "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "j788xF7vYJRPubFHAOvAi6WZoXFX3aR9",
-        "redirectUris": ["http://localhost:3000/*"],
+        "redirectUris": ["https://findyourjob.tech/*"],
         "webOrigins": ["/*"],
         "notBefore": 0,
         "bearerOnly": false,
@@ -826,7 +826,7 @@
         "protocol": "openid-connect",
         "attributes": {
           "client.secret.creation.time": "1709952463",
-          "post.logout.redirect.uris": "http://localhost:3000/*",
+          "post.logout.redirect.uris": "https://findyourjob.tech/*",
           "oauth2.device.authorization.grant.enabled": "false",
           "backchannel.logout.revoke.offline.tokens": "false",
           "use.refresh.tokens": "true",

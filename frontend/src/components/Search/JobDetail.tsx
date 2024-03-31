@@ -1,5 +1,10 @@
+import { useMutation } from '@apollo/client';
+import { useParams, useRouter } from 'next/navigation';
+
 import { routes } from '@/configs/router';
 import { JOB_TYPE_TEXT } from '@/constant/job';
+import { SEARCH_JOBS } from '@/graphql/job';
+import { SAVE_JOB, UNSAVE_JOB } from '@/graphql/job-save';
 import dayjs from '@/lib/dayjs';
 import { formatCurrency } from '@/lib/number';
 import { useLocale } from '@/locale';
@@ -8,6 +13,7 @@ import { Job } from '@/types/job';
 import { AppLink } from '../AppLink';
 import { Button } from '../Button';
 import {
+  IconCheckCircle,
   IconClock,
   IconExternalLink,
   IconHeart,
@@ -22,6 +28,36 @@ type Props = {
 
 const JobDetail = ({ job }: Props) => {
   const { t } = useLocale();
+  const router = useRouter();
+  const params = useParams();
+  const [save] = useMutation(SAVE_JOB, {
+    variables: {
+      id: job.id,
+    },
+    refetchQueries: [SEARCH_JOBS],
+  });
+
+  const [unsave] = useMutation(UNSAVE_JOB, {
+    variables: {
+      id: job.id,
+    },
+    refetchQueries: [SEARCH_JOBS],
+  });
+
+  const handleTagClick = (tag: string) => {
+    router.push(
+      routes.search.pathParams({ keyword: params.keyword as string }) +
+        `?search=${tag}`
+    );
+  };
+
+  const handleSave = () => {
+    if (!job.saved) {
+      save();
+    } else {
+      unsave();
+    }
+  };
 
   return (
     <div className='rounded-lg bg-white'>
@@ -51,24 +87,46 @@ const JobDetail = ({ job }: Props) => {
             </div>
           </div>
         </div>
-        <div className='my-4 flex items-center gap-4'>
-          <Button
-            href={routes.applyJob.pathParams({ id: job.id })}
-            size='medium'
-            className='flex-1'
-            disabled={job.was_applied}
-          >
-            {job.was_applied ? 'Applied' : 'Apply'}
-          </Button>
-          <IconHeart color='var(--primary)' size={32} />
+        <div className='my-4'>
+          {job.applied ? (
+            <div className='bg-light-success-color flex items-center gap-2 rounded py-2 pl-3'>
+              <IconCheckCircle size={20} color='var(--success-color)' />
+              <span className='text-sm font-normal'>
+                Applied {dayjs(job.applied.date_apply).format('DD/MM/YYYY')}
+              </span>
+            </div>
+          ) : (
+            <div className='flex items-center gap-4'>
+              <Button
+                href={routes.applyJob.pathParams({ id: job.id })}
+                size='medium'
+                className='flex-1'
+              >
+                Apply
+              </Button>
+              <IconHeart
+                onClick={handleSave}
+                color='var(--primary)'
+                size={32}
+                fill={job.saved ? 'var(--primary)' : '#fff'}
+                className='cursor-pointer'
+              />
+            </div>
+          )}
         </div>
       </div>
       <div className='h-[calc(100vh-300px)] overflow-y-scroll p-6'>
         <div className='text-rich-grey flex flex-col gap-2 text-sm'>
-          <div className='flex items-center gap-1'>
-            <IconMapPin size={16} color='var(--dark-grey' />
-            {job.company.country}
-          </div>
+          {!!job.job_working_location.length && (
+            <div className='flex items-center gap-1'>
+              <div className='w-4'>
+                <IconMapPin size={16} color='var(--dark-grey)' />
+              </div>
+              {job.job_working_location
+                .map((location) => location.company_location.address)
+                .join('; ')}
+            </div>
+          )}
           <div className='flex items-center gap-1'>
             <IconRemote size={16} viewBox='0 0 24 25' color='var(--dark-grey' />
             {t(JOB_TYPE_TEXT[job.working_type])}
@@ -81,7 +139,11 @@ const JobDetail = ({ job }: Props) => {
             <span className='mr-3'>Skills:</span>
             {job.skills &&
               JSON.parse(job.skills).map((tag: string, index: number) => (
-                <div key={index} className='itag itag-light itag-sm'>
+                <div
+                  onClick={() => handleTagClick(tag)}
+                  key={index}
+                  className='itag itag-light itag-sm'
+                >
                   {tag}
                 </div>
               ))}

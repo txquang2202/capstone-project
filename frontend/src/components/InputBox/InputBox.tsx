@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import useUncontrolled from '@/hooks/useUncontrolled';
+
 export type InputProps = {
   label: string;
   floatingclass?: string;
@@ -18,7 +20,6 @@ export const InputBox = (
 ) => {
   // check if required is true and value is empty after click outside then show error message
   const [error, setError] = useState(false);
-  // const [value, setValue] = useState('');
   const [isBlur, setIsBlur] = useState(false);
   useEffect(() => {
     if (isBlur && props.required && props.value === '') {

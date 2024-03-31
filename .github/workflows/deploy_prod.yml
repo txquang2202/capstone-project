@@ -69,8 +69,8 @@ jobs:
           [ "$VERSION" == "main" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          docker tag $FRONT_END_IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          docker tag $FRONT_END_IMAGE_NAME $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
 
   build-backend:
     runs-on: ubuntu-latest
@@ -105,8 +105,8 @@ jobs:
           [ "$VERSION" == "main" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          docker tag $BACK_END_IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          docker tag $BACK_END_IMAGE_NAME $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
 
   build-kafka-consumer:
     runs-on: ubuntu-latest
@@ -141,8 +141,8 @@ jobs:
           [ "$VERSION" == "main" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          docker tag $KAFKA_CONSUMER_IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          docker tag $KAFKA_CONSUMER_IMAGE_NAME $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
 
   deploy:
     runs-on: ubuntu-latest

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation, useSuspenseQuery } from '@apollo/client';
+import { useMutation, useQuery, useSuspenseQuery } from '@apollo/client';
 import { Textarea } from '@mantine/core';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -22,6 +22,7 @@ import {
   type GetJobResponse,
   type GetJobVariable,
 } from '@/graphql/job';
+import { GET_JOB_APPLIED } from '@/graphql/jobs-applied';
 import {
   FilePayload,
   UPLOAD_FILE,
@@ -42,6 +43,7 @@ const ApplyJob = () => {
   const params = useParams();
   const [value, setValue] = useState('default');
   const [show, setShow] = useState(false);
+  const [name, setName] = useState(session?.user.name);
   const [modalSuccessVisible, setModalSuccessVisible] = useState(false);
   const [uploadFile, { loading: loadingUploadFile }] = useMutation<
     UploadFileResponse,
@@ -50,6 +52,7 @@ const ApplyJob = () => {
   const [mutate, { loading }] = useMutation<ApplyJobResponse, ApplyJobVariable>(
     APPLY_JOBS
   );
+  const { data, loading: cvLoading } = useQuery(GET_JOB_APPLIED);
   const [fileData, setFileData] = useState<FilePayload | null>(null);
 
   const { fields, error, setError, onChangeField, handleSubmit } =
@@ -120,22 +123,16 @@ const ApplyJob = () => {
         </div>
         <div className='flex flex-col gap-6 rounded-lg bg-white p-8 shadow-[0_4px_20px_rgba(0,0,0,.06)]'>
           <div className='text-[22px] font-bold'>{job.name}</div>
-          {session ? (
-            <div>
-              <div className='mb-3 text-lg font-bold'>
-                Your full name <span className='text-primary'>*</span>
-              </div>
-              <p>{session.user?.name}</p>
-            </div>
-          ) : (
-            <InputBox
-              type='text'
-              name='contact_request[name]'
-              label='Your name'
-              required
-              error='Vui lòng điền tên của bạn'
-            />
-          )}
+          <InputBox
+            type='text'
+            name='contact_request[name]'
+            label='Your name'
+            required
+            value={name}
+            disabled={!!session?.user?.name}
+            onChange={(value) => setName(value as string)}
+            error='Vui lòng điền tên của bạn'
+          />
 
           <div>
             <div className='mb-3 text-lg font-bold'>
@@ -151,14 +148,24 @@ const ApplyJob = () => {
                 <Radio value='default' size='large' />
                 <div>
                   Use your current CV
-                  <a
-                    target='_blank'
-                    href={routes.viewCV.path}
-                    className='text-hyperlink mt-3 flex items-center gap-2'
-                  >
-                    VyDo-Resume.pdf
-                    <IconEye size={20} />
-                  </a>
+                  {cvLoading ? (
+                    <img
+                      src='/images/loading.gif'
+                      alt='loading'
+                      className='mt-2 h-6 w-6'
+                    />
+                  ) : (
+                    <a
+                      target='_blank'
+                      href={routes.viewCV.queryParams({
+                        cv: data?.currentJobApplication.cv as string,
+                      })}
+                      className='text-hyperlink mt-3 flex items-center gap-2'
+                    >
+                      {data?.currentJobApplication.cv.split('/').pop()}
+                      <IconEye size={20} />
+                    </a>
+                  )}
                 </div>
               </div>
               <div
@@ -190,7 +197,8 @@ const ApplyJob = () => {
                   )}
                   {fileData && (
                     <a
-                      href={fileData.url}
+                      target='_blank'
+                      href={routes.viewCV.queryParams({ cv: fileData.url })}
                       className='text-hyperlink mt-3 flex items-center gap-2'
                     >
                       {fileData.filename}
@@ -218,6 +226,7 @@ const ApplyJob = () => {
               candidate?
             </div>
             <Textarea
+              maxLength={500}
               onChange={(e) => onChangeField('coverLetter', e.target.value)}
               placeholder='Details and specific examples will make your application stronger...'
               classNames={{
@@ -225,7 +234,7 @@ const ApplyJob = () => {
               }}
             />
             <div className='text-dark-grey'>
-              500 of 500 characters remaining
+              {fields.coverLetter?.length || 0} of 500 characters remaining
             </div>
           </div>
           <Button

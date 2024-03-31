@@ -1,8 +1,12 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
+
 export default function Page() {
-  const url =
-    'https://firebasestorage.googleapis.com/v0/b/itviec-14e86.appspot.com/o/cv%2FVyDo-Resume.pdf?alt=media&token=73fe207f-f369-462b-86a0-0a7899fdf983';
+  const queries = useSearchParams();
+  const url = `https://docs.google.com/gview?embedded=true&url=${queries.get(
+    'cv'
+  )}`;
 
   return (
     <iframe src={url} style={{ width: '100%', minHeight: '100vh' }}></iframe>

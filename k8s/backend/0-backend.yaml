@@ -198,7 +198,6 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: findyourjob-api-hpa
 spec:
-  maxReplicas: 2
   minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
