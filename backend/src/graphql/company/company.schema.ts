@@ -126,6 +126,7 @@ const CompanySchema = gql`
     ): CompanyReview!
     deleteCompanyReview(id: ID!): CompanyReview!
     createCompanyRequest(input: CompanyRequestInput!): CompanyRequest!
+    deleteCompanyRequest(id: ID!): CompanyRequest!
   }
 `;
 

@@ -123,6 +123,16 @@ const Mutation = {
       data: input,
     });
     return newCompanyRequest;
+  },// Delete a company request by ID
+  deleteCompanyRequest: async (
+    _: any,
+    { id }: { id: string },
+    { prisma }: ContextInterface,
+  ): Promise<company_request | null> => {
+    const deletedCompanyRequest = await prisma.company_request.delete({
+      where: { id },
+    });
+    return deletedCompanyRequest;
   },
 };
 
