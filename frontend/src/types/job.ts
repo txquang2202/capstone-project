@@ -24,7 +24,21 @@ export type Job = {
   saved: boolean;
   applied: JobApplication;
 };
-
+export type UpdateJobInput = {
+  name: string;
+  salary_from: number;
+  salary_to: number;
+  unit: string;
+  hide_salary: boolean;
+  country: string[];
+  skills: string[];
+  working_type: string;
+  top_3_reason: string[];
+  job_description: string;
+  skill_demand: string;
+  why_you_love_working_here: string;
+  is_closed: boolean;
+};
 export type JobWorkingLocation = {
   company_location: CompanyLocation;
 };

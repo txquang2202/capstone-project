@@ -1,8 +1,15 @@
+import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+import { routes } from '@/configs/router';
 import { JOB_TYPE_TEXT } from '@/constant/job';
+import { DELETE_JOB } from '@/graphql/job';
 import dayjs from '@/lib/dayjs';
 import { formatCurrency } from '@/lib/number';
 import { Job } from '@/types/job';
 
+import { Button } from '../../components/Button';
 import { AppLink } from '../AppLink';
 import {
   IconClock,
@@ -11,12 +18,36 @@ import {
   IconRemote,
   IconSalary,
 } from '../Icons';
+import UpdateModal from './updateJobModel';
 
 type Props = {
   job: Job;
 };
-
 const JobDetail = ({ job }: Props) => {
+  const [deleteJob] = useMutation(DELETE_JOB);
+  const router = useRouter();
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+
+  const handleDeleteJob = async () => {
+    const isConfirmed = window.confirm(
+      'Are you sure you want to delete this job?'
+    );
+    if (isConfirmed) {
+      try {
+        const { data } = await deleteJob({
+          variables: { deleteJobId: job.id },
+        });
+        router.push(routes.customerJobList.path);
+        console.log('Job deleted:', data.deleteJob);
+      } catch (error) {
+        console.error('Error deleting job:', error);
+      }
+    }
+  };
+  const hanldeUpdate = async (data: unknown) => {
+    console.log(data);
+  };
+
   return (
     <div className='rounded-lg bg-white'>
       <div className='mx-6 pb-2 pt-6'>
@@ -142,6 +173,26 @@ const JobDetail = ({ job }: Props) => {
               </div>
             </div>
           </div>
+        </div>
+        <div className='mt-6 flex justify-end gap-3'>
+          <Button
+            intent='primary'
+            size='small'
+            onClick={() => setIsUpdateModalOpen(true)}
+          >
+            Update this job
+          </Button>
+          <Button intent='secondary' size='small' onClick={handleDeleteJob}>
+            Delete this job
+          </Button>
+          {/* Modal */}
+          {isUpdateModalOpen && (
+            <UpdateModal
+              job={job}
+              onClose={() => setIsUpdateModalOpen(false)}
+              onUpdate={hanldeUpdate}
+            />
+          )}
         </div>
       </div>
     </div>
