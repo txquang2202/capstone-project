@@ -1,3 +1,4 @@
+import { TrailApiClient } from "./../services/trail";
 import keycloakApiClient from "../services/keycloak";
 import { ApolloServerPluginInlineTraceDisabled } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-express";
@@ -97,7 +98,7 @@ export const createApolloServer = (
       }
       const keycloak = keycloakApiClient;
       const kafkaProducer = await initKafkaProducer();
-
+      const trail = new TrailApiClient();
       return Object.assign({
         isRoot,
         authUser,
@@ -106,6 +107,7 @@ export const createApolloServer = (
         elastic,
         kafkaProducer,
         mailer: mailerService,
+        trail,
       });
     },
     validationRules: [depthLimit(20)],

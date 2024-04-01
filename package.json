@@ -4,6 +4,9 @@
   "description": "Capstone",
   "private": true,
   "license": "MIT",
+  "workspaces": [
+    "audit-logging/*"
+  ],
   "scripts": {
     "postinstall": "husky install",
     "preinstall": "npx only-allow yarn",

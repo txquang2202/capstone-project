@@ -28,8 +28,8 @@ export async function generateMetadata({
     ? params.lang
     : route?.defaultLocale || DEFAULT_LOCALE;
 
-  const title = route?.metadata?.[lang].title || siteConfig.title;
-  const description = route?.metadata?.[lang].title || siteConfig.description;
+  const title = route?.metadata?.[lang]?.title || siteConfig.title;
+  const description = route?.metadata?.[lang]?.title || siteConfig.description;
 
   return {
     metadataBase: new URL(siteConfig.url),

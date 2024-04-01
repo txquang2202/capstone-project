@@ -1,3 +1,4 @@
+import { TrailApiClient } from "./../services/trail";
 import { PrismaClient } from "@prisma/client";
 import { RedisClient } from "redis";
 import { Client } from "@elastic/elasticsearch";
@@ -37,4 +38,5 @@ export interface ContextInterface {
   mailer: MailerApiClient;
   // no need to authenticate, using for testing api
   isRoot: boolean;
+  trail: TrailApiClient;
 }

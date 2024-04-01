@@ -1,0 +1,15 @@
+logs
+dist
+node_modules
+.eslintcache
+.env
+.env.test
+pc-api-*.json
+docs
+
+# Migrations
+prisma/migrations/*
+
+yarn-error.log
+
+.DS_Store

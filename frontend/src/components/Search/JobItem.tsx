@@ -82,7 +82,7 @@ const JobItem = ({ company, isHot, selected, onSelect, ...job }: Props) => {
             />
             {t(JOB_TYPE_TEXT[job.working_type])}
           </div>
-          {!!job.job_working_location.length && (
+          {job.job_working_location && !!job.job_working_location.length && (
             <div className='flex items-center gap-1'>
               <div className='w-4'>
                 <IconMapPin size={16} color='var(--dark-grey)' />
