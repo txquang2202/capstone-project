@@ -2,16 +2,14 @@
 
 import { MultiSelect, TextInput } from '@mantine/core';
 import { useRouter } from 'next/navigation';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 
-import { apiPost } from '@/apis/api';
-import { routes } from '@/configs/router';
-import useAuthData from '@/hooks/useAuthData';
+import { apiPut } from '@/apis/api';
 import useEmptyText from '@/hooks/useEmptyText';
 import { useForm } from '@/hooks/useForm';
 import { cn } from '@/lib/classNames';
 import { useLocale } from '@/locale';
-import { Blog, Tag } from '@/types/blog';
+import { Blog, BlogTag, Tag } from '@/types/blog';
 
 import { Button } from '../Button';
 import { TextEditor } from '../TextEditor';
@@ -51,32 +49,31 @@ const Content = ({
   );
 };
 
-type AddBlog = {
-  user_id: string;
+type UpdateBlog = {
   slug: string;
   title: string;
-  time_read: number;
   content: string;
   tag_ids: string[];
 };
 
-type AddBlogProps = {
+type UpdateBlogProps = {
+  blog: Blog;
   tags: Tag[];
+  onClose: () => void;
+  onUpdate: (updatedBlog: Blog, updatedBlogTag: BlogTag[]) => void;
 };
 
-const AddBlog = (props: AddBlogProps) => {
+const UpdateBlog = ({ blog, tags, onClose, onUpdate }: UpdateBlogProps) => {
   const { t } = useLocale();
-  const { authUser } = useAuthData();
-  const { isEmptyDraftJs } = useEmptyText();
   const router = useRouter();
-  const { fields, onChangeField, error, handleSubmit } = useForm<AddBlog>({
+  const { isEmptyDraftJs } = useEmptyText();
+  const [isError, setIsError] = useState(false);
+  const { fields, onChangeField, error, handleSubmit } = useForm<UpdateBlog>({
     defaultState: {
-      user_id: '',
-      slug: '',
-      tag_ids: [],
-      title: '',
-      content: '',
-      time_read: 0,
+      slug: blog.slug,
+      tag_ids: blog.tags?.map((tag) => tag.id) || [],
+      title: blog.title,
+      content: blog.content,
     },
     validate: {
       tag_ids: ({ value }) =>
@@ -96,31 +93,55 @@ const AddBlog = (props: AddBlogProps) => {
     },
   });
   const tagsData = (
-    props.tags || [{ tag_id: 'Loading...', tag_name: 'Loading...' }]
+    tags || [{ tag_id: 'Loading...', tag_name: 'Loading...' }]
   ).map((tag) => ({
     value: tag.id,
     label: tag.tag_name,
   }));
   const onSubmit = () => {
     const data = {
-      user_id: authUser?.id || '52fe191d-abc8-4087-a045-e2244b43df6e',
-      tag_ids: fields.tag_ids,
+      id: blog.id,
+      tags: fields.tag_ids.map((tag_id) => {
+        return {
+          id: tag_id,
+          tag_name: tags.find((tag) => tag.id === tag_id)?.tag_name || '',
+        };
+      }),
       title: fields.title,
       content: fields.content,
       slug: fields.slug,
-    };
-    apiPost<Blog>('/api/blogs', {
-      id: '',
-      content: data.content,
-      slug: data.slug,
-      title: data.title,
-      time_read: 0,
-      user_id: data.user_id,
       created_at: new Date(),
-    })
+    };
+    apiPut<Blog>(`/api/blogs/${data.id}`, data)
       .then((resp) => {
         if (resp.status === 200) {
-          router.push(routes.adminBlogDetail.pathParams({ id: resp.data.id }));
+          router.refresh();
+          console.log('Update blog successfully', resp.data);
+          onUpdate(
+            {
+              content: resp.data.content,
+              created_at: resp.data.created_at,
+              id: resp.data.id,
+              slug: resp.data.slug,
+              time_read: resp.data.time_read,
+              title: resp.data.title,
+              user_id: resp.data.user_id,
+            },
+            (resp.data.tags || []).map((tag) => {
+              return {
+                tag_id: tag.id,
+                blog_id: data.id,
+                tag: {
+                  tag_name:
+                    tags.find((item) => item.id === tag.id)?.tag_name || '',
+                },
+              };
+            })
+          );
+          onClose();
+        } else {
+          setIsError(true);
+          return JSON.stringify(resp.data);
         }
       })
       .catch((err) => {
@@ -137,6 +158,7 @@ const AddBlog = (props: AddBlogProps) => {
             size='lg'
             placeholder='Title'
             className='w-full'
+            value={fields.title}
             error={error.title && t(error.title)}
             onChange={(e) => onChangeField('title', e.target.value)}
           />
@@ -149,6 +171,7 @@ const AddBlog = (props: AddBlogProps) => {
             size='lg'
             placeholder='title-slug'
             className='w-full'
+            value={fields.slug}
             error={error.slug && t(error.slug)}
             onChange={(e) => onChangeField('slug', e.target.value)}
           />
@@ -177,6 +200,7 @@ const AddBlog = (props: AddBlogProps) => {
         content={
           <TextEditor
             error={error.content}
+            value={fields.content}
             onChange={(value) => onChangeField('content', value)}
             placeholder='Content'
           />
@@ -187,10 +211,11 @@ const AddBlog = (props: AddBlogProps) => {
         size='large'
         className='mt-2 w-full'
       >
-        Add Blog
+        Save Blog
       </Button>
+      {isError && <div className='text-red-500'>Error: {isError}</div>}
     </div>
   );
 };
 
-export default AddBlog;
+export default UpdateBlog;

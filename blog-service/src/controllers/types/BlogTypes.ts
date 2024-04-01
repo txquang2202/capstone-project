@@ -1,4 +1,7 @@
 import e = require("express");
+import { TagResponse } from "./TagTypes";
+import exp = require("constants");
+
 
 export type AddBlogRequest = {
     slug: string;
@@ -6,7 +9,7 @@ export type AddBlogRequest = {
     title: string;
     content: string;
 };
-export type AddBlogResponse = {
+export type BlogResponse = {
     id: string;
     slug: string;
     user_id: string;
@@ -14,9 +17,19 @@ export type AddBlogResponse = {
     content: string;
     time_read: number;
     created_at: Date;
-    tag_ids: string[];
+    tags: TagResponse[];
 };
-export type AddBlogTagRequest = {
+export type AddBlogResponse = {
+    id: string;
+};
+export type BlogTagRequest = {
     tag_id: string;
     blog_id: string;
+};
+export type UpdateBlogRequest = {
+    id: string;
+    slug: string;
+    title: string;
+    content: string;
+    created_at: Date;
 };

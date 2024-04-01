@@ -330,6 +330,9 @@ export const routes = {
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
     metadata: {
+      en: {
+        title: 'ITviec Admin',
+      },
       vi: {
         title: 'ITviec Admin',
       },
@@ -404,46 +407,38 @@ export const routes = {
       },
     },
   }),
-  adminDashboard: route({
-    path: '/admin',
+  customerBlogList: route({
+    path: '/customer/blogs',
     requiredAuth: true,
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
     metadata: {
-      vi: {
+      en: {
         title: 'ITviec Admin',
       },
     },
   }),
-  adminBlogList: route({
-    path: '/admin/blogs',
+  customerBlogDetail: route({
+    path: '/customer/blogs/[id]',
     requiredAuth: true,
-    locales: ['vi'],
+    locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
     metadata: {
+      en: {
+        title: 'ITviec Admin',
+      },
       vi: {
         title: 'ITviec Admin',
       },
     },
   }),
-  adminBlogDetail: route({
-    path: '/admin/blogs/[id]',
-    requiredAuth: true,
-    locales: ['vi'],
-    defaultLocale: DEFAULT_LOCALE,
-    metadata: {
-      vi: {
-        title: 'ITviec Admin',
-      },
-    },
-  }),
-  adminAddBlog: route({
-    path: '/admin/add-blog',
+  customerAddBlog: route({
+    path: '/customer/add-blog',
     requiredAuth: false,
-    locales: ['vi'],
+    locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
     metadata: {
-      vi: {
+      en: {
         title: 'ITviec Admin',
       },
     },

@@ -1,6 +1,4 @@
-import { create } from 'domain';
-import { IBlog, BlogModel } from '../models/Blog';
-import { BlogTagModel } from '../models/Blog_Tag';
+import { IBlog, Blog } from '../models/Blog';
 
 class BlogRepo {
   constructor() { }
@@ -8,23 +6,23 @@ class BlogRepo {
   getAllBlogs() {
     console.log();
 
-    return BlogModel.findAll();
+    return Blog.findAll();
   }
 
   getById(blogId) {
-    return BlogModel.findByPk(blogId, {
+    return Blog.findByPk(blogId, {
 
     });
   }
   async getPaginatedBlogs(limit: number, offset: number) {
     // Thực hiện truy vấn SQL để lấy dữ liệu blog phân trang
-    const blogs = await BlogModel.findAll({
+    const blogs = await Blog.findAll({
       limit: limit,
       offset: offset
     });
 
     // Tính toán tổng số lượng blog
-    const totalCount = await BlogModel.count();
+    const totalCount = await Blog.count();
 
     // Tính toán tổng số trang
     const totalPages = Math.ceil(totalCount / limit);
@@ -37,18 +35,13 @@ class BlogRepo {
     };
   }
   addBlog(blogData: IBlog) {
-    const newBlog = BlogModel.create(blogData);
+    const newBlog = Blog.create(blogData);
     return newBlog;
 
   }
   updateBlog(blogId, blogData: any) {
-    // Tim blog theo id
-    const blog = BlogModel.findByPk(blogId);
-    if (!blog) {
-      throw new Error(`Blog with id ${blogId} not found`);
-    }
     // Cap nhat blog
-    const updatedBlog = BlogModel.update({
+    const updatedBlog = Blog.update({
       title: blogData.title,
       content: blogData.content,
       slug: blogData.slug,
@@ -64,12 +57,12 @@ class BlogRepo {
   }
   deleteBlog(blogId) {
     // Tim blog theo id
-    const blog = BlogModel.findByPk(blogId);
+    const blog = Blog.findByPk(blogId);
     if (!blog) {
       throw new Error(`Blog with id ${blogId} not found`);
     }
     // Xoa blog
-    const deletedBlog = BlogModel.destroy({
+    const deletedBlog = Blog.destroy({
       where: {
         id: blogId
       }

@@ -1,7 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../db/db';
 
-export type IBlog = {
+export interface IBlog {
     id?: string;
     slug: string;
     user_id?: string | null;
@@ -11,7 +11,7 @@ export type IBlog = {
     created_at: Date;
 };
 
-export class BlogModel extends Model {
+export class Blog extends Model {
     public id!: string;
     public title!: string;
     public content!: string;
@@ -21,7 +21,7 @@ export class BlogModel extends Model {
     public user_id!: string;
 }
 
-BlogModel.init(
+Blog.init(
     {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
         title: { type: DataTypes.STRING },

@@ -3,7 +3,7 @@
 import { useQuery } from 'react-query';
 
 import { apiGet } from '@/apis/api';
-import { AddBlog } from '@/components/Admin';
+import { AddBlog } from '@/components/Customer';
 import { Tag } from '@/types/blog';
 
 const getTags = async () => {

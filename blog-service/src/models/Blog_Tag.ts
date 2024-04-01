@@ -2,15 +2,18 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from './../db/db';
 import { Tag } from './Tag';
 
-export type IBlogTag = {
+export interface IBlogTag {
     blog_id: string;
     tag_id: string;
+    tag?: {
+        tag_name: string;
+    };
 };
-export class BlogTagModel extends Model {
+export class BlogTag extends Model {
     public blog_id!: string;
     public tag_id!: string;
 }
-BlogTagModel.init(
+BlogTag.init(
     {
         blog_id: { type: DataTypes.STRING, primaryKey: true },
         tag_id: { type: DataTypes.STRING, primaryKey: true },
@@ -21,10 +24,5 @@ BlogTagModel.init(
         timestamps: false
     },
 );
-BlogTagModel.belongsTo(Tag, { foreignKey: 'tag_id', as: 'tag' });
-Tag.hasMany(BlogTagModel, { foreignKey: 'tag_id' });
-
-
-
-
-
+BlogTag.belongsTo(Tag, { foreignKey: 'tag_id', as: 'tag' });
+Tag.hasMany(BlogTag, { foreignKey: 'tag_id' });

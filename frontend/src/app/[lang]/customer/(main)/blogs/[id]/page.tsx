@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import { useQuery } from 'react-query';
 
 import { apiGet } from '@/apis/api';
-import { BlogDetail } from '@/components/Admin';
+import { BlogDetail } from '@/components/Customer';
 import { Blog, BlogTag, Tag } from '@/types/blog';
 
 type FetchData = {
@@ -30,7 +30,7 @@ export default function Page() {
   const params = useParams();
   const { isLoading, data, error } = useQuery<FetchData, Error>(
     ['fetchData', params],
-    () => FetchData(params.id as string)
+    () => FetchData(params?.id as string)
   );
 
   if (isLoading) return <div>Loading...</div>;

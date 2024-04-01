@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import CompanyRepo from './../repositories/CompanyRepo';
 import { apiErrorHandler } from './../handlers/errorHandler';
-
+import { StatusCodes } from 'http-status-codes';
 export default class CompanyCtrl {
-  constructor() {}
+  constructor() { }
 
   async getAllCompanies(req: Request, res: Response, next: NextFunction) {
     try {
       const company_list = await CompanyRepo.getAllCompanies();
       res.json(company_list);
     } catch (error) {
-      apiErrorHandler(error, req, res, 'Fetch All Courses failed.');
+      apiErrorHandler(error, StatusCodes.INTERNAL_SERVER_ERROR, req, res, 'Fetch All Courses failed.');
     }
   }
 
@@ -23,7 +23,7 @@ export default class CompanyCtrl {
         res.status(404).send(`Company ${req.params.id} not found.`);
       }
     } catch (error) {
-      apiErrorHandler(error, req, res, `Course ${req.params.id} is failed.`);
+      apiErrorHandler(error, StatusCodes.INTERNAL_SERVER_ERROR, req, res, `Course ${req.params.id} is failed.`);
     }
   }
 }

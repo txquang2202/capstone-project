@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import BlogTagRepo from './../repositories/BlogTagRepo';
 import { apiErrorHandler } from './../handlers/errorHandler';
+import { StatusCodes } from 'http-status-codes';
 
 export default class BlogTagCtrl {
-    constructor() {}
+    constructor() { }
     async getAllBlogTags(req: Request, res: Response, next: NextFunction) {
 
         console.log(req.params.id);
@@ -13,7 +14,7 @@ export default class BlogTagCtrl {
 
 
         } catch (error) {
-            apiErrorHandler(error, req, res, `Fetch All BlogTags failed: ${(error as Error).message}`);
+            apiErrorHandler(error, StatusCodes.INTERNAL_SERVER_ERROR, req, res, `Fetch All BlogTags failed: ${(error as Error).message}`);
         }
     }
     async getBlogDetails(req: Request, res: Response, next: NextFunction) {
@@ -25,7 +26,7 @@ export default class BlogTagCtrl {
                 res.status(404).send(`Blog ${req.params.id} not found.`);
             }
         } catch (error) {
-            apiErrorHandler(error, req, res, `Blog ${req.params.id} is failed.: ${(error as Error).message}`);
+            apiErrorHandler(error, StatusCodes.INTERNAL_SERVER_ERROR, req, res, `Blog ${req.params.id} is failed.: ${(error as Error).message}`);
         }
     }
 }

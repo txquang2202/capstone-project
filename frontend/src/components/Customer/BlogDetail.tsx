@@ -43,7 +43,7 @@ const BlogDetail = ({ blog, blogTag, tags }: Props) => {
 
   const handleDeleteBlog = () => {
     apiDelete(`/api/blogs/${blogData.id}`).then(() => {
-      router.push(routes.adminBlogList.path);
+      router.push(routes.customerBlogList.path);
     });
     closeDeleteConfirmation();
   };
@@ -113,8 +113,12 @@ const BlogDetail = ({ blog, blogTag, tags }: Props) => {
             title: blogData.title,
             time_read: blogData.time_read as number,
             content: blogData.content,
-            created_at: blogData.created_at,
-            tag_ids: blogTagData.map((item) => item.tag_id as string) || [],
+            created_at: blogData.created_at || new Date(),
+            tags:
+              blogTagData.map((item) => ({
+                id: item.tag_id || '',
+                tag_name: item.tag?.tag_name || '',
+              })) || [],
           }}
           tags={tags}
           onUpdate={handleUpdateBlog}

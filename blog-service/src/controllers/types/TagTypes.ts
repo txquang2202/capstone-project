@@ -1,4 +1,4 @@
 export type TagResponse = {
     id: string;
-    name: string;
+    tag_name: string;
 };

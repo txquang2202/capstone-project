@@ -4,12 +4,14 @@ import { MultiSelect, TextInput } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
 
-import { apiPut } from '@/apis/api';
+import { apiPost } from '@/apis/api';
+import { routes } from '@/configs/router';
+import useAuthData from '@/hooks/useAuthData';
 import useEmptyText from '@/hooks/useEmptyText';
 import { useForm } from '@/hooks/useForm';
 import { cn } from '@/lib/classNames';
 import { useLocale } from '@/locale';
-import { Blog, BlogTag, Tag } from '@/types/blog';
+import { Blog, Tag } from '@/types/blog';
 
 import { Button } from '../Button';
 import { TextEditor } from '../TextEditor';
@@ -49,38 +51,30 @@ const Content = ({
   );
 };
 
-type UpdateBlog = {
-  id: string;
+type AddBlog = {
   user_id: string;
   slug: string;
   title: string;
-  time_read: number;
   content: string;
   tag_ids: string[];
-  created_at: Date;
 };
 
-type UpdateBlogProps = {
-  blog: UpdateBlog;
+type AddBlogProps = {
   tags: Tag[];
-  onClose: () => void;
-  onUpdate: (updatedBlog: Blog, updatedBlogTag: BlogTag[]) => void;
 };
 
-const UpdateBlog = ({ blog, tags, onClose, onUpdate }: UpdateBlogProps) => {
+const AddBlog = (props: AddBlogProps) => {
   const { t } = useLocale();
-  const router = useRouter();
+  const { authUser } = useAuthData();
   const { isEmptyDraftJs } = useEmptyText();
-  const { fields, onChangeField, error, handleSubmit } = useForm<UpdateBlog>({
+  const router = useRouter();
+  const { fields, onChangeField, error, handleSubmit } = useForm<AddBlog>({
     defaultState: {
-      id: blog.id,
-      user_id: blog.user_id,
-      slug: blog.slug,
-      tag_ids: blog.tag_ids,
-      title: blog.title,
-      content: blog.content,
-      time_read: blog.time_read,
-      created_at: blog.created_at,
+      user_id: '',
+      slug: '',
+      tag_ids: [],
+      title: '',
+      content: '',
     },
     validate: {
       tag_ids: ({ value }) =>
@@ -100,45 +94,36 @@ const UpdateBlog = ({ blog, tags, onClose, onUpdate }: UpdateBlogProps) => {
     },
   });
   const tagsData = (
-    tags || [{ tag_id: 'Loading...', tag_name: 'Loading...' }]
+    props.tags || [{ tag_id: 'Loading...', tag_name: 'Loading...' }]
   ).map((tag) => ({
     value: tag.id,
     label: tag.tag_name,
   }));
   const onSubmit = () => {
     const data = {
-      id: fields.id,
-      user_id: fields.id,
+      user_id: authUser?.id || '52fe191d-abc8-4087-a045-e2244b43df6e',
       tag_ids: fields.tag_ids,
       title: fields.title,
       content: fields.content,
       slug: fields.slug,
-      time_read: fields.time_read,
-      created_at: fields.created_at,
     };
-    apiPut<Blog>(`/api/blogs/${data.id}`, data)
+    const tagsReq = data.tag_ids.map((tag_id) => ({
+      id: tag_id,
+      tag_name: props.tags.find((tag) => tag.id === tag_id)?.tag_name || '',
+    }));
+    apiPost<Blog>('/api/blogs', {
+      id: '',
+      content: data.content,
+      slug: data.slug,
+      title: data.title,
+      user_id: data.user_id,
+      tags: tagsReq,
+    })
       .then((resp) => {
         if (resp.status === 200) {
-          router.refresh();
-          onUpdate(
-            {
-              content: data.content,
-              created_at: data.created_at,
-              id: data.id,
-              slug: data.slug,
-              time_read: data.time_read,
-              title: data.title,
-              user_id: data.user_id,
-            },
-            data.tag_ids.map((tag_id) => {
-              return {
-                tag_id,
-                blog_id: data.id,
-                tag: tags.find((tag) => tag.id === tag_id),
-              };
-            })
+          router.push(
+            routes.customerBlogDetail.pathParams({ id: resp.data.id })
           );
-          onClose();
         }
       })
       .catch((err) => {
@@ -155,7 +140,6 @@ const UpdateBlog = ({ blog, tags, onClose, onUpdate }: UpdateBlogProps) => {
             size='lg'
             placeholder='Title'
             className='w-full'
-            value={fields.title}
             error={error.title && t(error.title)}
             onChange={(e) => onChangeField('title', e.target.value)}
           />
@@ -168,7 +152,6 @@ const UpdateBlog = ({ blog, tags, onClose, onUpdate }: UpdateBlogProps) => {
             size='lg'
             placeholder='title-slug'
             className='w-full'
-            value={fields.slug}
             error={error.slug && t(error.slug)}
             onChange={(e) => onChangeField('slug', e.target.value)}
           />
@@ -197,7 +180,6 @@ const UpdateBlog = ({ blog, tags, onClose, onUpdate }: UpdateBlogProps) => {
         content={
           <TextEditor
             error={error.content}
-            value={fields.content}
             onChange={(value) => onChangeField('content', value)}
             placeholder='Content'
           />
@@ -208,10 +190,10 @@ const UpdateBlog = ({ blog, tags, onClose, onUpdate }: UpdateBlogProps) => {
         size='large'
         className='mt-2 w-full'
       >
-        Save Blog
+        Add Blog
       </Button>
     </div>
   );
 };
 
-export default UpdateBlog;
+export default AddBlog;

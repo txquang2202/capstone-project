@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { apiErrorHandler } from '../handlers/errorHandler';
 import LessonRepo from '../repositories/LessonsRepo';
-
+import { StatusCodes } from 'http-status-codes';
 export default class LessonsCtrl {
   constructor() { }
 
@@ -10,7 +10,7 @@ export default class LessonsCtrl {
       const lessons = await LessonRepo.getAllLessons({ order: ['id'] });
       res.json(lessons);
     } catch (error) {
-      apiErrorHandler(error, req, res, 'Fetch All Lessons failed.');
+      apiErrorHandler(error, StatusCodes.INTERNAL_SERVER_ERROR, req, res, 'Fetch All Lessons failed.');
     }
   }
 
@@ -21,6 +21,7 @@ export default class LessonsCtrl {
     } catch (error) {
       apiErrorHandler(
         error,
+        StatusCodes.INTERNAL_SERVER_ERROR,
         req,
         res,
         `Lessons in course ${req.params.id} failed.`,
@@ -37,7 +38,7 @@ export default class LessonsCtrl {
         res.status(404).send(`Lesson ${req.params.id} not found.`);
       }
     } catch (error) {
-      apiErrorHandler(error, req, res, `Lesson ${req.params.id} failed.`);
+      apiErrorHandler(error, StatusCodes.INTERNAL_SERVER_ERROR, req, res, `Lesson ${req.params.id} failed.`);
     }
   }
 
@@ -46,7 +47,7 @@ export default class LessonsCtrl {
       const result = await LessonRepo.createLesson(req['value']['body']);
       res.json(result);
     } catch (error) {
-      apiErrorHandler(error, req, res, 'Creation of Lesson failed.');
+      apiErrorHandler(error, StatusCodes.INTERNAL_SERVER_ERROR, req, res, 'Creation of Lesson failed.');
     }
   }
 
@@ -58,6 +59,7 @@ export default class LessonsCtrl {
     } catch (error) {
       apiErrorHandler(
         error,
+        StatusCodes.INTERNAL_SERVER_ERROR,
         req,
         res,
         `updation of Lesson ${req.params.id} is failed.`,
@@ -73,6 +75,7 @@ export default class LessonsCtrl {
     } catch (error) {
       apiErrorHandler(
         error,
+        StatusCodes.INTERNAL_SERVER_ERROR,
         req,
         res,
         `deletion of Lesson ${req.params.id}  is failed.`,

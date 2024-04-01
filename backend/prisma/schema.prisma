@@ -14,7 +14,7 @@ model blog {
   content    String?    @db.VarChar
   time_read  Int?
   title      String?    @db.VarChar
-  slug       String?    @db.VarChar
+  slug       String?    @db.VarChar @unique
   id         String     @id(map: "blog_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id    String     @db.Uuid
   blog_tag   blog_tag[]
