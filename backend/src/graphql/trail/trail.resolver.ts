@@ -2,14 +2,14 @@ import { ContextInterface } from "../context";
 const { GraphQLUpload } = require("graphql-upload-minimal");
 
 const Query = {
-  trails: async () => {
-    return [];
+  trails: (_: any, __: any, { trail }: ContextInterface) => {
+    return trail.listTrails();
   },
 };
 
 const Mutation = {
   createTrail: async (
-    _,
+    _: any,
     {
       input,
     }: {
@@ -29,4 +29,14 @@ const Mutation = {
   },
 };
 
-export default { Query, Mutation, Upload: GraphQLUpload };
+const Trail = {
+  actorData: async (
+    { actor }: { actor: string },
+    _: any,
+    { keycloak }: ContextInterface,
+  ) => {
+    return await keycloak.getUserData(actor);
+  },
+};
+
+export default { Query, Mutation, Upload: GraphQLUpload, Trail };

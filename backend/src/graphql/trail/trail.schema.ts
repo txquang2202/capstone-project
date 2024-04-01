@@ -6,8 +6,9 @@ const TrailSchema = gql`
   # ---------------------------------------------------------
 
   type Trail {
-    id: ID
+    id: ID!
     actor: ID
+    actorData: User
     event: String
   }
 

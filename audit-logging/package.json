@@ -21,7 +21,7 @@
     "@grpc/grpc-js": "^1.8.13",
     "@grpc/proto-loader": "^0.6.0",
     "@grpc/reflection": "^1.0.3",
-    "@rsbh-nodejs-microservices/protos": "2.1",
+    "@capstone-project/protos": "1.0.0",
     "kafkajs": "^2.2.4",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
