@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package trail;
+
+message Trail {
+  string id = 1;
+  string actor = 2;
+  string event = 3;
+  string target_id = 4;
+  string target_type = 5;
+}
+
+message CreateTrailRequest {
+  string actor = 1;
+  string event = 2;
+  string target_id = 3;
+  string target_type = 4;
+}
+
+message CreateTrailResponse {
+  Trail trail = 1;
+}
+
+message GetTrailRequest {
+  string id = 1;
+}
+
+message GetTrailResponse {
+  Trail trail = 1;
+}
+
+message ListTrailsRequest {
+  
+}
+
+message ListTrailsResponse {
+  repeated Trail trails = 1;
+}
+
+service TrailService {
+  rpc CreateTrail(CreateTrailRequest) returns (CreateTrailResponse);
+  // rpc GetTrail(GetTrailRequest) returns (GetTrailResponse);
+  rpc ListTrails(ListTrailsRequest) returns (ListTrailsResponse);
+}

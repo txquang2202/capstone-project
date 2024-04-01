@@ -9,6 +9,7 @@ import jobResolver from "./job/job.resolver";
 import search_companyResolver from "./company/search_company.resolver";
 import uploadResolver from "./upload/upload.resolver";
 import mailerResolver from "./mailer/mailer.resolver";
+import trailResolver from "./trail/trail.resolver";
 
 export default [
   userResolver,
@@ -23,4 +24,5 @@ export default [
   jobResolver,
   uploadResolver,
   mailerResolver,
+  trailResolver,
 ];

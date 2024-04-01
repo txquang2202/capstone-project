@@ -1,0 +1,31 @@
+{
+  "name": "@nodejs-microservices/product-service",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.2"
+  },
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.8.13",
+    "@grpc/proto-loader": "^0.6.0",
+    "@grpc/reflection": "^1.0.3",
+    "@rsbh-nodejs-microservices/protos": "2.1",
+    "kafkajs": "^2.2.4",
+    "pg": "^8.10.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.12",
+    "winston": "^3.13.0"
+  }
+}

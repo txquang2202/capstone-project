@@ -5,6 +5,7 @@ import CompanySchema from "./company/company.schema";
 import BlogSchema from "./blog/blog.schema";
 import UploadSchema from "./upload/upload.schema";
 import MailerSchema from "./mailer/mailer.schema";
+import TrailSchema from "./trail/trail.schema";
 
 const schema = gql`
   # Date
@@ -28,6 +29,7 @@ const schema = gql`
   ${BlogSchema}
   ${UploadSchema}
   ${MailerSchema}
+  ${TrailSchema}
 `;
 
 export default schema;

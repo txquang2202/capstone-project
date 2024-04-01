@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.7'
 services:
   # Kafka Docker Image
   zookeeper:
@@ -8,7 +8,7 @@ services:
     hostname: zookeeper
     ports:
       - 2181:2181
-    environment :
+    environment:
       ZOO_MY_ID: 1
     networks:
       - kafkanet
@@ -27,7 +27,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${HOST_IP}:9092
       KAFKA_LISTENERS: PLAINTEXT://:9092
-      KAFKA_CREATE_TOPICS: "capstone:1:1,job:1:1,company:1:1"
+      KAFKA_CREATE_TOPICS: 'capstone:1:1,job:1:1,company:1:1,trail:1:1'
     depends_on:
       - zookeeper
     networks:
@@ -37,13 +37,13 @@ services:
     container_name: kakfa-manager
     restart: always
     ports:
-      - "9000:9000"
+      - '9000:9000'
     depends_on:
       - zookeeper
       - kafkaserver
     environment:
-      ZK_HOSTS: "zookeeper:2181"
-      APPLICATION_SECRET: "random-secret"
+      ZK_HOSTS: 'zookeeper:2181'
+      APPLICATION_SECRET: 'random-secret'
       command: -Dpidfile.path=/dev/null
     networks:
       - kafkanet
@@ -83,7 +83,7 @@ services:
       - kafkaserver:kafkaserver
     environment:
       HOST_IP: ${HOST_IP}
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      LS_JAVA_OPTS: '-Xmx256m -Xms256m'
     networks:
       - kafkanet
     depends_on: ['elasticsearch', 'kafkaserver']
@@ -93,7 +93,7 @@ services:
       # - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
       - ./logstash/vendor/postgresql-42.6.1.jar:/usr/share/logstash/vendor/postgresql-42.6.1.jar:ro,Z
     restart: unless-stopped
-  
+
 networks:
   kafkanet:
     driver: bridge
