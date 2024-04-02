@@ -49,8 +49,8 @@ const Mutation = {
   ): Promise<any> => {
     const { password, ...data } = input;
     const newUser = await keycloak.addUser({ ...data, enabled: true });
-    await keycloak.resetPassword(newUser.id, password)
-    console.log(newUser)
+    await keycloak.resetPassword(newUser.id, password);
+    console.log(newUser);
     return newUser;
   },
 
@@ -65,8 +65,10 @@ const Mutation = {
     if (!existingUser) {
       throw new Error(`User with ID ${id} does not exist`);
     }
-
-    await keycloak.editUser(id, input);
+    const newInpu = Object.assign({}, existingUser, {
+      attributes: Object.assign({}, existingUser.attributes, input.attributes)
+    });
+    await keycloak.editUser(id, newInpu);
     return await keycloak.getUserData(id);
   },
 
