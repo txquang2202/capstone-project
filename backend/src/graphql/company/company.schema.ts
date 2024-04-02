@@ -96,14 +96,14 @@ const CompanySchema = gql`
     working_day: String
     ot_policy: String
     company_size: String
-    overview: String @constraint(minLength: 10, maxLength: 80)
+    overview: String
     company_website: String
     company_facebook: String
-    brief_overview: String @constraint(minLength: 1, maxLength: 80)
+    brief_overview: String
     representative: String
-    #representative_position: String
-    # email: String!@constraint(format: "email")
-    # phone: String
+    representative_position: String
+    email: String @constraint(format: "email")
+    phone: String
   }
 
   input CompanyReviewInput {

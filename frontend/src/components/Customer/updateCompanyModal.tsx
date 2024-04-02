@@ -80,10 +80,10 @@ const UpdateCompanyModal = ({
   const [updateCompanyMutation] = useMutation(UPDATE_COMPANY);
   const { t } = useLocale();
   const { isEmptyDraftJs } = useEmptyText();
-  //   const [locations, setLocations] = useState<string[]>([]);
+
   const { fields, onChangeField, error } = useForm<UpdateCompanyInput>({
     defaultState: {
-      brief_overview: company.brief_overview,
+      brief_overview: '',
       company_name: company.company_name,
       company_website: company.company_website,
       company_facebook: company.company_facebook,
@@ -92,7 +92,7 @@ const UpdateCompanyModal = ({
       country: company.country,
       id: company.id,
       ot_policy: company.ot_policy,
-      overview: company.overview,
+      overview: '',
       working_day: company.working_day,
     },
     validate: {
@@ -111,6 +111,16 @@ const UpdateCompanyModal = ({
 
   const handleUpdate = async () => {
     try {
+      const overview = fields.overview;
+      const brief_overview = fields.brief_overview;
+      let overviewContent = '';
+      let briefOverviewContent = '';
+      if (overview) {
+        overviewContent = overview.replace(/<[^>]+>/g, '');
+      }
+      if (brief_overview) {
+        briefOverviewContent = brief_overview.replace(/<[^>]+>/g, '');
+      }
       const data = await updateCompanyMutation({
         variables: {
           updateCompanyId: company.id,
@@ -121,6 +131,8 @@ const UpdateCompanyModal = ({
             company_type: fields.company_type,
             company_size: fields.company_size,
             country: fields.country,
+            overview: overviewContent,
+            brief_overview: briefOverviewContent,
             ot_policy: fields.ot_policy,
             working_day: fields.working_day,
           },
@@ -266,31 +278,6 @@ const UpdateCompanyModal = ({
             />
           }
         />
-        {/* <Content
-          className='items-start'
-          title='Location'
-          content={
-            <CustomMultiSelectLocation
-              size='lg'
-              searchable
-              placeholder='Locations'
-              value={fields.company_location.map(
-                (location) => location.address
-              )}
-              data={locations}
-              onChange={(value) => {
-                const selectedLocations = value.map((address) => ({
-                  id: Math.random().toString(),
-                  address: address,
-                }));
-                onChangeField('company_location', selectedLocations);
-              }}
-              styles={{ inputField: { boxShadow: 'none', paddingLeft: 0 } }}
-              error={error.company_location}
-              onChangeData={setLocations}
-            />
-          }
-        /> */}
 
         <Button size='large' className='mt-2 w-full' onClick={handleUpdate}>
           Update
