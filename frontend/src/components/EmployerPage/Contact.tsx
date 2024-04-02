@@ -37,7 +37,7 @@ const EmployerContact = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [agreeLicense, setAgreeLicense] = useState(false);
 
-  const { fields, onChangeField, handleSubmit } = useForm<Form>({
+  const { fields, onChangeField } = useForm<Form>({
     defaultState: {
       representativeName: '',
       representativePosition: '',
@@ -77,7 +77,9 @@ const EmployerContact = () => {
     agreeLicense,
   ]);
 
-  const onSubmit = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSubmit = (e: any) => {
+    e.preventDefault();
     mutate({
       variables: {
         input: {
@@ -241,7 +243,7 @@ const EmployerContact = () => {
                     <div className='flex justify-center'>
                       <Button
                         // onClick={() => handleSubmit(onSubmit)}
-                        onClick={() => handleSubmit(onSubmit)}
+                        onClick={(e) => onSubmit(e)}
                         intent='primary'
                         size='xl'
                         disabled={!isFormValid}
