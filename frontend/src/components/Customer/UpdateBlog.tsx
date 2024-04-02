@@ -12,6 +12,7 @@ import { useLocale } from '@/locale';
 import { Blog, BlogTag, Tag } from '@/types/blog';
 
 import { Button } from '../Button';
+import { IconX } from '../Icons';
 import { TextEditor } from '../TextEditor';
 
 type ContentProps = {
@@ -150,70 +151,78 @@ const UpdateBlog = ({ blog, tags, onClose, onUpdate }: UpdateBlogProps) => {
   };
 
   return (
-    <div className='flex flex-col gap-5 p-10'>
-      <Content
-        title='Title'
-        content={
-          <TextInput
-            size='lg'
-            placeholder='Title'
-            className='w-full'
-            value={fields.title}
-            error={error.title && t(error.title)}
-            onChange={(e) => onChangeField('title', e.target.value)}
+    <div className='fixed inset-0 z-10 flex items-center justify-center overflow-y-auto rounded bg-[#000000] bg-opacity-50 p-20 transition-opacity duration-1000'>
+      <div className='flex max-h-[calc(100vh-80px)] w-full max-w-screen-lg  flex-col gap-5 overflow-y-auto rounded-lg bg-white p-10'>
+        <div className='flex flex-row justify-between '>
+          <h2>Update blog</h2>
+          <IconX onClick={() => onClose()} className='cursor-pointer' />
+        </div>
+        <div className='flex flex-col gap-5 p-10'>
+          <Content
+            title='Title'
+            content={
+              <TextInput
+                size='lg'
+                placeholder='Title'
+                className='w-full'
+                value={fields.title}
+                error={error.title && t(error.title)}
+                onChange={(e) => onChangeField('title', e.target.value)}
+              />
+            }
           />
-        }
-      />
-      <Content
-        title='Slug'
-        content={
-          <TextInput
-            size='lg'
-            placeholder='title-slug'
-            className='w-full'
-            value={fields.slug}
-            error={error.slug && t(error.slug)}
-            onChange={(e) => onChangeField('slug', e.target.value)}
+          <Content
+            title='Slug'
+            content={
+              <TextInput
+                size='lg'
+                placeholder='title-slug'
+                className='w-full'
+                value={fields.slug}
+                error={error.slug && t(error.slug)}
+                onChange={(e) => onChangeField('slug', e.target.value)}
+              />
+            }
           />
-        }
-      />
-      <Content
-        title='Tag'
-        content={
-          <MultiSelect
-            size='lg'
-            searchable
-            placeholder='Tag'
-            value={fields.tag_ids}
-            data={tagsData}
-            styles={{ inputField: { boxShadow: 'none', paddingLeft: 0 } }}
-            onChange={(value) => onChangeField('tag_ids', value)}
-            error={error.tag_ids}
+          <Content
+            title='Tag'
+            content={
+              <MultiSelect
+                size='lg'
+                searchable
+                placeholder='Tag'
+                value={fields.tag_ids}
+                data={tagsData}
+                styles={{ inputField: { boxShadow: 'none', paddingLeft: 0 } }}
+                onChange={(value) => onChangeField('tag_ids', value)}
+                error={error.tag_ids}
+              />
+            }
           />
-        }
-      />
-      <Content
-        titleClass='w-full'
-        contentClass='w-full'
-        title='Content'
-        className='w-full flex-col items-start gap-2'
-        content={
-          <TextEditor
-            error={error.content}
-            value={fields.content}
-            onChange={(value) => onChangeField('content', value)}
-            placeholder='Content'
+          <Content
+            titleClass='w-full'
+            contentClass='w-full'
+            title='Content'
+            className='w-full flex-col items-start gap-2'
+            content={
+              <TextEditor
+                error={error.content}
+                fref={fields.content}
+                onChange={(value) => onChangeField('content', value)}
+                placeholder='Content'
+              />
+            }
           />
-        }
-      />
-      <Button
-        onClick={() => handleSubmit(onSubmit)}
-        size='large'
-        className='mt-2 w-full'
-      >
-        Save Blog
-      </Button>
-      {isError && <div className='text-red-500'>Error: {isError}</div>}
+          <Button
+            onClick={() => handleSubmit(onSubmit)}
+            size='large'
+            className='mt-2 w-full'
+          >
+            Save Blog
+          </Button>
+          {isError && <div className='text-red-500'>Error: {isError}</div>}
+        </div>
+      </div>
     </div>
   );
 };

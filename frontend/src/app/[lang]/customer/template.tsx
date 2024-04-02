@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout>{children}</Layout>;
+      <Layout>{children}</Layout>
     </QueryClientProvider>
   );
 }
