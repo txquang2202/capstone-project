@@ -12,7 +12,7 @@ export default function Page() {
   const {
     data: { companies },
   } = useSuspenseQuery<DataResponse<'companies', Company[]>>(GET_COMPANIES);
-
+  console.log(companies);
   const router = useAppRouter();
 
   return (
