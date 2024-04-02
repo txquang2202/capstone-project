@@ -202,8 +202,6 @@ export const SEARCH_JOBS: TypedDocumentNode<
   }
 `;
 
-
-
 export type ApplyJobResponse = DataResponse<'job', Job>;
 export type ApplyJobVariable = {
   input: {
@@ -342,6 +340,45 @@ export const DELETE_JOB = gql`
       top_3_reason
       why_you_love_working_here
       working_type
+    }
+  }
+`;
+
+export type CreateUpdateJobResponse = DataResponse<'updateJob', Job>;
+export type CreateUpdateJobVariable = {
+  input: {
+    name: string;
+    salary_from: number;
+    salary_to: number;
+    unit: string;
+    hide_salary: boolean;
+    country: string;
+    skills: string;
+    working_type: string;
+    top_3_reason: string;
+    job_description: string;
+    skill_demand: string;
+    why_you_love_working_here: string;
+    is_closed: boolean;
+  };
+  updateJobId: string;
+};
+export const UPDATE_JOB1 = gql`
+  mutation UpdateJob($updateJobId: ID!, $input: updateJobInput) {
+    updateJob(id: $updateJobId, input: $input) {
+      id
+      name
+      salary_from
+      salary_to
+      unit
+      hide_salary
+      country
+      skills
+      working_type
+      top_3_reason
+      job_description
+      skill_demand
+      why_you_love_working_here
     }
   }
 `;

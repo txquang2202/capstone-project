@@ -10,6 +10,7 @@ import { AppLink } from '../AppLink';
 import { Button } from '../Button';
 import {
   IconAward,
+  IconBriefcase,
   IconDollarSign,
   IconHome,
   IconList,
@@ -20,6 +21,11 @@ import {
 const data = [
   { link: routes.customerDashboard.path, label: 'Dashboard', icon: IconHome },
   { link: routes.customerJobList.path, label: 'Job list', icon: IconList },
+  {
+    link: routes.customerCompanyList.path,
+    label: 'Companies',
+    icon: IconBriefcase,
+  },
   { link: '#', label: 'Ứng viên', icon: IconAward },
   { link: '#', label: 'Billing', icon: IconDollarSign },
   { link: '#', label: 'Settings', icon: IconSettings },

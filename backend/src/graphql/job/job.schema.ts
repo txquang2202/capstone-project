@@ -113,22 +113,22 @@ const JobSchema = gql`
     skill_demand: String!
     why_you_love_working_here: String!
     company_id: ID!
-    is_closed: Boolean!
+    is_closed: Boolean
   }
   input updateJobInput {
-    name: String!
+    name: String
     salary_from: Int
     salary_to: Int
     unit: String
     hide_salary: Boolean
-    country: String!
-    skills: String!
-    working_type: String!
-    top_3_reason: String!
-    job_description: String!
-    skill_demand: String!
-    why_you_love_working_here: String!
-    is_closed: Boolean!
+    country: String
+    skills: String
+    working_type: String
+    top_3_reason: String
+    job_description: String
+    skill_demand: String
+    why_you_love_working_here: String
+    is_closed: Boolean
   }
   input updateJobApplication {
     # cv: String!

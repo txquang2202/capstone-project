@@ -3,6 +3,13 @@ const CompanySchema = gql`
   # ---------------------------------------------------------
   # Model Objects
   # ---------------------------------------------------------
+  type CompanyLocate {
+    id: ID
+    company_id: ID
+    address: String
+    long: Float
+    lat: Float
+  }
   type CompanyPayload {
     id: ID!
     company_name: String!
@@ -19,6 +26,7 @@ const CompanySchema = gql`
     representative_position: String
     email: String
     phone: String
+    company_location: [CompanyLocate]
   }
   # type JobPayLoad{
 
@@ -81,6 +89,22 @@ const CompanySchema = gql`
     email: String! @constraint(format: "email")
     phone: String!
   }
+  input UpdateCompanyInput {
+    company_name: String
+    company_type: String
+    country: String
+    working_day: String
+    ot_policy: String
+    company_size: String
+    overview: String
+    company_website: String
+    company_facebook: String
+    brief_overview: String
+    representative: String
+    representative_position: String
+    email: String @constraint(format: "email")
+    phone: String
+  }
 
   input CompanyReviewInput {
     company_id: ID!
@@ -94,7 +118,7 @@ const CompanySchema = gql`
     ot_satisfy: Boolean!
   }
   input UpdateCompanyReviewInput {
-    summary: String! @constraint(minLength: 10, maxLength: 80)
+    summary: String @constraint(minLength: 10, maxLength: 80)
     ot_satisfy_reason: String @constraint(minLength: 50, maxLength: 140)
     input_experience: String @constraint(minLength: 50, maxLength: 10000)
     input_improvement_suggestion: String
@@ -117,7 +141,7 @@ const CompanySchema = gql`
 
   extend type Mutation {
     createCompany(input: CompanyInput!): CompanyPayload!
-    updateCompany(id: ID!, input: CompanyInput!): CompanyPayload
+    updateCompany(id: ID!, input: UpdateCompanyInput!): CompanyPayload
     deleteCompany(id: ID!): CompanyPayload
     createCompanyReview(input: CompanyReviewInput!): CompanyReview!
     updateCompanyReview(

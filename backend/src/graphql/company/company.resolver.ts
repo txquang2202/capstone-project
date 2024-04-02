@@ -1,5 +1,5 @@
 import { company, company_request } from "@prisma/client";
-// import { company_request } from "@prisma/client";
+
 import { ContextInterface } from "../context";
 import { EVENT } from "../../constants/elasticsearch";
 
@@ -12,6 +12,9 @@ const Query = {
   ): Promise<company | null> => {
     const companyByID = await prisma.company.findUnique({
       where: { id },
+      include: {
+        company_location: true,
+      },
     });
     return companyByID;
   },
@@ -20,7 +23,11 @@ const Query = {
     _args: any,
     { prisma }: ContextInterface,
   ): Promise<company[]> => {
-    const companies = await prisma.company.findMany();
+    const companies = await prisma.company.findMany({
+      include: {
+        company_location: true,
+      },
+    });
     return companies;
   },
   jobCompany: async (
@@ -123,7 +130,7 @@ const Mutation = {
       data: input,
     });
     return newCompanyRequest;
-  },// Delete a company request by ID
+  }, // Delete a company request by ID
   deleteCompanyRequest: async (
     _: any,
     { id }: { id: string },
