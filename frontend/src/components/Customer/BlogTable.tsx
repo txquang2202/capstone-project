@@ -135,11 +135,14 @@ const BlogTable = ({ allTags }: Props) => {
                 <Table.Tr key={blog.id} onClick={() => handleRowClick(blog.id)}>
                   <Table.Td className='text-left'>{blog.id}</Table.Td>
                   <Table.Td className='text-left'>{blog.title}</Table.Td>
-                  <Table.Td className='text-left'>
+                  <Table.Td
+                    className='text-left'
+                    style={{ whiteSpace: 'pre-wrap' }}
+                  >
                     {blog.tags?.map((tag) => (
                       <span
                         key={tag.id}
-                        className='mr-2 inline-block rounded bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700'
+                        className='mb-2 mr-2 inline-block rounded bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700'
                       >
                         {tag.tag_name}
                       </span>
