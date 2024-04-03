@@ -7,7 +7,7 @@ import { useState } from 'react';
 import AdminCompanyGeneralInformation from '@/components/CompanyPage/adminGeneralInformation';
 import AdminCompanyOverview from '@/components/CompanyPage/adminOverview';
 import { routes } from '@/configs/router';
-import { DELETE_COMPANY, UPDATE_COMPANY } from '@/graphql/company';
+import { UPDATE_COMPANY } from '@/graphql/company';
 import { Company } from '@/types/company';
 
 import { Button } from '../Button';
@@ -21,7 +21,6 @@ type Props = {
 const CompanyDetail = ({ company }: Props) => {
   const router = useRouter();
 
-  const [deleteCompany] = useMutation(DELETE_COMPANY);
   const [updateCompany] = useMutation(UPDATE_COMPANY);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
@@ -38,7 +37,9 @@ const CompanyDetail = ({ company }: Props) => {
     );
     if (isConfirmed) {
       try {
-        await deleteCompany({ variables: { deleteCompanyId: company.id } });
+        await updateCompany({
+          variables: { input: { enable: false }, updateCompanyId: company.id },
+        });
         router.push(routes.customerCompanyList.path);
       } catch (error) {
         console.log(error);

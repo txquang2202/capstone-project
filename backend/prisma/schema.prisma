@@ -41,6 +41,7 @@ model company {
   company_facebook  String?            @db.VarChar
   brief_overview    String?            @db.VarChar
   id                String             @id(map: "company_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  enable            Boolean?           @default(true)
   company_benefit   company_benefit?
   company_key_skill company_key_skill?
   company_location  company_location[]
