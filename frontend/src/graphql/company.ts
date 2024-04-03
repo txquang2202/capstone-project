@@ -50,6 +50,7 @@ export const GET_COMPANIES = gql`
         long
         lat
       }
+      enable
     }
   }
 `;
@@ -91,6 +92,7 @@ export const UPDATE_COMPANY = gql`
       company_website
       company_facebook
       brief_overview
+      enable
     }
   }
 `;
