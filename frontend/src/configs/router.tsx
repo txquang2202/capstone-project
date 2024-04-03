@@ -409,18 +409,21 @@ export const routes = {
   }),
   customerBlogList: route({
     path: '/customer/blogs',
-    requiredAuth: true,
+    requiredAuth: false,
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
     metadata: {
+      vi: {
+        title: 'ITviec Admin | Danh sách Blog',
+      },
       en: {
-        title: 'ITviec Admin',
+        title: 'ITviec Admin | Blogs List',
       },
     },
   }),
   customerBlogDetail: route({
     path: '/customer/blogs/[id]',
-    requiredAuth: true,
+    requiredAuth: false,
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
     metadata: {

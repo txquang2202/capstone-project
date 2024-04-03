@@ -28,7 +28,6 @@ class BlogRepo {
     const totalPages = Math.ceil(totalCount / limit);
 
     return {
-
       totalItems: totalCount,
       totalPages: totalPages,
       blogs: blogs

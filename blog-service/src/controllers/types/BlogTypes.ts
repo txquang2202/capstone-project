@@ -33,3 +33,15 @@ export type UpdateBlogRequest = {
     content: string;
     created_at: Date;
 };
+
+export type BlogsResponse = {
+    totalItems: number;
+    totalPages: number;
+    blogs: BlogResponse[];
+};
+
+export type BlogTagResponse = {
+    tag_id: string;
+    blog_id: string;
+    tag_name: string;
+};

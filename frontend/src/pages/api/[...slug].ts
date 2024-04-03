@@ -10,12 +10,13 @@ export const config = {
     bodyParser: false,
   },
 };
+const REST_APP_API_URL = process.env.NEXT_PUBLIC_REST_API_URL + '/api';
 // skip cors and api forwarding
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (isDevelopment) {
     return httpProxyMiddleware(req, res, {
       // You can use the `http-proxy` option
-      target: process.env.NEXT_PUBLIC_REST_API_URL ?? '',
+      target: REST_APP_API_URL ?? '',
       // In addition, you can use the `pathRewrite` option provided by `next-http-proxy-middleware`
       pathRewrite: [
         {

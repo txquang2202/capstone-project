@@ -120,10 +120,20 @@ const BlogDetail = ({ blog, blogTag, tags }: Props) => {
               <h3>Are you sure you want to delete this blog?</h3>
             </div>
             <div className='mt-4 flex justify-end'>
-              <Button onClick={handleDeleteBlog} className='mr-2'>
+              <Button
+                onClick={handleDeleteBlog}
+                className='mr-2'
+                intent='primary'
+                size='large'
+              >
                 Yes
               </Button>
-              <Button onClick={closeDeleteConfirmation} className='outlined'>
+              <Button
+                onClick={closeDeleteConfirmation}
+                className='outlined'
+                intent='secondary'
+                size='large'
+              >
                 No
               </Button>
             </div>

@@ -3,7 +3,7 @@ import BlogRepo from './../repositories/BlogRepo';
 import BlogTagRepo from './../repositories/BlogTagRepo';
 
 import { apiErrorHandler } from './../handlers/errorHandler';
-import { AddBlogRequest, BlogTagRequest, AddBlogResponse, UpdateBlogRequest, BlogResponse } from './types/BlogTypes';
+import { AddBlogRequest, BlogTagRequest, AddBlogResponse, UpdateBlogRequest, BlogResponse, BlogsResponse, BlogTagResponse } from './types/BlogTypes';
 import { IBlogTag } from '../models/Blog_Tag';
 import { StatusCodes } from 'http-status-codes';
 export default class BlogCtrl {
@@ -31,20 +31,40 @@ export default class BlogCtrl {
     async getAllBlogPages(req: Request, res: Response, next: NextFunction) {
         console.log(req.params);
         try {
+            const page: number = parseInt(req.query.page as string);
             // Trang hiện tại (mặc định là trang 1)
-            const currentPage: number = req.params.page ? parseInt(req.params.page as string) : 1;
-
+            const currentPage: number = (page > 0) ? page : 1;
             // Số lượng blog trên mỗi trang (mặc định là 10)
-            const blogsPerPage: number = req.query.limit ? parseInt(req.query.limit as string) : 1;
-
+            const blogsPerPage: number = req.query.limit ? parseInt(req.query.limit as string) : 10;
             // Tính toán offset cho truy vấn
             const offset = (currentPage - 1) * blogsPerPage;
-
             // Lấy dữ liệu blog phân trang từ BlogRepo
             const blogList = await BlogRepo.getPaginatedBlogs(blogsPerPage, offset);
-
+            const blogTags: BlogTagResponse[] = [];
+            for (const blog of blogList.blogs) {
+                const tags = await BlogTagRepo.getAllBlogTags(blog.id);
+                blogTags.push(...tags.map((blogTag) => ({
+                    tag_id: blogTag.tag_id,
+                    blog_id: blogTag.blog_id,
+                    tag_name: blogTag.tag?.tag_name || '',
+                })));
+            }
+            const blogsResp: BlogsResponse = {
+                totalItems: blogList.totalItems,
+                totalPages: blogList.totalPages,
+                blogs: blogList.blogs.map((blog) => ({
+                    id: blog.id,
+                    content: blog.content,
+                    slug: blog.slug,
+                    title: blog.title,
+                    time_read: blog.time_read,
+                    user_id: blog.user_id,
+                    created_at: blog.created_at,
+                    tags: blogTags.filter((blogTag) => blogTag.blog_id === blog.id).map((blogTag) => ({ tag_name: blogTag.tag_name, id: blogTag.tag_id })),
+                }))
+            };
             // Trả về kết quả phân trang
-            res.json(blogList);
+            res.status(StatusCodes.OK).json(blogsResp);
         } catch (error) {
             apiErrorHandler(error, StatusCodes.INTERNAL_SERVER_ERROR, req, res, `Fetch All BlogPages failed: ${(error as Error).message}`);
         }
