@@ -15,6 +15,7 @@ export type Company = {
   email: string;
   phone: string;
   company_location: CompanyLocate[];
+  enable: boolean;
 };
 export type CompanyLocate = {
   id: string;

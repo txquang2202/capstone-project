@@ -27,6 +27,7 @@ const CompanySchema = gql`
     email: String
     phone: String
     company_location: [CompanyLocate]
+    enable: Boolean
   }
   # type JobPayLoad{
 
@@ -104,6 +105,7 @@ const CompanySchema = gql`
     representative_position: String
     email: String @constraint(format: "email")
     phone: String
+    enable: Boolean
   }
 
   input CompanyReviewInput {
