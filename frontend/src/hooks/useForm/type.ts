@@ -2,7 +2,9 @@
 
 type ArrayKey = number;
 
-type IsTuple<T extends ReadonlyArray<any>> = number extends T['length'] ? false : true;
+type IsTuple<T extends ReadonlyArray<any>> = number extends T['length']
+  ? false
+  : true;
 
 type Primitive = null | undefined | string | number | boolean | symbol | bigint;
 
@@ -12,11 +14,19 @@ type IsEqual<T1, T2> = T1 extends T2
     : false
   : false;
 
-type AnyIsEqual<T1, T2> = T1 extends T2 ? (IsEqual<T1, T2> extends true ? true : never) : never;
+type AnyIsEqual<T1, T2> = T1 extends T2
+  ? IsEqual<T1, T2> extends true
+    ? true
+    : never
+  : never;
 
 type TupleKeys<T extends ReadonlyArray<any>> = Exclude<keyof T, keyof any[]>;
 
-type PathImpl<K extends string | number, V, TraversedTypes> = V extends Primitive
+type PathImpl<
+  K extends string | number,
+  V,
+  TraversedTypes
+> = V extends Primitive
   ? `${K}`
   : true extends AnyIsEqual<TraversedTypes, V>
   ? `${K}`
@@ -60,7 +70,7 @@ export type PathValue<T, P> = T extends any
 
 export type FieldPathValue<
   TFieldValues,
-  TFieldPath extends FieldPath<TFieldValues> | keyof TFieldValues,
+  TFieldPath extends FieldPath<TFieldValues> | keyof TFieldValues
 > = PathValue<TFieldValues, TFieldPath>;
 
 type Config<T> = {

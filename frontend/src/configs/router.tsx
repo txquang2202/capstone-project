@@ -330,6 +330,9 @@ export const routes = {
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
     metadata: {
+      en: {
+        title: 'ITviec Admin',
+      },
       vi: {
         title: 'ITviec Admin',
       },
@@ -401,6 +404,45 @@ export const routes = {
     metadata: {
       vi: {
         title: 'ITviec',
+      },
+    },
+  }),
+  customerBlogList: route({
+    path: '/customer/blogs',
+    requiredAuth: false,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin | Danh sách Blog',
+      },
+      en: {
+        title: 'ITviec Admin | Blogs List',
+      },
+    },
+  }),
+  customerBlogDetail: route({
+    path: '/customer/blogs/[id]',
+    requiredAuth: false,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      en: {
+        title: 'ITviec Admin',
+      },
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
+  customerAddBlog: route({
+    path: '/customer/add-blog',
+    requiredAuth: false,
+    locales: ['vi', 'en'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      en: {
+        title: 'ITviec Admin',
       },
     },
   }),

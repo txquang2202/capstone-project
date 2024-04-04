@@ -1,13 +1,13 @@
 'use client';
 
-import CompanyCard from "@/components/CompanyPage/CompanyCard";
-import CompanyBody from "@/components/CompanyPage/CompanyBody";
+import CompanyBody from '@/components/CompanyPage/CompanyBody';
+import CompanyCard from '@/components/CompanyPage/CompanyCard';
 
 export default function CompanyPage() {
-    return (
-        <main className="companies-landing-container">
-            <CompanyCard/>
-            <CompanyBody/>
-        </main>
-    );
-};
+  return (
+    <main className='companies-landing-container'>
+      <CompanyCard />
+      <CompanyBody />
+    </main>
+  );
+}

@@ -19,6 +19,7 @@ export function unCoughtErrorHandler(
 
 export function apiErrorHandler(
   err: any,
+  status: number,
   req: Request,
   res: Response,
   message: string
@@ -26,5 +27,5 @@ export function apiErrorHandler(
   const error: object = { Message: message, Request: req, Stack: err };
   // winston.error(JSON.stringify(error));
   // console.log({ error });
-  res.json({ Message: message });
+  res.status(status).json({ Message: message });
 }

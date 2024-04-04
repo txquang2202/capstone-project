@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import CourseRepo from './../repositories/CoursesRepo';
 import { apiErrorHandler } from './../handlers/errorHandler';
-
+import { StatusCodes } from 'http-status-codes';
 export default class CoursesCtrl {
   constructor() { }
 
@@ -10,7 +10,7 @@ export default class CoursesCtrl {
       const courseList = await CourseRepo.getAllCourses({ order: ['seqNo'] });
       res.json(courseList);
     } catch (error) {
-      apiErrorHandler(error, req, res, 'Fetch All Courses failed.');
+      apiErrorHandler(error, StatusCodes.INTERNAL_SERVER_ERROR, req, res, 'Fetch All Courses failed.');
     }
   }
 
@@ -23,7 +23,7 @@ export default class CoursesCtrl {
         res.status(404).send(`Lesson ${req.params.id} not found.`);
       }
     } catch (error) {
-      apiErrorHandler(error, req, res, `Course ${req.params.id} is failed.`);
+      apiErrorHandler(error, StatusCodes.INTERNAL_SERVER_ERROR, req, res, `Course ${req.params.id} is failed.`);
     }
   }
 }
