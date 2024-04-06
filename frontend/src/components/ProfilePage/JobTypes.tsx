@@ -1,46 +1,97 @@
-'use client';
-
-import { Tooltip } from '@mantine/core';
-import React, { useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
 
 import { Button } from '@/components/Button';
-import { IconInfo } from '@/components/Icons';
+import { GET_JOBTYPES_USER, UPDATE_JOBTYPES_USER } from '@/graphql/auth';
+import useAuthData from '@/hooks/useAuthData';
 import { useLocale } from '@/locale';
 
-import CheckButton from './CheckButton';
-import Options from './Options';
+interface JobTypeData {
+  jobLevel: string[];
+  workingTypes: string[];
+  companyTypes: string[];
+  companySizes: string[];
+  location: string;
+  [key: string]: string[] | string; // Index signature
+}
+
+interface NotificationProps {
+  onClose: () => void;
+}
 
 export default function JobTypes() {
   const { t } = useLocale();
-  const [fromValue, setFromValue] = useState('');
-  const [toValue, setToValue] = useState('');
-  const [error, setError] = useState('');
+  const { authUser } = useAuthData();
+  const { loading, error, data } = useQuery(GET_JOBTYPES_USER, {
+    variables: { userId: authUser?.id },
+  });
+  const [showNotification, setShowNotification] = useState(false);
 
-  const handleFromChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFromValue(event.target.value);
-    if (
-      event.target.value !== '' &&
-      parseInt(event.target.value) >= parseInt(toValue)
-    ) {
-      setError(
-        'The minimum salary cannot be more than the maximum salary. Please enter a valid salary range.'
-      );
-    } else {
-      setError('');
+  const [jobType, setJobType] = useState<JobTypeData>({
+    jobLevel: [],
+    workingTypes: [],
+    companyTypes: [],
+    companySizes: [],
+    location: 'Ho Chi Minh',
+  });
+
+  useEffect(() => {
+    if (!loading && !error && data) {
+      const jobType = data?.user?.attributes;
+      const initData: JobTypeData = {
+        jobLevel: jobType?.jobLevel ?? '',
+        workingTypes: jobType?.workingType ?? '',
+        companyTypes: jobType?.companyType ?? '',
+        companySizes: jobType?.companySize ?? '',
+        location: jobType?.jobLocation ?? '',
+      };
+
+      setJobType(initData);
     }
+  }, [loading, error, data]);
+
+  const [updateJobTypes] = useMutation(UPDATE_JOBTYPES_USER);
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked, value, name } = event.target;
+    setJobType((prevState: JobTypeData) => ({
+      ...prevState,
+      [name]: checked
+        ? [...(prevState[name] as string[]), value]
+        : (prevState[name] as string[]).filter((item) => item !== value),
+    }));
   };
 
-  const handleToChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setToValue(event.target.value);
-    if (
-      event.target.value !== '' &&
-      parseInt(event.target.value) <= parseInt(fromValue)
-    ) {
-      setError(
-        'The minimum salary cannot be more than the maximum salary. Please enter a valid salary range.'
-      );
-    } else {
-      setError('');
+  const handleLocationChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const { value } = event.target;
+    setJobType((prevState) => ({
+      ...prevState,
+      location: value,
+    }));
+  };
+
+  const handleSave = async () => {
+    try {
+      await updateJobTypes({
+        variables: {
+          input: {
+            attributes: {
+              jobLevel: jobType.jobLevel,
+              workingType: jobType.workingTypes,
+              companyType: jobType.companyTypes,
+              companySize: jobType.companySizes,
+              jobLocation: jobType.location.toString(),
+            },
+          },
+          updateUserId: authUser?.id,
+        },
+      });
+      setShowNotification(true);
+      console.log('Job types updated successfully!');
+    } catch (error) {
+      console.error('Error updating job types:', error);
     }
   };
 
@@ -55,29 +106,6 @@ export default function JobTypes() {
         </p>
         <hr className='mt-7 h-[1px] w-full border-none bg-gray-200' />
         <div className='py-7'>
-          {/* Skills */}
-          <div className='grid grid-cols-1 items-start gap-4 md:grid-cols-3'>
-            <div className='flex flex-row items-center gap-2'>
-              <p className='text-[20px] font-[600]'>{t('Skills')}</p>
-              <Tooltip
-                label={
-                  <div className='rounded-md bg-black p-1 text-[#ffff]'>
-                    <div className='text-center text-[14px]'>
-                      <p>Preferred skills include</p>
-                      <p>subscribed skills. You can</p>
-                      <p>still edit your preferred</p>
-                      <p>skill list</p>
-                    </div>
-                  </div>
-                }
-              >
-                <IconInfo className='text-silver-grey h-5 w-5 cursor-pointer' />
-              </Tooltip>
-            </div>
-            <div className='col-span-2'>
-              <Options />
-            </div>
-          </div>
           {/* Job Level */}
           <div className='mt-7 grid grid-cols-1 items-start gap-4 md:grid-cols-3'>
             <div className='flex flex-col gap-2'>
@@ -86,125 +114,24 @@ export default function JobTypes() {
             </div>
             <div className='col-span-2'>
               <div className='space-y-2'>
-                <div className='space-x-2'>
-                  <input
-                    type='checkbox'
-                    className='text-dark-grey focus:ring-silver-grey active:bg-silver-grey h-5 w-5 rounded focus:outline-none focus:ring'
-                  />
-                  <label htmlFor=''>
-                    Fresher (0 - 10 months of experience)
-                  </label>
-                </div>
-                <div className='space-x-2'>
-                  <input
-                    type='checkbox'
-                    className='text-dark-grey focus:ring-silver-grey active:bg-silver-grey h-5 w-5 rounded focus:outline-none focus:ring'
-                  />
-                  <label htmlFor=''>
-                    Junior (10 - 36 months of experience)
-                  </label>
-                </div>
-                <div className='space-x-2'>
-                  <input
-                    type='checkbox'
-                    className='text-dark-grey focus:ring-silver-grey active:bg-silver-grey h-5 w-5 rounded focus:outline-none focus:ring'
-                  />
-                  <label htmlFor=''>
-                    Senior (37 - 60 months of experience)
-                  </label>
-                </div>
-                <div className='space-x-2'>
-                  <input
-                    type='checkbox'
-                    className='text-dark-grey focus:ring-silver-grey active:bg-silver-grey h-5 w-5 rounded focus:outline-none focus:ring'
-                  />
-                  <label htmlFor=''>
-                    Manager (&gt; 60 months of experience)
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Current Salary per month */}
-          <div className='mt-7 grid grid-cols-1 items-start gap-4 md:grid-cols-3'>
-            <div className='flex flex-row items-center'>
-              <p className='w-[200px] text-[20px] font-[600]'>
-                {t('Current Salary per month')}
-              </p>
-              <Tooltip
-                label={
-                  <div className='rounded-md bg-black p-1 text-[#ffff]'>
-                    <div className='text-center text-[14px]'>
-                      <p>The system is only used</p>
-                      <p>for job recommendation</p>
-                      <p>purposes. It is not visible</p>
-                      <p>to any users.</p>
-                    </div>
+                {[
+                  'Fresher (0 - 10 months of experience)',
+                  'Junior (10 - 36 months of experience)',
+                  'Senior (37 - 60 months of experience)',
+                  'Manager (> 60 months of experience)',
+                ].map((level) => (
+                  <div className='space-x-2' key={level}>
+                    <input
+                      type='checkbox'
+                      name='jobLevel'
+                      className='text-dark-grey focus:ring-silver-grey active:bg-silver-grey h-5 w-5 rounded focus:outline-none focus:ring'
+                      value={level}
+                      checked={jobType.jobLevel?.includes(level)}
+                      onChange={handleCheckboxChange}
+                    />
+                    <label htmlFor={level}>{level}</label>
                   </div>
-                }
-              >
-                <IconInfo className='text-silver-grey h-5 w-5 cursor-pointer' />
-              </Tooltip>
-            </div>
-            <div className='col-span-1 flex flex-col items-center gap-5 md:col-span-2 md:flex-row'>
-              <div className=''>
-                <select
-                  name='currency'
-                  id='currency'
-                  className='focus:border-silver-grey focus:ring-light-red active:bg-silver-grey border-silver-grey border-1 rounded py-3 pr-20 text-[18px] focus:outline-none focus:ring'
-                >
-                  <option value='VND'>VND</option>
-                  <option value='USD'>USD</option>
-                </select>
-              </div>
-              <div className='w-full'>
-                <input
-                  type='number'
-                  placeholder='Enter number'
-                  pattern='[0-9]*'
-                  className='focus:border-silver-grey focus:ring-light-red active:bg-silver-grey border-silver-grey w-full  rounded px-4 py-3 text-[18px] focus:outline-none focus:ring'
-                />
-              </div>
-            </div>
-          </div>
-          {/* Expected Salary per month */}
-          <div className='mt-7 grid grid-cols-1 items-start gap-4 md:grid-cols-3'>
-            <div className='flex flex-row items-center'>
-              <p className='w-[200px] text-[20px] font-[600]'>
-                {t('Expected Salary per month')}
-              </p>
-            </div>
-            <div className='col-span-1 flex flex-col items-start gap-5 md:col-span-2 md:flex-row'>
-              <div className=''>
-                <select
-                  name='currency'
-                  id='currency'
-                  className='focus:border-silver-grey focus:ring-light-red active:bg-silver-grey border-silver-grey border-1 rounded py-3 pr-20 text-[18px] focus:outline-none focus:ring'
-                >
-                  <option value='VND'>VND</option>
-                  <option value='USD'>USD</option>
-                </select>
-              </div>
-              <div>
-                <div className='flex w-full flex-row  gap-3'>
-                  <input
-                    type='number'
-                    placeholder='From'
-                    pattern='[0-9]*'
-                    value={fromValue}
-                    onChange={handleFromChange}
-                    className='focus:border-silver-grey focus:ring-light-red active:bg-silver-grey border-silver-grey inline-block  w-1/2 rounded px-4 py-3 text-[18px] focus:outline-none focus:ring'
-                  />
-                  <input
-                    type='number'
-                    placeholder='To'
-                    pattern='[0-9]*'
-                    value={toValue}
-                    onChange={handleToChange}
-                    className='focus:border-silver-grey focus:ring-light-red active:bg-silver-grey border-silver-grey  inline-block w-1/2 rounded px-4 py-3 text-[18px] focus:outline-none focus:ring'
-                  />
-                </div>
-                {error && <p className='text-red mt-1 text-[13px]'>{error}</p>}
+                ))}
               </div>
             </div>
           </div>
@@ -214,8 +141,20 @@ export default function JobTypes() {
               <p className='text-[20px] font-[600]'>{t('Working Type')}</p>
               <p className='text-[16px] '>{t('Allow multiple choices')}</p>
             </div>
-            <div className='col-span-2 flex flex-wrap gap-3'>
-              <CheckButton types={workingTypes} />
+            <div className='col-span-2 flex flex-wrap gap-x-6 gap-y-3'>
+              {['At office', 'Remote', 'Hybrid'].map((level) => (
+                <div className='space-x-2' key={level}>
+                  <input
+                    type='checkbox'
+                    name='workingTypes'
+                    className='text-dark-grey focus:ring-silver-grey active:bg-silver-grey h-5 w-5 rounded focus:outline-none focus:ring'
+                    value={level}
+                    checked={jobType.workingTypes?.includes(level)}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor={level}>{level}</label>
+                </div>
+              ))}
             </div>
           </div>
           {/* Company Type */}
@@ -224,8 +163,26 @@ export default function JobTypes() {
               <p className='text-[20px] font-[600]'>{t('Company Type')}</p>
               <p className='text-[16px] '>{t('Allow multiple choices')}</p>
             </div>
-            <div className='col-span-2 flex flex-wrap gap-3'>
-              <CheckButton types={companyTypes} />
+            <div className='col-span-2 flex flex-wrap gap-x-6 gap-y-3'>
+              {[
+                'IT Outsourcing',
+                'IT Product',
+                'Headhunt',
+                'IT Service and IT Consulting',
+                'Non-IT',
+              ].map((level) => (
+                <div className='space-x-2' key={level}>
+                  <input
+                    type='checkbox'
+                    name='companyTypes'
+                    className='text-dark-grey focus:ring-silver-grey active:bg-silver-grey h-5 w-5 rounded focus:outline-none focus:ring'
+                    value={level}
+                    checked={jobType.companyTypes?.includes(level)}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor={level}>{level}</label>
+                </div>
+              ))}
             </div>
           </div>
           {/* Company Size */}
@@ -234,17 +191,38 @@ export default function JobTypes() {
               <p className='text-[20px] font-[600]'>{t('Company Size')}</p>
               <p className='text-[16px] '>{t('Allow multiple choices')}</p>
             </div>
-            <div className='col-span-2 flex flex-wrap gap-3'>
-              <CheckButton types={companySizes} />
+            <div className='col-span-2 flex flex-wrap gap-x-6 gap-y-3'>
+              {[
+                '1-50',
+                '51-150',
+                '151-300',
+                '301-500',
+                '501-1000',
+                '1000+',
+              ].map((level) => (
+                <div className='space-x-2' key={level}>
+                  <input
+                    type='checkbox'
+                    name='companySizes'
+                    className='text-dark-grey focus:ring-silver-grey active:bg-silver-grey h-5 w-5 rounded focus:outline-none focus:ring'
+                    value={level}
+                    checked={jobType.companySizes?.includes(level)}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor={level}>{level}</label>
+                </div>
+              ))}
             </div>
           </div>
-          {/* Current Salary per month */}
+          {/* Location */}
           <div className='mt-7 grid grid-cols-1 items-start gap-4 md:grid-cols-3'>
             <p className=' text-[20px] font-[600]'>{t('Location')}</p>
             <div className='col-span-2 flex flex-row items-center gap-5'>
               <select
-                name='currency'
-                id='currency'
+                name='location'
+                id='location'
+                value={jobType.location}
+                onChange={handleLocationChange}
                 className='focus:border-silver-grey focus:ring-light-red active:bg-silver-grey border-silver-grey border-1 w-full rounded py-3 pr-20 text-[18px] focus:outline-none focus:ring'
               >
                 <option value='None'>None</option>
@@ -255,11 +233,13 @@ export default function JobTypes() {
               </select>
             </div>
           </div>
+
           {/* Button Save */}
           <div className='mt-7 text-center sm:text-end'>
             <Button
               intent='primary'
               size='large'
+              onClick={handleSave}
               className='h-[46px] w-40 text-[16px] font-[600] hover:bg-red-700'
             >
               {t('Save')}
@@ -267,27 +247,28 @@ export default function JobTypes() {
           </div>
         </div>
       </div>
+      {showNotification && (
+        <Notification onClose={() => setShowNotification(false)} />
+      )}
     </div>
   );
 }
 
-const workingTypes = [
-  { id: 1, text: 'At office' },
-  { id: 2, text: 'Remote' },
-  { id: 3, text: 'Hybrid' },
-];
-const companyTypes = [
-  { id: 1, text: 'IT Outsourcing' },
-  { id: 2, text: 'IT Product' },
-  { id: 3, text: 'Headhunt' },
-  { id: 4, text: 'IT Service and IT Consulting' },
-  { id: 5, text: 'Non-IT' },
-];
-const companySizes = [
-  { id: 1, text: '1-50' },
-  { id: 2, text: '51-150' },
-  { id: 3, text: '151-300' },
-  { id: 4, text: '301-500' },
-  { id: 5, text: '501-1000' },
-  { id: 6, text: '1000+' },
-];
+const Notification: React.FC<NotificationProps> = ({ onClose }) => {
+  return (
+    <div className='fixed inset-0 z-50 flex items-center justify-center'>
+      <div className='absolute inset-0 bg-black opacity-50'></div>
+      <div className='z-10 mx-auto w-full max-w-sm rounded-md bg-white p-4'>
+        <p className='text-[20px] text-gray-800'>Lưu thành công!</p>
+        <div className='flex justify-end'>
+          <Button
+            className='mt-2 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none'
+            onClick={onClose}
+          >
+            Đóng
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};

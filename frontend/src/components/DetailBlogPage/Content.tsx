@@ -3,14 +3,20 @@ import React from 'react';
 type ContentProps = {
   title: string;
   content: string;
+  createTime: string;
 };
 
-export default function Content({ title, content }: ContentProps) {
+export default function Content({ title, content, createTime }: ContentProps) {
+  const createDate = new Date(createTime);
+  const day = createDate.getDate();
+  const month = createDate.getMonth() + 1;
+  const year = createDate.getFullYear();
+  const formattedDate = `${day}/${month}/${year}`;
+
   return (
     <div className='mb-12'>
       <div className=' font-medium italic text-gray-400 '>
-        <p>Ngày xuất bản: 01/02/2024</p>
-        <p>Ngày cập nhật: 01/02/2024</p>
+        <p>Ngày xuất bản: {formattedDate}</p>
       </div>
       <h2 className='text-red mb-8 mt-4 text-4xl font-bold'>{title}</h2>
       <h3 className='mb-10'>NỘI DUNG CHÍNH</h3>

@@ -7,7 +7,7 @@ interface SpringCardProps {
   description: string;
   tags: string[];
   url: string;
-  readTime: string;
+  // readTime: string;
 }
 
 const SpringCard: React.FC<SpringCardProps> = ({
@@ -16,8 +16,14 @@ const SpringCard: React.FC<SpringCardProps> = ({
   description,
   tags,
   url,
-  readTime,
+  // readTime,
 }) => {
+  // Tìm vị trí của thẻ mở và đóng của thẻ <p>
+  const startIndex = description.indexOf('<p>');
+  const endIndex = description.indexOf('</p>');
+
+  // Lấy ra nội dung của thẻ <p>
+  const trimmedContent = description.substring(startIndex + 3, endIndex);
   return (
     <div className='rounded-lg border border-gray-300 bg-white shadow-md hover:shadow-xl'>
       <img
@@ -29,9 +35,15 @@ const SpringCard: React.FC<SpringCardProps> = ({
         <p className='hover:text-red flex h-20 cursor-pointer items-center self-start text-xl font-medium'>
           <Link href={url}>{title}</Link>
         </p>
-        <p className='mt-6 h-32 self-start'>{description}</p>
+
+        <div className='mt-6 self-start'>
+          <p
+            className='line-clamp-5'
+            dangerouslySetInnerHTML={{ __html: trimmedContent }}
+          />
+        </div>
         <div className='mt-8 self-start py-4'>
-          {tags.map((tag, index) => (
+          {tags?.map((tag, index) => (
             <a
               key={index}
               href='#!'
@@ -43,7 +55,8 @@ const SpringCard: React.FC<SpringCardProps> = ({
         </div>
         <div className='mt-auto flex flex-row items-center gap-1 self-end justify-self-end text-sm font-medium text-blue-700'>
           <Link href={url} className='hyperlink'>
-            Bắt đầu đọc ({readTime})
+            Bắt đầu đọc
+            {/* ({readTime}) */}
           </Link>
           <svg
             width='16px'

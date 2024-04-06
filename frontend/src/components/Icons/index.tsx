@@ -57,4 +57,7 @@ export {
   Type as IconType,
   Underline as IconUnderline,
   Bold as IconBold,
+  Delete as IconDelete,
+  Trash2 as IconTrash2,
+  PenTool as IconPenTool,
 } from 'react-feather';

@@ -1,8 +1,20 @@
-'use client';
+import { GET_BLOGS } from '@/graphql/blog';
+import { getClient } from '@/lib/client';
+import { Blog } from '@/types/blog';
 
 import SpringCard from './SpringCard';
 
-export default function ListLatest() {
+export default async function ListLatest() {
+  const {
+    data: { blogs },
+  } = await getClient().query({
+    query: GET_BLOGS,
+    variables: {
+      skip: 0,
+      take: 3,
+    },
+  });
+
   return (
     <div className='container-xxl  px-4 py-8 sm:px-6 lg:px-8'>
       <div className='flex flex-row items-start justify-between'>
@@ -16,7 +28,25 @@ export default function ListLatest() {
       </div>
 
       <div className='mt-4 grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-        <SpringCard
+        {blogs.lenth === 0 ? (
+          <p className='text-gray-500'>Không có blog nào.</p>
+        ) : (
+          <>
+            {blogs.map((blog: Blog) => (
+              <SpringCard
+                key={blog.id}
+                imageUrl='https://itviec.com/blog/wp-content/uploads/2024/02/spring-framework-blog-thumbnail-vippro-700x368.jpg'
+                title={blog.title}
+                description={blog.content}
+                tags={['Chuyên môn IT', 'Tài liệu JS']}
+                url={`/blog/${blog.slug}`}
+                // readTime={blog.readTime}
+              />
+            ))}
+          </>
+        )}
+
+        {/* <SpringCard
           imageUrl='https://itviec.com/blog/wp-content/uploads/2024/02/spring-framework-blog-thumbnail-vippro-700x368.jpg'
           title='Spring là gì? Spring Framework là gì?'
           description='Spring Framework giúp lập trình viên dễ dàng tạo các ứng dụng Java Enterprise (Java EE) và cung cấp mọi thứ bạn cần để sử dụng ngôn ngữ Java. Là mã nguồn mở, Spring có cộng đồng rộng lớn và…'
@@ -39,7 +69,7 @@ export default function ListLatest() {
           tags={['Chuyên môn IT', 'Tài liệu JS']}
           url='/blog/the-evolution-of-programming-paradigms'
           readTime='10 phút'
-        />
+        /> */}
       </div>
     </div>
   );
