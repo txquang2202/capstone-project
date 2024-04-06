@@ -8,9 +8,20 @@ export const GET_BLOGS = gql`
       title
       id
       content
+      slug
     }
   }
 `;
+
+export const GET_TITLE_BLOGS = gql`
+  query GetBlogs($skip: Int, $take: Int) {
+    blogs(skip: $skip, take: $take) {
+      title
+      slug
+    }
+  }
+`;
+
 export type GetBlogResponse = DataResponse<'blog', Blog>;
 export type GetBlogVariable = { blogId: string };
 export const GET_BLOG = gql`
@@ -19,6 +30,8 @@ export const GET_BLOG = gql`
       title
       id
       content
+      slug
+      created_at
     }
   }
 `;

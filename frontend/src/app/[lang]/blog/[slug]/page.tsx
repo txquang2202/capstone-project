@@ -54,7 +54,11 @@ export default async function DetailPage({
           <div className='col-span-2 rounded-md  border border-gray-200 bg-white'>
             <div className='container-xxl px-12 py-8'>
               {/* content */}
-              <Content title={blog.title} content={blog.content} />
+              <Content
+                title={blog.title}
+                content={blog.content}
+                createTime={blog.created_at}
+              />
               <hr className='mt-4 h-[1px] w-full border-none bg-gray-200' />
               {/* share */}
               <div className='flex flex-col items-center justify-center py-8'>
@@ -146,7 +150,7 @@ export default async function DetailPage({
                   </div>
                 </div>
                 <div className='mt-4 flex flex-row items-stretch justify-between gap-x-2 rounded  bg-gray-200 px-4 py-3 text-lg'>
-                  <CopyButton />
+                  <CopyButton url={blog.slug} />
                 </div>
               </div>
               {/* tags */}

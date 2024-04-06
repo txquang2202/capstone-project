@@ -104,3 +104,12 @@ export const DELETE_COMPANY = gql`
     }
   }
 `;
+
+export const GET_NAME_COMPANIES = gql`
+  query Companies {
+    companies {
+      company_name
+      id
+    }
+  }
+`;

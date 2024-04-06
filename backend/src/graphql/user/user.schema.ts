@@ -10,6 +10,25 @@ const UserSchema = gql`
     location: [String]
     phone: [String]
     sex: [String]
+    aboutMe: [String]
+    school: [String]
+    major: [String]
+    fromMonth: [String]
+    fromYear: [String]
+    toMonth: [String]
+    toYear: [String]
+    details: [String]
+    awardName: [String]
+    awardOrg: [String]
+    awardMonth: [String]
+    awardYear: [String]
+    awardDesc: [String]
+    coverLetter: [String]
+    jobLevel: [String]
+    workingType: [String]
+    companyType: [String]
+    companySize: [String]
+    jobLocation: [String]
   }
 
   type User {
@@ -29,7 +48,6 @@ const UserSchema = gql`
   type UserID {
     id: ID!
   }
-
 
   # ---------------------------------------------------------
   # Queries
@@ -54,14 +72,32 @@ const UserSchema = gql`
     companyId: [String]
     avatarUrl: [String]
     dob: Date
-    location: String @constraint(minLength: 3)
-    phone: String @constraint(minLength: 10)
-    sex: String @constraint(minLength: 3)
-
+    location: String
+    phone: String
+    sex: String
+    aboutMe: String
+    school: String
+    major: String
+    fromMonth: String
+    fromYear: String
+    toMonth: String
+    toYear: String
+    details: String
+    awardName: String
+    awardOrg: String
+    awardMonth: String
+    awardYear: String
+    awardDesc: String
+    coverLetter: String
+    jobLevel: [String]
+    workingType: [String]
+    companyType: [String]
+    companySize: [String]
+    jobLocation: String
   }
   input UpdateUserInput {
-    lastName: String @constraint(minLength: 3)
-    firstName: String @constraint(minLength: 3)
+    lastName: String
+    firstName: String
     email: String @constraint(minLength: 6, format: "email")
     attributes: UpdateUserAttributes
   }
