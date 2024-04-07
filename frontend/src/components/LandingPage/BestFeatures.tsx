@@ -31,7 +31,12 @@ const BestFeatures = () => {
               Kiến tạo hồ sơ ITviec với cấu trúc chuẩn mực cùng các gợi ý chi
               tiết
             </p>
-            <Button intent='secondary' size='medium' className='mt-[24px]'>
+            <Button
+              href='/profile-cv'
+              intent='secondary'
+              size='medium'
+              className='mt-[24px]'
+            >
               Cập nhật hồ sơ
             </Button>
           </div>
@@ -60,7 +65,12 @@ const BestFeatures = () => {
               Mẫu CV MỚI Nâng cấp CV với các mẫu CV IT chuyên nghiệp - được nhà
               tuyển dụng đề xuất
             </p>
-            <Button intent='primary' size='medium' className='mt-[24px]'>
+            <Button
+              href='/profile-cv/manage-cv'
+              intent='primary'
+              size='medium'
+              className='mt-[24px]'
+            >
               Xem mẫu CV
             </Button>
             <div className='radial-gradient-box radial-gradient-box-left mx-auto'></div>
@@ -79,7 +89,12 @@ const BestFeatures = () => {
             <p className='line-height-[1.8] mt-[8px]'>
               Cập nhật thông tin lương thưởng, nghề nghiệp và kiến thức ngành IT
             </p>
-            <Button intent='secondary' size='medium' className='mt-[24px]'>
+            <Button
+              href='/blog'
+              intent='secondary'
+              size='medium'
+              className='mt-[24px]'
+            >
               Khám phá blog
             </Button>
           </div>
