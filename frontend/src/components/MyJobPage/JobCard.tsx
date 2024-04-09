@@ -21,8 +21,9 @@ type Props = {
   //   description: string[];
   tags: string[];
   expires: number;
-  isLiked: boolean;
+  isLiked?: boolean;
   isApplied?: boolean;
+  workingType?: string;
 };
 
 const JobCard = ({
@@ -37,6 +38,7 @@ const JobCard = ({
   expires,
   isLiked,
   isApplied = false,
+  workingType,
 }: Props) => {
   const [liked, setLiked] = useState(isLiked);
   const { t } = useLocale();
@@ -73,7 +75,7 @@ const JobCard = ({
         <div className='space-y-1'>
           <div className='flex flex-row items-center gap-2 text-sm'>
             <IconRemote size={16} viewBox='0 0 24 25' />
-            <span>Remote</span>
+            <span>{workingType}</span>
           </div>
           <div className='flex flex-row items-center gap-2 text-sm'>
             <IconMapPin size={16} />
@@ -105,13 +107,15 @@ const JobCard = ({
           >
             {isApplied ? 'Applied' : t('Apply now')}
           </Button>
-          <button onClick={handleLike}>
-            <IconHeart
-              color='var(--primary)'
-              fill={liked ? 'var(--primary)' : 'none'}
-              size={32}
-            />
-          </button>
+          {liked && (
+            <button onClick={handleLike}>
+              <IconHeart
+                color='var(--primary)'
+                fill='var(--primary)'
+                size={32}
+              />
+            </button>
+          )}
         </div>
       </div>
     </div>

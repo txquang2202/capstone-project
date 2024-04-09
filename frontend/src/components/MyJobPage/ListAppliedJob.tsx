@@ -1,5 +1,6 @@
 'use client';
 
+import { differenceInDays, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 
 import EmptyField from '@/components/MyJobPage/EmptyField';
@@ -45,7 +46,10 @@ export default function ListAppliedJob({ jobs }: Props) {
             {sortedJobs.map((job, index) => (
               <JobCard
                 key={index}
-                postedAgo={5}
+                postedAgo={differenceInDays(
+                  new Date(),
+                  parseISO(job.date_posted.toString())
+                )}
                 title={job.name}
                 companyName={job.company.company_name}
                 urlJob='/it-jobs/all'
@@ -55,6 +59,7 @@ export default function ListAppliedJob({ jobs }: Props) {
                 expires={10}
                 isLiked={false}
                 isApplied={true}
+                workingType={job.working_type}
               />
             ))}
           </div>
