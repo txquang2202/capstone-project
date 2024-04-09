@@ -1,5 +1,5 @@
+import { useMutation } from '@apollo/client';
 import Link from 'next/link';
-import { useState } from 'react';
 
 import { Button } from '@/components/Button';
 import {
@@ -8,6 +8,7 @@ import {
   IconRemote,
   IconSalary,
 } from '@/components/Icons';
+import { GET_SAVED_JOBS, UNSAVE_JOB } from '@/graphql/job-save';
 import { useLocale } from '@/locale';
 
 type Props = {
@@ -24,6 +25,7 @@ type Props = {
   isLiked?: boolean;
   isApplied?: boolean;
   workingType?: string;
+  idJob: string;
 };
 
 const JobCard = ({
@@ -39,13 +41,20 @@ const JobCard = ({
   isLiked,
   isApplied = false,
   workingType,
+  idJob,
 }: Props) => {
-  const [liked, setLiked] = useState(isLiked);
   const { t } = useLocale();
 
-  const handleLike = () => {
-    setLiked(!liked); // Chuyển đổi trạng thái liked khi nút được nhấp
+  const [unsave] = useMutation(UNSAVE_JOB, {
+    variables: {
+      id: idJob,
+    },
+    refetchQueries: [GET_SAVED_JOBS],
+  });
+  const handleSave = () => {
+    unsave();
   };
+
   return (
     <div className='duration-30 rounded bg-white p-4 shadow-sm transition hover:shadow-xl'>
       <p className='text-medium font-semibold text-gray-400'>
@@ -107,8 +116,8 @@ const JobCard = ({
           >
             {isApplied ? 'Applied' : t('Apply now')}
           </Button>
-          {liked && (
-            <button onClick={handleLike}>
+          {isLiked && (
+            <button onClick={handleSave}>
               <IconHeart
                 color='var(--primary)'
                 fill='var(--primary)'

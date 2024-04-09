@@ -61,6 +61,7 @@ export default function ListSavedJob({ jobs }: Props) {
                 isLiked={true}
                 isApplied={job.was_applied}
                 workingType={job.working_type}
+                idJob={job.id}
               />
             ))}
           </div>

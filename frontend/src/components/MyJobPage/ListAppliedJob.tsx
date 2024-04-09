@@ -60,6 +60,7 @@ export default function ListAppliedJob({ jobs }: Props) {
                 isLiked={false}
                 isApplied={true}
                 workingType={job.working_type}
+                idJob={job.id}
               />
             ))}
           </div>
