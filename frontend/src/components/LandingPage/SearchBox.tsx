@@ -21,6 +21,12 @@ const SearchBox = () => {
     );
   };
 
+  const handleTagClick = (skill: string) => {
+    router.push(
+      routes.search.pathParams({ keyword: selected }) + `?search=${skill}`
+    );
+  };
+
   return (
     <div className='search-box bg-header-gradient px-40 py-[64px]'>
       <h1 className='pb-[32px] font-bold text-white'>
@@ -81,9 +87,13 @@ const SearchBox = () => {
         </span>
         <div className='flex flex-1'>
           {['Java', 'Python', 'React', 'NodeJS', 'VueJS'].map((item, index) => (
-            <a key={index} className='itag itag-lg itag-dark ml-2 px-4 py-2'>
+            <div
+              key={index}
+              onClick={() => handleTagClick(item)}
+              className='itag itag-lg itag-dark ml-2 cursor-pointer px-4 py-2'
+            >
               {item}
-            </a>
+            </div>
           ))}
         </div>
       </div>

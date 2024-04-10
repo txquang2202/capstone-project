@@ -23,32 +23,14 @@ import {
 } from '@/components/Search';
 import { Filter } from '@/components/Search/FilterModal';
 import { routes } from '@/configs/router';
-import { COMPANY_TYPES, LEVELS, WORKING_TYPES } from '@/constant/global';
+import {
+  COMPANY_TYPES,
+  LEVELS,
+  SEARCH_OPTIONS,
+  WORKING_TYPES,
+} from '@/constant/global';
 import { SEARCH_JOBS } from '@/graphql/job';
 import { cn } from '@/lib/classNames';
-
-const OPTIONS = [
-  {
-    value: 'all',
-    label: 'Tất cả thành phố',
-  },
-  {
-    value: 'hcm',
-    label: 'Ho Chi Minh',
-  },
-  {
-    value: 'hanoi',
-    label: 'Ha Noi',
-  },
-  {
-    value: 'danang',
-    label: 'Da Nang',
-  },
-  {
-    value: 'other',
-    label: 'Other',
-  },
-];
 
 const PAGE_ITEM = 20;
 
@@ -59,8 +41,10 @@ export default function Page() {
   const [opened, { open, close }] = useDisclosure();
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState(0);
-  const [location, setLocation] = useState(params.keyword as string);
-  const [search, setSearch] = useState(queries.get('search') || '');
+  const [location, setLocation] = useState(
+    (params?.keyword as string)?.replaceAll('%20', ' ')
+  );
+  const [search, setSearch] = useState(queries?.get('search') || '');
   const [filter, setFilter] = useState<Filter>({});
 
   const calcQuery = useCallback(
@@ -72,7 +56,7 @@ export default function Page() {
 
       return {
         query: [search, ...levels].join(', '),
-        address: params.keyword as string,
+        address: params?.keyword as string,
         unit: filter.unit,
         salaryTo: filter.salaryTo,
         salaryFrom: filter.salaryFrom,
@@ -92,9 +76,10 @@ export default function Page() {
   const [variables, setVariables] = useState(calcQuery(filter));
   useEffect(() => {
     setSelected(0);
-    setSearch(queries.get('search') || '');
+    setSearch(queries?.get('search') || '');
     setVariables(calcQuery(filter));
-  }, [calcQuery, filter, queries]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter, queries]);
 
   const { data } = useSuspenseQuery(SEARCH_JOBS, {
     variables: {
@@ -128,7 +113,7 @@ export default function Page() {
       <div className='bg-header-gradient px-[160px]'>
         <div className='mx-auto flex max-w-[1220px] justify-center gap-3 pb-[124px] pt-6'>
           <Select
-            data={OPTIONS}
+            data={SEARCH_OPTIONS}
             size='lg'
             value={location}
             onChange={(value) => setLocation(value as string)}
@@ -168,7 +153,10 @@ export default function Page() {
           <div className='flex items-center justify-between pt-6'>
             <div className='text-[28px] font-bold leading-10'>
               {total} IT jobs in{' '}
-              {OPTIONS.find((opt) => opt.value === params.keyword)?.label}
+              {
+                SEARCH_OPTIONS.find((opt) => opt.value === params?.keyword)
+                  ?.label
+              }
             </div>
             <Button
               onClick={open}

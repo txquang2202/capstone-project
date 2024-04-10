@@ -10,6 +10,11 @@ type Post = {
 };
 
 const PostFrame = (post: Post) => {
+  const startIndex = post.content.indexOf('<p>');
+  const endIndex = post.content.indexOf('</p>');
+
+  const description = post.content.substring(startIndex + 3, endIndex);
+
   return (
     <div className='card blog-card'>
       <a
@@ -33,7 +38,7 @@ const PostFrame = (post: Post) => {
             !post.featured && 'text-clamp-2'
           )}
         >
-          {post.content}
+          {description}
         </p>
       </div>
       <div className='card-body blog-card-link mb-[8px] flex items-end'>
