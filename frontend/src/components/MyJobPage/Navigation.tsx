@@ -25,21 +25,21 @@ const Navigation = ({ selected }: Props) => {
             {t('Saved Jobs')}
           </Link>
         </div>
-        <div
+        {/* <div
           className={`mt-2  cursor-pointer py-3 text-center ${
             selected === 'recent-viewed'
               ? 'border-red text-red border-b-[3px]'
               : 'hover:border-gray-250 hover:border-b-[3px]'
           }`}
-        >
-          {/* Sử dụng params?.lang trong href */}
-          <Link
+        >*/}
+        {/* Sử dụng params?.lang trong href */}
+        {/* <Link
             href={`/${params?.lang}/my-jobs/recent-viewed`}
             className='px-5 py-3'
           >
             {t('Recent Viewed Jobs')}
           </Link>
-        </div>
+        </div>  */}
 
         <div
           className={`mt-2  cursor-pointer py-3 text-center ${
