@@ -30,15 +30,12 @@
   "Cancel": "Hủy",
   "Edit": "Sửa",
   "Delete": "Xóa",
-
   "Male": "Nam",
   "Female": "Nữ",
   "Others": "Khác",
   "Address (Street, district,...)": "Địa chỉ (Tên đường, quận/huyện,...)",
   "Personal link (Linkedin, porfolio,...)": "Link cá nhân (Linkedin, porfolio,...)",
-
   "Additional": "Thông tin khác",
-
   "Notifications": "Thông báo",
   "Don't receive invitations from": "Không nhận lời mời nộp đơn từ",
   "Maximum 5 employers": "Tối đa 5 nhà tuyển dụng",
@@ -46,7 +43,6 @@
   "Account deletion is a permanent action and cannot be undone. If you are deleting your account due to an excessive email notifications, you can unsubscribe from emails": "Thao tác xóa tài khoản là vĩnh viễn và không thể hoàn tác. Nếu bạn xóa tài khoản vì nhận quá nhiều email từ ITviec, bạn có thể hủy đăng ký email",
   "here": "tại đây",
   "Delete your account": "Xoá tài khoản",
-
   "Saved Jobs": "Đã lưu",
   "Recent Viewed Jobs": "Đã xem gần đây",
   "Applied Jobs": "Đã ứng tuyển",
@@ -59,7 +55,6 @@
   "Expires in": "Hết hạn trong",
   "days": "ngày",
   "Apply now": "Ứng tuyển",
-
   "Manage CVs": "Quản lý CV",
   "Upload your CV below to use it throughout your application process": "Tải CV của bạn bên dưới để có thể sử dụng xuyên suốt quá trình tìm việc",
   "Your own CV": "CV của bạn",
@@ -71,10 +66,8 @@
   "Tips: Start by describing what you bring to the table and why this job excites you": "Gợi ý: Bắt đầu bằng việc mô tả những gì bạn có thể mang đến cho công việc và tại sao công việc này lại khiến bạn hứng thú",
   "characters": "ký tự",
   "Introduce yourself and why you'd make a great hire": "Giới thiệu bản thân và lý do vì sao bạn sẽ là lựa chọn tuyển dụng tuyệt vời",
-
   "Profile": "Hồ sơ",
   "Job Preferences": "Tiêu chí tìm việc",
-
   "My interested job type": "Công việc yêu thích",
   "Let us know the type of job you prefer so we can recommend more suitable opportunities on our site. No emails sent": "Chia sẻ loại công việc bạn mong muốn để được giới thiệu cơ hội việc làm phù hợp hơn trên trang của chúng tôi (không qua email)",
   "Skills": "Kỹ năng",
@@ -86,7 +79,6 @@
   "Company Type": "Loại công ty",
   "Company Size": "Quy mô công ty",
   "Location": "Địa điểm",
-
   "Profile Strength": "Hoàn thiện hồ sơ",
   "completed": "hoàn thành",
   "Upgrade profile to \"Excellent\" to unlock Download CV": "Nâng cấp hồ sơ lên mức \"Rất tốt\" để tải CV",
@@ -161,7 +153,6 @@
   "Current province/city": "Tỉnh thành phố hiện tại",
   "Address": "Địa chỉ",
   "Personal link": "Link cá nhân",
-
   "You have": "Bạn có",
   "application forms": "đơn xin việc",
   "Cover letter": "Thư xin việc",
@@ -172,8 +163,11 @@
   "Submitting": "Đang nộp hồ sơ",
   "Interviewing": "Đang phỏng vấn",
   "Resume": "Hồ sơ cá nhân",
-
   "onsiteText": "On-site",
   "hybridText": "Hybrid",
-  "remoteText": "Remote"
+  "remoteText": "Remote",
+  "Thank you for contacting us!": "Cảm ơn bạn đã liên hệ!",
+  "Our Customer Love Team will get in touch with you soon. In the meantime, feel free to explore our Blog for valuable insights.": "Đội ngũ Customer Love Team sẽ liên hệ đến bạn trong thời gian sớm nhất. Trong lúc chờ đợi, mời bạn khám phá trang Blog của chúng tôi để cập nhật thêm nhiều thông tin bổ ích.",
+  "Visit the blog": "Khám phá blog",
+  "Back to Homepage": "Về trang chủ"
 }

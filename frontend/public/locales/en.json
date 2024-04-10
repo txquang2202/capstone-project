@@ -3,7 +3,6 @@
   "signupText": "Sign up",
   "enText": "EN",
   "viText": "VI",
-
   "My Account": "My Account",
   "General Information": "General Information",
   "Email": "Email",
@@ -18,7 +17,6 @@
   "Account deletion is a permanent action and cannot be undone. If you are deleting your account due to an excessive email notifications, you can unsubscribe from emails": "Account deletion is a permanent action and cannot be undone. If you are deleting your account due to an excessive email notifications, you can unsubscribe from emails",
   "here": "here",
   "Delete your account": "Delete your account",
-
   "Saved Jobs": "Saved Jobs",
   "Recent Viewed Jobs": "Recent Viewed Jobs",
   "Applied Jobs": "Applied Jobs",
@@ -31,7 +29,6 @@
   "Expires in": "Expires in",
   "days": "days",
   "Apply now": "Apply now",
-
   "Manage CVs": "Manage CVs",
   "Upload your CV below to use it throughout your application process": "Upload your CV below to use it throughout your application process",
   "Your own CV": "Your own CV",
@@ -43,10 +40,8 @@
   "Tips: Start by describing what you bring to the table and why this job excites you": "Tips: Start by describing what you bring to the table and why this job excites you",
   "characters": "characters",
   "Introduce yourself and why you'd make a great hire": "Introduce yourself and why you'd make a great hire",
-
   "Profile": "Profile",
   "Job Preferences": "Job Preferences",
-
   "My interested job type": "My interested job type",
   "Let us know the type of job you prefer so we can recommend more suitable opportunities on our site. No emails sent": "Let us know the type of job you prefer so we can recommend more suitable opportunities on our site. No emails sent",
   "Skills": "Skills",
@@ -58,7 +53,6 @@
   "Company Type": "Company Type",
   "Company Size": "Company Size",
   "Location": "Location",
-
   "Profile Strength": "Profile Strength",
   "completed": "completed",
   "Upgrade profile to \"Excellent\" to unlock Download CV": "Upgrade profile to \"Excellent\" to unlock Download CV",
@@ -80,18 +74,14 @@
   "Personal Project": "Personal Project",
   "Edit": "Edit",
   "Delete": "Delete",
-
   "Male": "Male",
   "Female": "Female",
   "Others": "Others",
   "Address (Street, district,...)": "Address (Street, district,...)",
   "Personal link (Linkedin, porfolio,...)": "Personal link (Linkedin, porfolio,...)",
-
   "Certificates": "Certificates",
-
   "Additional": "Additional",
   "Additional details": "Additional details",
-
   "Awards": "Awards",
   "Explore CV templates and download your CV": "Explore CV templates and download your CV",
   "Preview & Download CV": "Preview & Download CV",
@@ -110,7 +100,6 @@
   "To": "To",
   "Month": "Month",
   "Year": "Year",
-
   "Job title": "Job title",
   "Company": "Company",
   "I am currently working here": "I am currently working here",
@@ -146,7 +135,6 @@
   "Current province/city": "Current province/city",
   "Address": "Address",
   "Personal link": "Personal link",
-
   "You have": "You have",
   "application forms": "application forms",
   "Cover letter": "Cover letter",
@@ -157,8 +145,11 @@
   "Submitting": "Submitting",
   "Interviewing": "Interviewing",
   "Resume": "Resume",
-
   "onsiteText": "On-site",
   "hybridText": "Hybrid",
-  "remoteText": "Remote"
+  "remoteText": "Remote",
+  "Thank you for contacting us!": "Thank you for contacting us!",
+  "Our Customer Love Team will get in touch with you soon. In the meantime, feel free to explore our Blog for valuable insights.": "Our Customer Love Team will get in touch with you soon. In the meantime, feel free to explore our Blog for valuable insights.",
+  "Visit the blog": "Visit the blog",
+  "Back to Homepage": "Back to Homepage"
 }
