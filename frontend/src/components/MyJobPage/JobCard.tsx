@@ -1,5 +1,5 @@
+import { useMutation } from '@apollo/client';
 import Link from 'next/link';
-import { useState } from 'react';
 
 import { Button } from '@/components/Button';
 import {
@@ -8,6 +8,7 @@ import {
   IconRemote,
   IconSalary,
 } from '@/components/Icons';
+import { GET_SAVED_JOBS, UNSAVE_JOB } from '@/graphql/job-save';
 import { useLocale } from '@/locale';
 
 type Props = {
@@ -21,8 +22,10 @@ type Props = {
   //   description: string[];
   tags: string[];
   expires: number;
-  isLiked: boolean;
+  isLiked?: boolean;
   isApplied?: boolean;
+  workingType?: string;
+  idJob: string;
 };
 
 const JobCard = ({
@@ -37,13 +40,21 @@ const JobCard = ({
   expires,
   isLiked,
   isApplied = false,
+  workingType,
+  idJob,
 }: Props) => {
-  const [liked, setLiked] = useState(isLiked);
   const { t } = useLocale();
 
-  const handleLike = () => {
-    setLiked(!liked); // Chuyển đổi trạng thái liked khi nút được nhấp
+  const [unsave] = useMutation(UNSAVE_JOB, {
+    variables: {
+      id: idJob,
+    },
+    refetchQueries: [GET_SAVED_JOBS],
+  });
+  const handleSave = () => {
+    unsave();
   };
+
   return (
     <div className='duration-30 rounded bg-white p-4 shadow-sm transition hover:shadow-xl'>
       <p className='text-medium font-semibold text-gray-400'>
@@ -73,7 +84,7 @@ const JobCard = ({
         <div className='space-y-1'>
           <div className='flex flex-row items-center gap-2 text-sm'>
             <IconRemote size={16} viewBox='0 0 24 25' />
-            <span>Remote</span>
+            <span>{workingType}</span>
           </div>
           <div className='flex flex-row items-center gap-2 text-sm'>
             <IconMapPin size={16} />
@@ -105,13 +116,15 @@ const JobCard = ({
           >
             {isApplied ? 'Applied' : t('Apply now')}
           </Button>
-          <button onClick={handleLike}>
-            <IconHeart
-              color='var(--primary)'
-              fill={liked ? 'var(--primary)' : 'none'}
-              size={32}
-            />
-          </button>
+          {isLiked && (
+            <button onClick={handleSave}>
+              <IconHeart
+                color='var(--primary)'
+                fill='var(--primary)'
+                size={32}
+              />
+            </button>
+          )}
         </div>
       </div>
     </div>

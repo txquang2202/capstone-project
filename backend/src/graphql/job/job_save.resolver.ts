@@ -11,10 +11,25 @@ const Query = {
     const jobs = await prisma.job_saved.findMany({
       where: { user_id: authUser.sub },
       include: {
-        job: true,
-      },
+        job: true
+      }
     });
-    return jobs.map((data) => data.job);
+
+    const jobsWithApplyStatus = await Promise.all(jobs.map(async (savedJob) => {
+      const appliedJob = await prisma.job_apply.findFirst({
+        where: {
+          user_id: authUser.sub,
+          job_id: savedJob.job.id
+        }
+      });
+
+      return {
+        ...savedJob.job,
+        was_applied: !!appliedJob
+      };
+    }));
+
+    return jobsWithApplyStatus;
   },
 };
 

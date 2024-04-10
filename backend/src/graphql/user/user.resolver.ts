@@ -65,7 +65,8 @@ const Mutation = {
     if (!existingUser) {
       throw new Error(`User with ID ${id} does not exist`);
     }
-    const newInput = Object.assign({}, existingUser, {
+    const newProfile = Object.assign({}, existingUser, input);
+    const newInput = Object.assign({}, newProfile, {
       attributes: Object.assign({}, existingUser.attributes, input.attributes),
     });
     await keycloak.editUser(id, newInput);
