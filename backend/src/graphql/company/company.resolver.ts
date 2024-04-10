@@ -30,6 +30,20 @@ const Query = {
     });
     return companies;
   },
+  companySpotlight: async (
+    _: any,
+    _args: any,
+    { prisma }: ContextInterface,
+  ): Promise<company> => {
+    const companies = await prisma.company.findMany({
+      include: {
+        company_location: true,
+        job: true,
+      },
+    });
+
+    return companies[0];
+  },
   jobCompany: async (
     _: any,
     { id }: { id: string },
