@@ -2,6 +2,15 @@ import { create } from 'domain';
 import { Blog } from '../models/Blog';
 import { BlogTag } from '../models/Blog_Tag';
 
+const { Sequelize } = require('sequelize');
+
+const { QueryTypes } = require('sequelize');
+const sequelize= new Sequelize(
+  'capstone','postgres','localdb',{
+    host: 'localhost',
+    dialect: 'postgres'
+  }
+)
 class BlogRepo {
   constructor() {}
 
@@ -78,5 +87,17 @@ class BlogRepo {
     });
     return deletedBlog;
   }
+  // list all blog by tagName
+  async getBlogByTagName(tagName: string) {
+    const res = await sequelize.query('SELECT b.created_at, b."content", b.time_read, b.title, b.slug, b.id, b.user_id,t.tag_name FROM public.blog b join public.blog_tag bt on b.id =bt.blog_id join public.tag t on t.id =bt.tag_id where t.tag_name = ?',
+    {
+      replacements: [tagName ],
+      type: QueryTypes.SELECT
+    });
+   
+    
+    return res;
+  }
+
 }
 export default new BlogRepo();

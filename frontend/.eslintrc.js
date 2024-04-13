@@ -13,6 +13,7 @@ module.exports = {
     'prettier',
     'plugin:storybook/recommended',
     'plugin:storybook/recommended',
+    'plugin:cypress/recommended',
   ],
   rules: {
     'no-unused-vars': 'off',

@@ -13,6 +13,7 @@ class BlogRoutes {
         this.router.route('/').post(this.blogCtrl.addBlog);
         this.router.route('/:id').put(this.blogCtrl.updateBlog);
         this.router.route('/:id').delete(this.blogCtrl.deleteBlog);
+        this.router.route('/tag/:tagName').get(this.blogCtrl.getBlogByTagName);
     }
 }
 export default new BlogRoutes().router;

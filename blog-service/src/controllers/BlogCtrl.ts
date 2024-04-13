@@ -74,4 +74,12 @@ export default class BlogCtrl {
             apiErrorHandler(error, req, res, `Delete Blog failed: ${(error as Error).message}`);
         }
     }
+    async getBlogByTagName(req: Request, res: Response, next: NextFunction) {
+        try {
+            const blogList = await BlogRepo.getBlogByTagName(req.params.tagName);
+            res.json(blogList);
+        } catch (error) {
+            apiErrorHandler(error, req, res, `Fetch Blog by Tag Name failed: ${(error as Error).message}`);
+        }
+    }
 }

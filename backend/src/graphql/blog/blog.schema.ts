@@ -10,6 +10,7 @@ const BlogSchema = gql`
     title: String!
     time_read: Int
     created_at: Date
+    slug: String!
     user: User
   }
 
@@ -27,6 +28,7 @@ const BlogSchema = gql`
     user_id: ID!
     content: String! @constraint(minLength: 1)
     title: String! @constraint(minLength: 5, maxLength: 255)
+    slug: String! @constraint(minLength: 5, maxLength: 255)
   }
 
   # ---------------------------------------------------------
