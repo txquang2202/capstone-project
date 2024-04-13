@@ -6,7 +6,7 @@ import { IconPenTool, IconX } from '@/components/Icons';
 import { cn } from '@/lib/classNames';
 import { useLocale } from '@/locale';
 
-import TextEditor from '../TextEditor';
+// import TextEditor from '../TextEditor';
 
 interface ModalProps {
   closeModal: () => void;
@@ -184,7 +184,7 @@ const ModalPerProject: React.FC<ModalProps> = ({ closeModal }) => {
                 <p className='text-[18px] font-[600]'>
                   {t('Short description')}
                 </p>
-                <TextEditor />
+                {/* <TextEditor /> */}
               </div>
 
               {/* Project URL*/}
