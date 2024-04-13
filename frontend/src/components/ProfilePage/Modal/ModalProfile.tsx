@@ -2,8 +2,13 @@ import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 
 import { Button } from '@/components/Button';
-import { IconCamera, IconTrash2, IconX } from '@/components/Icons';
+import { IconCamera, IconX } from '@/components/Icons';
 import { UPDATE_ATRIBUTES_USER } from '@/graphql/auth';
+import {
+  UPLOAD_FILE,
+  UploadFileResponse,
+  UploadFileVariable,
+} from '@/graphql/upload';
 import useAuthData from '@/hooks/useAuthData';
 import { useLocale } from '@/locale';
 
@@ -60,6 +65,9 @@ const Modal: React.FC<ModalProps> = ({ closeModal, userData, onSave }) => {
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const { authUser } = useAuthData();
+  const [uploadFile] = useMutation<UploadFileResponse, UploadFileVariable>(
+    UPLOAD_FILE
+  );
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -108,22 +116,33 @@ const Modal: React.FC<ModalProps> = ({ closeModal, userData, onSave }) => {
     setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setFormData((prev) => ({ ...prev, avatar: imageUrl }));
+      try {
+        const fileData = await uploadFile({
+          variables: { prefix: 'usr', file },
+        });
+        setFormData((prev) => ({
+          ...prev,
+          attributes: {
+            ...prev.attributes,
+            avatarUrl: fileData?.data?.singleUpload?.url || '',
+          },
+        }));
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
     }
   };
-
-  const deleteImage = () => {
-    setFormData((prev) => ({ ...prev, avatar: '' }));
-  };
+  console.log(formData);
 
   const { t } = useLocale();
 
   const [updateUserMutation] = useMutation(UPDATE_ATRIBUTES_USER);
-
+  const { refetch } = useAuthData();
   const handleSave = async () => {
     const requiredFields: Array<keyof FormData> = ['firstName', 'attributes'];
     const newErrors: Partial<FormData> = {};
@@ -159,7 +178,9 @@ const Modal: React.FC<ModalProps> = ({ closeModal, userData, onSave }) => {
           updateUserId: authUser?.id,
         },
       });
+      console.log(formData);
       onSave(formData);
+      refetch();
       closeModal();
     } catch (error) {
       console.error('Error updating user:', error);
@@ -202,15 +223,6 @@ const Modal: React.FC<ModalProps> = ({ closeModal, userData, onSave }) => {
                   <IconCamera className='h-4' />
                   {t('Edit')}
                 </label>
-                {formData.attributes.avatarUrl && (
-                  <label
-                    onClick={deleteImage}
-                    className='flex cursor-pointer items-center text-[16px]'
-                  >
-                    <IconTrash2 className='h-4' />
-                    {t('Delete')}
-                  </label>
-                )}
               </div>
             </div>
 
@@ -322,7 +334,7 @@ const Modal: React.FC<ModalProps> = ({ closeModal, userData, onSave }) => {
                   <select
                     name='province'
                     id='province'
-                    value={formData.attributes.location} // Lấy giá trị đầu tiên của mảng hoặc trả về chuỗi rỗng nếu mảng trống
+                    value={formData.attributes.location}
                     onChange={handleChange}
                     className='focus:border-light-red focus:ring-light-red block w-full rounded-lg border border-gray-300 p-3.5 text-sm text-gray-900'
                   >

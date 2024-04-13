@@ -5,6 +5,6 @@ import { useContext } from 'react';
 import { AuthContext } from '@/provider/AuthProvider';
 
 export default function useAuthData() {
-  const { authUser, loading } = useContext(AuthContext);
-  return { authUser, loading };
+  const { authUser, loading, refetch } = useContext(AuthContext);
+  return { authUser, loading, refetch };
 }

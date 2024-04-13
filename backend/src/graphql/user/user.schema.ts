@@ -23,6 +23,7 @@ const UserSchema = gql`
     awardMonth: [String]
     awardYear: [String]
     awardDesc: [String]
+    cv: [String]
     coverLetter: [String]
     jobLevel: [String]
     workingType: [String]
@@ -88,6 +89,7 @@ const UserSchema = gql`
     awardMonth: String
     awardYear: String
     awardDesc: String
+    cv: String
     coverLetter: String
     jobLevel: [String]
     workingType: [String]

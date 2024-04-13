@@ -190,3 +190,23 @@ export const UPDATE_JOBTYPES_USER = gql`
     }
   }
 `;
+
+export const GET_CV_USER = gql`
+  query User($userId: ID!) {
+    user(id: $userId) {
+      attributes {
+        cv
+      }
+    }
+  }
+`;
+
+export const UPDATE_CV_USER = gql`
+  mutation UpdateUser($updateUserId: ID!, $input: UpdateUserInput!) {
+    updateUser(id: $updateUserId, input: $input) {
+      attributes {
+        cv
+      }
+    }
+  }
+`;
