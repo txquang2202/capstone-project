@@ -12,14 +12,18 @@ const CompanyItem = ({
   company_type,
   company_website,
   country,
+  enable,
   onSelect,
 }: Props) => {
   return (
     <div
-      className='hover:bg-light-grey min-h-[100%] rounded-lg bg-white  p-4 sm:p-8'
+      className='hover:bg-light-grey min-h-[100%] rounded-lg bg-white p-4 sm:p-8'
       onClick={onSelect}
     >
-      <div className=' mb-6 flex items-center gap-2'>
+      {enable === false && (
+        <p className='disabled-text text-red-600'>Disabled</p>
+      )}
+      <div className='mb-6 flex items-center gap-2'>
         <img
           alt='company logo'
           src='https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMExhTkE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c3d6987816061008255fe4b4bf962937bdc379a4/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmxwYVdrPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--e064c7b4667a202bc74d582f9581c9a645d77ae5/LOGO%20ICHIBA.jpg'

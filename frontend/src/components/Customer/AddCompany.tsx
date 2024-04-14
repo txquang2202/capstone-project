@@ -87,7 +87,7 @@ const AddCompany = () => {
         variables: {
           input: {
             ...fields,
-            overview: textContent, // Use the extracted text content
+            overview: textContent,
           },
         },
       });
