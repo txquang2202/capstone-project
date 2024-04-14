@@ -107,10 +107,11 @@ const CompanySchema = gql`
     company_website: String
     company_facebook: String
     brief_overview: String @constraint(minLength: 1, maxLength: 80)
-    representative: String!
-    representative_position: String!
-    email: String! @constraint(format: "email")
-    phone: String!
+    representative: String
+    representative_position: String
+    email: String @constraint(format: "email")
+    phone: String
+    address: String
   }
   input UpdateCompanyInput {
     company_name: String

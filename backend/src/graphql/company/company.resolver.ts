@@ -1,5 +1,5 @@
 import { company, company_request } from "@prisma/client";
-
+import { CompanyInput } from "./company.types";
 import { ContextInterface } from "../context";
 import { EVENT } from "../../constants/elasticsearch";
 
@@ -71,17 +71,28 @@ const Mutation = {
   //Add a new company
   createCompany: async (
     _: any,
-    { input }: { input: company },
+    { input }: { input: CompanyInput },
     { prisma, kafkaProducer }: ContextInterface,
   ): Promise<company> => {
+    const { address, ...companyInput } = input;
+
     const newCompanyRequest = await prisma.company.create({
-      data: input,
+      data: companyInput,
     });
+
+    await prisma.company_location.create({
+      data: {
+        company_id: newCompanyRequest.id,
+        address: address,
+      },
+    });
+
     kafkaProducer.send(process.env.KAFKA_TOPIC_COMPANY || "", {
       index: process.env.ELASTIC_COMPANY_INDEX || "company",
       event: EVENT.CREATE,
       data: newCompanyRequest,
     });
+
     return newCompanyRequest;
   },
 

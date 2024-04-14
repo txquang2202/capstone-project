@@ -107,6 +107,14 @@ export const GET_COMPANY = gql`
     }
   }
 `;
+export const CREATE_COMPANY = gql`
+  mutation CreateCompany($input: CompanyInput!) {
+    createCompany(input: $input) {
+      id
+      company_name
+    }
+  }
+`;
 export const UPDATE_COMPANY = gql`
   mutation UpdateCompany($updateCompanyId: ID!, $input: UpdateCompanyInput!) {
     updateCompany(id: $updateCompanyId, input: $input) {

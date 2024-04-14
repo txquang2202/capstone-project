@@ -73,6 +73,13 @@ const Menu = () => {
         >
           Add Blog
         </Button>
+        <Button
+          href={routes.customerAddCompany.path}
+          icon={<IconPlusCircle size={24} />}
+          className='mx-4 mb-4'
+        >
+          Add Company
+        </Button>
         {links}
       </div>
     </nav>
