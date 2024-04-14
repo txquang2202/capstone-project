@@ -48,7 +48,6 @@ model company {
   follow            follow[]
   job               job[]
   review            review[]
-  slug              String?            @unique @db.VarChar
 }
 
 model company_benefit {

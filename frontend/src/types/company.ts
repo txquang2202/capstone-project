@@ -16,7 +16,6 @@ export type Company = {
   phone: string;
   company_location: CompanyLocate[];
   enable: boolean;
-  slug: string;
 };
 export type CompanyLocate = {
   id: string;

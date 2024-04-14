@@ -4,13 +4,8 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/Button';
 import { IconBriefcase, IconMapPin, IconStar } from '@/components/Icons';
-import { Company } from '@/types/company';
 
-type Props = {
-  company: Company;
-};
-
-const CompanyCard = ({ company }: Props) => {
+const CompanyCard = () => {
   const [rate] = useState(4.5);
   const [widthRate, setWidthRate] = useState(0);
 
@@ -39,7 +34,7 @@ const CompanyCard = ({ company }: Props) => {
               {/* Company's Info */}
               <div>
                 <h1 className='text-md-start ipt-4 ipb-2 ipt-md-0 text-center'>
-                  {company.company_name}
+                  NAB Innovation Centre Vietnam
                 </h1>
                 <div className='flex-column flex md:flex-row'>
                   <div className='flex justify-center gap-x-[8px] pb-[8px] md:pb-0 md:pr-[24px]'>

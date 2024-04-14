@@ -1,31 +1,13 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
 
 import { routes } from '@/configs/router';
-import { Company } from '@/types/company';
 
 import { AppLink } from '../AppLink';
 
-type Props = {
-  company: Company;
-};
-
-const CompanyNavbar = ({ company }: Props) => {
+const CompanyNavbar = () => {
   const currentPage = usePathname();
-  const isReviewPage =
-    currentPage?.startsWith('/companies/') && currentPage.endsWith('/review');
-
-  useEffect(() => {
-    console.log('currentPage', currentPage);
-    console.log('isCompanyPage', isReviewPage);
-    console.log('company', company);
-  }, [company, currentPage, isReviewPage]);
-
-  if (!company) {
-    return null; // or return some loading state
-  }
 
   return (
     <div
@@ -35,16 +17,26 @@ const CompanyNavbar = ({ company }: Props) => {
       <ul className='itabs m-0 flex max-w-[100%] list-none items-center gap-[48px] overflow-auto overflow-y-hidden whitespace-nowrap p-0 text-[16px] leading-normal md:pl-[24px]'>
         <li className='py-[24px]'>
           <AppLink
-            href={routes.company.pathParams({ slug: company.slug })}
-            className={`tab-link ${isReviewPage ? '' : 'active'}`}
+            href={routes.company.path}
+            className={`tab-link ${
+              currentPage === routes.company.path ||
+              currentPage === '/vi/companies'
+                ? 'active'
+                : ''
+            }`}
           >
             Overview
           </AppLink>
         </li>
         <li className='py-[24px]'>
           <AppLink
-            href={routes.companyReview.pathParams({ slug: company.slug })}
-            className={`tab-link ${isReviewPage ? 'active' : ''}`}
+            href={routes.companyReview.path}
+            className={`tab-link ${
+              currentPage === routes.companyReview.path ||
+              currentPage === '/vi/companies/review'
+                ? 'active'
+                : ''
+            }`}
           >
             Reviews
             <div className='badge-counter ml-[8px]'>44</div>
