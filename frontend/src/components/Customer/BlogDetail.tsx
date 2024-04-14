@@ -101,7 +101,7 @@ const BlogDetail = ({ blog, blogTag, tags }: Props) => {
             title: blogData.title,
             time_read: blogData.time_read as number,
             content: blogData.content,
-            created_at: blogData.created_at || new Date(),
+            created_at: blogData.created_at || new Date().toString(),
             tags:
               blogTagData.map((item) => ({
                 id: item.tag_id || '',
