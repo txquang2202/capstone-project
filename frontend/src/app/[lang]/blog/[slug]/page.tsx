@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import Author from '@/components/DetailBlogPage/Author';
 import Content from '@/components/DetailBlogPage/Content';
-import CopyButton from '@/components/DetailBlogPage/CopyButton';
+// import CopyButton from '@/components/DetailBlogPage/CopyButton';
 import EmailSection from '@/components/DetailBlogPage/EmailSection';
 import RelatedArticles from '@/components/DetailBlogPage/RelatedArticles';
 import { GET_BLOG } from '@/graphql/blog';
@@ -144,9 +144,9 @@ export default function DetailPage({ params }: { params: { slug: string } }) {
                     </Link>
                   </div>
                 </div>
-                <div className='mt-4 flex flex-row items-stretch justify-between gap-x-2 rounded  bg-gray-200 px-4 py-3 text-lg'>
+                {/* <div className='mt-4 flex flex-row items-stretch justify-between gap-x-2 rounded  bg-gray-200 px-4 py-3 text-lg'>
                   <CopyButton url={blog.slug} />
-                </div>
+                </div> */}
               </div>
               {/* tags */}
               <div className='mt-6 flex flex-row items-center gap-3'>
