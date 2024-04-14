@@ -118,13 +118,13 @@ export const routes = {
     defaultLocale: DEFAULT_LOCALE,
   }),
   company: route({
-    path: '/companies',
+    path: '/companies/[slug]',
     requiredAuth: false,
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,
   }),
   companyReview: route({
-    path: '/companies/review',
+    path: '/companies/[slug]/review',
     requiredAuth: false,
     locales: ['vi', 'en'],
     defaultLocale: DEFAULT_LOCALE,

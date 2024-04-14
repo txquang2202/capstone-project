@@ -66,6 +66,19 @@ const Query = {
     const companyRequests = await prisma.company_request.findMany();
     return companyRequests;
   },
+  companyBySlug: async (
+    _: any,
+    { slug }: { slug: string },
+    { prisma }: ContextInterface,
+): Promise<company | null> => {
+    const companyBySlug = await prisma.company.findUnique({
+      where: { slug },
+      include: {
+        company_location: true,
+      },
+    });
+    return companyBySlug;
+},
 };
 const Mutation = {
   //Add a new company
