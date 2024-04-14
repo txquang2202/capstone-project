@@ -5,7 +5,7 @@ export type Blog = {
   title: string;
   content: string;
   time_read?: number | null;
-  created_at?: Date;
+  created_at?: string | Date;
   tags?: Tag[];
 };
 

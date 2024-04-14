@@ -52,7 +52,7 @@ export default function DetailPage({ params }: { params: { slug: string } }) {
               <Content
                 title={blog.title}
                 content={blog.content}
-                createTime={(blog?.created_at || new Date()).toISOString()}
+                createTime={blog?.created_at as string}
               />
               <hr className='mt-4 h-[1px] w-full border-none bg-gray-200' />
               {/* share */}
