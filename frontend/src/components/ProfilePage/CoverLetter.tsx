@@ -24,7 +24,6 @@ export default function CoverLetter() {
       }
     }
   }, [loading, error, data]);
-  console.log(edited);
 
   const handleOpen = () => {
     setIsOpening(true);

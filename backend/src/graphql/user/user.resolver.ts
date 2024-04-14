@@ -69,6 +69,7 @@ const Mutation = {
     const newInput = Object.assign({}, newProfile, {
       attributes: Object.assign({}, existingUser.attributes, input.attributes),
     });
+
     await keycloak.editUser(id, newInput);
     return await keycloak.getUserData(id);
   },

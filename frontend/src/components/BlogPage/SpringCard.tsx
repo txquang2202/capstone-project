@@ -5,7 +5,7 @@ interface SpringCardProps {
   imageUrl: string;
   title: string;
   description: string;
-  tags: string[];
+  tags?: string[];
   url: string;
   // readTime: string;
 }

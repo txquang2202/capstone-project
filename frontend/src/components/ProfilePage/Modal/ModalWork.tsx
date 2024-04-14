@@ -6,7 +6,7 @@ import { IconPenTool, IconX } from '@/components/Icons';
 import { cn } from '@/lib/classNames';
 import { useLocale } from '@/locale';
 
-import TextEditor from '../TextEditor';
+// import TextEditor from '../TextEditor';
 
 interface ModalProps {
   closeModal: () => void;
@@ -192,7 +192,7 @@ const ModalWork: React.FC<ModalProps> = ({ closeModal }) => {
                     )}
                   </p>
                 </div>
-                <TextEditor />
+                {/* <TextEditor /> */}
               </div>
               {/* Project */}
               <div className='mt-6 flex flex-col '>
@@ -210,7 +210,7 @@ const ModalWork: React.FC<ModalProps> = ({ closeModal }) => {
                     )}
                   </p>
                 </div>
-                <TextEditor />
+                {/* <TextEditor /> */}
               </div>
             </div>
           </div>

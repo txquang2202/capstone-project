@@ -31,7 +31,7 @@ export default async function ListSelected() {
                 imageUrl='https://itviec.com/blog/wp-content/uploads/2024/02/spring-framework-blog-thumbnail-vippro-700x368.jpg'
                 title={blog.title}
                 description={blog.content}
-                tags={['Chuyên môn IT', 'Tài liệu JS']}
+                // tags={['Chuyên môn IT', 'Tài liệu JS']}
                 url={`/blog/${blog.slug}`}
                 // readTime={blog.readTime}
               />
