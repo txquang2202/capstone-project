@@ -14,11 +14,11 @@ export default function Page() {
   } = useSuspenseQuery<DataResponse<'companies', Company[]>>(GET_COMPANIES);
   const router = useAppRouter();
 
-  const enabledCompanies = companies.filter((company) => company.enable);
+  // const enabledCompanies = companies.filter((company) => company.enable);
 
   return (
     <div className='grid grid-cols-3 gap-4 p-5 '>
-      {enabledCompanies.map((company) => (
+      {companies.map((company) => (
         <div key={company.id} className='cursor-pointer rounded shadow'>
           <CompanyItem
             {...company}
