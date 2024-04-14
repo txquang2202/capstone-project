@@ -1,19 +1,25 @@
+'use client';
+
+import { useSuspenseQuery } from '@apollo/client';
+
 import { GET_BLOGS } from '@/graphql/blog';
-import { getClient } from '@/lib/client';
 import { Blog } from '@/types/blog';
 
 import SpringCard from './SpringCard';
 
-export default async function ListSelected() {
+export default function ListSelected() {
   const {
     data: { blogs },
-  } = await getClient().query({
-    query: GET_BLOGS,
-    variables: {
-      skip: 6,
-      take: 3,
-    },
-  });
+  } = useSuspenseQuery<{ blogs: Blog[] }, { skip: number; take: number }>(
+    GET_BLOGS,
+    {
+      variables: {
+        skip: 6,
+        take: 3,
+      },
+    }
+  );
+
   return (
     <div className='container-xxl px-4 py-10 sm:px-6 lg:px-8'>
       <div className='flex flex-row items-start justify-start'>

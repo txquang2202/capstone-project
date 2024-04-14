@@ -39,8 +39,8 @@ const useAppRouter = (href?: string) => {
   const onChangeLang = (lang: string) => {
     if (!pathname) return;
     const query = searchParams?.toString();
-    const nextPath = pathname.startsWith(`/${params.lang}`)
-      ? pathname.replace(`/${params.lang}`, '')
+    const nextPath = pathname.startsWith(`/${params?.lang}`)
+      ? pathname.replace(`/${params?.lang}`, '')
       : pathname;
 
     router.replace(`/${lang}/${nextPath}${query ? '?' + query : ''}`);

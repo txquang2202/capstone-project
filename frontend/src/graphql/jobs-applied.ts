@@ -81,17 +81,6 @@ export type JobApplicationResponse = DataResponse<
   'jobApplications',
   JobApplication[]
 >;
-// const companyJobApplications = async () => {
-//   const id = 'đá';
-//   const {
-//     data: { companyJobApplications },
-//   } = await getClient().query({
-//     query: GET_JOBS_APPLIED, // Assuming GET_JOBS_APPLIED is a valid GraphQL query
-//     variables: {
-//       id: id,
-//     },
-//   });
-//   console.log(companyJobApplications);
 
 export const UPDATE_JOB_STATUS = gql`
   mutation UpdateJobApplication(

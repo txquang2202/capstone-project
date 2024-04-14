@@ -28,7 +28,7 @@ const data = [
 const Menu = () => {
   const path = usePathname();
   const active = useMemo(() => {
-    const route = getRouteByPath(path)?.path;
+    const route = getRouteByPath(path || '')?.path;
     return data.findIndex((d) => d.link === route);
   }, [path]);
 

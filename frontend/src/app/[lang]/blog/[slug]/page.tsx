@@ -1,6 +1,6 @@
-/**
- * DEMO SERVER COMPONENT - FETCH DATA
- */
+'use client';
+
+import { useSuspenseQuery } from '@apollo/client';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -10,28 +10,23 @@ import CopyButton from '@/components/DetailBlogPage/CopyButton';
 import EmailSection from '@/components/DetailBlogPage/EmailSection';
 import RelatedArticles from '@/components/DetailBlogPage/RelatedArticles';
 import { GET_BLOG } from '@/graphql/blog';
-import { getClient } from '@/lib/client';
+import { Blog } from '@/types/blog';
 
-export default async function DetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default function DetailPage({ params }: { params: { slug: string } }) {
   const tags = ['Dành cho nhà tuyển dụng IT', 'Xu hướng tuyển dụng IT'];
   const slug = params.slug;
 
-  if (!slug) {
-    return null;
-  }
-
   const {
     data: { blog },
-  } = await getClient().query({
-    query: GET_BLOG,
+  } = useSuspenseQuery<{ blog: Blog }, { slug: string }>(GET_BLOG, {
     variables: {
       slug,
     },
   });
+
+  if (!slug) {
+    return null;
+  }
 
   return (
     <main>
@@ -57,7 +52,7 @@ export default async function DetailPage({
               <Content
                 title={blog.title}
                 content={blog.content}
-                createTime={blog.created_at}
+                createTime={(blog?.created_at || new Date()).toISOString()}
               />
               <hr className='mt-4 h-[1px] w-full border-none bg-gray-200' />
               {/* share */}
