@@ -302,6 +302,17 @@ export const routes = {
       },
     },
   }),
+  customerAddCompany: route({
+    path: '/customer/add-company',
+    requiredAuth: true,
+    locales: ['vi'],
+    defaultLocale: DEFAULT_LOCALE,
+    metadata: {
+      vi: {
+        title: 'ITviec Admin',
+      },
+    },
+  }),
   customerCompanyList: route({
     path: '/customer/companies',
     requiredAuth: true,

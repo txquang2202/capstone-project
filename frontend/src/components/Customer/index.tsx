@@ -4,6 +4,7 @@ export { default as JobDetail } from './JobDetail';
 export { default as CompanyDetail } from './CompanyDetail';
 export { default as AddJob } from './AddJob';
 export { default as AddBlog } from './AddBlog';
+export { default as AddCompany } from './AddCompany';
 export { default as BlogDetail } from './BlogDetail';
 export { default as UpdateBlog } from './UpdateBlog';
 export { default as BlogTable } from './BlogTable';
