@@ -28,6 +28,7 @@ const CompanySchema = gql`
     phone: String
     company_location: [CompanyLocate]
     enable: Boolean
+    slug: String!
   }
   # type JobPayLoad{
 
@@ -86,6 +87,7 @@ const CompanySchema = gql`
     jobCompany(id: ID!): [JobPayLoad]
     companies: [CompanyPayload!]
     company(id: ID!): CompanyPayload
+    companyBySlug(slug: String!): CompanyPayload
     companySpotlight: CompanySpotlightPayload
     companyReviews: [CompanyReview!]
     companyReview(id: ID!): CompanyReview
