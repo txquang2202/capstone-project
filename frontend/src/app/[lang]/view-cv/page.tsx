@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 
 export default function Page() {
   const queries = useSearchParams();
-  const url = `https://docs.google.com/gview?embedded=true&url=${queries.get(
+  const url = `https://docs.google.com/gview?embedded=true&url=${queries?.get(
     'cv'
   )}`;
 

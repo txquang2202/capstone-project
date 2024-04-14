@@ -1,19 +1,24 @@
+'use client';
+
+import { useSuspenseQuery } from '@apollo/client';
+
 import { GET_BLOGS } from '@/graphql/blog';
-import { getClient } from '@/lib/client';
 import { Blog } from '@/types/blog';
 
 import SpringCard from './SpringCard';
 
-export default async function ListLatest() {
+export default function ListLatest() {
   const {
     data: { blogs },
-  } = await getClient().query({
-    query: GET_BLOGS,
-    variables: {
-      skip: 0,
-      take: 3,
-    },
-  });
+  } = useSuspenseQuery<{ blogs: Blog[] }, { skip: number; take: number }>(
+    GET_BLOGS,
+    {
+      variables: {
+        skip: 0,
+        take: 3,
+      },
+    }
+  );
 
   return (
     <div className='container-xxl  px-4 py-8 sm:px-6 lg:px-8'>
@@ -28,7 +33,7 @@ export default async function ListLatest() {
       </div>
 
       <div className='mt-4 grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-        {blogs.lenth === 0 ? (
+        {blogs.length === 0 ? (
           <p className='text-gray-500'>Không có blog nào.</p>
         ) : (
           <>

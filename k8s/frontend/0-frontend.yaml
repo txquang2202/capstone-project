@@ -30,7 +30,7 @@ spec:
             - name: NEXT_PUBLIC_CDN_URL
               value: https://cdn.findyourjob.tech/
             - name: NEXT_PUBLIC_ORIGIN_URL
-              value: https://www.findyourjob.tech
+              value: https://findyourjob.tech
             - name: NEXT_PUBLIC_API_URL
               value: https://api.findyourjob.tech
             - name: NEXT_PUBLIC_SHOW_LOGGER

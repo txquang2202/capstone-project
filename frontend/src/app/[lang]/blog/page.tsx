@@ -12,16 +12,6 @@ import SearchBox from '@/components/BlogPage/SearchBox';
 import Sharing from '@/components/BlogPage/Sharing';
 
 const BlogPage = async () => {
-  // const {
-  //   data: { blogs },
-  // } = await getClient().query({
-  //   query: GET_BLOGS,
-  //   variables: {
-  //     skip: 0,
-  //     take: 10,
-  //   },
-  // });
-  // console.log('blogs', blogs);
   return (
     <main>
       <section className='scroll-smooth bg-[#f2f2f2] focus:scroll-auto'>

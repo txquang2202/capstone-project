@@ -147,7 +147,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [build-frontend, build-backend, build-kafka-consumer]
-    if: ${{ github.event.inputs.deployFrontend == 'yes' || github.event.inputs.deployBackend == 'yes' || github.event.inputs.deployKafkaConsumer == 'yes' }}
+    # if: ${{ github.event.inputs.deployFrontend == 'yes' || github.event.inputs.deployBackend == 'yes' || github.event.inputs.deployKafkaConsumer == 'yes' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3

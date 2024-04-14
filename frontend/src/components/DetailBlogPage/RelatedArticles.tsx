@@ -1,22 +1,25 @@
+'use client';
+
+import { useSuspenseQuery } from '@apollo/client';
 import Link from 'next/link';
-import React from 'react';
 
 import { GET_TITLE_BLOGS } from '@/graphql/blog';
-import { getClient } from '@/lib/client';
 import { Blog } from '@/types/blog';
 
 import Article from './Article';
 
-export default async function RelatedArticles() {
+export default function RelatedArticles() {
   const {
     data: { blogs },
-  } = await getClient().query({
-    query: GET_TITLE_BLOGS,
-    variables: {
-      skip: 0,
-      take: 6,
-    },
-  });
+  } = useSuspenseQuery<{ blogs: Blog[] }, { skip: number; take: number }>(
+    GET_TITLE_BLOGS,
+    {
+      variables: {
+        skip: 0,
+        take: 6,
+      },
+    }
+  );
   return (
     <div className='rounded-md border border-gray-200 bg-white px-4 py-3'>
       <div className='p-4'>

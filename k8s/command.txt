@@ -57,8 +57,8 @@ eksctl create cluster \
     kubectl scale deployment/inflate --replicas 5
 
     aws ec2 create-tags --tags "Key=karpenter.sh/discovery,Value=${CLUSTER_NAME}" --resources "subnet-03a60ca85c4632b49" "subnet-0890a157d107924aa" "subnet-06fce67f55b544dc1"
-    
-    kubectl create configmap eks-loadtest-locustfile --from-file ./locustfile.py
+
+    kubectl delete configmap eks-loadtest-locustfile && kubectl create configmap eks-loadtest-locustfile --from-file ./locustfile.py
 
     helm upgrade --install findyourjob-locust deliveryhero/locust \
  --set loadtest.name=eks-loadtest \
@@ -66,3 +66,6 @@ eksctl create cluster \
  --set loadtest.locust_locustfile=locustfile.py \
  --set worker.hpa.enabled=true \
  --set worker.hpa.minReplicas=2
+
+    KARPENTER_NAMESPACE=kube-system
+    CLUSTER_NAME=findyourjob

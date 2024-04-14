@@ -9,7 +9,7 @@ import { GET_JOB, GetJobResponse, GetJobVariable } from '@/graphql/job';
 export default function Page() {
   const params = useParams();
   const { data, loading } = useQuery<GetJobResponse, GetJobVariable>(GET_JOB, {
-    variables: { jobId: params.id as string },
+    variables: { jobId: params?.id as string },
   });
 
   if (loading) return <div>Loading...</div>;
