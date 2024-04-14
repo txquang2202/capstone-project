@@ -22,11 +22,7 @@ export default async function RelatedArticles() {
       <div className='p-4'>
         <h3 className='font-semibold'>Related Articles</h3>
         {blogs.map((blog: Blog, index: number) => (
-          <Article
-            key={index}
-            title={blog.title}
-            url={`${process.env.NEXTAUTH_URL}/blog/${blog.slug}`}
-          />
+          <Article key={index} title={blog.title} url={`${blog.slug}`} />
         ))}
         <div className='mt-4 px-4 text-center'>
           <p className='text-red hover:text-dark-text text-sm font-semibold underline underline-offset-4 '>
