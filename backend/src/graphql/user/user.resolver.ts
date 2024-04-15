@@ -25,6 +25,10 @@ const Query = {
     __: any,
     { keycloak, authUser }: ContextInterface,
   ): Promise<any> => {
+    console.log("authUser", authUser);
+    if (!authUser) {
+      throw new Error("User not authenticated");
+    }
     const userData = await keycloak.getUserData(authUser.sub);
     return userData;
   },
