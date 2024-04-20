@@ -10,6 +10,7 @@ const BlogSchema = gql`
     title: String!
     time_read: Int
     created_at: Date
+    slug: String!
     user: User
     slug: String!
   }
