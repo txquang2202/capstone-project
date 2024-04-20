@@ -45,6 +45,7 @@ export default function ListViewedJob() {
                 tags={job.tags}
                 expires={job.expires}
                 isLiked={job.isLike}
+                idJob=''
               />
             ))}
           </div>

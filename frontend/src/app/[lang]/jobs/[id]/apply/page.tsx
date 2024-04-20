@@ -65,7 +65,7 @@ const ApplyJob = () => {
     data: { job },
   } = useSuspenseQuery<GetJobResponse, GetJobVariable>(GET_JOB, {
     variables: {
-      jobId: params.id as string,
+      jobId: params?.id as string,
     },
   });
 
@@ -84,6 +84,7 @@ const ApplyJob = () => {
       }
     }
   };
+
   const onSubmit = () => {
     mutate({
       variables: {

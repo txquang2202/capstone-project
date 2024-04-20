@@ -12,6 +12,7 @@ const BlogSchema = gql`
     created_at: Date
     slug: String!
     user: User
+    slug: String!
   }
 
   # ---------------------------------------------------------
@@ -28,7 +29,7 @@ const BlogSchema = gql`
     user_id: ID!
     content: String! @constraint(minLength: 1)
     title: String! @constraint(minLength: 5, maxLength: 255)
-    slug: String! @constraint(minLength: 5, maxLength: 255)
+    slug: String!
   }
 
   # ---------------------------------------------------------

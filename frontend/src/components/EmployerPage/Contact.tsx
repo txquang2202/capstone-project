@@ -96,7 +96,7 @@ const EmployerContact = () => {
         console.log(err);
       },
       onCompleted: () => {
-        router.push('/');
+        router.push('/employer/form-submission');
       },
     });
   };

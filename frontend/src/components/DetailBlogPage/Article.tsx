@@ -3,7 +3,7 @@ import React from 'react';
 
 const Article: React.FC<{ title: string; url: string }> = ({ title, url }) => {
   return (
-    <div className='mt-4'>
+    <div className='hover:text-red mt-4'>
       <p className='text-lg font-medium'>
         <Link href={url}>{title}</Link>
       </p>

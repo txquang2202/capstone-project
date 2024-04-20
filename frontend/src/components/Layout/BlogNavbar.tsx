@@ -11,12 +11,14 @@ const Navigation: React.FC = () => {
         <div className='flex h-16 items-center justify-between'>
           <div className='flex'>
             <div className='flex flex-shrink-0 items-center'>
-              <Image
-                src='https://itviec.com/blog/wp-content/uploads/2020/12/blog_logo_retina.png'
-                alt='logo'
-                width={148}
-                height={40}
-              />
+              <Link href='/blog'>
+                <Image
+                  src='https://itviec.com/blog/wp-content/uploads/2020/12/blog_logo_retina.png'
+                  alt='logo'
+                  width={148}
+                  height={40}
+                />
+              </Link>
             </div>
             <div className='hidden sm:ml-6 sm:flex sm:space-x-8'>
               <div className='text- group  relative inline-flex items-center px-1 pt-1 font-medium text-gray-300 hover:text-white'>

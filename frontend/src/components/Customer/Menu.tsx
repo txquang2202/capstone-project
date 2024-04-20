@@ -28,13 +28,14 @@ const data = [
   },
   { link: '#', label: 'Ứng viên', icon: IconAward },
   { link: '#', label: 'Billing', icon: IconDollarSign },
+  { link: routes.customerBlogList.path, label: 'Blog list', icon: IconList },
   { link: '#', label: 'Settings', icon: IconSettings },
 ];
 
 const Menu = () => {
   const path = usePathname();
   const active = useMemo(() => {
-    const route = getRouteByPath(path)?.path;
+    const route = getRouteByPath(path || '')?.path;
     return data.findIndex((d) => d.link === route);
   }, [path]);
 
@@ -64,6 +65,20 @@ const Menu = () => {
           className='mx-4 mb-4'
         >
           Add Job
+        </Button>
+        <Button
+          href={routes.customerAddBlog.path}
+          icon={<IconPlusCircle size={24} />}
+          className='mx-4 mb-4'
+        >
+          Add Blog
+        </Button>
+        <Button
+          href={routes.customerAddCompany.path}
+          icon={<IconPlusCircle size={24} />}
+          className='mx-4 mb-4'
+        >
+          Add Company
         </Button>
         {links}
       </div>

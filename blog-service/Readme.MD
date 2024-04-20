@@ -1,6 +1,7 @@
 # REST API with Node using Typescript
+
 - Link postman : https://documenter.getpostman.com/view/28346732/2sA35G42mo#672e6856-6747-4f8e-96a3-2557e18aa640
-This is a simple REST API developed using node and express with typescript
+  This is a simple REST API developed using node and express with typescript
 
 ![alt text](https://image.ibb.co/nAd9OF/logos.png "Node Typescript")
 
@@ -31,7 +32,7 @@ If you found this project useful, then please consider giving it a ⭐️ on Git
      - Manage `PostgreSQL` service
        `sudo systemctl {status | start | restart | stop} postgresql`
 
-2. rename `.env-sample` to `.env` in the file the DB connection string need to be updated according to your `credentials`.
+2. rename `.env.example` to `.env` in the file the DB connection string need to be updated according to your `credentials`.
    ex : `postgres://<YourUserName>:<YourPassword>@localhost:5432/<YourDatabase>`
 
 3. you can find the DB and other details under `src/db`

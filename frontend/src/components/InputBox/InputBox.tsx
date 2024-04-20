@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import useUncontrolled from '@/hooks/useUncontrolled';
-
 export type InputProps = {
   label: string;
   floatingclass?: string;

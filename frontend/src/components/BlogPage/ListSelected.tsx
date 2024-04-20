@@ -1,8 +1,25 @@
 'use client';
 
+import { useSuspenseQuery } from '@apollo/client';
+
+import { GET_BLOGS } from '@/graphql/blog';
+import { Blog } from '@/types/blog';
+
 import SpringCard from './SpringCard';
 
 export default function ListSelected() {
+  const {
+    data: { blogs },
+  } = useSuspenseQuery<{ blogs: Blog[] }, { skip: number; take: number }>(
+    GET_BLOGS,
+    {
+      variables: {
+        skip: 6,
+        take: 3,
+      },
+    }
+  );
+
   return (
     <div className='container-xxl px-4 py-10 sm:px-6 lg:px-8'>
       <div className='flex flex-row items-start justify-start'>
@@ -10,7 +27,24 @@ export default function ListSelected() {
       </div>
 
       <div className='mt-4 grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-        <SpringCard
+        {blogs.length < 6 ? (
+          <p className='text-gray-500'>Không có blog nào.</p>
+        ) : (
+          <>
+            {blogs.map((blog: Blog) => (
+              <SpringCard
+                key={blog.id}
+                imageUrl='https://itviec.com/blog/wp-content/uploads/2024/02/spring-framework-blog-thumbnail-vippro-700x368.jpg'
+                title={blog.title}
+                description={blog.content}
+                // tags={['Chuyên môn IT', 'Tài liệu JS']}
+                url={`/blog/${blog.slug}`}
+                // readTime={blog.readTime}
+              />
+            ))}
+          </>
+        )}
+        {/* <SpringCard
           imageUrl='https://itviec.com/blog/wp-content/uploads/2023/04/Artboard-1-700x377.jpg'
           title='“Là IT Thì Mình Cứ Viết Đi” – Cuộc thi viết hấp dẫn nhất cho dân IT chính thức trở lại'
           description='Cuộc thi viết “Là IT Thì Mình Cứ Viết Đi” do ITviec tổ chức từ ngày 26/04/2023 đến 26/06/2023, nhân dịp kỷ niệm 10 năm thành lập. Cuộc thi là sân chơi hấp dẫn cổ vũ tất cả anh em…'
@@ -33,7 +67,7 @@ export default function ListSelected() {
           tags={['Chuyện IT']}
           url='#!'
           readTime='10 phút'
-        />
+        /> */}
       </div>
     </div>
   );

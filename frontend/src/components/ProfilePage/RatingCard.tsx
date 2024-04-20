@@ -1,30 +1,42 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 
-import {
-  IconChevronDown,
-  IconChevronUp,
-  IconPlusCircle,
-} from '@/components/Icons';
+import { IconPlusCircle } from '@/components/Icons';
+import { useLocale } from '@/locale';
 
-interface RatingCardProps {
-  percent: number;
-}
+import { usePointData } from './Context/PointContext';
+import ModalAboutMe from './Modal/ModalAboutMe';
+import ModalAwards from './Modal/ModalAwards';
+import ModalEducation from './Modal/ModalEducation';
+import ModalPerProject from './Modal/ModalPerProject';
+import ModalWork from './Modal/ModalWork';
 
-const RatingCard: React.FC<RatingCardProps> = ({ percent }) => {
-  const [showAll, setShowAll] = useState<boolean>(false);
+const RatingCard: React.FC = () => {
+  const { t } = useLocale();
 
-  const toggleShowAll = () => {
-    setShowAll(!showAll);
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState<string | null>(null);
+  const { sumData } = usePointData();
+
+  const toggleShowModal = (type: string) => {
+    setModalType(type);
+    setShowModal(!showModal);
+    document.body.classList.add('overflow-y-hidden');
+  };
+
+  const closeModal = () => {
+    setModalType(null);
+    setShowModal(false);
+    document.body.classList.remove('overflow-y-hidden');
   };
 
   return (
-    <div className='w-[300px]  rounded-md bg-[#ffff] shadow-md sm:static md:static  lg:static xl:sticky xl:top-2 2xl:sticky 2xl:top-2'>
-      <div className=' p-5'>
+    <div>
+      <div className='w-[300px] rounded-md bg-[#ffff] p-5 shadow-md sm:static  md:static lg:sticky xl:sticky xl:top-24 2xl:sticky 2xl:top-24'>
         {/* start percent */}
         <div className='border-gray-250 flex flex-row items-start justify-center gap-5 border-b-[1px] p-2'>
           {/* start */}
-          <div className='relative h-[84px] w-[84px]'>
+          <div className='relative h-[84px] w-[84px] '>
             <svg
               className='h-full w-full'
               width='36'
@@ -47,10 +59,10 @@ const RatingCard: React.FC<RatingCardProps> = ({ percent }) => {
                   cy='18'
                   r='16'
                   fill='none'
-                  className='text-yellow  stroke-current'
+                  className='text-yellow  stroke-current transition-all'
                   strokeWidth='3'
-                  stroke-dasharray='100'
-                  stroke-dashoffset={100 - percent}
+                  strokeDasharray='100'
+                  strokeDashoffset={100 - sumData}
                 ></circle>
               </g>
             </svg>
@@ -74,85 +86,131 @@ const RatingCard: React.FC<RatingCardProps> = ({ percent }) => {
           </div>
           {/* percent */}
           <div className='flex flex-col'>
-            <span className='font-semibold'>Profile&nbsp;Strength</span>
+            <span className='font-semibold'>{t('Profile Strength')}</span>
             <span className='text-yellow text-lg font-bold'>
-              {percent >= 100
+              {sumData >= 100
                 ? 'Superstar'
-                : percent >= 75
+                : sumData >= 75
                 ? 'Excellent'
-                : percent >= 40
+                : sumData >= 40
                 ? 'Good'
-                : percent >= 30
+                : sumData >= 30
                 ? 'Poor'
                 : 'Poor'}
             </span>
             {/* Poor, Good, Excellent, Superstar Yay! Your profile is completed! */}
-            <span>{percent}%&nbsp;completed</span>
+            <span>
+              {sumData}% {t('completed')}
+            </span>
           </div>
         </div>
         {/* skills */}
         <div className='border-gray-250 border-b-[1px] text-center'>
           <div className='pb-4 pt-4 text-start'>
             <span className='font-semibold'>
-              Upgrade profile to "Excellent" to unlock Download CV
+              {t('Upgrade profile to "Excellent" to unlock Download CV')}
             </span>
 
             {/* add item */}
             <div className='flex flex-col justify-center'>
               {/* item 1 */}
-              <div className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'>
+              <div
+                className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'
+                onClick={() => toggleShowModal('AboutMe')}
+              >
                 <IconPlusCircle className='h-5 w-5' />
-                <span>Add About me</span>
+                <span>{t('Add About me')}</span>
               </div>
+              <div
+                className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'
+                onClick={() => toggleShowModal('Education')}
+              >
+                <IconPlusCircle className='h-5 w-5' />
+                <span>{t('Add Education')}</span>
+              </div>
+              <div
+                className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'
+                onClick={() => toggleShowModal('Awards')}
+              >
+                <IconPlusCircle className='h-5 w-5' />
+                <span>{t('Add Awards')}</span>
+              </div>
+              {/* <div
+                className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'
+                onClick={() => toggleShowModal('Skills')}
+              >
+                <IconPlusCircle className='h-5 w-5' />
+                <span>{t('Add Skills')}</span>
+              </div> */}
+
               {/* item 2 */}
-              <div className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'>
+              {/* <div
+                className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'
+                onClick={() => toggleShowModal('WorkExperience')}
+              >
                 <IconPlusCircle className='h-5 w-5' />
-                <span>Add Work Experience</span>
-              </div>
+                <span>{t('Add Work Experience')}</span>
+              </div> */}
               {/* item 3 */}
-              <div className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'>
+              {/* <div
+                className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'
+                onClick={() => toggleShowModal('Education')}
+              >
                 <IconPlusCircle className='h-5 w-5' />
-                <span>Add Education</span>
+                <span>{t('Add Education')}</span>
               </div>
               {showAll ? (
                 <>
-                  {/* item 4 */}
-                  <div className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'>
+                  <div
+                    className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'
+                    onClick={() => toggleShowModal('Skills')}
+                  >
                     <IconPlusCircle className='h-5 w-5' />
-                    <span>Add Skills</span>
+                    <span>{t('Add Skills')}</span>
                   </div>
-                  {/* item 5 */}
-                  <div className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'>
+
+                  <div
+                    className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'
+                    onClick={() => toggleShowModal('Certificates')}
+                  >
                     <IconPlusCircle className='h-5 w-5' />
-                    <span>Add Certificates</span>
+                    <span>{t('Add Certificates')}</span>
                   </div>
-                  {/* item 6 */}
-                  <div className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'>
+
+                  <div
+                    className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'
+                    onClick={() => toggleShowModal('Awards')}
+                  >
                     <IconPlusCircle className='h-5 w-5' />
-                    <span>Add Awards</span>
+                    <span>{t('Add Awards')}</span>
                   </div>
-                  {/* item 7 */}
-                  <div className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'>
+
+                  <div
+                    className='mt-4 flex cursor-pointer  items-center gap-2 text-[#0e2eed] hover:text-[#314091]'
+                    onClick={() => toggleShowModal('PersonalProject')}
+                  >
                     <IconPlusCircle className='h-5 w-5' />
-                    <span>Add Personal Project</span>
+                    <span>{t('Add Personal Project')}</span>
                   </div>
+
                   <div
                     className='text-rich-grey mt-4 flex  cursor-pointer items-center gap-2 '
                     onClick={toggleShowAll}
                   >
                     <IconChevronUp className='h-5 w-5' />
-                    <span>Show less</span>
+                    <span>{t('Show less')}</span>
                   </div>
                 </>
               ) : (
+                // show more
                 <div
                   className='text-rich-grey mt-4 flex  cursor-pointer items-center gap-2 '
                   onClick={toggleShowAll}
                 >
                   <IconChevronDown className='h-5 w-5' />
-                  <span>Add more information</span>
+                  <span>{t('Add more information')}</span>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -166,7 +224,7 @@ const RatingCard: React.FC<RatingCardProps> = ({ percent }) => {
               src='https://itviec.com/assets/profile/cv-d4db00ef4c885c25e437715236babd64c7cbb960ddf4771e69e55dd8169dd5ba.svg'
             />
             <span className='text-start'>
-              Explore CV templates and download your CV
+              {t('Explore CV templates and download your CV')}
             </span>
           </div>
 
@@ -174,10 +232,19 @@ const RatingCard: React.FC<RatingCardProps> = ({ percent }) => {
             href='#!'
             className='mt-4 inline-block w-full rounded-md  bg-[#ea1e30] px-4 py-3 font-semibold text-white shadow-md hover:bg-red-700  focus:outline-none'
           >
-            Preview & Download CV
+            {t('Preview & Download CV')}
           </a>
         </div>
       </div>
+      {/* Modal */}
+      {modalType === 'AboutMe' && <ModalAboutMe closeModal={closeModal} />}
+      {modalType === 'WorkExperience' && <ModalWork closeModal={closeModal} />}
+      {modalType === 'Education' && <ModalEducation closeModal={closeModal} />}
+
+      {modalType === 'Awards' && <ModalAwards closeModal={closeModal} />}
+      {modalType === 'PersonalProject' && (
+        <ModalPerProject closeModal={closeModal} />
+      )}
     </div>
   );
 };

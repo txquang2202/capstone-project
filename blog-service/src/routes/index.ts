@@ -4,6 +4,7 @@ import lessonRouter from './LessonRoutes';
 import companyRouter from './CompanyRoutes';
 import blogRouter from './BlogRoutes';
 import blogTagRouter from './BlogTagRoutes';
+import tagRouter from './TagRoutes';
 
 export default class Routes {
   constructor(app: Application) {
@@ -17,5 +18,8 @@ export default class Routes {
     app.use('/api/blogs', blogRouter);
     // blogTag routes
     app.use('/api/blogTag', blogTagRouter);
+    // tag routes
+    app.use('/api/tags', tagRouter);
+
   }
 }

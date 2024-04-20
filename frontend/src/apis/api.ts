@@ -8,8 +8,15 @@ import { isHasValue } from '@/lib/validate';
 import { getAccessToken } from '@/stores/auth';
 
 // type AxiosRetry = AxiosError['config'] & { _retry: boolean };
-
-const instance = axios.create();
+const isDevelopment = process.env.NODE_ENV !== 'production';
+const instance = axios.create(
+  !isDevelopment
+    ? {
+        baseURL: process.env.NEXT_PUBLIC_REST_API_URL,
+        withCredentials: true,
+      }
+    : {}
+);
 
 instance.interceptors.response.use(
   (response) => response,

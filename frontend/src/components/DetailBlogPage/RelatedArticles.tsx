@@ -1,15 +1,31 @@
+'use client';
+
+import { useSuspenseQuery } from '@apollo/client';
 import Link from 'next/link';
-import React from 'react';
+
+import { GET_TITLE_BLOGS } from '@/graphql/blog';
+import { Blog } from '@/types/blog';
 
 import Article from './Article';
 
-const RelatedArticles: React.FC = () => {
+export default function RelatedArticles() {
+  const {
+    data: { blogs },
+  } = useSuspenseQuery<{ blogs: Blog[] }, { skip: number; take: number }>(
+    GET_TITLE_BLOGS,
+    {
+      variables: {
+        skip: 0,
+        take: 6,
+      },
+    }
+  );
   return (
     <div className='rounded-md border border-gray-200 bg-white px-4 py-3'>
       <div className='p-4'>
         <h3 className='font-semibold'>Related Articles</h3>
-        {articles.slice(0, 18).map((aricle, index) => (
-          <Article key={index} title={aricle} url='#!' />
+        {blogs.map((blog: Blog, index: number) => (
+          <Article key={index} title={blog.title} url={`${blog.slug}`} />
         ))}
         <div className='mt-4 px-4 text-center'>
           <p className='text-red hover:text-dark-text text-sm font-semibold underline underline-offset-4 '>
@@ -19,13 +35,4 @@ const RelatedArticles: React.FC = () => {
       </div>
     </div>
   );
-};
-
-const articles = [
-  'Doanh nghiệp cần lưu ý 3 lý do nghỉ việc thật sự của chuyên gia IT',
-  'Công ty thuộc ngành nghề, loại hình nào đang trả lương IT ở Việt Nam cao nhất?',
-  'ITviec releases “IT Salary Report 2023-2024: Data-driven for better decision making”',
-  'ITviec phát hành “Báo cáo lương IT 2023-2024: Mọi quyết định đều dễ dàng hơn khi đã có số liệu”',
-  '4 thành công nổi bật của Workshop “Khai phá sức mạnh đội ngũ” dành cho nhà tuyển dụng',
-];
-export default RelatedArticles;
+}

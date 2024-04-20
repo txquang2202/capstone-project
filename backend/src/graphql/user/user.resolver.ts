@@ -25,6 +25,10 @@ const Query = {
     __: any,
     { keycloak, authUser }: ContextInterface,
   ): Promise<any> => {
+    console.log("authUser", authUser);
+    if (!authUser) {
+      throw new Error("User not authenticated");
+    }
     const userData = await keycloak.getUserData(authUser.sub);
     return userData;
   },
@@ -65,10 +69,12 @@ const Mutation = {
     if (!existingUser) {
       throw new Error(`User with ID ${id} does not exist`);
     }
-    const newInpu = Object.assign({}, existingUser, {
-      attributes: Object.assign({}, existingUser.attributes, input.attributes)
+    const newProfile = Object.assign({}, existingUser, input);
+    const newInput = Object.assign({}, newProfile, {
+      attributes: Object.assign({}, existingUser.attributes, input.attributes),
     });
-    await keycloak.editUser(id, newInpu);
+
+    await keycloak.editUser(id, newInput);
     return await keycloak.getUserData(id);
   },
 
@@ -103,7 +109,5 @@ const Mutation = {
     await keycloak.hardDelUser(id);
     return await keycloak.getUserData(id);
   },
-
-
 };
 export default { Query, Mutation, User };

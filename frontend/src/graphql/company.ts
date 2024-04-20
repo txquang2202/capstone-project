@@ -29,6 +29,35 @@ export const CREATE_COMPANY_REQUEST = gql`
 export type GetCompanyResponse = DataResponse<'company', Company>;
 export type GetCompanyVariable = { companyId: string };
 
+export const GET_SPOTLIGHT_COMPANY = gql`
+  query Companies {
+    companySpotlight {
+      id
+      company_name
+      company_type
+      country
+      working_day
+      ot_policy
+      company_size
+      overview
+      company_website
+      company_facebook
+      brief_overview
+      company_location {
+        id
+        company_id
+        address
+        long
+        lat
+      }
+      job {
+        id
+        name
+      }
+      enable
+    }
+  }
+`;
 export const GET_COMPANIES = gql`
   query Companies {
     companies {
@@ -78,6 +107,14 @@ export const GET_COMPANY = gql`
     }
   }
 `;
+export const CREATE_COMPANY = gql`
+  mutation CreateCompany($input: CompanyInput!) {
+    createCompany(input: $input) {
+      id
+      company_name
+    }
+  }
+`;
 export const UPDATE_COMPANY = gql`
   mutation UpdateCompany($updateCompanyId: ID!, $input: UpdateCompanyInput!) {
     updateCompany(id: $updateCompanyId, input: $input) {
@@ -101,6 +138,15 @@ export const DELETE_COMPANY = gql`
     deleteCompany(id: $deleteCompanyId) {
       id
       company_name
+    }
+  }
+`;
+
+export const GET_NAME_COMPANIES = gql`
+  query Companies {
+    companies {
+      company_name
+      id
     }
   }
 `;

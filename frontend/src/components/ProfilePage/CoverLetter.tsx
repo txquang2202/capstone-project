@@ -1,26 +1,29 @@
-'use client';
-
-import { useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/Button';
 import Card from '@/components/ProfilePage/Card';
+import { GET_COVERLETTER_USER, UPDATE_COVERLETTER_USER } from '@/graphql/auth';
+import useAuthData from '@/hooks/useAuthData';
 import { useLocale } from '@/locale';
 
-interface Letter {
-  content: string;
-  count?: number;
-}
-
-const letter: Letter = {
-  content: 'Nếu cuộc đời của bạn không Như Ý',
-  count: 32,
-};
-
 export default function CoverLetter() {
+  const { authUser } = useAuthData();
+  const { loading, error, data } = useQuery(GET_COVERLETTER_USER, {
+    variables: { userId: authUser?.id },
+  });
   const [isOpening, setIsOpening] = useState<boolean>(false);
-  const [edited, setEdited] = useState<string>(letter.content);
-  const [count, setCount] = useState<number | undefined>(letter.count);
+  const [edited, setEdited] = useState<string>('');
   const { t } = useLocale();
+
+  useEffect(() => {
+    if (!loading && !error && data) {
+      const coverLetter = data?.user?.attributes?.coverLetter?.toString();
+      if (coverLetter !== null && coverLetter !== undefined) {
+        setEdited(coverLetter);
+      }
+    }
+  }, [loading, error, data]);
 
   const handleOpen = () => {
     setIsOpening(true);
@@ -33,22 +36,36 @@ export default function CoverLetter() {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputText = event.target.value;
     setEdited(inputText);
-    setCount(inputText.length);
   };
 
-  const handleSave = () => {
-    if (edited.length >= 500) {
+  const [updateCoverLetter] = useMutation(UPDATE_COVERLETTER_USER);
+
+  const handleSave = async () => {
+    if (edited?.length >= 500) {
       alert('Cover letter must be 500 characters or less!');
       return;
     }
-    setIsOpening(false);
-    letter.content = edited;
-    letter.count = count;
+
+    try {
+      await updateCoverLetter({
+        variables: {
+          input: {
+            attributes: {
+              coverLetter: edited,
+            },
+          },
+          updateUserId: authUser?.id,
+        },
+      });
+      setIsOpening(false);
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
   };
 
   return (
     <div>
-      {letter.content.length !== 0 ? (
+      {edited?.length !== 0 ? (
         !isOpening ? (
           <div className='mt-6 rounded-md bg-[#ffff] shadow-md'>
             <div className='flex flex-col flex-wrap px-7 pb-16 pt-6'>
@@ -93,7 +110,7 @@ export default function CoverLetter() {
                 </span>
               </div>
               <hr className='mt-7 h-[1px] w-full border-none bg-gray-200' />
-              <p className='mt-5'>{letter.content}</p>
+              <p className='mt-5'>{edited}</p>
             </div>
           </div>
         ) : (
@@ -124,7 +141,7 @@ export default function CoverLetter() {
                 ></textarea>
               </div>
               <p className='mt-1 text-gray-400'>
-                {letter.count}/500 {t('characters')}
+                {edited?.length}/500 {t('characters')}
               </p>
               <div className=' flex flex-row flex-wrap items-center justify-end gap-3'>
                 <Button
@@ -174,7 +191,7 @@ export default function CoverLetter() {
               ></textarea>
             </div>
             <p className='mt-1 text-gray-400'>
-              {letter.count}/500 {t('characters')}
+              {edited?.length}/500 {t('characters')}
             </p>
             <div className=' flex flex-row flex-wrap items-center justify-end gap-3'>
               <Button

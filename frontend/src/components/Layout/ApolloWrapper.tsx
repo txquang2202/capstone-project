@@ -14,7 +14,23 @@ const makeClient = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
   const authLink = setContext(async (_, { headers }) => {
-    const { token } = await fetch('/api/auth/token').then((res) => res.json());
+    // const { token } = await fetch('/api/auth/token').then((res) => res.json());
+    const data = await fetch('/api/auth/token');
+    let token = '';
+    if (data.status === 401) {
+      return {
+        headers: {
+          ...headers,
+        },
+      };
+    } else {
+      try {
+        const dataJson = await data.json();
+        token = dataJson.token;
+      } catch (error) {
+        console.log('error', error);
+      }
+    }
 
     return {
       headers: {

@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import { Avatar } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 
 import { routes } from '@/configs/router';
@@ -46,7 +47,7 @@ const JobDetail = ({ job }: Props) => {
 
   const handleTagClick = (tag: string) => {
     router.push(
-      routes.search.pathParams({ keyword: params.keyword as string }) +
+      routes.search.pathParams({ keyword: params?.keyword as string }) +
         `?search=${tag}`
     );
   };
@@ -63,11 +64,9 @@ const JobDetail = ({ job }: Props) => {
     <div className='rounded-lg bg-white'>
       <div className='border-silver-grey mx-6 border-b pb-2 pt-6'>
         <div className='flex items-center gap-4'>
-          <img
-            alt='logo'
-            src='https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMExhTkE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c3d6987816061008255fe4b4bf962937bdc379a4/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmxwYVdrPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--e064c7b4667a202bc74d582f9581c9a645d77ae5/LOGO%20ICHIBA.jpg'
-            className='border-silver-grey h-[100px] w-[100px] rounded border'
-          />
+          <Avatar radius='sm' size={100}>
+            {job.company.company_name}
+          </Avatar>
           <div className='flex flex-col justify-center gap-2'>
             <div className='text-[22px] font-bold'>{job.name}</div>
             <div className='text-rich-grey'>{job.company.company_name}</div>

@@ -1,37 +1,32 @@
-/**
- * DEMO SERVER COMPONENT - FETCH DATA
- */
+'use client';
+
+import { useSuspenseQuery } from '@apollo/client';
 import Head from 'next/head';
 import Link from 'next/link';
 
 import Author from '@/components/DetailBlogPage/Author';
 import Content from '@/components/DetailBlogPage/Content';
-import CopyButton from '@/components/DetailBlogPage/CopyButton';
+// import CopyButton from '@/components/DetailBlogPage/CopyButton';
 import EmailSection from '@/components/DetailBlogPage/EmailSection';
 import RelatedArticles from '@/components/DetailBlogPage/RelatedArticles';
 import { GET_BLOG } from '@/graphql/blog';
-import { getClient } from '@/lib/client';
+import { Blog } from '@/types/blog';
 
-export default async function DetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default function DetailPage({ params }: { params: { slug: string } }) {
   const tags = ['Dành cho nhà tuyển dụng IT', 'Xu hướng tuyển dụng IT'];
   const slug = params.slug;
 
-  if (!slug) {
-    return null;
-  }
-
   const {
     data: { blog },
-  } = await getClient().query({
-    query: GET_BLOG,
+  } = useSuspenseQuery<{ blog: Blog }, { slug: string }>(GET_BLOG, {
     variables: {
       slug,
     },
   });
+
+  if (!slug) {
+    return null;
+  }
 
   return (
     <main>
@@ -54,7 +49,11 @@ export default async function DetailPage({
           <div className='col-span-2 rounded-md  border border-gray-200 bg-white'>
             <div className='container-xxl px-12 py-8'>
               {/* content */}
-              <Content title={blog.title} content={blog.content} />
+              <Content
+                title={blog.title}
+                content={blog.content}
+                createTime={blog?.created_at as string}
+              />
               <hr className='mt-4 h-[1px] w-full border-none bg-gray-200' />
               {/* share */}
               <div className='flex flex-col items-center justify-center py-8'>
@@ -145,9 +144,9 @@ export default async function DetailPage({
                     </Link>
                   </div>
                 </div>
-                <div className='mt-4 flex flex-row items-stretch justify-between gap-x-2 rounded  bg-gray-200 px-4 py-3 text-lg'>
-                  <CopyButton />
-                </div>
+                {/* <div className='mt-4 flex flex-row items-stretch justify-between gap-x-2 rounded  bg-gray-200 px-4 py-3 text-lg'>
+                  <CopyButton url={blog.slug} />
+                </div> */}
               </div>
               {/* tags */}
               <div className='mt-6 flex flex-row items-center gap-3'>

@@ -15,7 +15,7 @@ export default function Page() {
   const { data, loading } = useQuery<GetCompanyResponse, GetCompanyVariable>(
     GET_COMPANY,
     {
-      variables: { companyId: params.id as string },
+      variables: { companyId: params?.id as string },
     }
   );
 

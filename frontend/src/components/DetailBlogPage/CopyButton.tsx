@@ -1,42 +1,40 @@
-'use client';
+// import ClipboardJS from 'clipboard';
 
-import ClipboardJS from 'clipboard';
-import { useRef } from 'react';
+interface CopyButtonProps {
+  url: string;
+}
 
-const CopyButton = () => {
-  const textRef = useRef<HTMLInputElement>(null);
+const CopyButton: React.FC<CopyButtonProps> = ({ url }) => {
+  const text = `${process.env.NEXTAUTH_URL}/blog/${url}`;
 
-  const handleCopyClick = () => {
-    if (textRef.current) {
-      // Initialize ClipboardJS
-      const clipboard = new ClipboardJS('.copy-button', {
-        text: () => textRef.current?.innerText ?? '',
-      });
+  // const handleCopyClick = () => {
+  //   if (textRef.current) {
+  //     // Initialize ClipboardJS
+  //     const clipboard = new ClipboardJS('.copy-button', {
+  //       text: () => textRef.current?.innerText ?? '',
+  //     });
 
-      // Destroy ClipboardJS instance after copying
-      clipboard.on('success', () => {
-        clipboard.destroy();
-        window.alert('Text copied to clipboard!');
-      });
+  //     // Destroy ClipboardJS instance after copying
+  //     clipboard.on('success', () => {
+  //       clipboard.destroy();
+  //       window.alert('Text copied to clipboard!');
+  //     });
 
-      // Handle error
-      clipboard.on('error', (e) => {
-        clipboard.destroy();
-        console.error('Copy failed:', e.action);
-      });
-    }
-  };
+  //     // Handle error
+  //     clipboard.on('error', (e) => {
+  //       clipboard.destroy();
+  //       console.error('Copy failed:', e.action);
+  //     });
+  //   }
+  // };
 
   return (
     <>
-      <p
-        className='max-w-[400px] overflow-hidden overflow-ellipsis whitespace-nowrap text-gray-400'
-        ref={textRef}
-      >
-        http://localhost:3000/blog/detail-blog#!
+      <p className='max-w-[400px] overflow-hidden overflow-ellipsis whitespace-nowrap text-gray-400'>
+        {text}
       </p>
       <button
-        onClick={handleCopyClick}
+        // onClick={handleCopyClick}
         className='copy-button hover:text-dark-red ml-auto cursor-pointer self-start'
       >
         <svg
